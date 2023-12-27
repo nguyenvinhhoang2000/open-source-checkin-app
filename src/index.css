@@ -1,20 +1,28 @@
 
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-size: 8px;
+  font-size: 12px;
 
-  @media (min-width: theme("screens.lg")) {
+  @media (min-width: theme("screens.sm")) {
     font-size: 12px;
   }
 
-  @media (min-width: theme("screens.xxl")) {
+  @media (min-width: theme("screens.md")) {
     font-size: 14px;
+  }
+
+  @media (min-width: theme("screens.lg")) {
+    font-size: 16px;
+  }
+
+  @media (min-width: theme("screens.xl")) {
+    font-size: 16px;
   }
 
   @media (min-width: theme("screens.2xl")) {
