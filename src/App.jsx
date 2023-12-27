@@ -13,8 +13,9 @@ function App() {
       }}
     >
       <Modal open>
-        <span className="underline text-red-900">Hello</span>{" "}
+        <span className="underline text-red-900">Test Primary color Hello</span>{" "}
       </Modal>
+      <span className="underline text-red-900">Hello</span>{" "}
     </ConfigProvider>
   );
 }
