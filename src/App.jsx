@@ -1,39 +1,49 @@
 import React from "react";
-import { Alert, Button, ConfigProvider, Modal } from "antd";
-import resolveConfig from "tailwindcss/resolveConfig";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import tailwindConfig from "../tailwind.config";
+import Layout from "@/components/layouts/layout";
 
-const fullConfig = resolveConfig(tailwindConfig);
+import { LOCATIONS } from "@/constants/routes";
+
+import {
+  AbsentRequest,
+  CheckUserRole,
+  Dashboard,
+  Login,
+  Ranking,
+  UnauthorizedPage,
+} from "./routes";
 
 function App() {
-  return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: fullConfig.theme.colors.primary[0],
-          borderRadiusLG: fullConfig.theme.borderRadius.primary,
-          colorWarning: fullConfig.theme.colors.neutral[1],
+  const router = createBrowserRouter([
+    {
+      path: LOCATIONS.LOGIN,
+      element: <Login />,
+    },
+    {
+      path: LOCATIONS.MEMBER_LAYOUT,
+      element: <Layout />,
+      children: [
+        {
+          path: LOCATIONS.MEMBER_DASHBOARD,
+          element: <CheckUserRole element={Dashboard} />,
         },
-        components: {
-          Button: {
-            primaryColor: fullConfig.theme.colors.neutral[0],
-            paddingInline: fullConfig.theme.padding.primary.x,
-            borderRadius: fullConfig.theme.borderRadius.primary,
-          },
+        {
+          path: LOCATIONS.MEMBER_ABSENT,
+          element: <CheckUserRole element={AbsentRequest} />,
         },
-      }}
-    >
-      <Modal open okText="Check-in" cancelText="Cancel">
-        <span className="underline text-red-900">Test Primary color Hello</span>{" "}
-      </Modal>
-      <h1 className="text-primary-0">Hello Word</h1>
-      <Alert message="Warning" type="warning" showIcon closable />
-      <Button type="primary">
-        <span>Primary</span>
-      </Button>
-    </ConfigProvider>
-  );
+        {
+          path: LOCATIONS.MEMBER_RANKING,
+          element: <CheckUserRole element={Ranking} />,
+        },
+      ],
+    },
+    {
+      path: LOCATIONS.UNAUTHORIZED,
+      element: <UnauthorizedPage />,
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;

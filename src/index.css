@@ -18,12 +18,4 @@
   @media (min-width: theme("screens.lg")) {
     font-size: 16px;
   }
-
-  @media (min-width: theme("screens.xl")) {
-    font-size: 16px;
-  }
-
-  @media (min-width: theme("screens.2xl")) {
-    font-size: 16px;
-  }
 }
