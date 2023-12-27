@@ -1,10 +1,9 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from "@/components/layouts/layout";
-
 import { LOCATIONS } from "@/constants/routes";
 
+import Layout from "./components/layouts/layout";
 import {
   AbsentRequest,
   CheckUserRole,
@@ -41,11 +40,10 @@ function App() {
       ],
     },
     {
-      path: "/unauthorized",
+      path: LOCATIONS.UNAUTHORIZED,
       element: <UnauthorizedPage />,
     },
   ]);
-
   return <RouterProvider router={router} />;
 }
 
