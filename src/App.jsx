@@ -1,37 +1,51 @@
-import React, { useState } from "react";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
+import Layout from "@/components/layouts/layout";
 
-import "./App.css";
+import { LOCATIONS } from "@/constants/routes";
+import {
+  AbsentRequest,
+  CheckUserRole,
+  Dashboard,
+  Login,
+  Ranking,
+  UnauthorizedPage,
+} from "@/routes";
+
+import "@/App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const router = createBrowserRouter([
+    {
+      path: LOCATIONS.LOGIN,
+      element: <Login />,
+    },
+    {
+      path: LOCATIONS.MEMBER_LAYOUT,
+      element: <Layout />,
+      children: [
+        {
+          path: LOCATIONS.MEMBER_DASHBOARD,
+          element: <CheckUserRole element={Dashboard} />,
+        },
+        {
+          path: LOCATIONS.MEMBER_ABSENT,
+          element: <CheckUserRole element={AbsentRequest} />,
+        },
+        {
+          path: LOCATIONS.MEMBER_RANKING,
+          element: <CheckUserRole element={Ranking} />,
+        },
+      ],
+    },
+    {
+      path: "/unauthorized",
+      element: <UnauthorizedPage />,
+    },
+  ]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((prev) => prev + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
