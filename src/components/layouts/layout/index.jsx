@@ -8,12 +8,17 @@ function Layout() {
   return (
     <>
       <header>
+        {/* Navigation  */}
         <Header />
       </header>
+
       <main>
+        {/* Pages  */}
         <Outlet />
       </main>
+
       <footer>
+        {/* Footer  */}
         <Footer />
       </footer>
     </>
