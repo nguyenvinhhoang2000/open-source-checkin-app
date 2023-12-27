@@ -7,20 +7,16 @@ import Header from "@/components/layouts/Header";
 function Layout() {
   return (
     <>
-      <header>
-        {/* Navigation  */}
-        <Header />
-      </header>
+      {/* Navigation  */}
+      <Header />
 
       <main>
-        {/* Pages  */}
+        {/* Pages Section  */}
         <Outlet />
       </main>
 
-      <footer>
-        {/* Footer  */}
-        <Footer />
-      </footer>
+      {/* Footer  */}
+      <Footer />
     </>
   );
 }

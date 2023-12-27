@@ -1,7 +1,7 @@
 import React from "react";
 
 function AbsentRequest() {
-  return <div>AbsentRequest</div>;
+  return <section>AbsentRequest</section>;
 }
 
 export default AbsentRequest;

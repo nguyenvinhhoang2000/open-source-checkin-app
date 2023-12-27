@@ -2,11 +2,11 @@ import React from "react";
 
 function Login() {
   return (
-    <div>
+    <section>
       <button aria-hidden type="button">
         Login
       </button>
-    </div>
+    </section>
   );
 }
 

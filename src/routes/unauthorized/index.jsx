@@ -1,7 +1,7 @@
 import React from "react";
 
 function UnauthorizedPage() {
-  return <div>UnauthorizedPage</div>;
+  return <section>UnauthorizedPage</section>;
 }
 
 export default UnauthorizedPage;

@@ -8,10 +8,10 @@ function CheckUserRole({ roles, element: Element }) {
     role: "admin",
   };
 
-  if (!user?.role) {
+  if (!user.role) {
     return <Navigate to={`/?redirect=${location.pathname}`} />;
   }
-  if (user?.role && !roles.includes(user?.role)) {
+  if (user.role && !roles.includes(user.role)) {
     return <Navigate to="/unauthorized" />;
   }
 

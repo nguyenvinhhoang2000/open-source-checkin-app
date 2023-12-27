@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "@/components/layouts/layout";
 
 import { LOCATIONS } from "@/constants/routes";
+
 import {
   AbsentRequest,
   CheckUserRole,
@@ -11,9 +12,9 @@ import {
   Login,
   Ranking,
   UnauthorizedPage,
-} from "@/routes";
+} from "./routes";
 
-import "@/App.css";
+import "./App.css";
 
 function App() {
   const router = createBrowserRouter([
