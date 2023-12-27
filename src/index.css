@@ -7,10 +7,6 @@
 :root {
   font-size: 12px;
 
-  @media (min-width: theme("screens.sm")) {
-    font-size: 12px;
-  }
-
   @media (min-width: theme("screens.md")) {
     font-size: 14px;
   }
