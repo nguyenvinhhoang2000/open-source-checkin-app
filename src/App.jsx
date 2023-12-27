@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Modal } from "antd";
 
 function App() {
   return (
@@ -8,11 +8,13 @@ function App() {
         token: {
           colorPrimary: "#FF6D03",
           borderRadius: 2,
-          // colorBgContainer: "#f6ffed",
+          colorBgContainer: "#FFF",
         },
       }}
     >
-      <span>1</span>
+      <Modal open>
+        <span className="underline text-red-900">Hello</span>{" "}
+      </Modal>
     </ConfigProvider>
   );
 }
