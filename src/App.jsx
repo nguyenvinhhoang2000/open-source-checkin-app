@@ -27,6 +27,7 @@ function App() {
       <Modal open okText="Check-in" cancelText="Cancel">
         <span className="underline text-red-900">Test Primary color Hello</span>{" "}
       </Modal>
+      <h1 className="text-primary-0">Hello Word</h1>
       <Alert message="Warning" type="warning" showIcon closable />
       <Button type="primary">
         <span>Primary</span>
