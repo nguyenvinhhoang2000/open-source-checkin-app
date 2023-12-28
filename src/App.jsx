@@ -14,8 +14,6 @@ import {
   UnauthorizedPage,
 } from "./routes";
 
-import "./App.css";
-
 function App() {
   const router = createBrowserRouter([
     {
