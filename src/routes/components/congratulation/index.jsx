@@ -5,7 +5,7 @@ function Congratulation(props) {
   const { topThree } = props;
 
   return (
-    <div className="flex w-full items-start justify-center bg-neutral-1 bg-[url('/assets/images/background/phao-hoa.jpg')] bg-center bg-no-repeat pt-[3.81rem]">
+    <div className="flex w-full items-start justify-center bg-neutral-1 bg-[url('/assets/images/background/congratulation.jpg')] bg-center bg-no-repeat pt-[3.81rem]">
       <div className="grid w-[59.5rem] grid-cols-3 gap-[0.75rem] px-[0.5rem] lg:px-0">
         <div className="col-span-1 flex max-w-[19.375rem] flex-col items-center justify-end gap-[1rem]">
           <img
