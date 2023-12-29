@@ -22,6 +22,7 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     container: {
+      padding: "1em",
       center: true,
       screens: {
         "2xl": "1392px",
@@ -81,7 +82,7 @@ export default {
         },
       },
       boxShadow: {
-        tableShadow: "0px 1px 13px 0px rgba(0,0,0,0.05)",
+        tableShadow: "0px 10px 20px 0px rgba(18,38,63,0.03)",
       },
     },
   },

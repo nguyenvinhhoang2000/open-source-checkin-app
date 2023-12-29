@@ -1,3 +1,5 @@
 const rankingNumOfShow = 5;
 
-export { rankingNumOfShow };
+const absentNumOfShow = 7;
+
+export { rankingNumOfShow, absentNumOfShow };

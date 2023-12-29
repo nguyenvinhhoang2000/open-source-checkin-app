@@ -149,7 +149,6 @@ function RankTable(props) {
           scroll={{
             x: "auto",
           }}
-          // style={{ width: "auto" }}
           rowKey="id"
           columns={columns}
           dataSource={dataRanking}
