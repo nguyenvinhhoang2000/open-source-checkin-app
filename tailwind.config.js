@@ -22,7 +22,6 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     container: {
-      padding: "1em",
       center: true,
       screens: {
         "2xl": "1392px",
@@ -35,6 +34,7 @@ export default {
       borderRadius: {
         primary: "0.125rem",
         secondary: "0.25rem",
+        "100px": "6.25rem",
       },
       padding: {
         primary: {
@@ -61,12 +61,14 @@ export default {
           3: "#A7F3D0",
           4: "#6EE7B7",
           5: "#D9D9D9",
+          6: "#00CE9D",
         },
         neutral: {
           0: "#FFFFFF",
           1: "#556EE6",
           2: "#D9D9D9",
           3: "#F5F5F5",
+          4: "#F46A6A",
         },
         character: {
           0: "#00000040",
@@ -77,6 +79,9 @@ export default {
           2: "#FFD8BF",
           6: "#FA541C",
         },
+      },
+      boxShadow: {
+        tableShadow: "0px 1px 13px 0px rgba(0,0,0,0.05)",
       },
     },
   },

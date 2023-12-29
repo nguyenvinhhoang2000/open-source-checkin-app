@@ -23,6 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             paddingInline: fullConfig.theme.padding.primary.x,
             borderRadius: fullConfig.theme.borderRadius.primary,
           },
+          Pagination: {
+            colorPrimary: fullConfig.theme.colors.neutral[0],
+            borderRadius: fullConfig.theme.borderRadius["100px"],
+            itemActiveBg: fullConfig.theme.colors.neutral[1],
+            colorPrimaryHover: fullConfig.theme.colors.neutral[0],
+          },
         },
       }}
     >
