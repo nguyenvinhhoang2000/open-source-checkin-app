@@ -11,7 +11,7 @@ const columns = [
     key: "rank",
     width: "9.5rem",
     render: (text) => (
-      <div className="flex items-center justify-start gap-[0.5rem]">
+      <div className="flex min-w-[6rem] items-center justify-start gap-[0.5rem]">
         <img src="/assets/icons/trophy.svg" alt="trophy" />
 
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -122,14 +122,14 @@ function RankTable(props) {
   const { dataRanking } = props;
 
   return (
-    <div className="shadow-tableShadow container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
+    <div className="container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem] shadow-tableShadow">
       <div className="col-span-12 w-full">
         <Table
           pagination={{ pageSize: rankingNumOfShow }}
           scroll={{
             x: "auto",
           }}
-          style={{ width: "auto" }}
+          // style={{ width: "auto" }}
           rowKey="id"
           columns={columns}
           dataSource={dataRanking}
