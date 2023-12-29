@@ -79,6 +79,9 @@ export default {
           6: "#FA541C",
         },
       },
+      boxShadow: {
+        tableShadow: "0px 1px 13px 0px rgba(0,0,0,0.05)",
+      },
     },
   },
 };
