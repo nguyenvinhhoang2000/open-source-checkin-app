@@ -22,7 +22,7 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     container: {
-      padding: "1rem",
+      padding: "1em",
       center: true,
       screens: {
         "2xl": "1392px",
