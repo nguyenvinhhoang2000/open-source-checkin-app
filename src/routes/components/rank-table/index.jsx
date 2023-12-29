@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 
 import { rankingNumOfShow } from "@/constants/defaultPagination";
 
-import styles from "./rankTable.module.css";
-
 const columns = [
   {
     title: "Rank",
@@ -127,7 +125,6 @@ function RankTable(props) {
     <div className="grid max-w-[85rem] grid-cols-12 whitespace-nowrap p-[1.25rem]">
       <div className="col-span-12 w-full">
         <Table
-          className={styles.rank_table}
           pagination={{ pageSize: rankingNumOfShow }}
           scroll={{
             x: "auto",

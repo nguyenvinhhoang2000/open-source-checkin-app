@@ -34,7 +34,7 @@ export default {
       borderRadius: {
         primary: "0.125rem",
         secondary: "0.25rem",
-        custom1: "6.25rem",
+        "100px": "6.25rem",
       },
       padding: {
         primary: {
