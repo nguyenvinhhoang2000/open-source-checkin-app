@@ -20,21 +20,21 @@ const columns = [
 
         <div className="flex items-center justify-start gap-[0.125rem] pl-[0.75rem]">
           {record.changeRankings >= 0 ? (
-            <>
+            <div className="flex items-center justify-start gap-[0.125rem]">
               <img src="/assets/icons/arrow-up.svg" alt="arrow-up" />
 
               <span className="font-roboto text-[0.75rem] font-[400] leading-[1.25rem] text-secondary-6">
                 +{record.changeRankings}
               </span>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="flex items-center justify-start gap-[0.125rem]">
               <img src="/assets/icons/arrow-down.svg" alt="arrow-down" />
 
-              <span className="font-roboto text-[0.75rem] font-[400] leading-[1.25rem] text-neutral-4">
+              <span className="text-neutral-4 font-roboto text-[0.75rem] font-[400] leading-[1.25rem]">
                 {record.changeRankings}
               </span>
-            </>
+            </div>
           )}
         </div>
       </div>
@@ -134,7 +134,7 @@ function RankTable(props) {
   const { dataRanking } = props;
 
   return (
-    <div className="container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem] shadow-tableShadow">
+    <div className="shadow-tableShadow container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
       <div className="col-span-12 w-full">
         <Table
           pagination={{ pageSize: rankingNumOfShow }}
