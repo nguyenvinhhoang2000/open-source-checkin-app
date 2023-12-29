@@ -10,7 +10,7 @@ const columns = [
     dataIndex: "rank",
     key: "rank",
     width: "9.5rem",
-    render: (text) => (
+    render: (text, record) => (
       <div className="flex min-w-[6rem] items-center justify-start gap-[0.5rem]">
         <img src="/assets/icons/trophy.svg" alt="trophy" />
 
@@ -19,11 +19,23 @@ const columns = [
         </span>
 
         <div className="flex items-center justify-start gap-[0.125rem] pl-[0.75rem]">
-          <img src="/assets/icons/arrow-up.svg" alt="arrow-up" />
+          {record.changeRankings >= 0 ? (
+            <>
+              <img src="/assets/icons/arrow-up.svg" alt="arrow-up" />
 
-          <span className="font-roboto text-[0.75rem] font-[400] leading-[1.25rem] text-secondary-6">
-            +2
-          </span>
+              <span className="font-roboto text-[0.75rem] font-[400] leading-[1.25rem] text-secondary-6">
+                +{record.changeRankings}
+              </span>
+            </>
+          ) : (
+            <>
+              <img src="/assets/icons/arrow-down.svg" alt="arrow-down" />
+
+              <span className="font-roboto text-[0.75rem] font-[400] leading-[1.25rem] text-neutral-4">
+                {record.changeRankings}
+              </span>
+            </>
+          )}
         </div>
       </div>
     ),
