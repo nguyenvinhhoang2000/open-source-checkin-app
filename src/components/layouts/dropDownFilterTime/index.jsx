@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Dropdown } from "antd";
 import PropTypes from "prop-types";
 
-import Down from "../icons/down";
+import Down from "../../icons/down";
 
 function DropdownFilterTime(props) {
   const { menuProps, timeFilter } = props;
