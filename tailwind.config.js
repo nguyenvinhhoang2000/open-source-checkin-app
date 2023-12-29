@@ -22,7 +22,6 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     container: {
-      padding: "1em",
       center: true,
       screens: {
         "2xl": "1440px",
@@ -35,6 +34,7 @@ export default {
       borderRadius: {
         primary: "0.125rem",
         secondary: "0.25rem",
+        custom1: 100,
       },
       padding: {
         primary: {
@@ -61,6 +61,7 @@ export default {
           3: "#A7F3D0",
           4: "#6EE7B7",
           5: "#D9D9D9",
+          6: "#00CE9D",
         },
         neutral: {
           0: "#FFFFFF",
