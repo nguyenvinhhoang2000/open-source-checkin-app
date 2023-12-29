@@ -3,9 +3,9 @@ import { Button, Space, Table } from "antd";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
+import DropdownFilterTime from "@/components/dropDownFilterTime";
 import Edit from "@/components/icons/edit";
 import Eye from "@/components/icons/eye";
-import DropdownFilterTime from "@/components/layouts/dropDownFilterTime";
 
 import { defaultItemFilterTime } from "@/constants/defaultItemFilterTime";
 import { absentNumOfShow } from "@/constants/defaultPagination";
