@@ -3,10 +3,18 @@ import { Avatar, Button, Dropdown } from "antd";
 
 import { USER_DROPDOWN_KEY } from "@/constants/userDropdownKey";
 
+import EditAvatarDraw from "../edit-avatar";
+
 function UserDropdown() {
+  const [openEditAvatar, setOpenEditAvatar] = React.useState(false);
+
+  const onOpenDraw = React.useCallback((type) => {
+    setOpenEditAvatar(type);
+  }, []);
+
   const onMenuClick = React.useCallback(({ key }) => {
     if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
-      console.log(`🎶🎶🎶.. Edit avatar`);
+      setOpenEditAvatar(true);
     } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
       console.log(`🎶🎶🎶.. Log-out`);
     }
@@ -64,6 +72,7 @@ function UserDropdown() {
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
         </Button>
       </Dropdown>
+      <EditAvatarDraw open={openEditAvatar} onOpenDraw={onOpenDraw} />
     </div>
   );
 }
