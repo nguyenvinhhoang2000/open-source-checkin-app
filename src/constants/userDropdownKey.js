@@ -1,5 +1,5 @@
 export const USER_DROPDOWN_KEY = {
-  EDIT_AVATAR: "edit-avatar",
+  EDIT_AVATAR: "edit_avatar",
 
-  LOG_OUT: "log-out",
+  LOG_OUT: "log_out",
 };

@@ -8,7 +8,7 @@ function UserDropdown() {
     if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
       console.log(`🎶🎶🎶.. Edit avatar`);
     } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
-      console.log(`🎶🎶🎶.. logout`);
+      console.log(`🎶🎶🎶.. Log-out`);
     }
   }, []);
 
