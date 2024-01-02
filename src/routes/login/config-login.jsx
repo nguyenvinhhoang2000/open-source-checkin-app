@@ -1,7 +1,10 @@
 const initialValues = {
   remember: true,
 };
-const rulesEmail = [{ required: true, message: "Please input your Email!" }];
+const rulesEmail = [
+  { required: true, message: "Please input your E-mail!" },
+  { type: "email", message: "The input is not valid E-mail!" },
+];
 const rulesPassword = [
   {
     required: true,

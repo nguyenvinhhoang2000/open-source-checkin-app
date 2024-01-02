@@ -23,11 +23,11 @@ function Login() {
           initialValues={initialValues}
           onFinish={onFinish}
         >
-          <div className="mb-[1.5rem] px-[2.37rem]">
-            <h2 className="mb-[0.25rem] text-center font-roboto text-3xl font-medium leading-10 text-character-1">
+          <div className="mb-[1.5rem]">
+            <h2 className="mb-[0.25rem] px-[2.37rem] text-center font-roboto text-3xl font-medium leading-10 text-character-1">
               Welcome Back
             </h2>
-            <p className="font-roboto text-sm font-normal leading-[1.375rem] text-character-2">
+            <p className="font-roboto text-sm font-normal leading-[1.375rem] text-character-2 sm:px-[2.37rem]">
               Enter the account provided to access the dashboard
             </p>
           </div>
