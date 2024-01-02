@@ -2,6 +2,8 @@ import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 
+import { initialValues, rulesEmail, rulesPassword } from "./config-login";
+
 function Login() {
   const onFinish = async (e) => {
     e.preventDefault();
@@ -9,7 +11,7 @@ function Login() {
   return (
     <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern">
       <img
-        src="/src/assets/icons/wiicampLogo.svg"
+        src="/src/assets/icons/wiicamp-logo.svg"
         alt="logo"
         title="wiicamp-logo"
         className="mb-[2.75rem]"
@@ -17,8 +19,8 @@ function Login() {
       <div>
         <Form
           name="normal_login"
-          className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-formShadow"
-          initialValues={{ remember: true }}
+          className="shadow-dropShadow flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem]"
+          initialValues={initialValues}
           onFinish={onFinish}
         >
           <div className="mb-[1.5rem] px-[2.37rem]">
@@ -29,10 +31,7 @@ function Login() {
               Enter the account provided to access the dashboard
             </p>
           </div>
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Email!" }]}
-          >
+          <Form.Item name="email" rules={rulesEmail}>
             <Input
               prefix={
                 <MailOutlined className="my-[0.4375rem] text-primary-0" />
@@ -40,17 +39,7 @@ function Login() {
               placeholder="Enter your Email"
             />
           </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Password!",
-              },
-              { min: 6, message: "Password must be at least 6 characters" },
-            ]}
-            hasFeedback
-          >
+          <Form.Item name="password" rules={rulesPassword} hasFeedback>
             <Input.Password
               prefix={<LockOutlined className="my-[0.5rem] text-primary-0" />}
               placeholder="Enter your Password"

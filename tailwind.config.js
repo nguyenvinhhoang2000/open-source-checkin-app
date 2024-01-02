@@ -85,8 +85,7 @@ export default {
         },
       },
       boxShadow: {
-        tableShadow: "0px 1px 13px 0px rgba(0,0,0,0.05)",
-        formShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
+        dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
       },
     },
   },
