@@ -10,16 +10,25 @@ import { fullConfig } from "@/theme";
 import AvatarList from "./components/avatar-list";
 
 function EditAvatarDraw({ open, onOpenDraw }) {
+  const [loadingOk, setLoadingOk] = React.useState(false);
+
   const onClose = React.useCallback(() => {
     onOpenDraw(false);
   }, [onOpenDraw]);
 
   const onSumbit = React.useCallback(async () => {
+    await setLoadingOk(true);
     // HANDLE SUBMIT
-    console.log(`🎶🎶🎶.. SUBMIT OKAY THEN CLOSE`);
-
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(`🎶🎶🎶.. AWAIT SUBMIT OKAY THEN CLOSE`);
+        resolve();
+      }, 2000);
+    });
+    await setLoadingOk(false);
     await onOpenDraw(false);
   }, [onOpenDraw]);
+
   const renderFooter = React.useMemo(() => {
     return (
       <AppFooterDraw
@@ -28,9 +37,10 @@ function EditAvatarDraw({ open, onOpenDraw }) {
         onOk={onSumbit}
         onCancle={onClose}
         classNames="flex flex-row justify-end gap-2"
+        loadingButtonOk={loadingOk}
       />
     );
-  }, [onClose]);
+  }, [loadingOk, onClose, onSumbit]);
 
   const renderTitle = React.useMemo(() => {
     return <AppTitleDraw titleText="Change Avatar" onClose={onClose} />;

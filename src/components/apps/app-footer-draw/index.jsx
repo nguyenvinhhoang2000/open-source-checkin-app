@@ -12,6 +12,7 @@ function AppFooterDraw({
   onOk,
   onCancle,
   deleteText,
+  loadingButtonOk,
 }) {
   return (
     <div className={classNames}>
@@ -23,7 +24,7 @@ function AppFooterDraw({
       )}
       <div className="flex flex-row items-center gap-2">
         <Button onClick={onCancle}>{cancleText}</Button>
-        <Button onClick={onOk} type="primary">
+        <Button loading={loadingButtonOk} onClick={onOk} type="primary">
           {okText}
         </Button>
       </div>
@@ -41,6 +42,7 @@ AppFooterDraw.propTypes = {
   onOk: PropTypes.func.isRequired,
   onCancle: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
+  loadingButtonOk: PropTypes.bool.isRequired,
 };
 AppFooterDraw.defaultProps = {
   okText: "Save",
