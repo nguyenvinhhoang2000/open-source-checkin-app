@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function AppPicker({ children, classNames, onClick, checked, value }) {
   return (
     <Button
-      aria-label={`picke ${value}`}
+      aria-label={`pick ${value}`}
       type="text"
       className={classnames(
         classNames,

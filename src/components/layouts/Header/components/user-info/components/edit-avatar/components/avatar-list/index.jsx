@@ -14,22 +14,16 @@ function AvatarList() {
 
   return (
     <div className="grid grid-cols-3 gap-3">
-      {dataAvatar.map(({ avatar, alt }) => {
-        return (
-          <AppPicker
-            key={alt}
-            onClick={onSetPicker}
-            checked={onCheckPickerAvatar(picker, alt)}
-            value={alt}
-          >
-            <img
-              className="relative rounded-[0.25rem] "
-              src={avatar}
-              alt={alt}
-            />
-          </AppPicker>
-        );
-      })}
+      {dataAvatar.map(({ avatar, alt }) => (
+        <AppPicker
+          key={alt}
+          onClick={onSetPicker}
+          checked={onCheckPickerAvatar(picker, alt)}
+          value={alt}
+        >
+          <img className="relative rounded-[0.25rem] " src={avatar} alt={alt} />
+        </AppPicker>
+      ))}
     </div>
   );
 }
