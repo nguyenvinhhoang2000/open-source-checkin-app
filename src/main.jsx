@@ -2,9 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 
-import { fullConfig } from "../theme";
-
 import App from "./App";
+import { fullConfig } from "./theme";
 
 import "./index.css";
 
@@ -16,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           colorPrimary: fullConfig.theme.colors.primary[0],
           borderRadiusLG: fullConfig.theme.borderRadius.primary,
           colorWarning: fullConfig.theme.colors.neutral[1],
+          borderRadius: 3,
         },
         components: {
           Button: {

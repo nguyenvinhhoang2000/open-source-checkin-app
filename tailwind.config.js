@@ -29,6 +29,9 @@ export default {
       },
     },
     extend: {
+      backgroundImage: () => ({
+        "hero-pattern": "url('./src/assets/backgrounds/log-in.svg')",
+      }),
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
       },
@@ -51,6 +54,7 @@ export default {
         transparent: "transparent",
         current: "currentColor",
         mainBg: "#f8f8fb",
+        danger: "#FF4D4F",
         primary: {
           0: "#FF6D03",
           1: "#FFF4E6",
@@ -75,6 +79,7 @@ export default {
         character: {
           0: "#00000040",
           1: "#000000D9",
+          2: "#00000073",
         },
         calendula: "#FAAD14",
         volcano: {
@@ -83,7 +88,10 @@ export default {
         },
       },
       boxShadow: {
-        tableShadow: "0px 10px 20px 0px rgba(18,38,63,0.03)",
+        dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
+      },
+      width: {
+        drawWidth: "29rem",
       },
     },
   },
