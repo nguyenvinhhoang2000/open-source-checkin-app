@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Avatar, Dropdown } from "antd";
+import { Avatar, Button, Dropdown } from "antd";
 
 import { USER_DROPDOWN_KEY } from "@/constants/userDropdownKey";
 
@@ -47,19 +46,23 @@ function UserDropdown() {
         arrow
         overlayClassName="w-[11.9375rem]"
       >
-        <Link
-          to="/#"
+        <Button
+          type="text"
           onClick={(e) => e.preventDefault()}
-          className="flex flex-row items-center gap-2"
+          className="flex flex-row items-center gap-2 p-0"
         >
-          <Avatar className="flex h-6 w-6 items-center bg-volcano-2 text-volcano-6">
+          <Avatar
+            size="small"
+            shape="icon"
+            className=" bg-volcano-2 text-volcano-6"
+          >
             T
           </Avatar>
           <span className="text-[1rem] font-normal text-black/85">
             Vinh Thai
           </span>
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
-        </Link>
+        </Button>
       </Dropdown>
     </div>
   );

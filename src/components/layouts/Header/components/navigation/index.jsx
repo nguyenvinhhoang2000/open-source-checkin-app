@@ -11,18 +11,16 @@ function Navigation({ classNames }) {
   return (
     <nav>
       <ul className={classNames}>
-        {navigationList.map((item) => {
-          return (
-            <li className="flex list-none items-center" key={item.href}>
-              <Link
-                className={onCheckActiveLink(pathname, item.href)}
-                to={item.href}
-              >
-                {item.name}
-              </Link>
-            </li>
-          );
-        })}
+        {navigationList.map((item) => (
+          <li className="flex list-none items-center" key={item.href}>
+            <Link
+              className={onCheckActiveLink(pathname, item.href)}
+              to={item.href}
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
