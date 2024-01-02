@@ -10,6 +10,7 @@ function DropdownFilterTime(props) {
       menu={menuProps}
       overlayClassName="w-[7.8125rem]"
       placement="bottomRight"
+      trigger={["click"]}
     >
       <Button
         className="flex items-center justify-center gap-[0.625rem] self-stretch px-[0.9375rem] py-[0.25rem]"
