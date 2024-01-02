@@ -14,12 +14,18 @@ function EditAvatarDraw({ open, onOpenDraw }) {
     onOpenDraw(false);
   }, [onOpenDraw]);
 
+  const onSumbit = React.useCallback(async () => {
+    // HANDLE SUBMIT
+    console.log(`🎶🎶🎶.. SUBMIT OKAY THEN CLOSE`);
+
+    await onOpenDraw(false);
+  }, [onOpenDraw]);
   const renderFooter = React.useMemo(() => {
     return (
       <AppFooterDraw
         cancleText="Cancel"
         okText="Save"
-        onOk={onClose}
+        onOk={onSumbit}
         onCancle={onClose}
         classNames="flex flex-row justify-end gap-2"
       />
