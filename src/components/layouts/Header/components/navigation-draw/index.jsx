@@ -2,7 +2,8 @@ import React from "react";
 import { UnorderedListOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
 
-import { fullConfig } from "../../../../../../theme";
+import { fullConfig } from "@/theme";
+
 import Navigation from "../navigation";
 import UserDropdown from "../user-info/components/user-dropdown";
 
