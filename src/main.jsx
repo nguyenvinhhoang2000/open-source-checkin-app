@@ -2,9 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 
-import { fullConfig } from "../theme";
-
 import App from "./App";
+import { fullConfig } from "./theme";
 
 import "./index.css";
 

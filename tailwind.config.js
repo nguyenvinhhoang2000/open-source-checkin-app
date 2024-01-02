@@ -22,6 +22,7 @@ export default {
       // => @media (min-width: 1536px) { ... }
     },
     container: {
+      padding: "1em",
       center: true,
       screens: {
         "2xl": "1392px",
@@ -50,6 +51,7 @@ export default {
         transparent: "transparent",
         current: "currentColor",
         mainBg: "#f8f8fb",
+        danger: "#FF4D4F",
         primary: {
           0: "#FF6D03",
           1: "#FFF4E6",
@@ -82,6 +84,9 @@ export default {
       },
       boxShadow: {
         tableShadow: "0px 1px 13px 0px rgba(0,0,0,0.05)",
+      },
+      width: {
+        drawWidth: "29rem",
       },
     },
   },
