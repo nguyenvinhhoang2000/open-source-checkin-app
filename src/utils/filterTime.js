@@ -1,20 +1,19 @@
+import dayjs from "dayjs";
+
 import { defaultItemFilterTime } from "@/constants/defaultItemFilterTime";
 
 const filterDataAbsent = (time, data) => {
-  const timer = new Date();
+  const currentDate = dayjs();
 
-  const thisYear = timer.getFullYear().toString();
+  const lastMont = currentDate.subtract(1, "month");
 
-  const thisMonth = `${timer.getMonth() + 1}-${timer.getFullYear()}`;
-
-  const lastMonth = `${timer.getMonth()}-${timer.getFullYear()}`;
-
-  const lastThreeMonth = timer.getMonth() - 1;
+  const threeMonthsAgo = currentDate.subtract(3, "month");
 
   switch (time) {
     case defaultItemFilterTime[0]?.key: {
       const newData = data.filter((item) => {
-        return item.dateRequest.slice(3, 10).toString() === thisMonth;
+        const targetDate = dayjs(item.dateRequest);
+        return targetDate.isSame(currentDate, "month");
       });
 
       return newData;
@@ -22,7 +21,8 @@ const filterDataAbsent = (time, data) => {
 
     case defaultItemFilterTime[1]?.key: {
       const newData = data.filter((item) => {
-        return item.dateRequest.slice(3, 10).toString() === lastMonth;
+        const targetDate = dayjs(item.dateRequest);
+        return targetDate.isSame(lastMont, "month");
       });
 
       return newData;
@@ -30,10 +30,9 @@ const filterDataAbsent = (time, data) => {
 
     case defaultItemFilterTime[2]?.key: {
       const newData = data.filter((item) => {
+        const targetDate = dayjs(item.dateRequest);
         return (
-          item.dateRequest.slice(6, 10).toString() === thisYear &&
-          +item.dateRequest.slice(3, 5) >= lastThreeMonth &&
-          +item.dateRequest.slice(3, 5) <= lastThreeMonth + 3
+          targetDate.isAfter(threeMonthsAgo) && targetDate.isBefore(currentDate)
         );
       });
 
@@ -44,4 +43,5 @@ const filterDataAbsent = (time, data) => {
       return data;
   }
 };
+
 export { filterDataAbsent };

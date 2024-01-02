@@ -1,0 +1,12 @@
+.customTable th::before {
+  display: none !important;
+}
+
+.customTable th {
+  padding: 0.75rem !important;
+}
+
+.customTable td {
+  padding-right: 0.75rem !important;
+  padding-left: 0.75rem !important;
+}

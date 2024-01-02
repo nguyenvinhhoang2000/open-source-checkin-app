@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { rankingNumOfShow } from "@/constants/defaultPagination";
 
+import styles from "./rankTable.module.css";
+
 const columns = [
   {
     title: "Rank",
@@ -152,6 +154,7 @@ function RankTable(props) {
           rowKey="id"
           columns={columns}
           dataSource={dataRanking}
+          className={styles.customTable}
         />
       </div>
     </div>

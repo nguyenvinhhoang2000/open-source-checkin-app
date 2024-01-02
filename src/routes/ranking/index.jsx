@@ -2,8 +2,8 @@ import React from "react";
 
 import { dataRanking } from "@/constants/data/dataRanking";
 
-import Congratulation from "../components/ranking/congratulation";
-import RankTable from "../components/ranking/rank-table";
+import Congratulation from "./components/congratulation";
+import RankTable from "./components/rank-table";
 
 function Ranking() {
   return (
