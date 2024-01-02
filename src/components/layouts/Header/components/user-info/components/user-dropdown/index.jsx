@@ -58,7 +58,7 @@ function UserDropdown() {
           <span className="text-[1rem] font-normal text-black/85">
             Vinh Thai
           </span>
-          <img src="/assets/icons/arrow-down.svg" alt="down" />
+          <img src="/assets/icons/arrow-user-down.svg" alt="down" />
         </Link>
       </Dropdown>
     </div>
