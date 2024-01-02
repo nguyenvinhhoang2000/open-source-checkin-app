@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Button, Table } from "antd";
 import classNames from "classnames";
 import dayjs from "dayjs";
@@ -96,8 +96,6 @@ const columns = [
 function AbsentTable(props) {
   const { dataAbsent } = props;
 
-  const [dataAbsentFilter, setDataAbsentFilter] = useState([]);
-
   const [timeFilter, setTimeFilter] = useState(defaultItemFilterTime[0]?.key);
 
   const handleMenuClick = (e) => {
@@ -126,16 +124,16 @@ function AbsentTable(props) {
     onClick: handleMenuClick,
   };
 
-  useEffect(() => {
+  const dataAbsentFilter = useMemo(() => {
     const newData = filterDataAbsent(timeFilter, dataAbsent);
 
-    setDataAbsentFilter(newData);
+    return newData;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeFilter]);
 
   return (
     <div className="container">
-      <div className="shadow-tableShadow rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
+      <div className="rounded-[0.5rem] bg-neutral-0 p-[1.25rem] shadow-tableShadow">
         <div className="flex w-full flex-col items-start justify-start gap-[1.25rem]">
           <div className="flex flex-col items-center justify-start gap-[1rem] self-stretch sm:flex-row sm:gap-0">
             <h4 className="mr-auto font-roboto text-[1.25rem] font-[500] leading-[1.75rem]">
