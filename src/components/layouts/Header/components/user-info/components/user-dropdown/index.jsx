@@ -47,7 +47,7 @@ function UserDropdown() {
         overlayClassName="w-[11.9375rem]"
       >
         <Button
-          type="text"
+          type="link"
           onClick={(e) => e.preventDefault()}
           className="flex flex-row items-center gap-2 p-0"
         >
