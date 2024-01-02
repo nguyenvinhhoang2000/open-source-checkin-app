@@ -79,6 +79,9 @@ export default {
           6: "#FA541C",
         },
       },
+      width: {
+        drawWidth: "29rem",
+      },
     },
   },
 };
