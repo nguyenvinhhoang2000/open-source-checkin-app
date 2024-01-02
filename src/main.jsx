@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           colorPrimary: fullConfig.theme.colors.primary[0],
           borderRadiusLG: fullConfig.theme.borderRadius.primary,
           colorWarning: fullConfig.theme.colors.neutral[1],
+          fontFamily: fullConfig.theme.fontFamily.roboto,
         },
         components: {
           Button: {
