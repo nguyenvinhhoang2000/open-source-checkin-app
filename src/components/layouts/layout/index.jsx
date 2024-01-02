@@ -6,18 +6,18 @@ import Header from "@/components/layouts/Header";
 
 function Layout() {
   return (
-    <>
+    <div className="flex min-h-screen flex-col justify-between">
       {/* Navigation  */}
       <Header />
 
-      <main>
+      <main className="mb-auto bg-mainBg">
         {/* Pages Section  */}
         <Outlet />
       </main>
 
       {/* Footer  */}
       <Footer />
-    </>
+    </div>
   );
 }
 

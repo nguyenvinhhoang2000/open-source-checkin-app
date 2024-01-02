@@ -1,0 +1,9 @@
+import classnames from "classnames";
+
+export function onCheckActiveLink(pathname, href) {
+  const isActive = pathname === href || pathname === `${href}/`;
+  return classnames("no-underline font-[0.875rem]", {
+    "text-primary-0": isActive,
+    "text-black": !isActive,
+  });
+}
