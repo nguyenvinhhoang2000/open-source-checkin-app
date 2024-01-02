@@ -7,8 +7,9 @@ import PropTypes from "prop-types";
 import DropdownFilterTime from "@/components/apps/dropown-filter-time";
 
 import { defaultItemFilterTime } from "@/constants/defaultItemFilterTime";
-import { absentNumOfShow } from "@/constants/defaultPagination";
 import { filterDataAbsent } from "@/utils/filterTime";
+
+import { pageSize, scroll } from "./config";
 
 import styles from "./absentTable.module.css";
 
@@ -157,10 +158,8 @@ function AbsentTable(props) {
           </div>
 
           <Table
-            pagination={{ pageSize: absentNumOfShow }}
-            scroll={{
-              x: "auto",
-            }}
+            pagination={pageSize}
+            scroll={scroll}
             rowKey="id"
             columns={columns}
             dataSource={dataAbsentFilter}
