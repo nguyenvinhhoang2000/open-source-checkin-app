@@ -134,7 +134,7 @@ function RankTable(props) {
   const { dataRanking } = props;
 
   return (
-    <div className="shadow-dropShadow container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
+    <div className="container grid grid-cols-12 whitespace-nowrap rounded-[0.5rem] bg-neutral-0 p-[1.25rem] shadow-dropShadow">
       <div className="col-span-12 w-full">
         <Table
           pagination={{ pageSize: rankingNumOfShow }}

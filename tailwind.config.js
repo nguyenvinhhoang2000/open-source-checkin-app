@@ -74,6 +74,7 @@ export default {
           2: "#D9D9D9",
           3: "#F5F5F5",
           4: "#F46A6A",
+          5: "#E3E3E3",
         },
         character: {
           0: "#00000040",

@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           borderRadiusLG: fullConfig.theme.borderRadius.primary,
           colorWarning: fullConfig.theme.colors.neutral[1],
           borderRadius: 3,
+          colorBgMask: fullConfig.theme.colors.character[2],
         },
         components: {
           Button: {
@@ -28,6 +29,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             borderRadius: fullConfig.theme.borderRadius["100px"],
             itemActiveBg: fullConfig.theme.colors.neutral[1],
             colorPrimaryHover: fullConfig.theme.colors.neutral[0],
+          },
+          Model: {
+            primaryColor: fullConfig.theme.colors.primary[1],
           },
         },
       }}
