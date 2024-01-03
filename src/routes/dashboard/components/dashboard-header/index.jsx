@@ -19,4 +19,4 @@ function DashboardHead() {
     </div>
   );
 }
-export default DashboardHead;
+export default React.memo(DashboardHead);
