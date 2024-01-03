@@ -2,6 +2,7 @@
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  safelist: ["absolute", "right-0", "top-0", "z-40"],
   theme: {
     screens: {
       ssm: "480px",

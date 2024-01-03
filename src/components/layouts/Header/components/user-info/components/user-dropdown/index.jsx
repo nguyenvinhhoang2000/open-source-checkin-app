@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Button, Dropdown } from "antd";
 
-import { USER_DROPDOWN_KEY } from "@/constants/userDropdownKey";
+import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
 
 import EditAvatarDraw from "../edit-avatar";
 

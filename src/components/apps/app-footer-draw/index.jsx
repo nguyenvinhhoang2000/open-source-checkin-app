@@ -3,7 +3,7 @@ import { Button } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-import { emptyTypes } from "@/utils/emptyTypes";
+import { emptyFn } from "@/utils/empty-types";
 
 function AppFooterDraw({
   classNames,
@@ -23,7 +23,7 @@ function AppFooterDraw({
         </Button>
       )}
       <div className="flex flex-row items-center gap-2">
-        <Button onClick={onCancle}>{cancleText}</Button>
+        {cancleText && <Button onClick={onCancle}>{cancleText}</Button>}
         <Button loading={loadingButtonOk} onClick={onOk} type="primary">
           {okText}
         </Button>
@@ -47,8 +47,8 @@ AppFooterDraw.propTypes = {
 
 AppFooterDraw.defaultProps = {
   okText: "Save",
-  cancleText: "Cancel",
+  cancleText: "",
   deleteText: "",
   classNames: "",
-  onDelete: emptyTypes.emptyFn,
+  onDelete: emptyFn,
 };

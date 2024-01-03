@@ -2,10 +2,10 @@ import React from "react";
 
 import AppPicker from "@/components/apps/app-picker";
 
-import { dataAvatar } from "@/constants/data/dataAvatar";
+import { dataAvatar } from "@/constants/data/data-avatar";
 
 function AvatarList() {
-  const [picker, setPicker] = React.useState("avatar-edit-1");
+  const [picker, setPicker] = React.useState(dataAvatar[0].alt);
 
   const onSetPicker = React.useCallback((value) => {
     setPicker(value);
