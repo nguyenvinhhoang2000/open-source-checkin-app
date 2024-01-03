@@ -19,7 +19,7 @@ function Login() {
       <div>
         <Form
           name="normal_login"
-          className="shadow-dropShadow flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem]"
+          className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
           initialValues={initialValues}
           onFinish={onFinish}
         >

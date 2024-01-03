@@ -30,6 +30,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             itemActiveBg: fullConfig.theme.colors.neutral[1],
             colorPrimaryHover: fullConfig.theme.colors.neutral[0],
           },
+          Table: {
+            cellPaddingInline: fullConfig.theme.antdTable.cellPaddingInline,
+            cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
+            headerSplitColor: fullConfig.theme.antdTable.headerSplitColor,
+          },
         },
       }}
       drawer={drawerConfig}
