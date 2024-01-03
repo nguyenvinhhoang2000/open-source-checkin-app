@@ -2,6 +2,7 @@
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  safelist: ["absolute", "right-0", "top-0", "z-40"],
   theme: {
     screens: {
       ssm: "480px",
@@ -49,6 +50,10 @@ export default {
           x: "0.9375rem",
           y: "0.4rem",
         },
+        headerDraw: "1rem 0",
+        bodyDraw: "1.5rem 0",
+        footerDraw: "1rem 1rem",
+        contentDraw: "0 2.5rem",
       },
       colors: {
         transparent: "transparent",
@@ -90,6 +95,9 @@ export default {
       boxShadow: {
         dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
       },
+      backdropBlur: {
+        blurMain: "blur(6px)",
+      },
       width: {
         drawWidth: "29rem",
       },
@@ -97,6 +105,10 @@ export default {
         cellPaddingInline: "12px",
         cellPaddingBlock: "12px",
         headerSplitColor: "none",
+      },
+      borderWidth: {
+        borderTopDraw: "1px solid #f0f0f0",
+        borderBottomDraw: "1px solid #f0f0f0",
       },
     },
   },

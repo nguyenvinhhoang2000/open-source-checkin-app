@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { navigationList } from "@/constants/navigation";
-import { onCheckActiveLink } from "@/utils/onCheckActiveLink";
+import onCheckActiveLink from "@/utils/on-check-active-link";
 
 function Navigation({ classNames }) {
   const { pathname } = useLocation();
