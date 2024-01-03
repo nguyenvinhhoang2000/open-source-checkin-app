@@ -34,7 +34,7 @@ export default React.memo(AppPicker);
 
 AppPicker.propTypes = {
   classNames: PropTypes.string,
-  children: PropTypes.instanceOf(Object).isRequired,
+  children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
   checked: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
