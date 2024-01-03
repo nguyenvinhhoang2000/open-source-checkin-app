@@ -100,14 +100,14 @@ export default {
       width: {
         drawWidth: "29rem",
       },
+      borderWidth: {
+        borderTopDraw: "1px solid #f0f0f0",
+        borderBottomDraw: "1px solid #f0f0f0",
+      },
       antdTable: {
         cellPaddingInline: "12px",
         cellPaddingBlock: "12px",
         headerSplitColor: "none",
-      },
-      borderWidth: {
-        borderTopDraw: "1px solid #f0f0f0",
-        borderBottomDraw: "1px solid #f0f0f0",
       },
     },
   },
