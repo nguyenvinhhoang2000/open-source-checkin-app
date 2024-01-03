@@ -7,7 +7,7 @@ import HeadShortProfile from "./head-short-profile";
 
 function DashboardHead() {
   return (
-    <div className="container mt-[1.5rem] grid grid-cols-1 rounded-lg bg-secondary-1 p-[1.25rem] md:grid-cols-2 lg:flex lg:justify-between ">
+    <div className="mt-[1.5rem] grid grid-cols-1 rounded-lg bg-secondary-1 p-[1.25rem] md:grid-cols-2 lg:flex lg:justify-between ">
       <HeadShortProfile />
       <span className="hidden max-h-[4.125rem] w-[0.0625rem] rounded bg-neutral-5 lg:block" />
       <HeadAbsentInfor />

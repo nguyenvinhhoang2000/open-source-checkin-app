@@ -4,7 +4,7 @@ import DashboardHead from "./components/dashboard-header/index";
 
 function Dashboard() {
   return (
-    <section>
+    <section className="container">
       <DashboardHead />
     </section>
   );
