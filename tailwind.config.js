@@ -93,6 +93,11 @@ export default {
       width: {
         drawWidth: "29rem",
       },
+      antdTable: {
+        cellPaddingInline: "12px",
+        cellPaddingBlock: "12px",
+        headerSplitColor: "none",
+      },
     },
   },
 };

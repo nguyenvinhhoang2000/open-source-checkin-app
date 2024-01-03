@@ -11,8 +11,6 @@ import { filterDataAbsent } from "@/utils/filterTime";
 
 import { pageSize, scroll } from "./config";
 
-import styles from "./absentTable.module.css";
-
 const currentDate = dayjs();
 
 const columns = [
@@ -78,8 +76,7 @@ const columns = [
             <img src="/assets/icons/eye.svg" alt="view" />
           </button>
 
-          {(dayjs(record.dateRequest).isSame(currentDate, "day") ||
-            dayjs(record.dateRequest).isAfter(currentDate)) && (
+          {!dayjs(record.dateRequest).isBefore(currentDate, "day") && (
             <button
               className="h-[1.25rem] w-[1.25rem]"
               title="edit"
@@ -134,7 +131,7 @@ function AbsentTable(props) {
 
   return (
     <div className="container">
-      <div className="rounded-[0.5rem] bg-neutral-0 p-[1.25rem] shadow-tableShadow">
+      <div className="shadow-tableShadow rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
         <div className="flex w-full flex-col items-start justify-start gap-[1.25rem]">
           <div className="flex flex-col items-center justify-start gap-[1rem] self-stretch sm:flex-row sm:gap-0">
             <h4 className="mr-auto font-roboto text-[1.25rem] font-[500] leading-[1.75rem]">
@@ -163,10 +160,7 @@ function AbsentTable(props) {
             rowKey="id"
             columns={columns}
             dataSource={dataAbsentFilter}
-            className={classNames(
-              "w-full whitespace-nowrap",
-              styles.customTable,
-            )}
+            className="w-full whitespace-nowrap"
           />
         </div>
       </div>
