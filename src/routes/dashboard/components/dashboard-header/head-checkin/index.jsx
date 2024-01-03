@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 
+import AppFooterDraw from "@/components/apps/app-footer-draw/index";
+
 function Checkin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -36,12 +38,7 @@ function Checkin() {
         }
         open={isModalOpen}
         closable={false}
-        onOk={handleOk}
-        footer={[
-          <Button key="cancel" type="primary" onClick={handleOk}>
-            Cancel
-          </Button>,
-        ]}
+        footer={<AppFooterDraw onOk={handleOk} okText="Cancel" />}
       />
     </div>
   );
