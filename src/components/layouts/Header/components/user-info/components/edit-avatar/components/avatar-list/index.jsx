@@ -3,7 +3,6 @@ import React from "react";
 import AppPicker from "@/components/apps/app-picker";
 
 import { dataAvatar } from "@/constants/data/dataAvatar";
-import { onCheckPickerAvatar } from "@/utils/onCheckPickerAvatar";
 
 function AvatarList() {
   const [picker, setPicker] = React.useState("avatar-edit-1");
@@ -18,10 +17,10 @@ function AvatarList() {
         <AppPicker
           key={alt}
           onClick={onSetPicker}
-          checked={onCheckPickerAvatar(picker, alt)}
+          checked={picker === alt}
           value={alt}
         >
-          <img className="relative rounded-[0.25rem] " src={avatar} alt={alt} />
+          <img className="relative rounded-[0.25rem]" src={avatar} alt={alt} />
         </AppPicker>
       ))}
     </div>

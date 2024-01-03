@@ -2,13 +2,13 @@ import React from "react";
 import { Button } from "antd";
 import PropTypes from "prop-types";
 
-import { emptyFn } from "@/utils/emptyFn";
+import { emptyTypes } from "@/utils/emptyTypes";
 
 function AppFooterDraw({
+  classNames,
   okText,
   cancleText,
   onDelete,
-  classNames,
   onOk,
   onCancle,
   deleteText,
@@ -16,7 +16,6 @@ function AppFooterDraw({
 }) {
   return (
     <div className={classNames}>
-      {" "}
       {deleteText && (
         <Button danger type="text" onClick={onDelete}>
           {deleteText}
@@ -44,10 +43,11 @@ AppFooterDraw.propTypes = {
   onDelete: PropTypes.func,
   loadingButtonOk: PropTypes.bool.isRequired,
 };
+
 AppFooterDraw.defaultProps = {
   okText: "Save",
   cancleText: "cancel",
   deleteText: "",
   classNames: "flex flex-row justify-between items-center",
-  onDelete: emptyFn,
+  onDelete: emptyTypes.emptyFn,
 };

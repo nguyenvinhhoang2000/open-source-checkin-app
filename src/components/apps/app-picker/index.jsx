@@ -4,6 +4,10 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 
 function AppPicker({ children, classNames, onClick, checked, value }) {
+  const onClickBtn = React.useCallback(() => {
+    onClick(value);
+  }, [onClick, value]);
+
   return (
     <Button
       aria-label={`pick ${value}`}
@@ -12,15 +16,15 @@ function AppPicker({ children, classNames, onClick, checked, value }) {
         classNames,
         "relative h-full w-full p-0 hover:brightness-50",
       )}
-      onClick={() => {
-        onClick(value);
-      }}
+      onClick={onClickBtn}
     >
       {children}
       {checked && (
-        <div className="absolute right-0 top-0 z-40">
-          <img src="/assets/icons/picker.svg" alt="picker" />
-        </div>
+        <img
+          src="/assets/icons/picker.svg"
+          alt="picker"
+          className="absolute right-0 top-0 z-40"
+        />
       )}
     </Button>
   );

@@ -33,6 +33,7 @@ AppTitleDraw.propTypes = {
   classNamesTitle: PropTypes.string,
   onClose: PropTypes.func.isRequired,
 };
+
 AppTitleDraw.defaultProps = {
   titleText: "Save",
   classNames: "flex flex-row items-center justify-between",

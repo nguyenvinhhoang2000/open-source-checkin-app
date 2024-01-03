@@ -16,35 +16,25 @@ function EditAvatarDraw({ open, onOpenDraw }) {
     onOpenDraw(false);
   }, [onOpenDraw]);
 
-  const onSumbit = React.useCallback(async () => {
-    await setLoadingOk(true);
+  const onSumbit = React.useCallback(() => {
+    setLoadingOk(true);
     // HANDLE SUBMIT
-    await new Promise((resolve) => {
+    const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        console.log(`🎶🎶🎶.. AWAIT SUBMIT OKAY THEN CLOSE`);
-        resolve();
+        setLoadingOk(false);
+        onOpenDraw(false);
+        resolve("Change avatar okay");
       }, 2000);
     });
-    await setLoadingOk(false);
-    await onOpenDraw(false);
+
+    handleEditData
+      .then((data) => {
+        console.log(`🚀🚀🚀!..data`, data);
+      })
+      .catch((error) => {
+        console.log(`🚀🚀🚀!..change error`, error);
+      });
   }, [onOpenDraw]);
-
-  const renderFooter = React.useMemo(() => {
-    return (
-      <AppFooterDraw
-        cancleText="Cancel"
-        okText="Save"
-        onOk={onSumbit}
-        onCancle={onClose}
-        classNames="flex flex-row justify-end gap-2"
-        loadingButtonOk={loadingOk}
-      />
-    );
-  }, [loadingOk, onClose, onSumbit]);
-
-  const renderTitle = React.useMemo(() => {
-    return <AppTitleDraw titleText="Change Avatar" onClose={onClose} />;
-  }, [onClose]);
 
   return (
     <Drawer
@@ -54,9 +44,18 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       onClose={onClose}
       open={open}
       mask
-      title={renderTitle}
+      title={<AppTitleDraw titleText="Change Avatar" onClose={onClose} />}
       closable={false}
-      footer={renderFooter}
+      footer={
+        <AppFooterDraw
+          cancleText="Cancel"
+          okText="Save"
+          onOk={onSumbit}
+          onCancle={onClose}
+          classNames="flex flex-row justify-end gap-2"
+          loadingButtonOk={loadingOk}
+        />
+      }
     >
       <AvatarList />
     </Drawer>

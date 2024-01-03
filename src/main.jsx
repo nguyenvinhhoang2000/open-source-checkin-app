@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 
+import { drawerConfig } from "./constants/configAntd/drawer";
 import App from "./App";
 import { fullConfig } from "./theme";
 
@@ -31,30 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           },
         },
       }}
-      drawer={{
-        styles: {
-          mask: {
-            backgroundColor: fullConfig.theme.colors.bgMask,
-            backdropFilter: fullConfig.theme.backdropBlur.blurMain,
-          },
-          header: {
-            padding: fullConfig.theme.padding.headerDraw,
-            borderBottom: fullConfig.theme.borderWidth.border,
-          },
-          body: {
-            padding: fullConfig.theme.padding.bodyDraw,
-            borderTop: fullConfig.theme.borderWidth.borderTopDraw,
-            borderBottom: fullConfig.theme.borderWidth.borderBottomDraw,
-          },
-          footer: {
-            padding: fullConfig.theme.padding.footerDraw,
-            borderTop: fullConfig.theme.borderWidth.border,
-          },
-          content: {
-            padding: fullConfig.theme.padding.contentDraw,
-          },
-        },
-      }}
+      drawer={drawerConfig}
     >
       <App />
     </ConfigProvider>
