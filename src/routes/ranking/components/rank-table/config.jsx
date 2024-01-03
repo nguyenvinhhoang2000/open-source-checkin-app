@@ -1,4 +1,4 @@
-import { rankingNumOfShow } from "@/constants/defaultPagination";
+import { rankingNumOfShow } from "@/constants/default-pagination";
 
 const pageSize = {
   pageSize: rankingNumOfShow,

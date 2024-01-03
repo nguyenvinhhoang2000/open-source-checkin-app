@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 
 import DropdownFilterTime from "@/components/apps/dropown-filter-time";
 
-import { defaultItemFilterTime } from "@/constants/defaultItemFilterTime";
-import { filterDataAbsent } from "@/utils/filterTime";
+import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
+import filterDataAbsent from "@/utils/filter-time";
 
 import { pageSize, scroll } from "./config";
 

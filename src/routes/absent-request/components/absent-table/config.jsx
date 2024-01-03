@@ -1,4 +1,4 @@
-import { absentNumOfShow } from "@/constants/defaultPagination";
+import { absentNumOfShow } from "@/constants/default-pagination";
 
 const pageSize = {
   pageSize: absentNumOfShow,

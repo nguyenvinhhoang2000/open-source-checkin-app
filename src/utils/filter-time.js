@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-import { defaultItemFilterTime } from "@/constants/defaultItemFilterTime";
+import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
-const filterDataAbsent = (time, data) => {
+export default function filterDataAbsent(time, data) {
   const currentDate = dayjs();
 
   const lastMont = currentDate.subtract(1, "month");
@@ -42,6 +42,4 @@ const filterDataAbsent = (time, data) => {
     default:
       return data;
   }
-};
-
-export { filterDataAbsent };
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { dataAbsent } from "@/constants/data/dataAbsent";
+import { dataAbsent } from "@/constants/data/data-absent";
 
 import AbsentTable from "./components/absent-table";
 
