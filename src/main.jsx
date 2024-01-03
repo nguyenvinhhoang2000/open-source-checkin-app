@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 
+import { drawerConfig } from "./constants/config-antd/drawer";
 import App from "./App";
 import { fullConfig } from "./theme";
 
@@ -33,8 +34,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           Model: {
             primaryColor: fullConfig.theme.colors.primary[1],
           },
+          Table: {
+            cellPaddingInline: fullConfig.theme.antdTable.cellPaddingInline,
+            cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
+            headerSplitColor: fullConfig.theme.antdTable.headerSplitColor,
+          },
         },
       }}
+      drawer={drawerConfig}
     >
       <App />
     </ConfigProvider>
