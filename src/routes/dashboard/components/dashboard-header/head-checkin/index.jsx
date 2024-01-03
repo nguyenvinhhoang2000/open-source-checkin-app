@@ -25,10 +25,10 @@ function Checkin() {
               />
             </div>
             <div className="flex flex-col gap-[0.5rem]">
-              <p className="font-roboto text-base	font-medium text-character-1">
+              <p className="font-roboto text-base font-medium text-character-1">
                 You Check-in late!
               </p>
-              <p className="font-roboto text-sm	font-normal	leading-[1.375rem] text-character-2">
+              <p className="font-roboto text-sm	font-normal leading-[1.375rem] text-character-2">
                 Please be more compliant with your working hours
               </p>
             </div>
@@ -47,4 +47,4 @@ function Checkin() {
   );
 }
 
-export default Checkin;
+export default React.memo(Checkin);

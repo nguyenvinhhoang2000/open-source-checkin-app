@@ -11,10 +11,10 @@ function HeadAbsentInfor() {
             className="flex min-w-[5.3125rem] flex-col gap-[0.25rem] text-center "
             key={item.id}
           >
-            <h2 className="font-roboto text-xl font-medium	leading-10 text-character-1 sm:text-3xl">
+            <h2 className="font-roboto text-xl font-medium leading-10 text-character-1 sm:text-3xl">
               {item.number}
             </h2>
-            <p className="font-roboto text-sm	font-normal	leading-[1.375rem] text-character-2">
+            <p className="font-roboto text-sm font-normal leading-[1.375rem] text-character-2">
               {item.text}
             </p>
           </div>
@@ -24,4 +24,4 @@ function HeadAbsentInfor() {
   );
 }
 
-export default HeadAbsentInfor;
+export default React.memo(HeadAbsentInfor);

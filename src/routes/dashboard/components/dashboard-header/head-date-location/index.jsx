@@ -16,4 +16,4 @@ function HeadDateLocation() {
   );
 }
 
-export default HeadDateLocation;
+export default React.memo(HeadDateLocation);

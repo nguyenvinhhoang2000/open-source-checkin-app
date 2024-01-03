@@ -7,11 +7,11 @@ function HeadShortProfile() {
         src="/assets/images/avatar/avatar1.jpg"
         alt="avatar"
         title="avatar-member"
-        className="max-h-[64px] max-w-[64px]"
+        className="max-h-[4rem] max-w-[4rem]"
       />
       <div className="flex flex-col justify-center font-roboto">
         <h4 className="text-xl font-medium text-character-1">Vinh Thai</h4>
-        <span className="text-sm	font-normal	leading-[1.375rem] text-character-2">
+        <span className="text-sm font-normal leading-[1.375rem] text-character-2">
           Head
         </span>
       </div>
@@ -19,4 +19,4 @@ function HeadShortProfile() {
   );
 }
 
-export default HeadShortProfile;
+export default React.memo(HeadShortProfile);
