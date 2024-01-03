@@ -29,7 +29,7 @@ function EditAvatarDraw({ open, onOpenDraw }) {
 
     handleEditData
       .then((data) => {
-        console.log(`🚀🚀🚀!..data`, data);
+        console.log(`🚀🚀🚀!..data:`, data);
       })
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
@@ -52,7 +52,6 @@ function EditAvatarDraw({ open, onOpenDraw }) {
           okText="Save"
           onOk={onSumbit}
           onCancle={onClose}
-          classNames="flex flex-row justify-end gap-2"
           loadingButtonOk={loadingOk}
         />
       }

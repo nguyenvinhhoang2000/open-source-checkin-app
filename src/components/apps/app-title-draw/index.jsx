@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 
 function AppTitleDraw({
@@ -10,11 +11,20 @@ function AppTitleDraw({
   classNamesTitle,
 }) {
   return (
-    <div className={classNames}>
-      <span className={classNamesTitle}>{titleText}</span>
+    <div
+      className={classnames(
+        classNames,
+        "flex flex-row items-center justify-between",
+      )}
+    >
+      <span
+        className={classnames(classNamesTitle, "flex items-center font-medium")}
+      >
+        {titleText}
+      </span>
       <Button
         aria-label="Close draw"
-        className={classNamesClose}
+        className={classnames(classNamesClose, "m-0 h-fit p-0")}
         onClick={onClose}
         type="text"
       >
@@ -35,8 +45,8 @@ AppTitleDraw.propTypes = {
 };
 
 AppTitleDraw.defaultProps = {
-  titleText: "Save",
-  classNames: "flex flex-row items-center justify-between",
-  classNamesClose: "p-0 m-0 h-fit",
-  classNamesTitle: "flex items-center font-medium",
+  titleText: "Title Draw",
+  classNames: "",
+  classNamesClose: "",
+  classNamesTitle: "",
 };
