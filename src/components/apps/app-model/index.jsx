@@ -16,37 +16,35 @@ function AppModel({
   loadingButtonOk,
 }) {
   return (
-    <div>
-      <Modal
-        className="flex"
-        title={
-          <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem]">
-            <div>
-              <img src={src} alt="icon" title="check-in-icon" />
-            </div>
-            <div className="flex flex-col gap-[0.5rem]">
-              <p className="font-roboto text-base font-medium text-character-1">
-                {title}
-              </p>
-              <p className="font-roboto text-sm	font-normal leading-[1.375rem] text-character-2">
-                {description}
-              </p>
-            </div>
+    <Modal
+      className="flex"
+      title={
+        <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem]">
+          <div>
+            <img src={src} alt="icon" title="check-in-icon" />
           </div>
-        }
-        open={isModalOpen}
-        closable={false}
-        footer={
-          <AppFooterDraw
-            okText={okText}
-            onOk={onHandleOk}
-            cancleText={CancelText}
-            onCancle={onHandleCanlce}
-            loadingButtonOk={loadingButtonOk}
-          />
-        }
-      />
-    </div>
+          <div className="flex flex-col gap-[0.5rem]">
+            <p className="font-roboto text-base font-medium text-character-1">
+              {title}
+            </p>
+            <p className="font-roboto text-sm	font-normal leading-[1.375rem] text-character-2">
+              {description}
+            </p>
+          </div>
+        </div>
+      }
+      open={isModalOpen}
+      closable={false}
+      footer={
+        <AppFooterDraw
+          okText={okText}
+          onOk={onHandleOk}
+          cancleText={CancelText}
+          onCancle={onHandleCanlce}
+          loadingButtonOk={loadingButtonOk}
+        />
+      }
+    />
   );
 }
 

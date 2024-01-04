@@ -5,12 +5,15 @@ import AppModel from "@/components/apps/app-model";
 
 function Checkin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleClickOK = () => {
     setIsModalOpen(false);
   };
+
   const showModal = () => {
     setIsModalOpen(true);
   };
+
   return (
     <div className="mt-[1.25rem] lg:mt-0 lg:flex lg:flex-col lg:justify-center">
       <Button type="primary" onClick={showModal}>
