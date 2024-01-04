@@ -1,11 +1,13 @@
 import React from "react";
 
 import DashBoardChart from "./components/dashboard-chart";
+import DashboardHead from "./components/dashboard-header/index";
 
 function Dashboard() {
   return (
     <section className="container">
-      Dashboard
+      <DashboardHead />
+
       <div className="flex flex-col gap-6 md:flex md:flex-row md:gap-6">
         <div className="flex flex-col gap-6 sm:flex sm:w-full sm:flex-row sm:gap-6 md:flex md:w-full md:max-w-[26.375rem] md:flex-col md:gap-6">
           <div className="min-h-[21.75rem] w-full rounded-lg bg-white p-5 shadow-dropShadow sm:w-1/2 md:w-full">
