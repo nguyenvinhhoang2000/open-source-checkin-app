@@ -7,14 +7,11 @@ import {
   TOOLTIP_COLOR,
   TOOLTIP_DIRECTION,
 } from "@/constants/config-app/tooltip";
-import {
-  findArrowTooltip,
-  findDirectionTooltip,
-} from "@/utils/find-direction-tooltip";
+import { findDirectionTooltip } from "@/utils/find-direction-tooltip";
 
 function AppToolTip({ position, content, children, classNames, colorToolTip }) {
   const foundDirection = findDirectionTooltip(TOOLTIP_DIRECTION, position);
-  const foundArrow = findArrowTooltip(TOOLTIP_ARROW, position);
+  const foundArrow = findDirectionTooltip(TOOLTIP_ARROW, position);
 
   return (
     <div className={classnames(classNames, "relative cursor-pointer")}>
