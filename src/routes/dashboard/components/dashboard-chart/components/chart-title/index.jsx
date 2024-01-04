@@ -4,4 +4,4 @@ function ChartTitle() {
   return <div>ChartTitle</div>;
 }
 
-export default ChartTitle;
+export default React.memo(ChartTitle);

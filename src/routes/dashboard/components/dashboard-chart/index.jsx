@@ -12,4 +12,4 @@ function DashboardChart() {
   );
 }
 
-export default DashboardChart;
+export default React.memo(DashboardChart);
