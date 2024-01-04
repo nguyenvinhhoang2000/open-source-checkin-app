@@ -1,78 +1,45 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Column } from "@ant-design/plots";
 
 import AppToolTip from "@/components/apps/app-tooltip";
 
+import { CHART_CONFIG_VALUE } from "@/constants/config-antd/chart";
+import { dataChart } from "@/constants/data/data-chart";
+import { createMedalLabel } from "@/utils/create-medal-label";
+
 function DashBoardChart() {
+  const chartRef = React.useRef(null);
+
   const [activeHover, setActiveHover] = React.useState(null);
 
   const onActiveHover = React.useCallback((event) => {
     setActiveHover(event.data.data);
   }, []);
+
   const onUnActiveHover = React.useCallback(() => {
     setActiveHover(null);
   }, []);
 
-  const data = [
-    { type: "Check-in Early", value: 20 },
-    { type: "Check-in Later", value: 5 },
-    { type: "Absent", value: 2 },
-  ];
+  const medal = useCallback((_datum, ranking) => {
+    return createMedalLabel(chartRef, ranking);
+  }, []);
+
   const config = {
-    data,
+    data: dataChart,
     xField: "type",
     yField: "value",
     axis: {
       x: {
-        // SET NO TITLE
-        title: false,
-
-        // SET TICK
-        tickLength: 18,
-        tickStrokeOpacity: 0,
-
-        // SET X LINE (TRUC HOANH)
-        line: true,
-        lineStrokeOpacity: 0.4,
-        lineExtension: [0, 120],
-
-        // SET GRID
-        // grid: true,
-        gridLength: 30,
+        ...CHART_CONFIG_VALUE.axis.x,
+        labelFormatter: (datum, index) => medal(datum, index),
       },
       y: {
-        // SET NO TITLE
-        title: false,
-
-        // SET TICK
-        tickLength: 15,
-        tickStrokeOpacity: 0,
-
-        // SET GRID
-        gridFilter: (_, _index, record) => {
-          record.filter((item) => item.label !== "0");
-          return record;
-        },
-
-        grid: true,
+        ...CHART_CONFIG_VALUE.axis.y,
       },
     },
-    scale: {
-      x: {
-        align: 2.5,
-        paddingInner: 1.5,
-        paddingOuter: 0.1,
-      },
-      y: {
-        type: "linear",
-        domain: [0, 30],
-      },
-    },
+    scale: CHART_CONFIG_VALUE.scale,
     label: {
-      text: "value",
-      textBaseline: "bottom",
-      background: true,
-      opacity: 1,
+      ...CHART_CONFIG_VALUE.label,
       render: (_, record) => {
         return (
           <div className="-ml-2 -mt-3">
@@ -91,28 +58,20 @@ function DashBoardChart() {
       },
     },
     style: {
-      radiusTopLeft: 200,
-      radiusTopRight: 200,
+      ...CHART_CONFIG_VALUE.style,
       fill: ({ value }) => {
-        return value < 10 ? "#D9D9D9" : "#556EE6";
-      },
-      maxWidth: 20,
-      marginRight: 50,
-    },
-    interaction: {
-      tooltip: {
-        disableNative: true,
+        return value > 10
+          ? CHART_CONFIG_VALUE.style.colors["chart-1"]
+          : CHART_CONFIG_VALUE.style.colors["chart-2"];
       },
     },
-    onReady: ({ chart }) => {
-      chart.on("interval:pointerover", onActiveHover);
-      chart.on("interval:pointerout", onUnActiveHover);
+    interaction: CHART_CONFIG_VALUE.interaction,
+    ...CHART_CONFIG_VALUE.other,
+    onReady: (plot) => {
+      chartRef.current = plot;
+      plot.chart.on("interval:pointerover", onActiveHover);
+      plot.chart.on("interval:pointerout", onUnActiveHover);
     },
-    paddingLeft: 15,
-    marginRight: 120,
-    paddingBottom: 20,
-    height: 254,
-    legend: false,
   };
   return <Column {...config} />;
 }

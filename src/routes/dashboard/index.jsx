@@ -8,8 +8,8 @@ function Dashboard() {
     <section className="container">
       <DashboardHead />
 
-      <div className="flex flex-col gap-6 md:flex md:flex-row md:gap-6">
-        <div className="flex flex-col gap-6 sm:flex sm:w-full sm:flex-row sm:gap-6 md:flex md:w-full md:max-w-[26.375rem] md:flex-col md:gap-6">
+      <div className="mt-6 flex flex-col gap-6 md:flex md:flex-row md:gap-6">
+        <div className="flex flex-col gap-6 min-[540px]:flex min-[540px]:w-full min-[540px]:flex-row min-[540px]:gap-6 md:flex md:w-full md:max-w-[26.375rem] md:flex-col md:gap-6">
           <div className="min-h-[21.75rem] w-full rounded-lg bg-white p-5 shadow-dropShadow sm:w-1/2 md:w-full">
             <DashBoardChart />
           </div>

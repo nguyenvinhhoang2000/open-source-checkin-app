@@ -15,6 +15,7 @@ import {
 function AppToolTip({ position, content, children, classNames, colorToolTip }) {
   const foundDirection = findDirectionTooltip(TOOLTIP_DIRECTION, position);
   const foundArrow = findArrowTooltip(TOOLTIP_ARROW, position);
+
   return (
     <div className={classnames(classNames, "relative cursor-pointer")}>
       <div className="mx-2 my-1">{children}</div>
