@@ -7,7 +7,7 @@ function HeadAbsentInfor() {
     <div className="mt-[1.25rem] flex gap-[1.5rem] lg:mt-0">
       {data.map((item) => (
         <div
-          className="flex min-w-[5.3125rem] flex-col gap-[0.25rem] text-center "
+          className="flex flex-col gap-[0.25rem] text-center sm:min-w-[5.3125rem]"
           key={item.id}
         >
           <h2 className="font-roboto text-xl font-medium leading-10 text-character-1 sm:text-3xl">

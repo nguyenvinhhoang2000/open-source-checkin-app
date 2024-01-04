@@ -1,44 +1,29 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button } from "antd";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw/index";
+import AppModel from "@/components/apps/app-model";
 
 function Checkin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleClickOK = () => {
+    setIsModalOpen(false);
+  };
   const showModal = () => {
     setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
   return (
     <div className="mt-[1.25rem] lg:mt-0 lg:flex lg:flex-col lg:justify-center">
       <Button type="primary" onClick={showModal}>
         Check-in
       </Button>
-      <Modal
-        title={
-          <div className="flex gap-[1rem]">
-            <div>
-              <img
-                src="/assets/icons/check-in.svg"
-                alt="logo"
-                title="check-in-logo"
-              />
-            </div>
-            <div className="flex flex-col gap-[0.5rem]">
-              <p className="font-roboto text-base font-medium text-character-1">
-                You Check-in late!
-              </p>
-              <p className="font-roboto text-sm	font-normal leading-[1.375rem] text-character-2">
-                Please be more compliant with your working hours
-              </p>
-            </div>
-          </div>
-        }
-        open={isModalOpen}
-        closable={false}
-        footer={<AppFooterDraw onOk={handleOk} okText="Cancel" />}
+      <AppModel
+        text="Check-in"
+        title="You Check-in late!"
+        description="Please be more compliant with your working hours"
+        src="/assets/icons/check-in.svg"
+        okText="Cancel"
+        onHandleOk={handleClickOK}
+        isModalOpen={isModalOpen}
       />
     </div>
   );
