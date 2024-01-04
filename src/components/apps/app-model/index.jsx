@@ -2,6 +2,8 @@ import React from "react";
 import { Modal } from "antd";
 import PropTypes from "prop-types";
 
+import { emptyFn } from "@/utils/empty-types";
+
 import AppFooterDraw from "../app-footer-draw";
 
 function AppModel({
@@ -68,8 +70,8 @@ AppModel.defaultProps = {
   description: "",
   okText: "",
   src: "",
-  onHandleOk: () => {},
-  onHandleCanlce: () => {},
   isModalOpen: false,
   loadingButtonOk: false,
+  onHandleOk: emptyFn,
+  onHandleCanlce: emptyFn,
 };
