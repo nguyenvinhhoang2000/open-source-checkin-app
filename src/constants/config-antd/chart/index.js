@@ -15,6 +15,7 @@ export const CHART_CONFIG_VALUE = {
       lineStrokeOpacity: 0.4,
       lineExtension: [0, 120],
       gridLength: 30,
+      labelAutoEllipsis: true,
     },
     y: {
       tickLength: 15,
