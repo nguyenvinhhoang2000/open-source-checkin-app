@@ -21,7 +21,7 @@ function AppModel({
     <Modal
       className="flex"
       title={
-        <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem]">
+        <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem] px-[2rem]">
           <div>
             <img src={src} alt="icon" title="check-in-icon" />
           </div>
@@ -44,6 +44,7 @@ function AppModel({
           cancleText={CancelText}
           onCancle={onHandleCanlce}
           loadingButtonOk={loadingButtonOk}
+          classNames="pr-[2rem]"
         />
       }
     />
