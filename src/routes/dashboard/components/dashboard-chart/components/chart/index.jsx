@@ -73,6 +73,7 @@ function DashBoardChart() {
       plot.chart.on("interval:pointerout", onUnActiveHover);
     },
   };
+
   return <Column {...config} />;
 }
 

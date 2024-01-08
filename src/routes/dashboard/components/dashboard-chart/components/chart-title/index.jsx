@@ -36,7 +36,7 @@ function ChartTitle() {
   };
   return (
     <div className="flex flex-row justify-between">
-      <span>Statistic</span>
+      <span className="text-[1.25rem] font-medium">Statistic</span>
 
       <DropdownFilterTime menuProps={menuProps} timeFilter={timeFilter} />
     </div>
