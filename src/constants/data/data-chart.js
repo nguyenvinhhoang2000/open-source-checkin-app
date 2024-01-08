@@ -1,7 +1,9 @@
+import { data } from "./data-head-absent-infor";
+
 export const dataChart = [
-  { type: "Check-in Early", value: 20 },
-  { type: "Check-in Later", value: 5 },
-  { type: "Absent", value: 3 },
+  { type: data[1].text, value: 20 },
+  { type: data[2].text, value: 5 },
+  { type: data[3].text, value: 3 },
 ];
 const extraValue = 10;
 export const domainValue = [
