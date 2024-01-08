@@ -1,3 +1,6 @@
-export function findDirectionTooltip(data, record) {
-  return data.find((item) => item.direction === record);
+export function findDirectionTooltip(data, dataArrow, record) {
+  return {
+    foundDirection: data.find((item) => item.direction === record),
+    foundArrow: dataArrow.find((item) => item.direction === record),
+  };
 }
