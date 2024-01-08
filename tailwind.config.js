@@ -96,6 +96,8 @@ export default {
           1: "#556EE6",
           2: "#D9D9D9",
         },
+        checkEalry: "#00CE9D",
+        checkDescription: "#0386FF",
       },
       boxShadow: {
         dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",

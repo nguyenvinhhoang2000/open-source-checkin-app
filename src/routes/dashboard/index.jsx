@@ -2,6 +2,7 @@ import React from "react";
 
 import DashBoardChart from "./components/dashboard-chart";
 import DashboardHead from "./components/dashboard-header/index";
+import DashboardTable from "./components/dashboard-table";
 
 function Dashboard() {
   return (
@@ -18,7 +19,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="w-full rounded-lg bg-white p-5 shadow-dropShadow md:max-w-[57.125rem]">
-          3
+          <DashboardTable />
         </div>
       </div>
     </section>
