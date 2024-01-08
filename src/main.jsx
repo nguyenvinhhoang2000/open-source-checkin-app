@@ -39,6 +39,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
             headerSplitColor: fullConfig.theme.antdTable.headerSplitColor,
           },
+          Dropdown: {
+            controlItemBgHover: fullConfig.theme.colors.primary[1],
+          },
         },
       }}
       drawer={drawerConfig}
