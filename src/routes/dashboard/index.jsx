@@ -1,7 +1,7 @@
 import React from "react";
 
 import DashboardHead from "./components/dashboard-header/index";
-import DashboardTable from "./components/dashboard-table/components/index";
+import DashboardTable from "./components/dashboard-table/index";
 
 function Dashboard() {
   return (
