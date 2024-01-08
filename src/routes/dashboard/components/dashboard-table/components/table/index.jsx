@@ -27,7 +27,7 @@ function HistoryTable() {
       render: (text) => {
         if (text === "Absent")
           return (
-            <div>
+            <div className="min-h-[3.1875rem]">
               <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
                 {text}
               </p>
@@ -40,7 +40,7 @@ function HistoryTable() {
         const isLate = checkLate(text, "in");
 
         return (
-          <div>
+          <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {dayjs(text).format("hh:mm:ss")}
             </p>
@@ -67,7 +67,7 @@ function HistoryTable() {
       render: (text) => {
         if (text === "Absent")
           return (
-            <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
+            <span className="flex min-h-[3.1875rem] items-start font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {text}
             </span>
           );
@@ -75,7 +75,7 @@ function HistoryTable() {
         const isLate = checkLate(text, "out");
 
         return (
-          <div>
+          <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {dayjs(text).format("hh:mm:ss")}
             </p>
