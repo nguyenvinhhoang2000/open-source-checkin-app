@@ -18,7 +18,7 @@ function Dashboard() {
             2
           </div>
         </div>
-        <div className="w-full rounded-lg bg-white p-5 shadow-dropShadow md:max-w-[57.125rem]">
+        <div className="w-full rounded-lg bg-white px-5 pt-5 shadow-dropShadow md:max-w-[57.125rem]">
           <DashboardTable />
         </div>
       </div>
