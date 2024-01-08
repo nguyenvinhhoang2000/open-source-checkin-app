@@ -1,7 +1,12 @@
-import { domainValue } from "@/constants/data/data-chart";
+import { dataChart, domainValue } from "@/constants/data/data-chart";
 import { fullConfig } from "@/theme";
 
 export const CHART_CONFIG_VALUE = {
+  data: dataChart,
+  field: {
+    xField: Object.keys(dataChart[0])[0],
+    yField: Object.keys(dataChart[0])[1],
+  },
   axis: {
     x: {
       tickLength: 18,

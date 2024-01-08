@@ -4,7 +4,6 @@ import { Column } from "@ant-design/plots";
 import AppToolTip from "@/components/apps/app-tooltip";
 
 import { CHART_CONFIG_VALUE } from "@/constants/config-antd/chart";
-import { dataChart } from "@/constants/data/data-chart";
 import { createMedalLabel } from "@/utils/create-medal-label";
 
 function DashBoardChart() {
@@ -25,9 +24,8 @@ function DashBoardChart() {
   }, []);
 
   const config = {
-    data: dataChart,
-    xField: "type",
-    yField: "value",
+    data: CHART_CONFIG_VALUE.data,
+    ...CHART_CONFIG_VALUE.field,
     axis: {
       x: {
         ...CHART_CONFIG_VALUE.axis.x,
