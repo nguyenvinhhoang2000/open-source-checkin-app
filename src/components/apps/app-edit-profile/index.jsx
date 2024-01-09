@@ -16,7 +16,7 @@ function AppEditProfile({
   CancelText,
   okText,
   onHandleOk,
-  onHandleCanlce,
+  onHandleCancel,
   isModalOpen,
   loadingButtonOk,
   onClose,
@@ -37,7 +37,7 @@ function AppEditProfile({
           okText={okText}
           onOk={onHandleOk}
           cancleText={CancelText}
-          onCancle={onHandleCanlce}
+          onCancle={onHandleCancel}
           loadingButtonOk={loadingButtonOk}
           classNames="px-[1.25rem]"
         />
@@ -115,7 +115,7 @@ AppEditProfile.propTypes = {
   CancelText: PropTypes.string,
   okText: PropTypes.string,
   onHandleOk: PropTypes.func,
-  onHandleCanlce: PropTypes.func,
+  onHandleCancel: PropTypes.func,
   loadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
 };
@@ -126,6 +126,6 @@ AppEditProfile.defaultProps = {
   okText: "",
   loadingButtonOk: false,
   onHandleOk: emptyFn,
-  onHandleCanlce: emptyFn,
+  onHandleCancel: emptyFn,
   onClose: emptyFn,
 };

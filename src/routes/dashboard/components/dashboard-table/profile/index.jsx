@@ -28,10 +28,6 @@ function Profile() {
       });
   });
 
-  const handleClickCancle = React.useCallback(() => {
-    setIsModalOpen(false);
-  });
-
   const showModal = React.useCallback(() => {
     setIsModalOpen(true);
   });
@@ -76,7 +72,7 @@ function Profile() {
           CancelText="Cancel"
           onHandleOk={handleClickOK}
           isModalOpen={isModalOpen}
-          onHandleCanlce={handleClickCancle}
+          onHandleCancel={handleClickClose}
           loadingButtonOk={loadingOk}
           onClose={handleClickClose}
         />
