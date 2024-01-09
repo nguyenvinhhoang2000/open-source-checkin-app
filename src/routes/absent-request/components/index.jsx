@@ -2,11 +2,12 @@ import React from "react";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
 
+import { dataAbsent } from "@/constants/data/data-absent";
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
-import Chart from "./chart";
+import AbsentTable from "./absent-table";
 
-function DashboardChart() {
+function AbsentRequestTable() {
   const [filterTime, setFilterTime] = React.useState(
     defaultItemFilterTime[0].key,
   );
@@ -17,14 +18,15 @@ function DashboardChart() {
   return (
     <div className="flex flex-col gap-6">
       <AppHeaderTable
-        title="Statistic"
+        title="Your Absent Request"
         classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
         filterTime={filterTime}
+        buttonSendText="Absent Request"
         onFilterTime={onFilterTime}
       />
-      <Chart filterTime={filterTime} />
+      <AbsentTable dataAbsent={dataAbsent} />
     </div>
   );
 }
 
-export default React.memo(DashboardChart);
+export default React.memo(AbsentRequestTable);

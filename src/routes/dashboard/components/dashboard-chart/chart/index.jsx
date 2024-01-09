@@ -1,5 +1,6 @@
 import React from "react";
 import { Column } from "@ant-design/plots";
+import PropTypes from "prop-types";
 
 import AppTooltip from "@/components/apps/app-tooltip";
 
@@ -64,3 +65,11 @@ function DashBoardChart() {
 }
 
 export default React.memo(DashBoardChart);
+
+DashBoardChart.propTypes = {
+  filterTime: PropTypes.string,
+};
+
+DashBoardChart.defaultProps = {
+  filterTime: "",
+};

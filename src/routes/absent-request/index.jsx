@@ -1,13 +1,11 @@
 import React from "react";
 
-import { dataAbsent } from "@/constants/data/data-absent";
-
-import AbsentTable from "./components/absent-table";
+import AbsentRequestTable from "./components";
 
 function AbsentRequest() {
   return (
-    <section className="mt-[1.25rem]">
-      <AbsentTable dataAbsent={dataAbsent} />
+    <section className="container mt-[1.25rem] rounded-xl bg-white p-5 shadow-dropShadow">
+      <AbsentRequestTable />
     </section>
   );
 }

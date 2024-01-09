@@ -1,18 +1,19 @@
 const defaultItemFilterTime = [
+  { id: 1, key: "thisMonth", label: "This month" },
   {
-    key: "This month",
+    id: 2,
+    key: "lastMonth",
+    label: "Last month",
   },
-
   {
-    key: "Last month",
+    id: 3,
+    key: "3month",
+    label: "3 month",
   },
-
   {
-    key: "3 month",
-  },
-
-  {
-    key: "All time",
+    id: 4,
+    key: "allTime",
+    label: "All time",
   },
 ];
 

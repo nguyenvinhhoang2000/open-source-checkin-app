@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import DropdownFilterTime from "@/components/apps/dropown-filter-time";
+import DropdownFilterTime from "@/components/apps/app-header-table/app-dropdown-filter-time";
 
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
