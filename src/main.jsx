@@ -18,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           colorWarning: fullConfig.theme.colors.neutral[1],
           borderRadius: 3,
           colorBgMask: fullConfig.theme.colors.character[2],
-          fontFamily: fullConfig.theme.fontFamily.roboto[0],
         },
         components: {
           Button: {
@@ -39,6 +38,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             cellPaddingInline: fullConfig.theme.antdTable.cellPaddingInline,
             cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
             headerSplitColor: fullConfig.theme.antdTable.headerSplitColor,
+            fontFamily: fullConfig.theme.fontFamily.roboto[0],
           },
           Dropdown: {
             controlItemBgHover: fullConfig.theme.colors.primary[1],

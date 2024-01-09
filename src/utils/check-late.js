@@ -7,8 +7,19 @@ export default function checkLate(text, type) {
   const checkTime = dayjs(
     `${dayjs(text).format("YYYY-MM-DD")} ${TIME_WORKING[type].time}`,
   );
-
   const isLate = currentTime.isAfter(checkTime);
-
-  return type === Object.keys(TIME_WORKING)[0] ? isLate : !isLate;
+  switch (type) {
+    case "in":
+      return {
+        isLate,
+        type: isLate ? TIME_WORKING[type].late : TIME_WORKING[type].early,
+      };
+    case "out":
+      return {
+        isLate,
+        type: isLate ? TIME_WORKING[type].late : TIME_WORKING[type].early,
+      };
+    default:
+      return { error: "Unknown type" };
+  }
 }

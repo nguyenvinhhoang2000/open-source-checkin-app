@@ -1,9 +1,12 @@
 import React from "react";
 import { Table } from "antd";
+import classnames from "classnames";
 import dayjs from "dayjs";
 
+import { data } from "@/constants/data/data-head-absent-infor";
 import { dataTableHistory } from "@/constants/data/data-history-table";
 import checkLate from "@/utils/check-late";
+import onCheckRowAbsent from "@/utils/check-row-absent";
 
 function HistoryTable() {
   const columns = [
@@ -25,34 +28,34 @@ function HistoryTable() {
       key: "checkIn",
       width: "25%",
       render: (text) => {
-        if (text === "Absent")
+        if (text === data[3].text)
           return (
             <div className="min-h-[3.1875rem]">
               <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
                 {text}
               </p>
-              <p className="text-checkDescription text-[0.75rem]">
+              <p className="text-absentDescription text-[0.75rem]">
                 Description
               </p>
             </div>
           );
 
-        const isLate = checkLate(text, "in");
+        const { isLate, type } = checkLate(text, "in");
 
         return (
           <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {dayjs(text).format("hh:mm:ss")}
             </p>
-            {isLate ? (
-              <p className="text-[0.875rem] font-[400] leading-[1.375rem] text-neutral-4">
-                Check-in Late
-              </p>
-            ) : (
-              <p className="text-checkEalry text-[0.875rem] font-[400] leading-[1.375rem]">
-                Check-in Early
-              </p>
-            )}
+
+            <p
+              className={classnames(
+                isLate ? "text-neutral-4" : "text-secondary-6",
+                "text-[0.875rem] font-[400] leading-[1.375rem]",
+              )}
+            >
+              {type}
+            </p>
           </div>
         );
       },
@@ -65,29 +68,23 @@ function HistoryTable() {
       width: "25%",
 
       render: (text) => {
-        if (text === "Absent")
+        if (text === data[3].text)
           return (
             <span className="flex min-h-[3.1875rem] items-start font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {text}
             </span>
           );
 
-        const isLate = checkLate(text, "out");
+        const { type } = checkLate(text, "out");
 
         return (
           <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {dayjs(text).format("hh:mm:ss")}
             </p>
-            {isLate ? (
-              <p className="text-checkEalry text-[0.875rem] font-[400] leading-[1.375rem]">
-                Check-out Late
-              </p>
-            ) : (
-              <p className="text-[0.875rem] font-[400] leading-[1.375rem] text-neutral-4">
-                Check-out Early
-              </p>
-            )}
+            <p className="text-[0.875rem] font-[400] leading-[1.375rem] text-neutral-4">
+              {type}
+            </p>
           </div>
         );
       },
@@ -117,9 +114,7 @@ function HistoryTable() {
         columns={columns}
         className="w-full whitespace-nowrap"
         dataSource={dataTableHistory}
-        rowClassName={(record) =>
-          record.checkIn === "Absent" ? "bg-neutral-3" : ""
-        }
+        rowClassName={onCheckRowAbsent}
       />
     </div>
   );

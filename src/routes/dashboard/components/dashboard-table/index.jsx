@@ -1,7 +1,7 @@
 import React from "react";
 
-import HistoryTable from "./components/table";
-import TableTitle from "./components/table-title";
+import HistoryTable from "./table";
+import TableTitle from "./table-title";
 
 function DashboardTable() {
   return (

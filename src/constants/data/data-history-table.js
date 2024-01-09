@@ -3,7 +3,7 @@ const dataTableHistory = [
     id: 1,
     date: "2024-01-05 08:20:30",
     checkIn: "2024-01-05 08:20:30",
-    checkOut: "2024-01-05 17:20:30",
+    checkOut: "2024-01-05 17:40:30",
     device: "Iphone 10",
   },
 
