@@ -47,11 +47,10 @@ function DashBoardChart() {
       },
       style: {
         ...CHART_CONFIG_VALUE.style,
-        fill: ({ value }) => {
-          return value > 10
+        fill: ({ value }) =>
+          value > 10
             ? CHART_CONFIG_VALUE.style.colors["1"]
-            : CHART_CONFIG_VALUE.style.colors["2"];
-        },
+            : CHART_CONFIG_VALUE.style.colors["2"],
       },
       interaction: CHART_CONFIG_VALUE.interaction,
       ...CHART_CONFIG_VALUE.other,
