@@ -31,7 +31,7 @@ function AppToolTip({ position, content, children, classNames, colorToolTip }) {
       </span>
       <span
         className={classnames(
-          "absolute border-[0.375rem]",
+          "absolute border-[1rem]",
           foundArrow.classname,
           TOOLTIP_COLOR[colorToolTip][position].arrow,
         )}
