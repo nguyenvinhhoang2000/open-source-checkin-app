@@ -1,5 +1,6 @@
+import CheckUserRole from "@/components/check-user-roles";
+
 import AbsentRequest from "@/routes/absent-request";
-import CheckUserRole from "@/routes/components/check-user-roles";
 import Dashboard from "@/routes/dashboard";
 import Login from "@/routes/login";
 import Ranking from "@/routes/ranking";
