@@ -45,8 +45,7 @@ export const CHART_CONFIG_VALUE = {
     radiusTopLeft: 200,
     radiusTopRight: 200,
     colors: {
-      "chart-1": fullConfig.theme.colors.chart[1],
-      "chart-2": fullConfig.theme.colors.chart[2],
+      ...fullConfig.theme.colors.chart,
     },
     maxWidth: 20,
     marginRight: 50,

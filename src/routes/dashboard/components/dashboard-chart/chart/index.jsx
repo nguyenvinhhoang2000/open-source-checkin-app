@@ -14,7 +14,6 @@ function DashBoardChart() {
   const onUnActiveHover = React.useCallback(() => {
     setActiveHover(null);
   }, []);
-
   const config = React.useMemo(() => {
     return {
       data: CHART_CONFIG_VALUE.data,
@@ -50,8 +49,8 @@ function DashBoardChart() {
         ...CHART_CONFIG_VALUE.style,
         fill: ({ value }) => {
           return value > 10
-            ? CHART_CONFIG_VALUE.style.colors["chart-1"]
-            : CHART_CONFIG_VALUE.style.colors["chart-2"];
+            ? CHART_CONFIG_VALUE.style.colors["1"]
+            : CHART_CONFIG_VALUE.style.colors["2"];
         },
       },
       interaction: CHART_CONFIG_VALUE.interaction,
@@ -62,7 +61,6 @@ function DashBoardChart() {
       },
     };
   }, [activeHover?.type, activeHover?.value, onActiveHover, onUnActiveHover]);
-
   return <Column {...config} />;
 }
 
