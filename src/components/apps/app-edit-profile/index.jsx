@@ -97,6 +97,7 @@ function AppEditProfile({
             Note
           </span>
           <TextArea
+            showCount
             maxLength={100}
             placeholder="Enter your note"
             value={dataProfile.note}
