@@ -16,10 +16,7 @@ function AppToolTip({ position, content, children, classNames, colorToolTip }) {
     TOOLTIP_ARROW,
     position,
   );
-  console.log(
-    `🚀🚀🚀!..fullConfig.theme.colors.chart:`,
-    fullConfig.theme.colors.chart,
-  );
+
   return (
     <div className={classnames(classNames, "relative cursor-pointer")}>
       <div className="mx-2 my-1">{children}</div>
