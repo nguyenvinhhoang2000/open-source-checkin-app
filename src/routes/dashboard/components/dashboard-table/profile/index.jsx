@@ -37,7 +37,7 @@ function Profile() {
   });
 
   return (
-    <div className="flex min-h-[26.5625rem] max-w-[26.375rem] gap-[1.5rem] rounded-lg bg-white p-5 font-roboto text-sm font-normal leading-[1.375rem] shadow-dropShadow">
+    <div className="flex gap-[1.5rem] p-5 font-roboto text-sm font-normal leading-[1.375rem]">
       <div className="flex flex-col gap-[1.25rem] text-character-2">
         <span>Name</span>
         <span>Gender</span>
@@ -65,7 +65,7 @@ function Profile() {
             alt="icon-edit"
             title="edit-profile"
           />
-          Edit Profile
+          <span> Edit Profile</span>
         </Button>
         <AppEditProfile
           okText="Save"

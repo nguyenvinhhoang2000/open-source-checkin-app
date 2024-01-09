@@ -93,6 +93,10 @@ export default {
           2: "#FFD8BF",
           6: "#FA541C",
         },
+        chart: {
+          1: "#556EE6",
+          2: "#D9D9D9",
+        },
       },
       boxShadow: {
         dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
