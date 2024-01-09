@@ -49,7 +49,7 @@ export const TOOLTIP_ARROW = [
 ];
 
 export const TOOLTIP_COLOR = {
-  "chart-1": {
+  1: {
     top: {
       bg: "bg-chart-1 text-white",
       arrow: "border-t-chart-1",
@@ -67,7 +67,7 @@ export const TOOLTIP_COLOR = {
       arrow: "border-r-chart-1",
     },
   },
-  "chart-2": {
+  2: {
     top: {
       bg: "bg-chart-2 text-black/50",
       arrow: "border-t-chart-2",

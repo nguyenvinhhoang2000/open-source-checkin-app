@@ -1,7 +1,7 @@
 import React from "react";
 
-import Chart from "./components/chart";
-import ChartTitle from "./components/chart-title";
+import Chart from "./chart";
+import ChartTitle from "./chart-title";
 
 function DashboardChart() {
   return (

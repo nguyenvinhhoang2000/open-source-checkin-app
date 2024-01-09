@@ -7,6 +7,7 @@ import {
   TOOLTIP_COLOR,
   TOOLTIP_DIRECTION,
 } from "@/constants/config-app/tooltip";
+import { fullConfig } from "@/theme";
 import { findDirectionTooltip } from "@/utils/find-direction-tooltip";
 
 function AppToolTip({ position, content, children, classNames, colorToolTip }) {
@@ -30,7 +31,7 @@ function AppToolTip({ position, content, children, classNames, colorToolTip }) {
       </span>
       <span
         className={classnames(
-          "absolute border-[6px]",
+          "absolute border-[1rem]",
           foundArrow.classname,
           TOOLTIP_COLOR[colorToolTip][position].arrow,
         )}
@@ -45,9 +46,9 @@ AppToolTip.propTypes = {
   content: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   classNames: PropTypes.string,
-  colorToolTip: PropTypes.oneOf(["chart-1", "chart-2"]),
+  colorToolTip: PropTypes.oneOf(Object.keys(fullConfig.theme.colors.chart)),
 };
 AppToolTip.defaultProps = {
   classNames: "",
-  colorToolTip: "chart-2",
+  colorToolTip: "2",
 };

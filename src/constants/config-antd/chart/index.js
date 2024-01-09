@@ -15,6 +15,7 @@ export const CHART_CONFIG_VALUE = {
       lineStrokeOpacity: 0.4,
       lineExtension: [0, 120],
       gridLength: 30,
+      labelAutoEllipsis: true,
     },
     y: {
       tickLength: 15,
@@ -44,8 +45,7 @@ export const CHART_CONFIG_VALUE = {
     radiusTopLeft: 200,
     radiusTopRight: 200,
     colors: {
-      "chart-1": fullConfig.theme.colors.chart[1],
-      "chart-2": fullConfig.theme.colors.chart[2],
+      ...fullConfig.theme.colors.chart,
     },
     maxWidth: 20,
     marginRight: 50,
