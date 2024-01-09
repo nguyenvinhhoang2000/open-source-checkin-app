@@ -15,7 +15,7 @@ function AppHeaderTable({
   onButtonSend,
 }) {
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex flex-col items-center gap-4 min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
       <span className={classNameTitle}>{title}</span>
       <div className="flex flex-row items-center gap-6">
         <AppDropdownFilterTime
@@ -24,7 +24,7 @@ function AppHeaderTable({
         />
         {buttonSendText && (
           <Button
-            className="min-w-[8.1875rem]"
+            className="h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto"
             title="Absent Request"
             type="primary"
             onClick={onButtonSend}

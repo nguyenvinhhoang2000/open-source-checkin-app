@@ -11,7 +11,7 @@ function AppDropdownFilterTime({ onFilterTime, filterTime }) {
       overlayClassName="w-[7.8125rem]"
       placement="bottomRight"
       trigger={["click"]}
-      className="flex flex-row items-center justify-between gap-[0.625rem]"
+      className="flex flex-row items-center justify-between gap-[0.625rem] font-roboto"
     >
       <Button title="Filter" type="link">
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem] text-primary-0">
