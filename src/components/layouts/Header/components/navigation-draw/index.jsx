@@ -5,7 +5,7 @@ import { Button, Drawer } from "antd";
 import { fullConfig } from "@/theme";
 
 import Navigation from "../navigation";
-import UserDropdown from "../user-info/components/user-dropdown";
+import UserDropdown from "../user-info/user-dropdown";
 
 function NavigationDraw() {
   const [open, setOpen] = React.useState(false);

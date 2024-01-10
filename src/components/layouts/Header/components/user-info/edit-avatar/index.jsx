@@ -7,7 +7,7 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
-import AvatarList from "./components/avatar-list";
+import AvatarList from "./avatar-list";
 
 function EditAvatarDraw({ open, onOpenDraw }) {
   const [isLoadingOk, setIsLoadingOk] = React.useState(false);
