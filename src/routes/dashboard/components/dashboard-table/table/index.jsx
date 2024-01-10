@@ -8,7 +8,7 @@ import { dataTableHistory } from "@/constants/data/data-history-table";
 import checkLate from "@/utils/check-late";
 import onCheckRowAbsent from "@/utils/check-row-absent";
 
-import { scroll } from "./table-config";
+import { pagination, scroll } from "./table-config";
 
 function HistoryTable() {
   const columns = [
@@ -106,9 +106,7 @@ function HistoryTable() {
   ];
   return (
     <Table
-      pagination={{
-        pageSize: 8,
-      }}
+      pagination={pagination}
       scroll={scroll}
       rowKey="id"
       columns={columns}
