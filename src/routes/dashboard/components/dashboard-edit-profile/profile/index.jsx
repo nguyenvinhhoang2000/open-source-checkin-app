@@ -60,7 +60,7 @@ function Profile() {
             alt="icon-edit"
             title="edit-profile"
           />
-          <span> Edit Profile</span>
+          <span className="font-roboto text-sm"> Edit Profile</span>
         </Button>
         <ModalEditProfile
           currentData={currentData}
