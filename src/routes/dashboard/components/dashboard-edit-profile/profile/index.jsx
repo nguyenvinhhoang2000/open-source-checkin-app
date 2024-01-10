@@ -39,7 +39,7 @@ function Profile() {
   }, []);
 
   return (
-    <div className="flex gap-[1.5rem] p-5 font-roboto text-sm font-normal leading-[1.375rem]">
+    <div className="flex gap-[1.5rem] font-roboto text-sm font-normal leading-[1.375rem]">
       <div className="flex flex-col gap-[1.25rem] text-character-2">
         {Object.keys(dataProfile).map((item) => (
           <span key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
