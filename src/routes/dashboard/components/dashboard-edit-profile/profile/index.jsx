@@ -1,15 +1,17 @@
 import React from "react";
 import { Button } from "antd";
+import { useBoolean } from "usehooks-ts";
 
 import { dataProfile } from "@/constants/data/data-profile.js";
 
 import ModalEditProfile from "../modal-edit";
 
 function Profile() {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [isLoadingOk, setIsLoadingOk] = React.useState(false);
+  const { value: isModalOpen, setValue: setIsModalOpen } = useBoolean(false);
+  const { value: isLoadingOk, setValue: setIsLoadingOk } = useBoolean(false);
 
   const [currentData, setCurrentData] = React.useState();
+
   const onClickOk = React.useCallback(() => {
     setIsLoadingOk(true);
     const handleEditData = new Promise((resolve) => {
@@ -27,16 +29,16 @@ function Profile() {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  });
+  }, [setIsLoadingOk, setIsModalOpen]);
 
   const onShowModal = React.useCallback(() => {
     setCurrentData(dataProfile);
     setIsModalOpen(true);
-  }, []);
+  }, [setIsModalOpen]);
 
   const onClickClose = React.useCallback(() => {
     setIsModalOpen(false);
-  }, []);
+  }, [setIsModalOpen]);
 
   return (
     <div className="flex gap-[1.5rem] font-roboto text-sm font-normal leading-[1.375rem]">

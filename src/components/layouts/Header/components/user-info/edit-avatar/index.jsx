@@ -1,6 +1,7 @@
 import React from "react";
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
+import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
@@ -10,8 +11,7 @@ import { fullConfig } from "@/theme";
 import AvatarList from "./avatar-list";
 
 function EditAvatarDraw({ open, onOpenDraw }) {
-  const [isLoadingOk, setIsLoadingOk] = React.useState(false);
-
+  const { value: isLoadingOk, setValue: setIsLoadingOk } = useBoolean(false);
   const onClose = React.useCallback(() => {
     onOpenDraw(false);
   }, [onOpenDraw]);
@@ -34,7 +34,7 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [onOpenDraw]);
+  }, [onOpenDraw, setIsLoadingOk]);
 
   return (
     <Drawer

@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "antd";
+import { useBoolean } from "usehooks-ts";
 
 import AppModel from "@/components/apps/app-model";
 
 function Checkin() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleClickOK = () => {
+  const { value: isModalOpen, setValue: setIsModalOpen } = useBoolean(false);
+  const onClickOk = () => {
     setIsModalOpen(false);
   };
 
-  const showModal = () => {
+  const onShowModal = () => {
     setIsModalOpen(true);
   };
 
   return (
     <div className="mt-[1.25rem] lg:mt-0 lg:flex lg:flex-col lg:justify-center">
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={onShowModal}>
         Check-in
       </Button>
       <AppModel
@@ -25,7 +25,7 @@ function Checkin() {
         description="Please be more compliant with your working hours"
         src="/assets/icons/check-in.svg"
         okText="Cancel"
-        onHandleOk={handleClickOK}
+        onHandleOk={onClickOk}
         isModalOpen={isModalOpen}
       />
     </div>
