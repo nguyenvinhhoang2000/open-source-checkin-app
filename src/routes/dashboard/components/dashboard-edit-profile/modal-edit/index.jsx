@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import AppFooterDraw from "@/components/apps/app-footer-popup";
 import AppTitleDraw from "@/components/apps/app-title-popup";
 
+import { GENDER } from "@/constants/gender";
+import { POSITION } from "@/constants/position";
 import { emptyFn } from "@/utils/empty-types";
 
 function ModalEditProfile({
@@ -68,9 +70,11 @@ function ModalEditProfile({
             disabled
             placeholder="Select a option and change input text above"
           >
-            <Select.Option value="male">Male</Select.Option>
-            <Select.Option value="female">Female</Select.Option>
-            <Select.Option value="other">Other</Select.Option>
+            {GENDER.map((item) => (
+              <Select.Option key={item.value} value={item.value}>
+                {item.label}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item name="position" label="Position">
@@ -81,8 +85,11 @@ function ModalEditProfile({
             disabled
             placeholder="Select a option and change input text above"
           >
-            <Select.Option value="male">Head office, Da Nang</Select.Option>
-            <Select.Option value="female">Sub office, HCM</Select.Option>
+            {POSITION.map((item) => (
+              <Select.Option key={item.value} value={item.value}>
+                {item.label}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item name="phone" label="Phone">
