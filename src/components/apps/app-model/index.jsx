@@ -39,7 +39,6 @@ function AppModel({
       closable={false}
       footer={
         <AppFooterDraw
-          htmlType="button"
           okText={okText}
           onOk={onHandleOk}
           cancelText={CancelText}

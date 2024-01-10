@@ -54,7 +54,7 @@ AppFooterDraw.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool.isRequired,
-  htmlType: PropTypes.oneOf(BUTTON_TYPE).isRequired,
+  htmlType: PropTypes.oneOf(BUTTON_TYPE),
 };
 
 AppFooterDraw.defaultProps = {
@@ -62,5 +62,6 @@ AppFooterDraw.defaultProps = {
   cancelText: "",
   deleteText: "",
   classNames: "",
+  htmlType: BUTTON_TYPE[0],
   onDelete: emptyFn,
 };

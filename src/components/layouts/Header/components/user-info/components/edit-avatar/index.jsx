@@ -48,7 +48,6 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       closable={false}
       footer={
         <AppFooterDraw
-          htmlType="button"
           cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
