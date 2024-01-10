@@ -12,15 +12,19 @@ function Profile() {
     setTrue: setModalOpen,
     setFalse: setModalClose,
   } = useBoolean(false);
-  const { value: isLoadingOk, setValue: setIsLoadingOk } = useBoolean(false);
+  const {
+    value: isLoadingOk,
+    setTrue: setLoadingOk,
+    setFalse: setUnLoadingOk,
+  } = useBoolean(false);
 
   const [currentData, setCurrentData] = React.useState();
 
   const onClickOk = React.useCallback(() => {
-    setIsLoadingOk(true);
+    setLoadingOk();
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setIsLoadingOk(false);
+        setUnLoadingOk();
         setModalClose();
         resolve("Change profile okay");
       }, 2000);
@@ -33,7 +37,7 @@ function Profile() {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [setIsLoadingOk, setModalClose]);
+  }, [setLoadingOk, setModalClose, setUnLoadingOk]);
 
   const onShowModal = React.useCallback(() => {
     setCurrentData(dataProfile);

@@ -11,14 +11,18 @@ import { fullConfig } from "@/theme";
 import AvatarList from "./avatar-list";
 
 function EditAvatarDraw({ openDraw, onCloseDraw }) {
-  const { value: isLoadingOk, setValue: setIsLoadingOk } = useBoolean(false);
+  const {
+    value: isLoadingOk,
+    setTrue: setLoadingOk,
+    setFalse: setUnLoadingOk,
+  } = useBoolean(false);
 
   const onSumbit = React.useCallback(() => {
-    setIsLoadingOk(true);
+    setLoadingOk();
     // HANDLE SUBMIT
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setIsLoadingOk(false);
+        setUnLoadingOk();
         onCloseDraw();
         resolve("Change avatar okay");
       }, 2000);
@@ -31,7 +35,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [onCloseDraw, setIsLoadingOk]);
+  }, [onCloseDraw, setLoadingOk, setUnLoadingOk]);
 
   return (
     <Drawer
