@@ -15,6 +15,9 @@ function AbsentTable({ filterTime }) {
   const onOpenModalView = React.useCallback(() => {
     setIsOpenView(true);
   }, []);
+  const onCloseModalView = React.useCallback(() => {
+    setIsOpenView(false);
+  }, []);
   const onOpenModalEdit = React.useCallback(() => {
     setIsOpenEdit(true);
   }, []);
@@ -91,8 +94,6 @@ function AbsentTable({ filterTime }) {
                 onClick={onOpenModalView}
               >
                 <img src="/assets/icons/edit.svg" alt="edit" />
-
-                <AbsentFormModal CancelText="Cancel" isModalOpen={isOpenView} />
               </Button>
             )}
           </div>
@@ -104,15 +105,23 @@ function AbsentTable({ filterTime }) {
   // handle width filterTime to render data of table
   console.log(`🚀🚀🚀!..filterTime:`, filterTime);
   return (
-    <Table
-      pagination={{
-        pageSize: 7,
-      }}
-      scroll={{ x: "auto" }}
-      rowKey="id"
-      columns={columns}
-      dataSource={dataAbsent}
-    />
+    <div>
+      <Table
+        pagination={{
+          pageSize: 7,
+        }}
+        scroll={{ x: "auto" }}
+        rowKey="id"
+        columns={columns}
+        dataSource={dataAbsent}
+      />
+
+      <AbsentFormModal
+        onClose={onCloseModalView}
+        cancelText="Cancel"
+        isModalOpen={isOpenView}
+      />
+    </div>
   );
 }
 

@@ -16,7 +16,6 @@ function AbsentFormModal({
   isLoadingButtonOk,
   onClose,
   currentData,
-  headerTitle,
 }) {
   const [absentForm] = Form.useForm();
 
@@ -32,26 +31,26 @@ function AbsentFormModal({
 
   return (
     <Modal
-      title={
-        <AppTitleDraw
-          titleText="Absent Request"
-          onClose={onClose}
-          classNames="px-[1.25rem] mb-[1rem]"
-        />
-      }
+      // title={
+      //   <AppTitleDraw
+      //     titleText="Absent Request"
+      //     onClose={onClose}
+      //     classNames="px-[1.25rem] mb-[1rem]"
+      //   />
+      // }
       open={isModalOpen}
       closable={false}
-      footer={
-        <AppFooterDraw
-          htmlType="submit"
-          okText={okText}
-          onOk={onSubmit}
-          cancelText={cancelText}
-          onCancel={onHandleCancel}
-          isLoadingButtonOk={isLoadingButtonOk}
-          classNames="px-[1.25rem]"
-        />
-      }
+      // footer={
+      //   <AppFooterDraw
+      //     htmlType="submit"
+      //     okText={okText}
+      //     onOk={onSubmit}
+      //     cancelText={cancelText}
+      //     onCancel={onHandleCancel}
+      //     isLoadingButtonOk={isLoadingButtonOk}
+      //     classNames="px-[1.25rem]"
+      //   />
+      // }
     >
       <Form
         className="border-b border-t border-b-black/5 border-t-black/5 px-4 pb-1 pt-4"
@@ -92,7 +91,6 @@ AbsentFormModal.propTypes = {
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
-  headerTitle: PropTypes.string.isRequired,
 };
 
 AbsentFormModal.defaultProps = {
