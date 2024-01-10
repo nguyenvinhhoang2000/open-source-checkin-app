@@ -49,7 +49,6 @@ function HistoryTable() {
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
               {dayjs(text).format("hh:mm:ss")}
             </p>
-
             <p
               className={classnames(
                 isLate ? "text-neutral-4" : "text-secondary-6",
@@ -82,7 +81,7 @@ function HistoryTable() {
         return (
           <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-              {dayjs(text).format("hh:mm:ss")}
+              {dayjs(text).format("HH:mm:ss")}
             </p>
             <p className="text-[0.875rem] font-[400] leading-[1.375rem] text-neutral-4">
               {type}
