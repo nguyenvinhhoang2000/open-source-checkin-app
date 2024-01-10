@@ -3,6 +3,7 @@ import { Button } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
+import { BUTTON_TYPE } from "@/constants/button-type";
 import { emptyFn } from "@/utils/empty-types";
 
 function AppFooterDraw({
@@ -49,7 +50,7 @@ AppFooterDraw.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   loadingButtonOk: PropTypes.bool.isRequired,
-  htmlType: PropTypes.oneOf(["submit", "button", "reset"]).isRequired,
+  htmlType: PropTypes.oneOf(BUTTON_TYPE).isRequired,
 };
 
 AppFooterDraw.defaultProps = {
