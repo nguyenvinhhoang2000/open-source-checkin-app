@@ -32,9 +32,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             itemActiveBg: fullConfig.theme.colors.neutral[1],
             colorPrimaryHover: fullConfig.theme.colors.neutral[0],
           },
-          // Modal: {
-          //   paddingInline: fullConfig.theme.padding.contentModel,
-          // },
           Table: {
             cellPaddingInline: fullConfig.theme.antdTable.cellPaddingInline,
             cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
