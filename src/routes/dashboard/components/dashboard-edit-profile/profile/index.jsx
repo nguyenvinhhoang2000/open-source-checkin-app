@@ -65,7 +65,7 @@ function Profile() {
         <ModalEditProfile
           currentData={currentData}
           okText="Save"
-          CancelText="Cancel"
+          cancelText="Cancel"
           onHandleOk={handleClickOK}
           isModalOpen={isModalOpen}
           onHandleCancel={handleClickClose}

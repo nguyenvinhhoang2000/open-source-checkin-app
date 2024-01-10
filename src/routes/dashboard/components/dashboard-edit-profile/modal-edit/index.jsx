@@ -10,7 +10,7 @@ import { GENDER } from "@/constants/gender";
 import { emptyFn } from "@/utils/empty-types";
 
 function ModalEditProfile({
-  CancelText,
+  cancelText,
   okText,
   onHandleOk,
   onHandleCancel,
@@ -49,7 +49,7 @@ function ModalEditProfile({
           buttonOkType="submit"
           okText={okText}
           onOk={onSubmit}
-          cancelText={CancelText}
+          cancelText={cancelText}
           onCancel={onHandleCancel}
           isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
@@ -112,7 +112,7 @@ export default React.memo(ModalEditProfile);
 
 ModalEditProfile.propTypes = {
   isModalOpen: PropTypes.bool,
-  CancelText: PropTypes.string,
+  cancelText: PropTypes.string,
   okText: PropTypes.string,
   onHandleOk: PropTypes.func,
   onHandleCancel: PropTypes.func,
@@ -123,7 +123,7 @@ ModalEditProfile.propTypes = {
 
 ModalEditProfile.defaultProps = {
   isModalOpen: false,
-  CancelText: "",
+  cancelText: "",
   okText: "",
   isLoadingButtonOk: false,
   onHandleOk: emptyFn,
