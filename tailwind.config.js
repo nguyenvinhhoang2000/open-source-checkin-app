@@ -9,7 +9,8 @@ export default {
     "z-40",
     "text-[0.875rem] font-[400]",
     "leading-[1.375rem]",
-    "text-neutral-4]",
+    "text-neutral-3",
+    "text-neutral-4",
     "text-secondary-6",
   ],
   theme: {

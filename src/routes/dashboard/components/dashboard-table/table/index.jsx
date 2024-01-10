@@ -8,6 +8,8 @@ import { dataTableHistory } from "@/constants/data/data-history-table";
 import checkLate from "@/utils/check-late";
 import onCheckRowAbsent from "@/utils/check-row-absent";
 
+import { scroll } from "./table-config";
+
 function HistoryTable() {
   const columns = [
     {
@@ -103,20 +105,17 @@ function HistoryTable() {
     },
   ];
   return (
-    <div>
-      {" "}
-      <Table
-        pagination={{
-          pageSize: 8,
-        }}
-        scroll={{ x: "auto" }}
-        rowKey="id"
-        columns={columns}
-        className="w-full whitespace-nowrap"
-        dataSource={dataTableHistory}
-        rowClassName={onCheckRowAbsent}
-      />
-    </div>
+    <Table
+      pagination={{
+        pageSize: 8,
+      }}
+      scroll={scroll}
+      rowKey="id"
+      columns={columns}
+      className="w-full whitespace-nowrap"
+      dataSource={dataTableHistory}
+      rowClassName={onCheckRowAbsent}
+    />
   );
 }
 
