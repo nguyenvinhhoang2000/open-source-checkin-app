@@ -5,13 +5,14 @@ import { useBoolean } from "usehooks-ts";
 import AppModel from "@/components/apps/app-model";
 
 function Checkin() {
-  const { value: isModalOpen, setValue: setIsModalOpen } = useBoolean(false);
+  const {
+    value: isModalOpen,
+    setValue: setIsModalOpen,
+    setTrue: onShowModal,
+  } = useBoolean(false);
+
   const onClickOk = React.useCallback(() => {
     setIsModalOpen(false);
-  }, [setIsModalOpen]);
-
-  const onShowModal = React.useCallback(() => {
-    setIsModalOpen(true);
   }, [setIsModalOpen]);
 
   return (

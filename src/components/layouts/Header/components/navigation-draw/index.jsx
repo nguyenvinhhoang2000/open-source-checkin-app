@@ -9,14 +9,11 @@ import Navigation from "../navigation";
 import UserDropdown from "../user-info/user-dropdown";
 
 function NavigationDraw() {
-  const { value: isOpen, setValue: setIsOpen } = useBoolean(false);
-
-  const onOpenDraw = React.useCallback(() => {
-    setIsOpen(true);
-  }, [setIsOpen]);
-  const onCloseDraw = React.useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+  const {
+    value: isOpen,
+    setFalse: onCloseDraw,
+    setTrue: onOpenDraw,
+  } = useBoolean(false);
 
   const onRenderTitle = React.useMemo(() => {
     return (

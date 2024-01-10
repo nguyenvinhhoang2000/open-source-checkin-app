@@ -10,11 +10,8 @@ import { fullConfig } from "@/theme";
 
 import AvatarList from "./avatar-list";
 
-function EditAvatarDraw({ open, onOpenDraw }) {
+function EditAvatarDraw({ openDraw, onCloseDraw }) {
   const { value: isLoadingOk, setValue: setIsLoadingOk } = useBoolean(false);
-  const onClose = React.useCallback(() => {
-    onOpenDraw(false);
-  }, [onOpenDraw]);
 
   const onSumbit = React.useCallback(() => {
     setIsLoadingOk(true);
@@ -22,7 +19,7 @@ function EditAvatarDraw({ open, onOpenDraw }) {
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
         setIsLoadingOk(false);
-        onOpenDraw(false);
+        onCloseDraw();
         resolve("Change avatar okay");
       }, 2000);
     });
@@ -34,24 +31,24 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [onOpenDraw, setIsLoadingOk]);
+  }, [onCloseDraw, setIsLoadingOk]);
 
   return (
     <Drawer
       width={fullConfig.theme.width.drawWidth}
       keyboard="false"
       placement="right"
-      onClose={onClose}
-      open={open}
+      onClose={onCloseDraw}
+      open={openDraw}
       mask
-      title={<AppTitlePopup titleText="Change Avatar" onClose={onClose} />}
+      title={<AppTitlePopup titleText="Change Avatar" onClose={onCloseDraw} />}
       closable={false}
       footer={
         <AppFooterPopup
           cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
-          onCancel={onClose}
+          onCancel={onCloseDraw}
           isLoadingButtonOk={isLoadingOk}
         />
       }
@@ -64,6 +61,6 @@ function EditAvatarDraw({ open, onOpenDraw }) {
 export default React.memo(EditAvatarDraw);
 
 EditAvatarDraw.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onOpenDraw: PropTypes.func.isRequired,
+  openDraw: PropTypes.bool.isRequired,
+  onCloseDraw: PropTypes.func.isRequired,
 };

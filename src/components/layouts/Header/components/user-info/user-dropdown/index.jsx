@@ -7,25 +7,21 @@ import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
 import EditAvatarDraw from "../edit-avatar";
 
 function UserDropdown() {
-  const { value: isOpenEditAvatar, setValue: setIsOpenEditAvatar } =
-    useBoolean(false);
-
-  const onOpenDraw = React.useCallback(
-    (type) => {
-      setIsOpenEditAvatar(type);
-    },
-    [setIsOpenEditAvatar],
-  );
+  const {
+    value: isOpenEditAvatar,
+    setTrue: setOpenEditAvatar,
+    setFalse: setCloseEditAvatar,
+  } = useBoolean(false);
 
   const onMenuClick = React.useCallback(
     ({ key }) => {
       if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
-        setIsOpenEditAvatar(true);
+        setOpenEditAvatar();
       } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
         console.log(`🎶🎶🎶.. Log-out`);
       }
     },
-    [setIsOpenEditAvatar],
+    [setOpenEditAvatar],
   );
 
   const items = [
@@ -80,7 +76,10 @@ function UserDropdown() {
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
         </Button>
       </Dropdown>
-      <EditAvatarDraw open={isOpenEditAvatar} onOpenDraw={onOpenDraw} />
+      <EditAvatarDraw
+        openDraw={isOpenEditAvatar}
+        onCloseDraw={setCloseEditAvatar}
+      />
     </div>
   );
 }
