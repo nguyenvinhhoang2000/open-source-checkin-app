@@ -1,11 +1,12 @@
 import React from "react";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import { dataAbsent } from "@/constants/data/data-absent";
 
-const currentDate = dayjs();
+import AbsentFormModal from "../absent-form";
+import AbsentView from "../absent-view";
 
 const columns = [
   {
@@ -62,22 +63,16 @@ const columns = [
     render: (record) => {
       return (
         <div className="flex items-center justify-start gap-[1.25rem]">
-          <button
-            className="h-[1.25rem] w-[1.25rem]"
-            title="view"
-            type="button"
-          >
+          <Button title="view" type="text" className="p-0">
             <img src="/assets/icons/eye.svg" alt="view" />
-          </button>
+            <AbsentFormModal />
+          </Button>
 
-          {!dayjs(record.dateRequest).isBefore(currentDate, "day") && (
-            <button
-              className="h-[1.25rem] w-[1.25rem]"
-              title="edit"
-              type="button"
-            >
+          {!dayjs(record.dateRequest).isAfter(dayjs(new Date()), "day") && (
+            <Button title="edit" type="text" className="p-0">
               <img src="/assets/icons/edit.svg" alt="edit" />
-            </button>
+              <AbsentView />
+            </Button>
           )}
         </div>
       );

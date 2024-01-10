@@ -2,7 +2,6 @@ import React from "react";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
 
-import { dataAbsent } from "@/constants/data/data-absent";
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
 import AbsentTable from "./absent-table";
@@ -11,7 +10,6 @@ function AbsentRequestTable() {
   const [filterTime, setFilterTime] = React.useState(
     defaultItemFilterTime[0].key,
   );
-
   const onFilterTime = React.useCallback((record) => {
     setFilterTime(record.key);
   }, []);
@@ -24,7 +22,7 @@ function AbsentRequestTable() {
         buttonSendText="Absent Request"
         onFilterTime={onFilterTime}
       />
-      <AbsentTable dataAbsent={dataAbsent} />
+      <AbsentTable filterTime={filterTime} />
     </div>
   );
 }
