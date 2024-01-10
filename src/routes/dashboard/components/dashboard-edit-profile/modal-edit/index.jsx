@@ -58,7 +58,7 @@ function ModalEditProfile({
       }
     >
       <Form
-        className="border-b border-t border-b-black/5 border-t-black/5 px-4 pb-1 pt-4"
+        className="border-b border-t border-b-black/5 border-t-black/5 px-4 pb-3 pt-4"
         form={updateProfileForm}
         layout="vertical"
         name="edit-profile"
