@@ -1,14 +1,15 @@
 import React from "react";
 import { Button } from "antd";
 
-import AppEditProfile from "@/components/apps/app-edit-profile";
-
 import { dataProfile } from "@/constants/data/data-profile.js";
+
+import ModalEditProfile from "../modal-edit";
 
 function Profile() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [loadingOk, setLoadingOk] = React.useState(false);
 
+  const [currentData, setCurrentData] = React.useState();
   const handleClickOK = React.useCallback(() => {
     setLoadingOk(true);
     const handleEditData = new Promise((resolve) => {
@@ -29,32 +30,26 @@ function Profile() {
   });
 
   const showModal = React.useCallback(() => {
+    setCurrentData(dataProfile);
     setIsModalOpen(true);
-  });
+  }, []);
 
   const handleClickClose = React.useCallback(() => {
     setIsModalOpen(false);
-  });
+  }, []);
 
   return (
     <div className="flex gap-[1.5rem] p-5 font-roboto text-sm font-normal leading-[1.375rem]">
       <div className="flex flex-col gap-[1.25rem] text-character-2">
-        <span>Name</span>
-        <span>Gender</span>
-        <span>Position</span>
-        <span>Branch</span>
-        <span>Email</span>
-        <span>Phone</span>
-        <span>Note</span>
+        {Object.keys(dataProfile).map((item) => (
+          <span key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
+        ))}
       </div>
       <div className="flex flex-col gap-[1.25rem] text-character-1">
-        <span>{dataProfile.name}</span>
-        <span>{dataProfile.gender}</span>
-        <span>{dataProfile.position}</span>
-        <span>{dataProfile.branch}</span>
-        <span>{dataProfile.email}</span>
-        <span>{dataProfile.phone}</span>
-        <span>{dataProfile.note}</span>
+        {Object.keys(dataProfile).map((item) => (
+          <span key={item}>{dataProfile[item]}</span>
+        ))}
+
         <Button
           type="primary"
           className="flex max-w-[9rem] items-center gap-[0.625rem] sm:max-w-[7.75rem]"
@@ -67,7 +62,8 @@ function Profile() {
           />
           <span> Edit Profile</span>
         </Button>
-        <AppEditProfile
+        <ModalEditProfile
+          currentData={currentData}
           okText="Save"
           CancelText="Cancel"
           onHandleOk={handleClickOK}

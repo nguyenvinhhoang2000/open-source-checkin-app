@@ -1,8 +1,8 @@
 import React from "react";
 
 import DashBoardChart from "./components/dashboard-chart";
+import DashboardProfile from "./components/dashboard-edit-profile";
 import DashboardHead from "./components/dashboard-header/index";
-import DashboardTable from "./components/dashboard-table/index";
 
 function Dashboard() {
   return (
@@ -14,7 +14,7 @@ function Dashboard() {
             <DashBoardChart />
           </div>
           <div className="min-h-[26.5625rem] w-full rounded-lg bg-white p-5 shadow-dropShadow sm:w-1/2 md:w-full">
-            <DashboardTable />
+            <DashboardProfile />
           </div>
         </div>
         <div className="w-full rounded-lg bg-white p-5 shadow-dropShadow md:max-w-[57.125rem]">

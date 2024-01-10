@@ -42,7 +42,7 @@ function AppModel({
           okText={okText}
           onOk={onHandleOk}
           cancleText={CancelText}
-          onCancle={onHandleCanlce}
+          onCancel={onHandleCanlce}
           loadingButtonOk={loadingButtonOk}
           classNames="pr-[2rem]"
         />

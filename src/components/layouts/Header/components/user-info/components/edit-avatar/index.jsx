@@ -51,7 +51,7 @@ function EditAvatarDraw({ open, onOpenDraw }) {
           cancleText="Cancel"
           okText="Save"
           onOk={onSumbit}
-          onCancle={onClose}
+          onCancel={onClose}
           loadingButtonOk={loadingOk}
         />
       }

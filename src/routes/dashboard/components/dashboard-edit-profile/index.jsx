@@ -2,7 +2,7 @@ import React from "react";
 
 import Profile from "./profile";
 
-function DashboardTable() {
+function DashboardProfile() {
   return <Profile />;
 }
-export default DashboardTable;
+export default DashboardProfile;
