@@ -10,7 +10,7 @@ function Profile() {
   const [isLoadingOk, setIsLoadingOk] = React.useState(false);
 
   const [currentData, setCurrentData] = React.useState();
-  const handleClickOK = React.useCallback(() => {
+  const onClickOk = React.useCallback(() => {
     setIsLoadingOk(true);
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
@@ -29,12 +29,12 @@ function Profile() {
       });
   });
 
-  const showModal = React.useCallback(() => {
+  const onShowModal = React.useCallback(() => {
     setCurrentData(dataProfile);
     setIsModalOpen(true);
   }, []);
 
-  const handleClickClose = React.useCallback(() => {
+  const onClickClose = React.useCallback(() => {
     setIsModalOpen(false);
   }, []);
 
@@ -53,7 +53,7 @@ function Profile() {
         <Button
           type="primary"
           className="flex max-w-[9rem] items-center gap-[0.625rem] sm:max-w-[7.75rem]"
-          onClick={showModal}
+          onClick={onShowModal}
         >
           <img
             src="/assets/icons/edit-profile.svg"
@@ -66,11 +66,11 @@ function Profile() {
           currentData={currentData}
           okText="Save"
           cancelText="Cancel"
-          onHandleOk={handleClickOK}
+          onHandleOk={onClickOk}
           isModalOpen={isModalOpen}
-          onHandleCancel={handleClickClose}
+          onHandleCancel={onClickClose}
           isLoadingButtonOk={isLoadingOk}
-          onClose={handleClickClose}
+          onClose={onClickClose}
         />
       </div>
     </div>
