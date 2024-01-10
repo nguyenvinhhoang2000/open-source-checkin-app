@@ -8,12 +8,13 @@ import { emptyFn } from "@/utils/empty-types";
 function AppFooterDraw({
   classNames,
   okText,
-  cancleText,
+  cancelText,
   onDelete,
   onOk,
   onCancel,
   deleteText,
   loadingButtonOk,
+  htmlType,
 }) {
   return (
     <div className={classnames(classNames, "flex flex-row justify-end gap-2")}>
@@ -23,8 +24,13 @@ function AppFooterDraw({
         </Button>
       )}
       <div className="flex flex-row items-center gap-2">
-        {cancleText && <Button onClick={onCancel}>{cancleText}</Button>}
-        <Button loading={loadingButtonOk} onClick={onOk} type="primary">
+        {cancelText && <Button onClick={onCancel}>{cancelText}</Button>}
+        <Button
+          loading={loadingButtonOk}
+          onClick={onOk}
+          type="primary"
+          htmlType={htmlType}
+        >
           {okText}
         </Button>
       </div>
@@ -36,18 +42,19 @@ export default React.memo(AppFooterDraw);
 
 AppFooterDraw.propTypes = {
   okText: PropTypes.string,
-  cancleText: PropTypes.string,
+  cancelText: PropTypes.string,
   deleteText: PropTypes.string,
   classNames: PropTypes.string,
   onOk: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   loadingButtonOk: PropTypes.bool.isRequired,
+  htmlType: PropTypes.oneOf(["submit", "button", "reset"]).isRequired,
 };
 
 AppFooterDraw.defaultProps = {
   okText: "Save",
-  cancleText: "",
+  cancelText: "",
   deleteText: "",
   classNames: "",
   onDelete: emptyFn,

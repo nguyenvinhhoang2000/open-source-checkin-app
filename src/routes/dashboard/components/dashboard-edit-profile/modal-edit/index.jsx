@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Input, Modal, Select } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw";
-import AppTitleDraw from "@/components/apps/app-title-draw";
+import AppFooterDraw from "@/components/apps/app-footer-popup";
+import AppTitleDraw from "@/components/apps/app-title-popup";
 
 import { emptyFn } from "@/utils/empty-types";
 
@@ -17,15 +17,20 @@ function ModalEditProfile({
   onClose,
   currentData,
 }) {
-  const [form] = Form.useForm();
+  const [updateProfileForm] = Form.useForm();
 
   React.useEffect(() => {
-    form.setFieldsValue(currentData);
-  }, [currentData, form]);
+    updateProfileForm.setFieldsValue(currentData);
+  }, [currentData, updateProfileForm]);
 
-  const onFinish = React.useCallback((record) => {
+  const onSubmit = React.useCallback(() => {
+    // HANDLE UPDATE DATA RIGHT HERE
+    const record = updateProfileForm.getFieldsValue();
     console.log(`🚀🚀🚀!..record:`, record);
-  }, []);
+    // CLOSE AFTER UPDATE DATA
+    onHandleOk();
+  }, [onHandleOk, updateProfileForm]);
+
   return (
     <Modal
       title={
@@ -39,9 +44,10 @@ function ModalEditProfile({
       closable={false}
       footer={
         <AppFooterDraw
+          htmlType="submit"
           okText={okText}
-          onOk={onHandleOk}
-          cancleText={CancelText}
+          onOk={onSubmit}
+          cancelText={CancelText}
           onCancel={onHandleCancel}
           loadingButtonOk={loadingButtonOk}
           classNames="px-[1.25rem]"
@@ -50,10 +56,9 @@ function ModalEditProfile({
     >
       <Form
         className="border-t border-t-black/5 px-4 pt-4"
-        form={form}
+        form={updateProfileForm}
         layout="vertical"
         name="edit-profile"
-        onFinish={onFinish}
       >
         <Form.Item name="name" label="Name">
           <Input disabled />

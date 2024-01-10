@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { emptyFn } from "@/utils/empty-types";
 
-import AppFooterDraw from "../app-footer-draw";
+import AppFooterDraw from "../app-footer-popup";
 
 function AppModel({
   title,
@@ -39,9 +39,10 @@ function AppModel({
       closable={false}
       footer={
         <AppFooterDraw
+          htmlType="button"
           okText={okText}
           onOk={onHandleOk}
-          cancleText={CancelText}
+          cancelText={CancelText}
           onCancel={onHandleCanlce}
           loadingButtonOk={loadingButtonOk}
           classNames="pr-[2rem]"

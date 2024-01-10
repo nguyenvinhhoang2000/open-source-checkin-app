@@ -2,8 +2,8 @@ import React from "react";
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw";
-import AppTitleDraw from "@/components/apps/app-title-draw";
+import AppFooterDraw from "@/components/apps/app-footer-popup";
+import AppTitleDraw from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
@@ -48,7 +48,8 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       closable={false}
       footer={
         <AppFooterDraw
-          cancleText="Cancel"
+          htmlType="button"
+          cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
           onCancel={onClose}
