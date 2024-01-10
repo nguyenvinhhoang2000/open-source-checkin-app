@@ -1,5 +1,5 @@
 import React from "react";
-import { DatePicker, Form, Input, Modal } from "antd";
+import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
 import PropTypes from "prop-types";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
@@ -9,7 +9,6 @@ import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentFormModal({
   cancelText,
-  onHandleOk,
   onHandleCancel,
   isModalOpen,
   isLoadingButtonOk,
@@ -25,8 +24,8 @@ function AbsentFormModal({
   }, [absentForm, currentData, currentData?.description]);
 
   const onSubmit = React.useCallback(() => {
-    onHandleOk();
-  }, [onHandleOk]);
+    const record = absentForm.getFieldsValue();
+  }, [absentForm]);
 
   return (
     <Modal
@@ -57,29 +56,75 @@ function AbsentFormModal({
         form={absentForm}
         layout="vertical"
         name="edit-profile"
+        onFinish={onSubmit}
       >
-        <div className="flex flex-col sm:flex sm:flex-row sm:justify-start sm:gap-8 xl:flex xl:flex-row xl:justify-between">
-          <Form.Item name="typeAbsent" label="Type Absent" required>
-            <Input className="w-full" />
-          </Form.Item>
-          <Form.Item name="typeAbsent" label="Type Absent" required>
-            <Input className="w-full" />
-          </Form.Item>
-        </div>
-        <div className="flex flex-col sm:flex sm:flex-row sm:justify-start sm:gap-8 xl:flex xl:flex-row xl:justify-between">
-          <Form.Item name="typeAbsent" label="Type Absent" required>
-            <DatePicker className="sm:w-[16rem]" />
-          </Form.Item>
-          <Form.Item name="typeAbsent" label="Type Absent" required>
-            <DatePicker className="sm:w-[16rem]" />
-          </Form.Item>
-        </div>
-        <Form.Item name="note" label="Note">
+        <Row gutter={24}>
+          <Col span={12}>
+            <Form.Item
+              labelAlign="left"
+              name="absentType"
+              label="Type Absent"
+              required
+            >
+              <Select placeholder="Select type">
+                <Select.Option value="Zhejiang">Remove</Select.Option>
+                <Select.Option value="Jiangsu">Absent</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              hasFeedback
+              labelAlign="right"
+              name="reason"
+              label="Reason"
+              required
+            >
+              <Select placeholder="Select reason">
+                <Select.Option value="Zhejiang">I’m got sick</Select.Option>
+                <Select.Option value="Jiangsu">
+                  Equipment is damaged/forgotten
+                </Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col span={12}>
+            <Form.Item name="fromDate" label="From" required>
+              <DatePicker
+                placeholder="Pick time"
+                className="w-full"
+                suffixIcon={
+                  <img
+                    src="/assets/icons/union-date-picker.svg"
+                    alt="union-date-picker"
+                  />
+                }
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="toDate" label="To" required>
+              <DatePicker
+                placeholder="Pick time"
+                className="w-full"
+                suffixIcon={
+                  <img
+                    src="/assets/icons/union-date-picker.svg"
+                    alt="union-date-picker"
+                  />
+                }
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Form.Item name="description" label="Description" required>
           <Input.TextArea
             showCount
-            className="flex h-[6rem] w-[32.5rem]"
+            className="flex h-[6rem]"
             maxLength={100}
-            placeholder="Enter your note"
+            placeholder="Enter your Description"
           />
         </Form.Item>
       </Form>
@@ -92,7 +137,6 @@ export default AbsentFormModal;
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
   cancelText: PropTypes.string,
-  onHandleOk: PropTypes.func,
   onHandleCancel: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
@@ -103,7 +147,6 @@ AbsentFormModal.defaultProps = {
   isModalOpen: false,
   cancelText: "",
   isLoadingButtonOk: false,
-  onHandleOk: emptyFn,
   onHandleCancel: emptyFn,
   onClose: emptyFn,
   currentData: emptyObj,
