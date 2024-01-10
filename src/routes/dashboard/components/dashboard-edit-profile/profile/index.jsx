@@ -7,14 +7,14 @@ import ModalEditProfile from "../modal-edit";
 
 function Profile() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [loadingOk, setLoadingOk] = React.useState(false);
+  const [isLoadingOk, setIsLoadingOk] = React.useState(false);
 
   const [currentData, setCurrentData] = React.useState();
   const handleClickOK = React.useCallback(() => {
-    setLoadingOk(true);
+    setIsLoadingOk(true);
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setLoadingOk(false);
+        setIsLoadingOk(false);
         setIsModalOpen(false);
         resolve("Change profile okay");
       }, 2000);
@@ -69,7 +69,7 @@ function Profile() {
           onHandleOk={handleClickOK}
           isModalOpen={isModalOpen}
           onHandleCancel={handleClickClose}
-          isLoadingButtonOk={loadingOk}
+          isLoadingButtonOk={isLoadingOk}
           onClose={handleClickClose}
         />
       </div>
