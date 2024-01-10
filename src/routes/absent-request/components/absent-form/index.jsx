@@ -8,7 +8,7 @@ import AppTitleDraw from "@/components/apps/app-title-draw";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentFormModal({
-  CancelText,
+  cancelText,
   okText,
   onHandleOk,
   onHandleCancel,
@@ -16,6 +16,7 @@ function AbsentFormModal({
   isLoadingButtonOk,
   onClose,
   currentData,
+  headerTitle,
 }) {
   const [absentForm] = Form.useForm();
 
@@ -33,7 +34,7 @@ function AbsentFormModal({
     <Modal
       title={
         <AppTitleDraw
-          titleText="Edit Profile"
+          titleText="Absent Request"
           onClose={onClose}
           classNames="px-[1.25rem] mb-[1rem]"
         />
@@ -45,7 +46,7 @@ function AbsentFormModal({
           htmlType="submit"
           okText={okText}
           onOk={onSubmit}
-          cancelText={CancelText}
+          cancelText={cancelText}
           onCancel={onHandleCancel}
           isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
@@ -84,18 +85,19 @@ export default AbsentFormModal;
 
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
-  CancelText: PropTypes.string,
+  cancelText: PropTypes.string,
   okText: PropTypes.string,
   onHandleOk: PropTypes.func,
   onHandleCancel: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
+  headerTitle: PropTypes.string.isRequired,
 };
 
 AbsentFormModal.defaultProps = {
   isModalOpen: false,
-  CancelText: "",
+  cancelText: "",
   okText: "",
   isLoadingButtonOk: false,
   onHandleOk: emptyFn,
