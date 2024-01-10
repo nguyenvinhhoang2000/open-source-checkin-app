@@ -10,18 +10,18 @@ import { fullConfig } from "@/theme";
 import AvatarList from "./components/avatar-list";
 
 function EditAvatarDraw({ open, onOpenDraw }) {
-  const [loadingOk, setLoadingOk] = React.useState(false);
+  const [isLoadingOk, setIsLoadingOk] = React.useState(false);
 
   const onClose = React.useCallback(() => {
     onOpenDraw(false);
   }, [onOpenDraw]);
 
   const onSumbit = React.useCallback(() => {
-    setLoadingOk(true);
+    setIsLoadingOk(true);
     // HANDLE SUBMIT
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setLoadingOk(false);
+        setIsLoadingOk(false);
         onOpenDraw(false);
         resolve("Change avatar okay");
       }, 2000);
@@ -53,7 +53,7 @@ function EditAvatarDraw({ open, onOpenDraw }) {
           okText="Save"
           onOk={onSumbit}
           onCancel={onClose}
-          loadingButtonOk={loadingOk}
+          isLoadingButtonOk={isLoadingOk}
         />
       }
     >

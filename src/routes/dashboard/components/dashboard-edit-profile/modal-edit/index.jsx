@@ -15,7 +15,7 @@ function ModalEditProfile({
   onHandleOk,
   onHandleCancel,
   isModalOpen,
-  loadingButtonOk,
+  isLoadingButtonOk,
   onClose,
   currentData,
 }) {
@@ -51,7 +51,7 @@ function ModalEditProfile({
           onOk={onSubmit}
           cancelText={CancelText}
           onCancel={onHandleCancel}
-          loadingButtonOk={loadingButtonOk}
+          isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
         />
       }
@@ -116,7 +116,7 @@ ModalEditProfile.propTypes = {
   okText: PropTypes.string,
   onHandleOk: PropTypes.func,
   onHandleCancel: PropTypes.func,
-  loadingButtonOk: PropTypes.bool,
+  isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object).isRequired,
 };
@@ -125,7 +125,7 @@ ModalEditProfile.defaultProps = {
   isModalOpen: false,
   CancelText: "",
   okText: "",
-  loadingButtonOk: false,
+  isLoadingButtonOk: false,
   onHandleOk: emptyFn,
   onHandleCancel: emptyFn,
   onClose: emptyFn,

@@ -69,7 +69,7 @@ function Profile() {
           onHandleOk={handleClickOK}
           isModalOpen={isModalOpen}
           onHandleCancel={handleClickClose}
-          loadingButtonOk={loadingOk}
+          isLoadingButtonOk={loadingOk}
           onClose={handleClickClose}
         />
       </div>

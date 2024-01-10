@@ -15,7 +15,7 @@ function AppModel({
   onHandleOk,
   onHandleCanlce,
   isModalOpen,
-  loadingButtonOk,
+  isLoadingButtonOk,
 }) {
   return (
     <Modal
@@ -44,7 +44,7 @@ function AppModel({
           onOk={onHandleOk}
           cancelText={CancelText}
           onCancel={onHandleCanlce}
-          loadingButtonOk={loadingButtonOk}
+          isLoadingButtonOk={isLoadingButtonOk}
           classNames="pr-[2rem]"
         />
       }
@@ -63,7 +63,7 @@ AppModel.propTypes = {
   onHandleOk: PropTypes.func,
   onHandleCanlce: PropTypes.func,
   isModalOpen: PropTypes.bool,
-  loadingButtonOk: PropTypes.bool,
+  isLoadingButtonOk: PropTypes.bool,
 };
 
 AppModel.defaultProps = {
@@ -73,7 +73,7 @@ AppModel.defaultProps = {
   okText: "",
   src: "",
   isModalOpen: false,
-  loadingButtonOk: false,
+  isLoadingButtonOk: false,
   onHandleOk: emptyFn,
   onHandleCanlce: emptyFn,
 };
