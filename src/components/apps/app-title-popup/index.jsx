@@ -3,7 +3,7 @@ import { Button } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-function AppTitleDraw({
+function AppTitlePopup({
   titleText,
   onClose,
   classNames,
@@ -34,9 +34,9 @@ function AppTitleDraw({
   );
 }
 
-export default React.memo(AppTitleDraw);
+export default React.memo(AppTitlePopup);
 
-AppTitleDraw.propTypes = {
+AppTitlePopup.propTypes = {
   titleText: PropTypes.string,
   classNames: PropTypes.string,
   classNamesClose: PropTypes.string,
@@ -44,7 +44,7 @@ AppTitleDraw.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-AppTitleDraw.defaultProps = {
+AppTitlePopup.defaultProps = {
   titleText: "Title Draw",
   classNames: "",
   classNamesClose: "",

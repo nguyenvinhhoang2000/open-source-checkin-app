@@ -10,7 +10,7 @@ function ChartTitle() {
     defaultItemFilterTime[0]?.key,
   );
 
-  const handleMenuClick = React.useCallback((e) => {
+  const onMenuClick = React.useCallback((e) => {
     setTimeFilter(e?.key);
   }, []);
 
@@ -32,7 +32,7 @@ function ChartTitle() {
 
   const menuProps = {
     items,
-    onClick: handleMenuClick,
+    onClick: onMenuClick,
   };
   return (
     <div className="flex flex-row justify-between">

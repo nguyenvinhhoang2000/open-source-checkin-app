@@ -2,26 +2,26 @@ import React from "react";
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw";
-import AppTitleDraw from "@/components/apps/app-title-draw";
+import AppFooterPopup from "@/components/apps/app-footer-popup";
+import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
 import AvatarList from "./components/avatar-list";
 
 function EditAvatarDraw({ open, onOpenDraw }) {
-  const [loadingOk, setLoadingOk] = React.useState(false);
+  const [isLoadingOk, setIsLoadingOk] = React.useState(false);
 
   const onClose = React.useCallback(() => {
     onOpenDraw(false);
   }, [onOpenDraw]);
 
   const onSumbit = React.useCallback(() => {
-    setLoadingOk(true);
+    setIsLoadingOk(true);
     // HANDLE SUBMIT
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setLoadingOk(false);
+        setIsLoadingOk(false);
         onOpenDraw(false);
         resolve("Change avatar okay");
       }, 2000);
@@ -44,15 +44,15 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       onClose={onClose}
       open={open}
       mask
-      title={<AppTitleDraw titleText="Change Avatar" onClose={onClose} />}
+      title={<AppTitlePopup titleText="Change Avatar" onClose={onClose} />}
       closable={false}
       footer={
-        <AppFooterDraw
-          cancleText="Cancel"
+        <AppFooterPopup
+          cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
-          onCancle={onClose}
-          loadingButtonOk={loadingOk}
+          onCancel={onClose}
+          isLoadingButtonOk={isLoadingOk}
         />
       }
     >

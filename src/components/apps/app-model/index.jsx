@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { emptyFn } from "@/utils/empty-types";
 
-import AppFooterDraw from "../app-footer-draw";
+import AppFooterPopup from "../app-footer-popup";
 
 function AppModel({
   title,
@@ -15,13 +15,13 @@ function AppModel({
   onHandleOk,
   onHandleCanlce,
   isModalOpen,
-  loadingButtonOk,
+  isLoadingButtonOk,
 }) {
   return (
     <Modal
       className="flex"
       title={
-        <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem]">
+        <div className="mb-[1.5rem] mt-[0.75rem] flex gap-[1rem] px-[2rem]">
           <div>
             <img src={src} alt="icon" title="check-in-icon" />
           </div>
@@ -38,12 +38,13 @@ function AppModel({
       open={isModalOpen}
       closable={false}
       footer={
-        <AppFooterDraw
+        <AppFooterPopup
           okText={okText}
           onOk={onHandleOk}
-          cancleText={CancelText}
-          onCancle={onHandleCanlce}
-          loadingButtonOk={loadingButtonOk}
+          cancelText={CancelText}
+          onCancel={onHandleCanlce}
+          isLoadingButtonOk={isLoadingButtonOk}
+          classNames="pr-[2rem]"
         />
       }
     />
@@ -61,7 +62,7 @@ AppModel.propTypes = {
   onHandleOk: PropTypes.func,
   onHandleCanlce: PropTypes.func,
   isModalOpen: PropTypes.bool,
-  loadingButtonOk: PropTypes.bool,
+  isLoadingButtonOk: PropTypes.bool,
 };
 
 AppModel.defaultProps = {
@@ -71,7 +72,7 @@ AppModel.defaultProps = {
   okText: "",
   src: "",
   isModalOpen: false,
-  loadingButtonOk: false,
+  isLoadingButtonOk: false,
   onHandleOk: emptyFn,
   onHandleCanlce: emptyFn,
 };

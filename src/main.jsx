@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ConfigProvider } from "antd";
 
 import { drawerConfig } from "./constants/config-antd/drawer";
+import { modalConfig } from "./constants/config-antd/modal";
 import App from "./App";
 import { fullConfig } from "./theme";
 
@@ -31,9 +32,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             itemActiveBg: fullConfig.theme.colors.neutral[1],
             colorPrimaryHover: fullConfig.theme.colors.neutral[0],
           },
-          Model: {
-            primaryColor: fullConfig.theme.colors.primary[1],
-          },
           Table: {
             cellPaddingInline: fullConfig.theme.antdTable.cellPaddingInline,
             cellPaddingBlock: fullConfig.theme.antdTable.cellPaddingBlock,
@@ -45,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         },
       }}
       drawer={drawerConfig}
+      modal={modalConfig}
     >
       <App />
     </ConfigProvider>
