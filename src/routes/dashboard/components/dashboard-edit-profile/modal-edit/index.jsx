@@ -7,7 +7,7 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { POSITION } from "@/constants/company-location";
 import { GENDER } from "@/constants/gender";
-import { emptyFn } from "@/utils/empty-types";
+import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function ModalEditProfile({
   cancelText,
@@ -35,6 +35,7 @@ function ModalEditProfile({
 
   return (
     <Modal
+      forceRender
       title={
         <AppTitlePopup
           titleText="Edit Profile"
@@ -62,10 +63,10 @@ function ModalEditProfile({
         layout="vertical"
         name="edit-profile"
       >
-        <Form.Item name="name" label="Name">
+        <Form.Item className="mb-2" name="name" label="Name">
           <Input disabled />
         </Form.Item>
-        <Form.Item name="gender" label="Gender">
+        <Form.Item className="mb-2" name="gender" label="Gender">
           <Select
             disabled
             placeholder="Select a option and change input text above"
@@ -77,10 +78,10 @@ function ModalEditProfile({
             ))}
           </Select>
         </Form.Item>
-        <Form.Item name="position" label="Position">
+        <Form.Item className="mb-2" name="position" label="Position">
           <Input disabled />
         </Form.Item>
-        <Form.Item name="branch" label="Branch">
+        <Form.Item className="mb-2" name="branch" label="Branch">
           <Select
             disabled
             placeholder="Select a option and change input text above"
@@ -92,10 +93,10 @@ function ModalEditProfile({
             ))}
           </Select>
         </Form.Item>
-        <Form.Item name="phone" label="Phone">
+        <Form.Item className="mb-2" name="phone" label="Phone">
           <Input placeholder="Enter your Phone" />
         </Form.Item>
-        <Form.Item name="note" label="Note">
+        <Form.Item className="mb-2" name="note" label="Note">
           <Input.TextArea
             showCount
             className="h-[6rem]"
@@ -118,7 +119,7 @@ ModalEditProfile.propTypes = {
   onHandleCancel: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
-  currentData: PropTypes.instanceOf(Object).isRequired,
+  currentData: PropTypes.instanceOf(Object),
 };
 
 ModalEditProfile.defaultProps = {
@@ -129,4 +130,5 @@ ModalEditProfile.defaultProps = {
   onHandleOk: emptyFn,
   onHandleCancel: emptyFn,
   onClose: emptyFn,
+  currentData: emptyObj,
 };
