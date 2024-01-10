@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Modal, Select } from "antd";
+import { DatePicker, Form, Input, Modal } from "antd";
 import PropTypes from "prop-types";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
@@ -9,7 +9,6 @@ import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentFormModal({
   cancelText,
-  okText,
   onHandleOk,
   onHandleCancel,
   isModalOpen,
@@ -31,6 +30,7 @@ function AbsentFormModal({
 
   return (
     <Modal
+      width={572}
       title={
         <AppTitlePopup
           titleText="Absent Request"
@@ -53,29 +53,31 @@ function AbsentFormModal({
       }
     >
       <Form
-        className="border-b border-t border-b-black/5 border-t-black/5 px-4 pb-1 pt-4"
+        className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
         form={absentForm}
         layout="vertical"
         name="edit-profile"
       >
-        <Form.Item name="name" label="Name">
-          <Form.Item name="name" label="Name">
-            <Select />
+        <div className="flex flex-col sm:flex sm:flex-row sm:justify-start sm:gap-8 xl:flex xl:flex-row xl:justify-between">
+          <Form.Item name="typeAbsent" label="Type Absent" required>
+            <Input className="w-full" />
           </Form.Item>
-          <Form.Item name="name" label="Name">
-            <Select />
+          <Form.Item name="typeAbsent" label="Type Absent" required>
+            <Input className="w-full" />
           </Form.Item>
-        </Form.Item>
-        <Form.Item name="position" label="Position">
-          <Input disabled />
-        </Form.Item>
-        <Form.Item name="phone" label="Phone">
-          <Input placeholder="Enter your Phone" />
-        </Form.Item>
+        </div>
+        <div className="flex flex-col sm:flex sm:flex-row sm:justify-start sm:gap-8 xl:flex xl:flex-row xl:justify-between">
+          <Form.Item name="typeAbsent" label="Type Absent" required>
+            <DatePicker className="sm:w-[16rem]" />
+          </Form.Item>
+          <Form.Item name="typeAbsent" label="Type Absent" required>
+            <DatePicker className="sm:w-[16rem]" />
+          </Form.Item>
+        </div>
         <Form.Item name="note" label="Note">
           <Input.TextArea
             showCount
-            className="h-[6rem]"
+            className="flex h-[6rem] w-[32.5rem]"
             maxLength={100}
             placeholder="Enter your note"
           />
@@ -90,7 +92,6 @@ export default AbsentFormModal;
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
   cancelText: PropTypes.string,
-  okText: PropTypes.string,
   onHandleOk: PropTypes.func,
   onHandleCancel: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool,
@@ -101,7 +102,6 @@ AbsentFormModal.propTypes = {
 AbsentFormModal.defaultProps = {
   isModalOpen: false,
   cancelText: "",
-  okText: "",
   isLoadingButtonOk: false,
   onHandleOk: emptyFn,
   onHandleCancel: emptyFn,
