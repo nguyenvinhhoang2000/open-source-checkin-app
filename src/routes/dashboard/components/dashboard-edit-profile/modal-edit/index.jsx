@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import AppFooterDraw from "@/components/apps/app-footer-popup";
 import AppTitleDraw from "@/components/apps/app-title-popup";
 
+import { POSITION } from "@/constants/company-location";
 import { GENDER } from "@/constants/gender";
-import { POSITION } from "@/constants/position";
 import { emptyFn } from "@/utils/empty-types";
 
 function ModalEditProfile({
@@ -108,7 +108,7 @@ function ModalEditProfile({
   );
 }
 
-export default ModalEditProfile;
+export default React.memo(ModalEditProfile);
 
 ModalEditProfile.propTypes = {
   isModalOpen: PropTypes.bool,

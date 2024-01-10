@@ -5,4 +5,4 @@ import Profile from "./profile";
 function DashboardProfile() {
   return <Profile />;
 }
-export default DashboardProfile;
+export default React.memo(DashboardProfile);
