@@ -2,8 +2,8 @@ import React from "react";
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-popup";
-import AppTitleDraw from "@/components/apps/app-title-popup";
+import AppFooterPopup from "@/components/apps/app-footer-popup";
+import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
@@ -44,10 +44,10 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       onClose={onClose}
       open={open}
       mask
-      title={<AppTitleDraw titleText="Change Avatar" onClose={onClose} />}
+      title={<AppTitlePopup titleText="Change Avatar" onClose={onClose} />}
       closable={false}
       footer={
-        <AppFooterDraw
+        <AppFooterPopup
           cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}

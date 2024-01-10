@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { BUTTON_TYPE } from "@/constants/button-type";
 import { emptyFn } from "@/utils/empty-types";
 
-function AppFooterDraw({
+function AppFooterPopup({
   classNames,
   okText,
   cancelText,
@@ -15,7 +15,7 @@ function AppFooterDraw({
   onCancel,
   deleteText,
   isLoadingButtonOk,
-  htmlType,
+  buttonOkType,
 }) {
   return (
     <div className={classnames(classNames, "flex flex-row justify-end gap-2")}>
@@ -34,7 +34,7 @@ function AppFooterDraw({
           loading={isLoadingButtonOk}
           onClick={onOk}
           type="primary"
-          htmlType={htmlType}
+          htmlType={buttonOkType}
         >
           {okText}
         </Button>
@@ -43,9 +43,9 @@ function AppFooterDraw({
   );
 }
 
-export default React.memo(AppFooterDraw);
+export default React.memo(AppFooterPopup);
 
-AppFooterDraw.propTypes = {
+AppFooterPopup.propTypes = {
   okText: PropTypes.string,
   cancelText: PropTypes.string,
   deleteText: PropTypes.string,
@@ -54,14 +54,14 @@ AppFooterDraw.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool.isRequired,
-  htmlType: PropTypes.oneOf(BUTTON_TYPE),
+  buttonOkType: PropTypes.oneOf(BUTTON_TYPE),
 };
 
-AppFooterDraw.defaultProps = {
+AppFooterPopup.defaultProps = {
   okText: "Save",
   cancelText: "",
   deleteText: "",
   classNames: "",
-  htmlType: BUTTON_TYPE[0],
+  buttonOkType: BUTTON_TYPE[0],
   onDelete: emptyFn,
 };

@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Input, Modal, Select } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-popup";
-import AppTitleDraw from "@/components/apps/app-title-popup";
+import AppFooterPopup from "@/components/apps/app-footer-popup";
+import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { POSITION } from "@/constants/company-location";
 import { GENDER } from "@/constants/gender";
@@ -36,7 +36,7 @@ function ModalEditProfile({
   return (
     <Modal
       title={
-        <AppTitleDraw
+        <AppTitlePopup
           titleText="Edit Profile"
           onClose={onClose}
           classNames="px-[1.25rem] mb-[1rem]"
@@ -45,8 +45,8 @@ function ModalEditProfile({
       open={isModalOpen}
       closable={false}
       footer={
-        <AppFooterDraw
-          htmlType="submit"
+        <AppFooterPopup
+          buttonOkType="submit"
           okText={okText}
           onOk={onSubmit}
           cancelText={CancelText}

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { emptyFn } from "@/utils/empty-types";
 
-import AppFooterDraw from "../app-footer-popup";
+import AppFooterPopup from "../app-footer-popup";
 
 function AppModel({
   title,
@@ -38,7 +38,7 @@ function AppModel({
       open={isModalOpen}
       closable={false}
       footer={
-        <AppFooterDraw
+        <AppFooterPopup
           okText={okText}
           onOk={onHandleOk}
           cancelText={CancelText}
