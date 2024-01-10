@@ -8,6 +8,8 @@ import { dataAbsent } from "@/constants/data/data-absent";
 import AbsentFormModal from "../absent-form";
 import AbsentView from "../absent-view";
 
+import { pagination } from "./table-config";
+
 function AbsentTable({ filterTime }) {
   const [isOpenView, setIsOpenView] = React.useState(false);
   const [isOpenEdit, setIsOpenEdit] = React.useState(false);
@@ -107,9 +109,7 @@ function AbsentTable({ filterTime }) {
   return (
     <div>
       <Table
-        pagination={{
-          pageSize: 7,
-        }}
+        pagination={pagination}
         scroll={{ x: "auto" }}
         rowKey="id"
         columns={columns}

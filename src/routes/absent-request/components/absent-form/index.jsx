@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import PropTypes from "prop-types";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw";
-import AppTitleDraw from "@/components/apps/app-title-draw";
+import AppFooterPopup from "@/components/apps/app-footer-popup";
+import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
@@ -31,26 +31,26 @@ function AbsentFormModal({
 
   return (
     <Modal
-      // title={
-      //   <AppTitleDraw
-      //     titleText="Absent Request"
-      //     onClose={onClose}
-      //     classNames="px-[1.25rem] mb-[1rem]"
-      //   />
-      // }
+      title={
+        <AppTitlePopup
+          titleText="Absent Request"
+          onClose={onClose}
+          classNames="px-[1.25rem] mb-[1rem]"
+        />
+      }
       open={isModalOpen}
       closable={false}
-      // footer={
-      //   <AppFooterDraw
-      //     htmlType="submit"
-      //     okText={okText}
-      //     onOk={onSubmit}
-      //     cancelText={cancelText}
-      //     onCancel={onHandleCancel}
-      //     isLoadingButtonOk={isLoadingButtonOk}
-      //     classNames="px-[1.25rem]"
-      //   />
-      // }
+      footer={
+        <AppFooterPopup
+          buttonOkType="submit"
+          okText="Save"
+          onOk={onSubmit}
+          cancelText={cancelText}
+          onCancel={onHandleCancel}
+          isLoadingButtonOk={isLoadingButtonOk}
+          classNames="px-[1.25rem]"
+        />
+      }
     >
       <Form
         className="border-b border-t border-b-black/5 border-t-black/5 px-4 pb-1 pt-4"
@@ -59,7 +59,12 @@ function AbsentFormModal({
         name="edit-profile"
       >
         <Form.Item name="name" label="Name">
-          <Input disabled />
+          <Form.Item name="name" label="Name">
+            <Select />
+          </Form.Item>
+          <Form.Item name="name" label="Name">
+            <Select />
+          </Form.Item>
         </Form.Item>
         <Form.Item name="position" label="Position">
           <Input disabled />
