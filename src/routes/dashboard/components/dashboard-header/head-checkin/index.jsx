@@ -6,13 +6,13 @@ import AppModel from "@/components/apps/app-model";
 
 function Checkin() {
   const { value: isModalOpen, setValue: setIsModalOpen } = useBoolean(false);
-  const onClickOk = () => {
+  const onClickOk = React.useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, [setIsModalOpen]);
 
-  const onShowModal = () => {
+  const onShowModal = React.useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, [setIsModalOpen]);
 
   return (
     <div className="mt-[1.25rem] lg:mt-0 lg:flex lg:flex-col lg:justify-center">
