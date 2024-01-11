@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
+import classNames from "classnames";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
@@ -9,12 +10,22 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentModalView({
-  cancelText,
   isModalOpen,
   isLoadingButtonOk,
   onClose,
   currentData,
+  onOpenEdit,
 }) {
+  const isEdit = dayjs(currentData.dateRequest).isAfter(dayjs(new Date()));
+
+  const onOkBtn = React.useCallback(() => {
+    if (isEdit) {
+      onClose();
+      onOpenEdit();
+    } else {
+      onClose();
+    }
+  }, [isEdit, onClose, onOpenEdit]);
   return (
     <Modal
       width={572}
@@ -30,12 +41,13 @@ function AbsentModalView({
       footer={
         <AppFooterPopup
           buttonOkType="submit"
-          okText="Save"
-          onOk={onClose}
-          cancelText={cancelText}
+          onOk={onOkBtn}
+          okText={isEdit ? "Edit" : "OK"}
+          cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}
           isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
+          buttonOkClassNames={classNames(!isEdit && "min-w-[6.25rem]")}
         />
       }
     >
@@ -54,7 +66,7 @@ function AbsentModalView({
               </span>
               <span>
                 {currentData[item] instanceof Date
-                  ? dayjs(currentData[item]).format("DD--MM-YYYY HH:mm:ss")
+                  ? dayjs(currentData[item]).format("D-M-YYYY h:m A")
                   : currentData[item].toString()}
               </span>
             </div>
@@ -69,16 +81,16 @@ export default AbsentModalView;
 
 AbsentModalView.propTypes = {
   isModalOpen: PropTypes.bool,
-  cancelText: PropTypes.string,
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
+  onOpenEdit: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
 };
 
 AbsentModalView.defaultProps = {
   isModalOpen: false,
-  cancelText: "",
   isLoadingButtonOk: false,
   onClose: emptyFn,
+  onOpenEdit: emptyFn,
   currentData: emptyObj,
 };

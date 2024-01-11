@@ -16,6 +16,7 @@ function AppFooterPopup({
   deleteText,
   isLoadingButtonOk,
   buttonOkType,
+  buttonOkClassNames,
 }) {
   return (
     <div className={classnames(classNames, "flex flex-row justify-end gap-2")}>
@@ -31,6 +32,7 @@ function AppFooterPopup({
           </Button>
         )}
         <Button
+          className={buttonOkClassNames}
           loading={isLoadingButtonOk}
           onClick={onOk}
           type="primary"
@@ -55,6 +57,7 @@ AppFooterPopup.propTypes = {
   onDelete: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool.isRequired,
   buttonOkType: PropTypes.oneOf(BUTTON_TYPE),
+  buttonOkClassNames: PropTypes.string,
 };
 
 AppFooterPopup.defaultProps = {
@@ -63,5 +66,6 @@ AppFooterPopup.defaultProps = {
   deleteText: "",
   classNames: "",
   buttonOkType: BUTTON_TYPE[0],
+  buttonOkClassNames: "",
   onDelete: emptyFn,
 };

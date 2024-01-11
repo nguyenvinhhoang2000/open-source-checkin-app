@@ -32,6 +32,8 @@ function AbsentTable({ filterTime }) {
     },
     [onOpenView],
   );
+
+  const onOkModalView = React.useCallback(() => {}, []);
   const columns = [
     {
       title: "From",
@@ -96,7 +98,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {!dayjs(record.dateRequest).isAfter(dayjs(new Date()), "day") && (
+            {dayjs(record.dateRequest).isAfter(dayjs(new Date())) && (
               <Button
                 title="edit"
                 type="text"
@@ -131,9 +133,10 @@ function AbsentTable({ filterTime }) {
       />
       <AbsentModalView
         onClose={onCloseView}
-        cancelText="Cancel"
         isModalOpen={isOpenView}
         currentData={dataView}
+        onOk={onOkModalView}
+        onOpenEdit={onOpenEdit}
       />
     </div>
   );
