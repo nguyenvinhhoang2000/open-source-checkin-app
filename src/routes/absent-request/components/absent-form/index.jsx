@@ -27,12 +27,14 @@ function AbsentFormModal({
   const [absentForm] = Form.useForm();
 
   React.useEffect(() => {
-    const currentOne = {
-      ...currentData,
-      to: dayjs(new Date(currentData.to)),
-      from: dayjs(new Date(currentData.from)),
-    };
-    absentForm.setFieldsValue(currentOne);
+    if (currentData && currentData?.description) {
+      const currentOne = {
+        ...currentData,
+        to: dayjs(new Date(currentData.to)),
+        from: dayjs(new Date(currentData.from)),
+      };
+      absentForm.setFieldsValue(currentOne);
+    }
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
