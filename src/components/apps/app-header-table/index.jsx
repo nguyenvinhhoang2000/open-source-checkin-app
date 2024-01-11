@@ -11,8 +11,8 @@ function AppHeaderTable({
   classNameTitle,
   onFilterTime,
   filterTime,
-  buttonSendText,
-  onButtonSend,
+  buttonAbsentRequestText,
+  onOpenAbsentRequestForm,
 }) {
   return (
     <div className="flex flex-col items-center gap-4 min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
@@ -22,14 +22,14 @@ function AppHeaderTable({
           onFilterTime={onFilterTime}
           filterTime={filterTime}
         />
-        {buttonSendText && (
+        {buttonAbsentRequestText && (
           <Button
             className="h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto"
             title="Absent Request"
             type="primary"
-            onClick={onButtonSend}
+            onClick={onOpenAbsentRequestForm}
           >
-            {buttonSendText}
+            {buttonAbsentRequestText}
           </Button>
         )}
       </div>
@@ -44,12 +44,12 @@ AppHeaderTable.propTypes = {
   classNameTitle: PropTypes.string,
   onFilterTime: PropTypes.func.isRequired,
   filterTime: PropTypes.string.isRequired,
-  onButtonSend: PropTypes.func,
-  buttonSendText: PropTypes.string,
+  onOpenAbsentRequestForm: PropTypes.func,
+  buttonAbsentRequestText: PropTypes.string,
 };
 
 AppHeaderTable.defaultProps = {
   classNameTitle: "",
-  buttonSendText: "",
-  onButtonSend: emptyFn,
+  buttonAbsentRequestText: "",
+  onOpenAbsentRequestForm: emptyFn,
 };
