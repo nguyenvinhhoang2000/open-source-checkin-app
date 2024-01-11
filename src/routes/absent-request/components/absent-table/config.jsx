@@ -1,11 +1,9 @@
-import { absentNumOfShow } from "@/constants/default-pagination";
-
-const pageSize = {
-  pageSize: absentNumOfShow,
+const pagination = {
+  pageSize: 7,
 };
 
 const scroll = {
   x: "auto",
 };
 
-export { pageSize, scroll };
+export { pagination, scroll };

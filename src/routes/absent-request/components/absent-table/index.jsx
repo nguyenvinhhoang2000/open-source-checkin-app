@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 
 import { dataAbsent } from "@/constants/data/data-absent";
 
+import { pagination, scroll } from "./config";
+
 const columns = [
   {
     title: "From",
@@ -77,13 +79,11 @@ const columns = [
 
 function AbsentTable({ filterTime }) {
   // handle width filterTime to render data of table
-  console.log(`🚀🚀🚀!..filterTime:`, filterTime);
+  console.log(`🚀🚀🚀!..filterTime of Absent request Table:`, filterTime);
   return (
     <Table
-      pagination={{
-        pageSize: 7,
-      }}
-      scroll={{ x: "auto" }}
+      pagination={pagination}
+      scroll={scroll}
       rowKey="id"
       columns={columns}
       dataSource={dataAbsent}
