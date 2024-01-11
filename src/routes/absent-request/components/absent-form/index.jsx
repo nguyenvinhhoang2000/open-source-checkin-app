@@ -9,7 +9,6 @@ import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentFormModal({
   cancelText,
-  onHandleCancel,
   isModalOpen,
   isLoadingButtonOk,
   onClose,
@@ -25,6 +24,7 @@ function AbsentFormModal({
 
   const onSubmit = React.useCallback(() => {
     const record = absentForm.getFieldsValue();
+    console.log(`🚀🚀🚀!..record:`, record);
   }, [absentForm]);
 
   return (
@@ -45,7 +45,7 @@ function AbsentFormModal({
           okText="Save"
           onOk={onSubmit}
           cancelText={cancelText}
-          onCancel={onHandleCancel}
+          onCancel={onClose}
           isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
         />
@@ -137,7 +137,6 @@ export default AbsentFormModal;
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
   cancelText: PropTypes.string,
-  onHandleCancel: PropTypes.func,
   isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
@@ -147,7 +146,6 @@ AbsentFormModal.defaultProps = {
   isModalOpen: false,
   cancelText: "",
   isLoadingButtonOk: false,
-  onHandleCancel: emptyFn,
   onClose: emptyFn,
   currentData: emptyObj,
 };

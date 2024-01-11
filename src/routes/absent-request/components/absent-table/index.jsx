@@ -2,27 +2,36 @@ import React from "react";
 import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
+import { useBoolean } from "usehooks-ts";
 
 import { dataAbsent } from "@/constants/data/data-absent";
 
 import AbsentFormModal from "../absent-form";
-import AbsentView from "../absent-view";
+import AbsentModalView from "../absent-view";
 
 import { pagination } from "./table-config";
 
 function AbsentTable({ filterTime }) {
-  const [isOpenView, setIsOpenView] = React.useState(false);
-  const [isOpenEdit, setIsOpenEdit] = React.useState(false);
+  const {
+    value: isOpenView,
+    setTrue: onOpenView,
+    setFalse: onCloseView,
+  } = useBoolean(false);
+  const {
+    value: isOpenEdit,
+    setTrue: onOpenEdit,
+    setFalse: onCloseEdit,
+  } = useBoolean(false);
 
-  const onOpenModalView = React.useCallback(() => {
-    setIsOpenView(true);
-  }, []);
-  const onCloseModalView = React.useCallback(() => {
-    setIsOpenView(false);
-  }, []);
-  const onOpenModalEdit = React.useCallback(() => {
-    setIsOpenEdit(true);
-  }, []);
+  const [dataView, setDateView] = React.useState({});
+  const onOpenModalView = React.useCallback(
+    (record) => {
+      console.log(`🚀🚀🚀!..record:`, record);
+      setDateView(record);
+      onOpenView();
+    },
+    [onOpenView],
+  );
   const columns = [
     {
       title: "From",
@@ -82,10 +91,9 @@ function AbsentTable({ filterTime }) {
               title="view"
               type="text"
               className="p-0"
-              onClick={onOpenModalEdit}
+              onClick={() => onOpenModalView(record)}
             >
               <img src="/assets/icons/eye.svg" alt="view" />
-              <AbsentView />
             </Button>
 
             {!dayjs(record.dateRequest).isAfter(dayjs(new Date()), "day") && (
@@ -93,7 +101,7 @@ function AbsentTable({ filterTime }) {
                 title="edit"
                 type="text"
                 className="p-0"
-                onClick={onOpenModalView}
+                onClick={onOpenEdit}
               >
                 <img src="/assets/icons/edit.svg" alt="edit" />
               </Button>
@@ -117,9 +125,15 @@ function AbsentTable({ filterTime }) {
       />
 
       <AbsentFormModal
-        onClose={onCloseModalView}
+        onClose={onCloseEdit}
+        cancelText="Cancel"
+        isModalOpen={isOpenEdit}
+      />
+      <AbsentModalView
+        onClose={onCloseView}
         cancelText="Cancel"
         isModalOpen={isOpenView}
+        currentData={dataView}
       />
     </div>
   );
