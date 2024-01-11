@@ -3,6 +3,7 @@ import React from "react";
 import DashBoardChart from "./components/dashboard-chart";
 import DashboardProfile from "./components/dashboard-edit-profile";
 import DashboardHead from "./components/dashboard-header/index";
+import DashboardTable from "./components/dashboard-table";
 
 function Dashboard() {
   return (
@@ -17,8 +18,8 @@ function Dashboard() {
             <DashboardProfile />
           </div>
         </div>
-        <div className="w-full rounded-lg bg-white p-5 shadow-dropShadow md:max-w-[57.125rem]">
-          3
+        <div className="w-full rounded-lg bg-white px-5 pt-5 shadow-dropShadow md:max-w-[57.125rem]">
+          <DashboardTable />
         </div>
       </div>
     </section>

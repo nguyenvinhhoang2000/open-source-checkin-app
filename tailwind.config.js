@@ -2,7 +2,17 @@
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  safelist: ["absolute", "right-0", "top-0", "z-40"],
+  safelist: [
+    "absolute",
+    "right-0",
+    "top-0",
+    "z-40",
+    "text-[0.875rem] font-[400]",
+    "leading-[1.375rem]",
+    "text-neutral-3",
+    "text-neutral-4",
+    "text-secondary-6",
+  ],
   theme: {
     screens: {
       ssm: "480px",
@@ -97,6 +107,7 @@ export default {
           1: "#556EE6",
           2: "#D9D9D9",
         },
+        absentDescription: "#0386FF",
       },
       boxShadow: {
         dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
