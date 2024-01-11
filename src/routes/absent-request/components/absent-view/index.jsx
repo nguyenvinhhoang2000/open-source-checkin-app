@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
-import classNames from "classnames";
+import classnames from "classnames";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
@@ -47,7 +47,7 @@ function AbsentModalView({
           onCancel={onClose}
           isLoadingButtonOk={isLoadingButtonOk}
           classNames="px-[1.25rem]"
-          buttonOkClassNames={classNames(!isEdit && "min-w-[6.25rem]")}
+          buttonOkClassNames={classnames(!isEdit && "min-w-[6.25rem]")}
         />
       }
     >

@@ -1,19 +1,19 @@
 import React from "react";
 import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
 import PropTypes from "prop-types";
+import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
-function AbsentFormModal({
-  cancelText,
-  isModalOpen,
-  isLoadingButtonOk,
-  onClose,
-  currentData,
-}) {
+function AbsentFormModal({ cancelText, isModalOpen, onClose, currentData }) {
+  const {
+    value: isLoadingButtonOk,
+    setTrue: setLoadingButtonOk,
+    setFalse: setUnLoadingButtonOk,
+  } = useBoolean(false);
   const [absentForm] = Form.useForm();
 
   React.useEffect(() => {
@@ -23,9 +23,23 @@ function AbsentFormModal({
   }, [absentForm, currentData, currentData?.description]);
 
   const onSubmit = React.useCallback(() => {
+    setLoadingButtonOk();
     const record = absentForm.getFieldsValue();
-    console.log(`🚀🚀🚀!..record:`, record);
-  }, [absentForm]);
+    const handleRequest = new Promise((resolve) => {
+      setTimeout(() => {
+        setUnLoadingButtonOk();
+        onClose();
+        resolve(record);
+      }, [2000]);
+    });
+    handleRequest
+      .then((res) => {
+        console.log(`🚀🚀🚀!..res:`, res);
+      })
+      .catch((err) => {
+        console.log(`🚀🚀🚀!..err:`, err);
+      });
+  }, [absentForm, onClose, setLoadingButtonOk, setUnLoadingButtonOk]);
 
   return (
     <Modal
@@ -137,7 +151,6 @@ export default AbsentFormModal;
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
   cancelText: PropTypes.string,
-  isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
 };
@@ -145,7 +158,6 @@ AbsentFormModal.propTypes = {
 AbsentFormModal.defaultProps = {
   isModalOpen: false,
   cancelText: "",
-  isLoadingButtonOk: false,
   onClose: emptyFn,
   currentData: emptyObj,
 };
