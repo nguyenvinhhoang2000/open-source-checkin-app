@@ -14,7 +14,7 @@ function AbsentRequestTable() {
     setFilterTime(record.key);
   }, []);
   return (
-    <div className="container mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
+    <section className="container mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
       <AppHeaderTable
         title="Your Absent Request"
         classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
@@ -23,7 +23,7 @@ function AbsentRequestTable() {
         onFilterTime={onFilterTime}
       />
       <AbsentTable filterTime={filterTime} />
-    </div>
+    </section>
   );
 }
 
