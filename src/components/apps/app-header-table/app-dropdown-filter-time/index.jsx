@@ -14,7 +14,6 @@ function AppDropdownFilterTime({ onFilterTime, filterTime }) {
   return (
     <Dropdown
       menu={menu}
-      overlayClassName="w-[7.8125rem]"
       placement="bottomRight"
       trigger={["click"]}
       className="flex flex-row items-center justify-between gap-[0.625rem] font-roboto"

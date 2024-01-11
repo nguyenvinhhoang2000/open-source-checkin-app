@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import { emptyFn } from "@/utils/empty-types";
@@ -15,7 +16,14 @@ function AppHeaderTable({
   onOpenAbsentRequestForm,
 }) {
   return (
-    <div className="flex flex-col items-center gap-4 min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
+    <div
+      className={classNames(
+        buttonAbsentRequestText
+          ? "flex flex-col items-center gap-4"
+          : "flex flex-row items-center justify-between",
+        "min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between",
+      )}
+    >
       <span className={classNameTitle}>{title}</span>
       <div className="flex flex-row items-center gap-6">
         <AppDropdownFilterTime
