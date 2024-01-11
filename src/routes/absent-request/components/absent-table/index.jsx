@@ -26,8 +26,8 @@ function AbsentTable({ filterTime }) {
   const [dataView, setDateView] = React.useState({});
   const onOpenModalView = React.useCallback(
     (record) => {
-      console.log(`🚀🚀🚀!..record:`, record);
-      setDateView(record);
+      const { id, ...recordWithoutId } = record;
+      setDateView(recordWithoutId);
       onOpenView();
     },
     [onOpenView],

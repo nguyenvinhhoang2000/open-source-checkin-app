@@ -8,12 +8,6 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
-const formatDateTime = (value) => {
-  if (value instanceof Date) {
-    return dayjs(value).format("DD--MM-YYYY HH:mm:ss");
-  }
-  return value.toString();
-};
 function AbsentModalView({
   cancelText,
   isModalOpen,
@@ -52,8 +46,17 @@ function AbsentModalView({
               key={item}
               className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
             >
-              <span className="font-bold">{item}</span>
-              <span>{formatDateTime(currentData[item])}</span>
+              <span className="font-bold">
+                {item
+                  .replace(/([a-z])([A-Z])/g, "$1 $2")
+                  .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
+                  .replace(/^./, (str) => str.toUpperCase())}
+              </span>
+              <span>
+                {currentData[item] instanceof Date
+                  ? dayjs(currentData[item]).format("DD--MM-YYYY HH:mm:ss")
+                  : currentData[item].toString()}
+              </span>
             </div>
           );
         })}
