@@ -106,7 +106,7 @@ function HistoryTable({ filterTime }) {
   ];
 
   // KEY TO FILTER DATA OF TABLE
-  console.log(`🚀🚀🚀!..filterTime:`, filterTime);
+  console.log(`🚀🚀🚀!..filterTime of DASHBOARD HISTORY TABLE:`, filterTime);
   return (
     <Table
       pagination={pagination}
