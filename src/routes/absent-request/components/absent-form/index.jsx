@@ -8,19 +8,25 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
-function AbsentFormModal({ cancelText, isModalOpen, onClose, currentData }) {
+function AbsentFormModal({
+  cancelText,
+  isModalOpen,
+  onClose,
+  currentData,
+  formName,
+}) {
   const {
     value: isLoadingButtonOk,
     setTrue: setLoadingButtonOk,
     setFalse: setUnLoadingButtonOk,
   } = useBoolean(false);
+
   const [absentForm] = Form.useForm();
 
   React.useEffect(() => {
-    if (currentData?.description) {
-      absentForm.setFieldsValue(currentData);
-    }
-  }, [absentForm, currentData, currentData?.description]);
+    console.log(`🚀🚀🚀!..currentData:`, currentData);
+    absentForm.setFieldsValue(currentData);
+  }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
     setLoadingButtonOk();
@@ -43,6 +49,7 @@ function AbsentFormModal({ cancelText, isModalOpen, onClose, currentData }) {
 
   return (
     <Modal
+      forceRender
       width={572}
       title={
         <AppTitlePopup
@@ -69,7 +76,7 @@ function AbsentFormModal({ cancelText, isModalOpen, onClose, currentData }) {
         className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
         form={absentForm}
         layout="vertical"
-        name="edit-profile"
+        name={formName}
         onFinish={onSubmit}
       >
         <Row gutter={24}>
@@ -151,6 +158,7 @@ export default AbsentFormModal;
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,
   cancelText: PropTypes.string,
+  formName: PropTypes.string.isRequired,
   onClose: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
 };

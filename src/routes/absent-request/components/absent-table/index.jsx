@@ -23,17 +23,24 @@ function AbsentTable({ filterTime }) {
     setFalse: onCloseEdit,
   } = useBoolean(false);
 
-  const [dataView, setDateView] = React.useState({});
+  const [dataSelectAction, setDataSelectAction] = React.useState({});
   const onOpenModalView = React.useCallback(
     (record) => {
       const { id, ...recordWithoutId } = record;
-      setDateView(recordWithoutId);
+      setDataSelectAction(recordWithoutId);
       onOpenView();
     },
     [onOpenView],
   );
 
-  const onOkModalView = React.useCallback(() => {}, []);
+  const onOpenModalEdit = React.useCallback(
+    (record) => {
+      setDataSelectAction(record);
+      onOpenEdit();
+    },
+    [onOpenEdit],
+  );
+
   const columns = [
     {
       title: "From",
@@ -92,7 +99,7 @@ function AbsentTable({ filterTime }) {
             <Button
               title="view"
               type="text"
-              className="p-0"
+              className="h-[1.25rem] w-[1.25rem] p-0"
               onClick={() => onOpenModalView(record)}
             >
               <img src="/assets/icons/eye.svg" alt="view" />
@@ -102,8 +109,10 @@ function AbsentTable({ filterTime }) {
               <Button
                 title="edit"
                 type="text"
-                className="p-0"
-                onClick={onOpenEdit}
+                className="h-[1.25rem] w-[1.25rem] p-0"
+                onClick={() => {
+                  onOpenModalEdit(record);
+                }}
               >
                 <img src="/assets/icons/edit.svg" alt="edit" />
               </Button>
@@ -130,12 +139,13 @@ function AbsentTable({ filterTime }) {
         onClose={onCloseEdit}
         cancelText="Cancel"
         isModalOpen={isOpenEdit}
+        currentData={dataSelectAction}
+        formName="edit-absent"
       />
       <AbsentModalView
         onClose={onCloseView}
         isModalOpen={isOpenView}
-        currentData={dataView}
-        onOk={onOkModalView}
+        currentData={dataSelectAction}
         onOpenEdit={onOpenEdit}
       />
     </div>
