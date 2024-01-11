@@ -3,17 +3,19 @@ import { Button } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
+import { BUTTON_TYPE } from "@/constants/button-type";
 import { emptyFn } from "@/utils/empty-types";
 
-function AppFooterDraw({
+function AppFooterPopup({
   classNames,
   okText,
-  cancleText,
+  cancelText,
   onDelete,
   onOk,
-  onCancle,
+  onCancel,
   deleteText,
-  loadingButtonOk,
+  isLoadingButtonOk,
+  buttonOkType,
 }) {
   return (
     <div className={classnames(classNames, "flex flex-row justify-end gap-2")}>
@@ -23,8 +25,17 @@ function AppFooterDraw({
         </Button>
       )}
       <div className="flex flex-row items-center gap-2">
-        {cancleText && <Button onClick={onCancle}>{cancleText}</Button>}
-        <Button loading={loadingButtonOk} onClick={onOk} type="primary">
+        {cancelText && (
+          <Button disabled={isLoadingButtonOk} onClick={onCancel}>
+            {cancelText}
+          </Button>
+        )}
+        <Button
+          loading={isLoadingButtonOk}
+          onClick={onOk}
+          type="primary"
+          htmlType={buttonOkType}
+        >
           {okText}
         </Button>
       </div>
@@ -32,23 +43,25 @@ function AppFooterDraw({
   );
 }
 
-export default React.memo(AppFooterDraw);
+export default React.memo(AppFooterPopup);
 
-AppFooterDraw.propTypes = {
+AppFooterPopup.propTypes = {
   okText: PropTypes.string,
-  cancleText: PropTypes.string,
+  cancelText: PropTypes.string,
   deleteText: PropTypes.string,
   classNames: PropTypes.string,
   onOk: PropTypes.func.isRequired,
-  onCancle: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
-  loadingButtonOk: PropTypes.bool.isRequired,
+  isLoadingButtonOk: PropTypes.bool.isRequired,
+  buttonOkType: PropTypes.oneOf(BUTTON_TYPE),
 };
 
-AppFooterDraw.defaultProps = {
+AppFooterPopup.defaultProps = {
   okText: "Save",
-  cancleText: "",
+  cancelText: "",
   deleteText: "",
   classNames: "",
+  buttonOkType: BUTTON_TYPE[0],
   onDelete: emptyFn,
 };

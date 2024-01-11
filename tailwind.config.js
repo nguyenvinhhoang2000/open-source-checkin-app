@@ -54,6 +54,7 @@ export default {
         bodyDraw: "1.5rem 0",
         footerDraw: "1rem 1rem",
         contentDraw: "0 2.5rem",
+        contentModel: "1rem 0 1rem 0",
       },
       colors: {
         transparent: "transparent",

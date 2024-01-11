@@ -1,23 +1,21 @@
 import React from "react";
 import { UnorderedListOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
+import { useBoolean } from "usehooks-ts";
 
 import { fullConfig } from "@/theme";
 
 import Navigation from "../navigation";
-import UserDropdown from "../user-info/components/user-dropdown";
+import UserDropdown from "../user-info/user-dropdown";
 
 function NavigationDraw() {
-  const [open, setOpen] = React.useState(false);
+  const {
+    value: isOpen,
+    setFalse: onCloseDraw,
+    setTrue: onOpenDraw,
+  } = useBoolean(false);
 
-  const onOpenDraw = React.useCallback(() => {
-    setOpen(true);
-  }, []);
-  const onCloseDraw = React.useCallback(() => {
-    setOpen(false);
-  }, []);
-
-  const renderTitle = React.useMemo(() => {
+  const onRenderTitle = React.useMemo(() => {
     return (
       <div className="sm:hidden">
         <UserDropdown />
@@ -37,10 +35,10 @@ function NavigationDraw() {
       </Button>
       <Drawer
         width={fullConfig.theme.width.drawWidth}
-        title={renderTitle}
+        title={onRenderTitle}
         placement="right"
         onClose={onCloseDraw}
-        open={open}
+        open={isOpen}
       >
         <Navigation classNames="flex flex-col justify-between gap-4" />
       </Drawer>

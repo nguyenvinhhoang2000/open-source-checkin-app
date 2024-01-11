@@ -1,28 +1,29 @@
 import React from "react";
 import { Drawer } from "antd";
 import PropTypes from "prop-types";
+import { useBoolean } from "usehooks-ts";
 
-import AppFooterDraw from "@/components/apps/app-footer-draw";
-import AppTitleDraw from "@/components/apps/app-title-draw";
+import AppFooterPopup from "@/components/apps/app-footer-popup";
+import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
-import AvatarList from "./components/avatar-list";
+import AvatarList from "./avatar-list";
 
-function EditAvatarDraw({ open, onOpenDraw }) {
-  const [loadingOk, setLoadingOk] = React.useState(false);
-
-  const onClose = React.useCallback(() => {
-    onOpenDraw(false);
-  }, [onOpenDraw]);
+function EditAvatarDraw({ openDraw, onCloseDraw }) {
+  const {
+    value: isLoadingOk,
+    setTrue: setLoadingOk,
+    setFalse: setUnLoadingOk,
+  } = useBoolean(false);
 
   const onSumbit = React.useCallback(() => {
-    setLoadingOk(true);
+    setLoadingOk();
     // HANDLE SUBMIT
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setLoadingOk(false);
-        onOpenDraw(false);
+        setUnLoadingOk();
+        onCloseDraw();
         resolve("Change avatar okay");
       }, 2000);
     });
@@ -34,25 +35,25 @@ function EditAvatarDraw({ open, onOpenDraw }) {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [onOpenDraw]);
+  }, [onCloseDraw, setLoadingOk, setUnLoadingOk]);
 
   return (
     <Drawer
       width={fullConfig.theme.width.drawWidth}
       keyboard="false"
       placement="right"
-      onClose={onClose}
-      open={open}
+      onClose={onCloseDraw}
+      open={openDraw}
       mask
-      title={<AppTitleDraw titleText="Change Avatar" onClose={onClose} />}
+      title={<AppTitlePopup titleText="Change Avatar" onClose={onCloseDraw} />}
       closable={false}
       footer={
-        <AppFooterDraw
-          cancleText="Cancel"
+        <AppFooterPopup
+          cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
-          onCancle={onClose}
-          loadingButtonOk={loadingOk}
+          onCancel={onCloseDraw}
+          isLoadingButtonOk={isLoadingOk}
         />
       }
     >
@@ -64,6 +65,6 @@ function EditAvatarDraw({ open, onOpenDraw }) {
 export default React.memo(EditAvatarDraw);
 
 EditAvatarDraw.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onOpenDraw: PropTypes.func.isRequired,
+  openDraw: PropTypes.bool.isRequired,
+  onCloseDraw: PropTypes.func.isRequired,
 };
