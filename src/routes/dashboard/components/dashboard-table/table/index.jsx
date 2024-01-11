@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "antd";
 import classnames from "classnames";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 
 import { data } from "@/constants/data/data-head-absent-infor";
 import { dataTableHistory } from "@/constants/data/data-history-table";
@@ -10,7 +11,7 @@ import onCheckRowAbsent from "@/utils/check-row-absent";
 
 import { pagination, scroll } from "./table-config";
 
-function HistoryTable() {
+function HistoryTable({ filterTime }) {
   const columns = [
     {
       title: "Date",
@@ -103,6 +104,9 @@ function HistoryTable() {
       ),
     },
   ];
+
+  // KEY TO FILTER DATA OF TABLE
+  console.log(`🚀🚀🚀!..filterTime of DASHBOARD HISTORY TABLE:`, filterTime);
   return (
     <Table
       pagination={pagination}
@@ -117,3 +121,11 @@ function HistoryTable() {
 }
 
 export default React.memo(HistoryTable);
+
+HistoryTable.propTypes = {
+  filterTime: PropTypes.string,
+};
+
+HistoryTable.defaultProps = {
+  filterTime: "",
+};

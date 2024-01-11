@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import { emptyFn } from "@/utils/empty-types";
@@ -11,25 +12,32 @@ function AppHeaderTable({
   classNameTitle,
   onFilterTime,
   filterTime,
-  buttonSendText,
-  onButtonSend,
+  buttonAbsentRequestText,
+  onOpenAbsentRequestForm,
 }) {
   return (
-    <div className="flex flex-col items-center gap-4 min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
+    <div
+      className={classNames(
+        buttonAbsentRequestText
+          ? "flex flex-col items-center gap-4"
+          : "flex flex-row items-center justify-between",
+        "min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between",
+      )}
+    >
       <span className={classNameTitle}>{title}</span>
       <div className="flex flex-row items-center gap-6">
         <AppDropdownFilterTime
           onFilterTime={onFilterTime}
           filterTime={filterTime}
         />
-        {buttonSendText && (
+        {buttonAbsentRequestText && (
           <Button
             className="h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto"
             title="Absent Request"
             type="primary"
-            onClick={onButtonSend}
+            onClick={onOpenAbsentRequestForm}
           >
-            {buttonSendText}
+            {buttonAbsentRequestText}
           </Button>
         )}
       </div>
@@ -44,12 +52,12 @@ AppHeaderTable.propTypes = {
   classNameTitle: PropTypes.string,
   onFilterTime: PropTypes.func.isRequired,
   filterTime: PropTypes.string.isRequired,
-  onButtonSend: PropTypes.func,
-  buttonSendText: PropTypes.string,
+  onOpenAbsentRequestForm: PropTypes.func,
+  buttonAbsentRequestText: PropTypes.string,
 };
 
 AppHeaderTable.defaultProps = {
   classNameTitle: "",
-  buttonSendText: "",
-  onButtonSend: emptyFn,
+  buttonAbsentRequestText: "",
+  onOpenAbsentRequestForm: emptyFn,
 };

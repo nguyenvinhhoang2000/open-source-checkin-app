@@ -9,7 +9,7 @@ import { dataAbsent } from "@/constants/data/data-absent";
 import AbsentFormModal from "../absent-form";
 import AbsentModalView from "../absent-view";
 
-import { pagination } from "./table-config";
+import { pagination } from "./config";
 
 function AbsentTable({ filterTime }) {
   const {
@@ -115,7 +115,7 @@ function AbsentTable({ filterTime }) {
   ];
 
   // handle width filterTime to render data of table
-  console.log(`🚀🚀🚀!..filterTime:`, filterTime);
+  console.log(`🚀🚀🚀!..filterTime of Absent request Table:`, filterTime);
   return (
     <div>
       <Table

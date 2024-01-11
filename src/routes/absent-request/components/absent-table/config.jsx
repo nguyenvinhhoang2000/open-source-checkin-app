@@ -6,4 +6,4 @@ const scroll = {
   x: "auto",
 };
 
-export { scroll, pagination };
+export { pagination, scroll };

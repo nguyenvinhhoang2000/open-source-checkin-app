@@ -24,35 +24,37 @@ function UserDropdown() {
     [setOpenEditAvatar],
   );
 
-  const items = [
-    {
-      key: USER_DROPDOWN_KEY.EDIT_AVATAR,
-      label: (
-        <div className="flex flex-row items-center justify-start gap-2">
-          <img src="/assets/icons/user-icon.svg" alt="Edit user" />
-          <span>Edit Avatar</span>
-        </div>
-      ),
-    },
-    {
-      key: USER_DROPDOWN_KEY.LOG_OUT,
-      label: (
-        <div className="flex flex-row items-center justify-start gap-2">
-          <img src="/assets/icons/logout-icon.svg" alt="Edit user" />
-          <span className="text-danger">Log-out</span>
-        </div>
-      ),
-    },
-  ];
-
+  const menu = React.useMemo(() => {
+    const items = [
+      {
+        key: USER_DROPDOWN_KEY.EDIT_AVATAR,
+        label: (
+          <div className="flex flex-row items-center justify-start gap-2">
+            <img src="/assets/icons/user-icon.svg" alt="Edit user" />
+            <span>Edit Avatar</span>
+          </div>
+        ),
+      },
+      {
+        key: USER_DROPDOWN_KEY.LOG_OUT,
+        label: (
+          <div className="flex flex-row items-center justify-start gap-2">
+            <img src="/assets/icons/logout-icon.svg" alt="Edit user" />
+            <span className="text-danger">Log-out</span>
+          </div>
+        ),
+      },
+    ];
+    return {
+      items,
+      onClick: onMenuClick,
+    };
+  }, [onMenuClick]);
   return (
     <div className="flex flex-row justify-end">
       <Dropdown
         align={{ offset: [0, -24] }}
-        menu={{
-          items,
-          onClick: onMenuClick,
-        }}
+        menu={menu}
         placement="topRight"
         trigger={["click"]}
         arrow
