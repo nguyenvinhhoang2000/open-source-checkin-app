@@ -11,6 +11,11 @@ export default {
     "min-h-[2.3125rem]",
     "min-w-[8.1875rem]",
     "font-roboto",
+    "text-[0.875rem] font-[400]",
+    "leading-[1.375rem]",
+    "text-neutral-3",
+    "text-neutral-4",
+    "text-secondary-6",
   ],
   theme: {
     screens: {
@@ -106,6 +111,7 @@ export default {
           1: "#556EE6",
           2: "#D9D9D9",
         },
+        absentDescription: "#0386FF",
       },
       boxShadow: {
         dropShadow: "0px 10px 20px 0px rgba(18, 38, 63, 0.03)",
