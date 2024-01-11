@@ -2,7 +2,16 @@
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  safelist: ["absolute", "right-0", "top-0", "z-40"],
+  safelist: [
+    "absolute",
+    "right-0",
+    "top-0",
+    "z-40",
+    "h-full",
+    "min-h-[2.3125rem]",
+    "min-w-[8.1875rem]",
+    "font-roboto",
+  ],
   theme: {
     screens: {
       ssm: "480px",

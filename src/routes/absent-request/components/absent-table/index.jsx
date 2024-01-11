@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 
 import { dataAbsent } from "@/constants/data/data-absent";
 
-import AbsentFormModal from "../absent-form";
-import AbsentView from "../absent-view";
-
 const columns = [
   {
     title: "From",
@@ -65,13 +62,11 @@ const columns = [
         <div className="flex items-center justify-start gap-[1.25rem]">
           <Button title="view" type="text" className="p-0">
             <img src="/assets/icons/eye.svg" alt="view" />
-            <AbsentFormModal />
           </Button>
 
           {!dayjs(record.dateRequest).isAfter(dayjs(new Date()), "day") && (
             <Button title="edit" type="text" className="p-0">
               <img src="/assets/icons/edit.svg" alt="edit" />
-              <AbsentView />
             </Button>
           )}
         </div>
