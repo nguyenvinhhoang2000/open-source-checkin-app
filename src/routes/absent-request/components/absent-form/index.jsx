@@ -1,11 +1,14 @@
 import React from "react";
 import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
+import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import { ABSENT_REASONS } from "@/constants/absent-reason";
+import { ABSENT_TYPES } from "@/constants/absent-types";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentFormModal({
@@ -24,8 +27,12 @@ function AbsentFormModal({
   const [absentForm] = Form.useForm();
 
   React.useEffect(() => {
-    console.log(`🚀🚀🚀!..currentData:`, currentData);
-    absentForm.setFieldsValue(currentData);
+    const currentOne = {
+      ...currentData,
+      to: dayjs(new Date(currentData.to)),
+      from: dayjs(new Date(currentData.from)),
+    };
+    absentForm.setFieldsValue(currentOne);
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
@@ -87,9 +94,12 @@ function AbsentFormModal({
               label="Type Absent"
               required
             >
-              <Select placeholder="Select type">
-                <Select.Option value="Zhejiang">Remove</Select.Option>
-                <Select.Option value="Jiangsu">Absent</Select.Option>
+              <Select placeholder="Select type" allowClear>
+                {ABSENT_TYPES.map((item) => (
+                  <Select.Option value={item.key} key={item.key}>
+                    {item.label}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
@@ -101,19 +111,21 @@ function AbsentFormModal({
               label="Reason"
               required
             >
-              <Select placeholder="Select reason">
-                <Select.Option value="Zhejiang">I’m got sick</Select.Option>
-                <Select.Option value="Jiangsu">
-                  Equipment is damaged/forgotten
-                </Select.Option>
+              <Select placeholder="Select reason" allowClear>
+                {ABSENT_REASONS.map((item) => (
+                  <Select.Option value={item.key} key={item.key}>
+                    {item.label}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item name="fromDate" label="From" required>
+            <Form.Item name="from" label="From" required>
               <DatePicker
+                showTime
                 placeholder="Pick time"
                 className="w-full"
                 suffixIcon={
@@ -126,8 +138,9 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="toDate" label="To" required>
+            <Form.Item name="to" label="To" required>
               <DatePicker
+                showTime
                 placeholder="Pick time"
                 className="w-full"
                 suffixIcon={
