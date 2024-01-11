@@ -5,9 +5,9 @@ import { Button, Form, Input } from "antd";
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
-  const onFinish = async (e) => {
+  const onFinish = React.useCallback((e) => {
     e.preventDefault();
-  };
+  }, []);
   return (
     <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern">
       <img

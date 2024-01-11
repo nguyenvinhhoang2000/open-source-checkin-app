@@ -1,24 +1,28 @@
 import React from "react";
 import { Avatar, Button, Dropdown } from "antd";
+import { useBoolean } from "usehooks-ts";
 
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
 
 import EditAvatarDraw from "../edit-avatar";
 
 function UserDropdown() {
-  const [openEditAvatar, setOpenEditAvatar] = React.useState(false);
+  const {
+    value: isOpenEditAvatar,
+    setTrue: setOpenEditAvatar,
+    setFalse: setCloseEditAvatar,
+  } = useBoolean(false);
 
-  const onOpenDraw = React.useCallback((type) => {
-    setOpenEditAvatar(type);
-  }, []);
-
-  const onMenuClick = React.useCallback(({ key }) => {
-    if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
-      setOpenEditAvatar(true);
-    } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
-      console.log(`🎶🎶🎶.. Log-out`);
-    }
-  }, []);
+  const onMenuClick = React.useCallback(
+    ({ key }) => {
+      if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
+        setOpenEditAvatar();
+      } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
+        console.log(`🎶🎶🎶.. Log-out`);
+      }
+    },
+    [setOpenEditAvatar],
+  );
 
   const items = [
     {
@@ -72,7 +76,10 @@ function UserDropdown() {
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
         </Button>
       </Dropdown>
-      <EditAvatarDraw open={openEditAvatar} onOpenDraw={onOpenDraw} />
+      <EditAvatarDraw
+        openDraw={isOpenEditAvatar}
+        onCloseDraw={setCloseEditAvatar}
+      />
     </div>
   );
 }
