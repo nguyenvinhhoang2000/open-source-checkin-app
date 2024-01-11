@@ -1,5 +1,5 @@
 const pagination = {
-  pageSize: 7,
+  pageSize: 10,
 };
 
 const scroll = {

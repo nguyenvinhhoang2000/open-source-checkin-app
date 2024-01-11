@@ -5,9 +5,15 @@ import PropTypes from "prop-types";
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
 function AppDropdownFilterTime({ onFilterTime, filterTime }) {
+  const menu = React.useMemo(() => {
+    return {
+      items: defaultItemFilterTime,
+      onClick: onFilterTime,
+    };
+  }, [onFilterTime]);
   return (
     <Dropdown
-      menu={{ items: defaultItemFilterTime, onClick: onFilterTime }}
+      menu={menu}
       overlayClassName="w-[7.8125rem]"
       placement="bottomRight"
       trigger={["click"]}
