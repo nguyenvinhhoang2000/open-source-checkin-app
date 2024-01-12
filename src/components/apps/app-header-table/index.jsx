@@ -21,7 +21,7 @@ function AppHeaderTable({
         buttonAbsentRequestText
           ? "flex flex-col items-center gap-4"
           : "flex flex-row items-center justify-between",
-        "min-[380px]:flex min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between",
+        "ssm:flex ssm:flex-row ssm:items-center ssm:justify-between",
       )}
     >
       <span className={classNameTitle}>{title}</span>
