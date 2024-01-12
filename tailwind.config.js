@@ -4,18 +4,18 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: [
     "absolute",
-    "right-0",
-    "top-0",
-    "z-40",
+    "font-roboto",
     "h-full",
+    "leading-[1.375rem]",
     "min-h-[2.3125rem]",
     "min-w-[8.1875rem]",
-    "font-roboto",
+    "right-0",
     "text-[0.875rem] font-[400]",
-    "leading-[1.375rem]",
     "text-neutral-3",
     "text-neutral-4",
     "text-secondary-6",
+    "top-0",
+    "z-40",
   ],
   theme: {
     screens: {
