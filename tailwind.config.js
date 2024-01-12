@@ -72,6 +72,7 @@ export default {
         footerDraw: "1rem 1rem",
         contentDraw: "0 2.5rem",
         contentModel: "1rem 0 1rem 0",
+        dropdownOverlay: "0.25rem 0",
       },
       colors: {
         transparent: "transparent",
