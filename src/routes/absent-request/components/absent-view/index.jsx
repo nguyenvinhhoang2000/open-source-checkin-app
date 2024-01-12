@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
-import onCapitalize from "@/utils/capitalize";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentModalView({
@@ -17,8 +16,9 @@ function AbsentModalView({
   currentData,
   onOpenEdit,
 }) {
-  const isEdit = dayjs(currentData.dateRequest).isAfter(dayjs(new Date()));
-
+  const isEdit = dayjs(currentData.record?.dateRequest).isAfter(
+    dayjs(new Date()),
+  );
   const onOkBtn = React.useCallback(() => {
     if (isEdit) {
       onClose();
@@ -27,6 +27,7 @@ function AbsentModalView({
       onClose();
     }
   }, [isEdit, onClose, onOpenEdit]);
+
   return (
     <Modal
       width={572}
@@ -53,21 +54,27 @@ function AbsentModalView({
       }
     >
       <div className="flex flex-col gap-2 border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4">
-        {Object.keys(currentData).map((item) => {
-          return (
-            <div
-              key={item}
-              className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
-            >
-              <span className="font-bold">{onCapitalize(item)}</span>
-              <span>
-                {currentData[item] instanceof Date
-                  ? dayjs(currentData[item]).format("D-M-YYYY h:m A")
-                  : currentData[item].toString()}
-              </span>
-            </div>
-          );
-        })}
+        {currentData.record &&
+          Object.keys(currentData.record).map((item) => {
+            return (
+              <div
+                key={item}
+                className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
+              >
+                <span className="font-bold">
+                  {
+                    currentData.columnData.find((child) => child.key === item)
+                      ?.title
+                  }
+                </span>
+                <span>
+                  {currentData.record[item] instanceof Date
+                    ? dayjs(currentData.record[item]).format("D-M-YYYY h:m A")
+                    : currentData.record[item].toString()}
+                </span>
+              </div>
+            );
+          })}
       </div>
     </Modal>
   );

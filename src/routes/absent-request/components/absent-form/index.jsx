@@ -29,11 +29,11 @@ function AbsentFormModal({
   const [absentForm] = Form.useForm();
 
   React.useEffect(() => {
-    if (currentData && currentData?.description) {
+    if (currentData && currentData?.record) {
       const currentOne = {
-        ...currentData,
-        to: dayjs(new Date(currentData.to)),
-        from: dayjs(new Date(currentData.from)),
+        ...currentData.record,
+        to: dayjs(new Date(currentData.record.to)),
+        from: dayjs(new Date(currentData.record.from)),
       };
       absentForm.setFieldsValue(currentOne);
     }

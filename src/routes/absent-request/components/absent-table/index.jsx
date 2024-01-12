@@ -9,7 +9,7 @@ import { dataAbsent } from "@/constants/data/data-absent";
 import AbsentFormModal from "../absent-form";
 import AbsentModalView from "../absent-view";
 
-import { pagination } from "./config";
+import { pagination, scroll } from "./config";
 
 function AbsentTable({ filterTime }) {
   const {
@@ -25,17 +25,18 @@ function AbsentTable({ filterTime }) {
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
   const onOpenModalView = React.useCallback(
-    (record) => {
+    (columnData, record) => {
       const { id, ...recordWithoutId } = record;
-      setDataSelectAction(recordWithoutId);
+      setDataSelectAction({ columnData, record: recordWithoutId });
       onOpenView();
     },
     [onOpenView],
   );
 
   const onOpenModalEdit = React.useCallback(
-    (record) => {
-      setDataSelectAction(record);
+    (columnData, record) => {
+      setDataSelectAction({ columnData, record });
+
       onOpenEdit();
     },
     [onOpenEdit],
@@ -94,13 +95,20 @@ function AbsentTable({ filterTime }) {
       title: "Action",
       key: "actions",
       render: (record) => {
+        const onClickButtonEye = () => {
+          onOpenModalView(columns, record);
+        };
+
+        const onClickButtonEdit = () => {
+          onOpenModalEdit(columns, record);
+        };
         return (
           <div className="flex items-center justify-start gap-[1.25rem]">
             <Button
               title="view"
               type="text"
               className="h-[1.25rem] w-[1.25rem] p-0"
-              onClick={() => onOpenModalView(record)}
+              onClick={onClickButtonEye}
             >
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
@@ -110,9 +118,7 @@ function AbsentTable({ filterTime }) {
                 title="edit"
                 type="text"
                 className="h-[1.25rem] w-[1.25rem] p-0"
-                onClick={() => {
-                  onOpenModalEdit(record);
-                }}
+                onClick={onClickButtonEdit}
               >
                 <img src="/assets/icons/edit.svg" alt="edit" />
               </Button>
@@ -129,7 +135,7 @@ function AbsentTable({ filterTime }) {
     <div>
       <Table
         pagination={pagination}
-        scroll={{ x: "auto" }}
+        scroll={scroll}
         rowKey="id"
         columns={columns}
         dataSource={dataAbsent}
