@@ -18,7 +18,7 @@ function AppDropdownFilterTime({ onFilterTime, filterTime }) {
       trigger={["click"]}
       className="flex flex-row items-center justify-between gap-[0.625rem] font-roboto"
     >
-      <Button title="Filter" type="link">
+      <Button className="p-1" title="Filter" type="text">
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem] text-primary-0">
           {defaultItemFilterTime.find((item) => item.key === filterTime)?.label}
         </span>

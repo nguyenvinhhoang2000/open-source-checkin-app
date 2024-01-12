@@ -25,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             primaryColor: fullConfig.theme.colors.neutral[0],
             paddingInline: fullConfig.theme.padding.primary.x,
             borderRadius: fullConfig.theme.borderRadius.primary,
+            textHoverBg: fullConfig.theme.colors.primary[1],
           },
           Pagination: {
             colorPrimary: fullConfig.theme.colors.neutral[0],
