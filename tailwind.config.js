@@ -57,6 +57,7 @@ export default {
         primary: "0.125rem",
         secondary: "0.25rem",
         "100px": "6.25rem",
+        dropdownOverlay: "0",
       },
       padding: {
         primary: {
