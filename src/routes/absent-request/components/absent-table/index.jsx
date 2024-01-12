@@ -113,7 +113,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {dayjs(record.dateRequest).isAfter(dayjs(new Date())) && (
+            {dayjs(new Date()).diff(dayjs(record.dateRequest), "hour") < 24 && (
               <Button
                 title="edit"
                 type="text"

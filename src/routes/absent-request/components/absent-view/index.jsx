@@ -16,9 +16,9 @@ function AbsentModalView({
   currentData,
   onOpenEdit,
 }) {
-  const isEdit = dayjs(currentData.record?.dateRequest).isAfter(
-    dayjs(new Date()),
-  );
+  const isEdit =
+    dayjs(new Date()).diff(dayjs(currentData.record?.dateRequest), "hour") < 24;
+
   const onOkBtn = React.useCallback(() => {
     if (isEdit) {
       onClose();
