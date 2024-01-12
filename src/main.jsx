@@ -43,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             controlItemBgHover: fullConfig.theme.colors.primary[1],
             paddingXXS: fullConfig.theme.padding.dropdownOverlay,
             borderRadiusSM: fullConfig.theme.borderRadius.dropdownOverlay,
+            fontFamily: fullConfig.theme.fontFamily.roboto[0],
           },
         },
       }}

@@ -15,7 +15,7 @@ function AppDropdownFilterTime({ onFilterTime, filterTime }) {
           <span
             className={classNames(
               item.key === filterTime && "font-medium",
-              "font-roboto text-[0.875rem]",
+              "text-[0.875rem]",
             )}
           >
             {item.label}
