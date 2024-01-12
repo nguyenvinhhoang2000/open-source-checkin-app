@@ -1,11 +1,15 @@
 import React from "react";
 import { Column } from "@ant-design/plots";
+import PropTypes from "prop-types";
 
 import AppTooltip from "@/components/apps/app-tooltip";
 
 import { CHART_CONFIG_VALUE } from "@/constants/config-antd/chart";
 
-function DashBoardChart() {
+function DashBoardChart({ filterTime }) {
+  // DATE TO FILTER CHART
+  console.log(`🚀🚀🚀!..filterTime of DASHBOARD CHART:`, filterTime);
+
   const [activeHover, setActiveHover] = React.useState(null);
   const onActiveHover = React.useCallback((event) => {
     setActiveHover(event.data.data);
@@ -64,3 +68,11 @@ function DashBoardChart() {
 }
 
 export default React.memo(DashBoardChart);
+
+DashBoardChart.propTypes = {
+  filterTime: PropTypes.string,
+};
+
+DashBoardChart.defaultProps = {
+  filterTime: "",
+};

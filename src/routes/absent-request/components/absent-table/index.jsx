@@ -1,17 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Button, Table } from "antd";
-import classNames from "classnames";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-import DropdownFilterTime from "@/components/apps/dropown-filter-time";
+import { dataAbsent } from "@/constants/data/data-absent";
 
-import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
-import filterDataAbsent from "@/utils/filter-time";
-
-import { pageSize, scroll } from "./config";
-
-const currentDate = dayjs();
+import { pagination, scroll } from "./config";
 
 const columns = [
   {
@@ -68,22 +62,14 @@ const columns = [
     render: (record) => {
       return (
         <div className="flex items-center justify-start gap-[1.25rem]">
-          <button
-            className="h-[1.25rem] w-[1.25rem]"
-            title="view"
-            type="button"
-          >
+          <Button title="view" type="text" className="p-0">
             <img src="/assets/icons/eye.svg" alt="view" />
-          </button>
+          </Button>
 
-          {!dayjs(record.dateRequest).isBefore(currentDate, "day") && (
-            <button
-              className="h-[1.25rem] w-[1.25rem]"
-              title="edit"
-              type="button"
-            >
+          {!dayjs(record.dateRequest).isAfter(dayjs(new Date()), "day") && (
+            <Button title="edit" type="text" className="p-0">
               <img src="/assets/icons/edit.svg" alt="edit" />
-            </button>
+            </Button>
           )}
         </div>
       );
@@ -91,85 +77,26 @@ const columns = [
   },
 ];
 
-function AbsentTable(props) {
-  const { dataAbsent } = props;
-
-  const [timeFilter, setTimeFilter] = useState(defaultItemFilterTime[0]?.key);
-
-  const handleMenuClick = (e) => {
-    setTimeFilter(e?.key);
-  };
-
-  const items = defaultItemFilterTime.map((item) => {
-    return {
-      key: item.key,
-
-      label: (
-        <span
-          className={classNames(
-            "font-roboto text-[0.875rem] leading-[1.375rem]",
-            item.key === timeFilter ? "font-[500]" : "font-[400]",
-          )}
-        >
-          {item.key}
-        </span>
-      ),
-    };
-  });
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
-
-  const dataAbsentFilter = useMemo(() => {
-    const newData = filterDataAbsent(timeFilter, dataAbsent);
-
-    return newData;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timeFilter]);
-
+function AbsentTable({ filterTime }) {
+  // handle width filterTime to render data of table
+  console.log(`🚀🚀🚀!..filterTime of Absent request Table:`, filterTime);
   return (
-    <div className="container">
-      <div className="shadow-tableShadow rounded-[0.5rem] bg-neutral-0 p-[1.25rem]">
-        <div className="flex w-full flex-col items-start justify-start gap-[1.25rem]">
-          <div className="flex flex-col items-center justify-start gap-[1rem] self-stretch sm:flex-row sm:gap-0">
-            <h4 className="mr-auto font-roboto text-[1.25rem] font-[500] leading-[1.75rem]">
-              Your Absent Request
-            </h4>
-
-            <div className="flex items-center justify-end gap-[1.5rem]">
-              <DropdownFilterTime
-                menuProps={menuProps}
-                timeFilter={timeFilter}
-              />
-
-              <Button
-                className="min-w-[8.1875rem]"
-                title="Absent Request"
-                type="primary"
-              >
-                Absent Request
-              </Button>
-            </div>
-          </div>
-
-          <Table
-            pagination={pageSize}
-            scroll={scroll}
-            rowKey="id"
-            columns={columns}
-            dataSource={dataAbsentFilter}
-            className="w-full whitespace-nowrap"
-          />
-        </div>
-      </div>
-    </div>
+    <Table
+      pagination={pagination}
+      scroll={scroll}
+      rowKey="id"
+      columns={columns}
+      dataSource={dataAbsent}
+    />
   );
 }
 
 export default AbsentTable;
 
 AbsentTable.propTypes = {
-  dataAbsent: PropTypes.instanceOf(Array).isRequired,
+  filterTime: PropTypes.string,
+};
+
+AbsentTable.defaultProps = {
+  filterTime: "",
 };
