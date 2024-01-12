@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import { dataAbsent } from "@/constants/data/data-absent";
+import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
 import AbsentFormModal from "../absent-form";
 import AbsentModalView from "../absent-view";
@@ -113,7 +114,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {dayjs(new Date()).diff(dayjs(record.dateRequest), "hour") < 24 && (
+            {onCheckIsEditAbsent(record.dateRequest) && (
               <Button
                 title="edit"
                 type="text"

@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentModalView({
@@ -16,9 +17,7 @@ function AbsentModalView({
   currentData,
   onOpenEdit,
 }) {
-  const isEdit =
-    dayjs(new Date()).diff(dayjs(currentData.record?.dateRequest), "hour") < 24;
-
+  const isEdit = onCheckIsEditAbsent(currentData.record?.dateRequest);
   const onOkBtn = React.useCallback(() => {
     if (isEdit) {
       onClose();
