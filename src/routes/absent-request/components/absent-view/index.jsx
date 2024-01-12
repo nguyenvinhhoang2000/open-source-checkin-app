@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import onCapitalize from "@/utils/capitalize";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 function AbsentModalView({
@@ -58,12 +59,7 @@ function AbsentModalView({
               key={item}
               className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
             >
-              <span className="font-bold">
-                {item
-                  .replace(/([a-z])([A-Z])/g, "$1 $2")
-                  .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
-                  .replace(/^./, (str) => str.toUpperCase())}
-              </span>
+              <span className="font-bold">{onCapitalize(item)}</span>
               <span>
                 {currentData[item] instanceof Date
                   ? dayjs(currentData[item]).format("D-M-YYYY h:m A")
