@@ -17,7 +17,7 @@ function DashboardTable() {
   return (
     <div className="flex flex-col gap-[1.25rem]">
       <AppHeaderTable
-        title="Statistic"
+        title="History"
         classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
         filterTime={filterTime}
         onFilterTime={onFilterTime}
