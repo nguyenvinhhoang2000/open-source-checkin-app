@@ -11,6 +11,8 @@ import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
+import CustomizeFormItem from "./CustomizeFormItem";
+
 function AbsentFormModal({
   cancelText,
   isModalOpen,
@@ -82,6 +84,7 @@ function AbsentFormModal({
       }
     >
       <Form
+        requiredMark={CustomizeFormItem}
         className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
         form={absentForm}
         layout="vertical"
@@ -90,12 +93,7 @@ function AbsentFormModal({
       >
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item
-              labelAlign="left"
-              name="absentType"
-              label="Type Absent"
-              required
-            >
+            <Form.Item name="absentType" label="Type Absent" required>
               <Select placeholder="Select type" allowClear>
                 {ABSENT_TYPES.map((item) => (
                   <Select.Option value={item.key} key={item.key}>
