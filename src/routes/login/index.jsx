@@ -9,7 +9,7 @@ function Login() {
     e.preventDefault();
   }, []);
   return (
-    <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern">
+    <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern bg-center">
       <img
         src="/src/assets/icons/wiicamp-logo.svg"
         alt="logo"
