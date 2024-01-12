@@ -25,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             primaryColor: fullConfig.theme.colors.neutral[0],
             paddingInline: fullConfig.theme.padding.primary.x,
             borderRadius: fullConfig.theme.borderRadius.primary,
+            textHoverBg: fullConfig.theme.colors.primary[1],
           },
           Pagination: {
             colorPrimary: fullConfig.theme.colors.neutral[0],
@@ -40,6 +41,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           },
           Dropdown: {
             controlItemBgHover: fullConfig.theme.colors.primary[1],
+            paddingXXS: fullConfig.theme.padding.dropdownOverlay,
+            borderRadiusSM: fullConfig.theme.borderRadius.dropdownOverlay,
+            fontFamily: fullConfig.theme.fontFamily.roboto[0],
           },
         },
       }}
