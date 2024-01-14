@@ -114,7 +114,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {onCheckIsEditAbsent(record.dateRequest) && (
+            {onCheckIsEditAbsent(record.from) && (
               <Button
                 title="edit"
                 type="text"

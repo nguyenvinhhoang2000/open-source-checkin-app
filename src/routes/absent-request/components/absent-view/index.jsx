@@ -17,7 +17,7 @@ function AbsentModalView({
   currentData,
   onOpenEdit,
 }) {
-  const isEdit = onCheckIsEditAbsent(currentData.record?.dateRequest);
+  const isEdit = onCheckIsEditAbsent(currentData.record?.from);
   const onOkBtn = React.useCallback(() => {
     if (isEdit) {
       onClose();
