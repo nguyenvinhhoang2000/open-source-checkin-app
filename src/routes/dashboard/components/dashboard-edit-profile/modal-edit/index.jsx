@@ -99,8 +99,8 @@ function ModalEditProfile({
         <Form.Item className="mb-2" name="note" label="Note">
           <Input.TextArea
             showCount
-            className="h-[6rem]"
             maxLength={100}
+            rows={4}
             placeholder="Enter your note"
           />
         </Form.Item>
