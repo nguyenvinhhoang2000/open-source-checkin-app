@@ -144,6 +144,7 @@ function AbsentFormModal({
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
+                className="w-full"
                 suffixIcon={
                   <img
                     src="/assets/icons/union-date-picker.svg"
