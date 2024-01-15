@@ -49,7 +49,7 @@ export default {
     },
     extend: {
       backgroundImage: () => ({
-        "hero-pattern": "url('./src/assets/backgrounds/log-in.svg')",
+        "hero-pattern": "url('/assets/images/background/login-background.svg')",
       }),
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],

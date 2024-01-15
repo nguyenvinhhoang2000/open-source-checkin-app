@@ -72,7 +72,7 @@ function UserDropdown() {
           >
             T
           </Avatar>
-          <span className="font-roboto text-[1rem] font-normal leading-[1.375rem] text-black/85">
+          <span className="font-roboto text-[0.875rem] font-normal leading-[1.375rem] text-black/85">
             Vinh Thai
           </span>
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
