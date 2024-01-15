@@ -158,8 +158,8 @@ function AbsentFormModal({
         <Form.Item name="description" label="Description" required>
           <Input.TextArea
             showCount
-            className="flex h-[6rem]"
             maxLength={100}
+            rows={4}
             placeholder="Enter your Description"
           />
         </Form.Item>

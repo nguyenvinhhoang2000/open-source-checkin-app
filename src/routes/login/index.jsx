@@ -11,7 +11,7 @@ function Login() {
   return (
     <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern">
       <img
-        src="/src/assets/icons/wiicamp-logo.svg"
+        src="/assets/icons/wiicamp-logo-horizontal.svg"
         alt="logo"
         title="wiicamp-logo"
         className="mb-[2.75rem]"
