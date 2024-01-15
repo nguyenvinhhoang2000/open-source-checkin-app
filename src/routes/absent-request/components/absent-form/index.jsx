@@ -126,7 +126,7 @@ function AbsentFormModal({
             <Form.Item name="from" label="From" required>
               <DatePicker
                 showTime
-                popupClassName="max-h-[25rem] overflow-y-scroll"
+                popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
                 className="w-full"
                 suffixIcon={
@@ -142,7 +142,7 @@ function AbsentFormModal({
             <Form.Item name="to" label="To" required>
               <DatePicker
                 showTime
-                popupClassName="max-h-[25rem] overflow-y-scroll"
+                popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
                 suffixIcon={
                   <img
