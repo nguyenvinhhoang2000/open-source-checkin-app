@@ -10,6 +10,7 @@ export default {
     "min-h-[2.3125rem]",
     "min-w-[8.1875rem]",
     "right-0",
+    "text-danger",
     "text-[0.875rem] font-[400]",
     "text-neutral-3",
     "text-neutral-4",

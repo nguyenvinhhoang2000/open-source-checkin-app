@@ -37,7 +37,7 @@ function HistoryTable({ filterTime }) {
               <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
                 {text}
               </p>
-              <p className="text-absentDescription text-[0.75rem]">
+              <p className="text-[0.75rem] text-absentDescription">
                 Description
               </p>
             </div>

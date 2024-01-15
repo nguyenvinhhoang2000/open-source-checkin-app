@@ -41,3 +41,11 @@
 ::-webkit-scrollbar-thumb:active {
   background-color: #999999 !important;
 }
+
+
+.ant-picker-datetime-panel {
+  flex-direction: column;
+  @media (min-width: 480px) {
+      flex-direction: row;
+  }
+}

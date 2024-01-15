@@ -1,12 +1,19 @@
 import React from "react";
+import { useBoolean } from "usehooks-ts";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
 
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
+import AbsentFormModal from "./components/absent-form";
 import AbsentTable from "./components/absent-table";
 
 function AbsentRequestTable() {
+  const {
+    value: isOpenCreateAbsent,
+    setTrue: onOpenCreateAbsent,
+    setFalse: onCloseCreateAbsent,
+  } = useBoolean(false);
   const [filterTime, setFilterTime] = React.useState(
     defaultItemFilterTime[0].key,
   );
@@ -20,7 +27,14 @@ function AbsentRequestTable() {
         classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
         filterTime={filterTime}
         buttonAbsentRequestText="Absent Request"
+        onOpenAbsentRequestForm={onOpenCreateAbsent}
         onFilterTime={onFilterTime}
+      />
+      <AbsentFormModal
+        onClose={onCloseCreateAbsent}
+        cancelText="Cancel"
+        isModalOpen={isOpenCreateAbsent}
+        formName="create-absent"
       />
       <AbsentTable filterTime={filterTime} />
     </section>
