@@ -11,7 +11,7 @@ import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
-import CustomizeFormItem from "./CustomizeFormItem";
+import CustomizeFormLabel from "./CustomizeFormLabel";
 
 function AbsentFormModal({
   cancelText,
@@ -84,7 +84,7 @@ function AbsentFormModal({
       }
     >
       <Form
-        requiredMark={CustomizeFormItem}
+        requiredMark={CustomizeFormLabel}
         className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
         form={absentForm}
         layout="vertical"
@@ -126,6 +126,7 @@ function AbsentFormModal({
             <Form.Item name="from" label="From" required>
               <DatePicker
                 showTime
+                popupClassName="max-h-[25rem] overflow-y-scroll"
                 placeholder="Pick time"
                 className="w-full"
                 suffixIcon={
@@ -141,8 +142,8 @@ function AbsentFormModal({
             <Form.Item name="to" label="To" required>
               <DatePicker
                 showTime
+                popupClassName="max-h-[25rem] overflow-y-scroll"
                 placeholder="Pick time"
-                className="w-full"
                 suffixIcon={
                   <img
                     src="/assets/icons/union-date-picker.svg"

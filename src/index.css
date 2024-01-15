@@ -42,13 +42,15 @@
   background-color: #999999 !important;
 }
 
-.ant-picker-datetime-panel {
-  display: flex;
-  flex-direction: column;
-}
 
-@media (min-width: 480px) {
-  .ant-picker-datetime-panel {
-    flex-direction: row;
+.ant-picker-datetime-panel {
+  flex-direction: column;
+  @media (min-width: 480px) {
+      flex-direction: row;
   }
 }
+
+
+
+
+
