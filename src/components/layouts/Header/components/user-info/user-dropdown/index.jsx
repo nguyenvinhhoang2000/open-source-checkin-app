@@ -4,7 +4,7 @@ import { Avatar, Button, Dropdown } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
-import { useAuthStore } from "@/utils/useAuthStore";
+import { useAuthStore } from "@/utils/use-auth-store";
 
 import EditAvatarDraw from "../edit-avatar";
 

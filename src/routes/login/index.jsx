@@ -4,7 +4,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 
 import { LOCATIONS } from "@/constants/routes";
-import { useAuthStore } from "@/utils/useAuthStore";
+import { useAuthStore } from "@/utils/use-auth-store";
 
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 

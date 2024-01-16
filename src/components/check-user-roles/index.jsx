@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { LOCATIONS } from "@/constants/routes";
-import { useAuthStore } from "@/utils/useAuthStore";
+import { useAuthStore } from "@/utils/use-auth-store";
 
 function CheckUserRole({ element: Element }) {
   const location = useLocation();
