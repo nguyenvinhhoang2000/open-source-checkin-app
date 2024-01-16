@@ -5,19 +5,19 @@ import PropTypes from "prop-types";
 import { LOCATIONS } from "@/constants/routes";
 import { useAuthStore } from "@/utils/use-auth-store";
 
-function PrivateRoute({ element: Element }) {
+function PrivateRoute({ children }) {
   const location = useLocation();
-
   const { token, user } = useAuthStore();
+
   if (!token && !user?._id) {
     return <Navigate to={`${LOCATIONS.LOGIN}?redirect=${location.pathname}`} />;
   }
 
-  return <Element />;
+  return <div>{children}</div>;
 }
 
 export default PrivateRoute;
 
 PrivateRoute.propTypes = {
-  element: PropTypes.elementType.isRequired,
+  children: PropTypes.node.isRequired,
 };
