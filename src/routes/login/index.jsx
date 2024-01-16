@@ -13,14 +13,15 @@ function Login() {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
+
   const onFinish = async (record) => {
     const loadingMessage = message.loading("Login");
     const result = await login(record);
     message[result.status](result.message);
     loadingMessage();
-    if (redirect) {
+    if (redirect && result.ok) {
       navigate(redirect);
-    } else {
+    } else if (!redirect && result.ok) {
       navigate(LOCATIONS.MEMBER_DASHBOARD);
     }
   };
