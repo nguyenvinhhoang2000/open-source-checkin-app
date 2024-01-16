@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { LOCATIONS } from "@/constants/routes";
 import { useAuthStore } from "@/utils/use-auth-store";
 
-function CheckUserRole({ element: Element }) {
+function PrivateRoute({ element: Element }) {
   const location = useLocation();
 
   const { token, user } = useAuthStore();
@@ -16,8 +16,8 @@ function CheckUserRole({ element: Element }) {
   return <Element />;
 }
 
-export default CheckUserRole;
+export default PrivateRoute;
 
-CheckUserRole.propTypes = {
+PrivateRoute.propTypes = {
   element: PropTypes.elementType.isRequired,
 };

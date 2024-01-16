@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, Button, Dropdown } from "antd";
 import { useBoolean } from "usehooks-ts";
 
+import { LOCATIONS } from "@/constants/routes";
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
 import { useAuthStore } from "@/utils/use-auth-store";
 
@@ -22,7 +23,7 @@ function UserDropdown() {
         setOpenEditAvatar();
       } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
         logout();
-        navigate("/");
+        navigate(LOCATIONS.LOGIN);
       }
     },
     [logout, navigate, setOpenEditAvatar],
