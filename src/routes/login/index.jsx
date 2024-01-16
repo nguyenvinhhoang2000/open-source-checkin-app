@@ -10,7 +10,7 @@ import { useAuthStore } from "@/store/use-auth-store";
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
-  const { login } = useAuthStore();
+  const { onSignin } = useAuthStore();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Login() {
   const onFinish = async (record) => {
     const loadingMessage = message.loading("Login");
     onLoadingLogin();
-    const result = await login(record);
+    const result = await onSignin(record);
     loadingMessage();
     onUnLoadingLogin();
     await message[result.status](result.message, 1);
