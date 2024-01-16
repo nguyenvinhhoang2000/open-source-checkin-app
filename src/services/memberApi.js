@@ -1,7 +1,7 @@
 import cookie from "react-cookies";
 import axios from "axios";
 
-import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
+import { COOKIES_KEYS } from "@/constants/local-storage-keys";
 
 const API_STATUS = {
   UNAUTHORIZED: 401,
@@ -21,7 +21,7 @@ function addFailedQueue(cb) {
 }
 
 function reloadApp() {
-  localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
+  localStorage.removeItem(COOKIES_KEYS.TOKEN);
 
   failedQueue = [];
   // force reload app, reset all state
@@ -43,7 +43,7 @@ axiosClient.interceptors.response.use(
 
     // EX: Handle 401 error
     if (response?.status === API_STATUS.UNAUTHORIZED) {
-      const token = cookie.load(LOCAL_STORAGE_KEYS.TOKEN) || "";
+      const token = cookie.load(COOKIES_KEYS.TOKEN) || "";
 
       // EX: Check if token is expired
       if (!token) {

@@ -16,16 +16,16 @@ function Login() {
   const navigate = useNavigate();
 
   const {
-    value: isLoadingLogin,
-    setTrue: onLoadingLogin,
-    setFalse: onUnLoadingLogin,
+    value: isLoadingSignin,
+    setTrue: onLoadingSignin,
+    setFalse: onUnLoadingSignin,
   } = useBoolean(false);
   const onFinish = async (record) => {
     const loadingMessage = message.loading("Login");
-    onLoadingLogin();
+    onLoadingSignin();
     const result = await onSignin(record);
     loadingMessage();
-    onUnLoadingLogin();
+    onUnLoadingSignin();
     await message[result.status](result.message, 1);
 
     // eslint-disable-next-line no-unused-expressions
@@ -42,7 +42,7 @@ function Login() {
       />
       <div>
         <Form
-          disabled={isLoadingLogin}
+          disabled={isLoadingSignin}
           name="normal_login"
           className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
           initialValues={initialValues}

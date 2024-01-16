@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Avatar, Button, Dropdown } from "antd";
 import { useBoolean } from "usehooks-ts";
 
-import { LOCATIONS } from "@/constants/routes";
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
 import { useAuthStore } from "@/store/use-auth-store";
 
@@ -15,7 +13,6 @@ function UserDropdown() {
     setTrue: setOpenEditAvatar,
     setFalse: setCloseEditAvatar,
   } = useBoolean(false);
-  const navigate = useNavigate();
   const { onSignout } = useAuthStore();
   const onMenuClick = React.useCallback(
     ({ key }) => {
@@ -23,10 +20,9 @@ function UserDropdown() {
         setOpenEditAvatar();
       } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
         onSignout();
-        navigate(LOCATIONS.LOGIN);
       }
     },
-    [onSignout, navigate, setOpenEditAvatar],
+    [onSignout, setOpenEditAvatar],
   );
 
   const menu = React.useMemo(() => {

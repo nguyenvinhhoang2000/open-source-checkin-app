@@ -1,6 +1,8 @@
 import cookie from "react-cookies";
 import { create } from "zustand";
 
+import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { LOCATIONS } from "@/constants/routes";
 import { TYPE_MESSAGE } from "@/constants/type-message";
 import axiosClient from "@/services/memberApi";
 
@@ -13,10 +15,9 @@ const useAuthStore = create(
         const {
           data: { payload: token, message },
         } = await axiosClient.post(`/client/auth/login`, data);
-        console.log(`🚀🚀🚀!..data:`, data);
 
         cookie.save("token", token, {
-          path: "/",
+          path: LOCATIONS.LOGIN,
           // One day
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
@@ -34,7 +35,9 @@ const useAuthStore = create(
       }
     },
     onSignout: async () => {
-      window.localStorage.clear();
+      cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
+      window.location.replace(LOCATIONS.LOGIN);
+
       set({ user: null, token: null });
     },
     onGetUserInfo: async (user) => {
