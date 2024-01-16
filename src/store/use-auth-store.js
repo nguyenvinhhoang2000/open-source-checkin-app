@@ -8,11 +8,12 @@ const useAuthStore = create(
   (set) => ({
     user: null,
     token: null,
-    login: async (data) => {
+    onSignin: async (data) => {
       try {
         const {
           data: { payload: token, message },
         } = await axiosClient.post(`/client/auth/login`, data);
+        console.log(`🚀🚀🚀!..data:`, data);
 
         cookie.save("token", token, {
           path: "/",
@@ -32,7 +33,7 @@ const useAuthStore = create(
         };
       }
     },
-    logout: async () => {
+    onSignout: async () => {
       window.localStorage.clear();
       set({ user: null, token: null });
     },

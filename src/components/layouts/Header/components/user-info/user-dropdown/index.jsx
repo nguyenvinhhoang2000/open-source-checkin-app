@@ -16,17 +16,17 @@ function UserDropdown() {
     setFalse: setCloseEditAvatar,
   } = useBoolean(false);
   const navigate = useNavigate();
-  const { logout } = useAuthStore();
+  const { onSignout } = useAuthStore();
   const onMenuClick = React.useCallback(
     ({ key }) => {
       if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
         setOpenEditAvatar();
       } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
-        logout();
+        onSignout();
         navigate(LOCATIONS.LOGIN);
       }
     },
-    [logout, navigate, setOpenEditAvatar],
+    [onSignout, navigate, setOpenEditAvatar],
   );
 
   const menu = React.useMemo(() => {
