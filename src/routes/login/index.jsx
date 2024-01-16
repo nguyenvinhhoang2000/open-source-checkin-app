@@ -1,13 +1,30 @@
 import React from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
+
+import { LOCATIONS } from "@/constants/routes";
+import { useAuthStore } from "@/utils/useAuthStore";
 
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
-  const onFinish = React.useCallback((e) => {
-    e.preventDefault();
-  }, []);
+  const { login } = useAuthStore();
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const navigate = useNavigate();
+  const onFinish = async (record) => {
+    const loadingMessage = message.loading("Login");
+    const result = await login(record);
+    message[result.status](result.message);
+    loadingMessage();
+    if (redirect) {
+      navigate(redirect);
+    } else {
+      navigate(LOCATIONS.MEMBER_DASHBOARD);
+    }
+  };
+
   return (
     <section className="flex h-screen flex-col items-center justify-center bg-hero-pattern bg-center">
       <img
@@ -60,4 +77,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default React.memo(Login);
