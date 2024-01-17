@@ -8,7 +8,7 @@ const API_STATUS = {
 };
 
 const config = {
-  baseURL: `${import.meta.env.VITE_API_URL}/v1.0`,
+  baseURL: `${import.meta.env.VITE_API_URL}v1.0`,
   validateStatus: (status) => status >= 200 && status < 400,
   timeout: 60000,
 };
