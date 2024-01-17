@@ -30,7 +30,8 @@ function Login() {
     message[result.status](result.message, 1);
 
     // eslint-disable-next-line no-unused-expressions
-    result.ok && window.location.reload(redirect || LOCATIONS.MEMBER_DASHBOARD);
+    result.ok &&
+      window.location.replace(redirect || LOCATIONS.MEMBER_DASHBOARD);
   };
 
   return (
