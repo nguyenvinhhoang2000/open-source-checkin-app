@@ -4,42 +4,54 @@ import { create } from "zustand";
 import { COOKIES_KEYS } from "@/constants/local-storage-keys";
 import { LOCATIONS } from "@/constants/routes";
 import { TYPE_MESSAGE } from "@/constants/type-message";
-import axiosClient from "@/services/memberApi";
+import { setAppAccessToken } from "@/services/axiosConfig";
+import userAPI from "@/services/userApi";
+import onStoreResult from "@/utils/return-message";
 
 const useAuthStore = create((set) => ({
   user: null,
+  token: null,
   onLogin: async (data) => {
     try {
       const {
         data: { payload: token, message },
-      } = await axiosClient.post(`/client/auth/login`, data);
+      } = await userAPI.login(data);
 
       cookie.save("token", token, {
         path: LOCATIONS.LOGIN,
-        // EX: One day
+        // EX: Set time of cookie in 1 day
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
-      return {
-        ok: true,
-        status: TYPE_MESSAGE.SUCCESS,
-        message,
-      };
+      set({ token });
+      return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
     } catch (error) {
-      return {
-        ok: false,
-        status: TYPE_MESSAGE.ERROR,
-        message: error.response ? error.response.data.message : "Sytem error",
-      };
+      return onStoreResult(
+        false,
+        TYPE_MESSAGE.ERROR,
+        error.response ? error.response.data.message : "Sytem error",
+      );
     }
   },
   onLogout: async () => {
     cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
     window.location.replace(LOCATIONS.LOGIN);
-
     set({ user: null, token: null });
   },
-  onGetUserInfo: async (user) => {
-    set({ user });
+  onGetUserInformation: async (token) => {
+    try {
+      setAppAccessToken(token);
+      const {
+        data: { payload: user, message },
+      } = await userAPI.getProfile();
+      set({ user });
+      return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
+    } catch (error) {
+      return onStoreResult(
+        false,
+        TYPE_MESSAGE.ERROR,
+        error.response ? error.response.data.message : "Sytem error",
+      );
+    }
   },
 }));
 

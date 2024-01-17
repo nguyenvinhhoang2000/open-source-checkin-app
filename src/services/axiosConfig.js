@@ -2,6 +2,7 @@ import cookie from "react-cookies";
 import axios from "axios";
 
 import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { LOCATIONS } from "@/constants/routes";
 
 const API_STATUS = {
   UNAUTHORIZED: 401,
@@ -13,17 +14,9 @@ const config = {
   timeout: 60000,
 };
 
-let failedQueue = [];
-
-// EX: Push callback to failedQueue for retry request
-function addFailedQueue(cb) {
-  failedQueue.push(cb);
-}
-
 function reloadApp() {
-  localStorage.removeItem(COOKIES_KEYS.TOKEN);
+  cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
 
-  failedQueue = [];
   // force reload app, reset all state
   // window.location.replace(`${LOCATION.SIGN_IN}?redirect=${window.history.state.as}`);
 }
@@ -39,26 +32,12 @@ export function setAppAccessToken(token) {
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const { config: originalRequest, response } = error;
+    const { response } = error;
 
     // EX: Handle 401 error
     if (response?.status === API_STATUS.UNAUTHORIZED) {
-      const token = cookie.load(COOKIES_KEYS.TOKEN) || "";
-
-      // EX: Check if token is expired
-      if (!token) {
-        reloadApp();
-        return Promise.reject(error);
-      }
-
-      // EX: ONLY add callback to failedQueue for retry request
-      return new Promise((resolve) => {
-        addFailedQueue((newToken) => {
-          originalRequest.headers.Authorization = createAuthToken(newToken);
-
-          resolve(axiosClient(originalRequest));
-        });
-      });
+      reloadApp();
+      return Promise.reject(error);
     }
 
     // EX: Handle other error
