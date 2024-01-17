@@ -7,9 +7,9 @@ import { LOCATIONS } from "@/constants/routes";
 
 import {
   AbsentRequest,
-  CheckUserRole,
   Dashboard,
   Login,
+  PrivateRoute,
   Ranking,
   UnauthorizedPage,
 } from "./routes";
@@ -18,23 +18,31 @@ function App() {
   const router = createBrowserRouter([
     {
       path: LOCATIONS.LOGIN,
-      element: <Login />,
+      element: (
+        <PrivateRoute>
+          <Login />
+        </PrivateRoute>
+      ),
     },
     {
       path: LOCATIONS.MEMBER_LAYOUT,
-      element: <Layout />,
+      element: (
+        <PrivateRoute>
+          <Layout />
+        </PrivateRoute>
+      ),
       children: [
         {
           path: LOCATIONS.MEMBER_DASHBOARD,
-          element: <CheckUserRole element={Dashboard} />,
+          element: <Dashboard />,
         },
         {
           path: LOCATIONS.MEMBER_ABSENT,
-          element: <CheckUserRole element={AbsentRequest} />,
+          element: <AbsentRequest />,
         },
         {
           path: LOCATIONS.MEMBER_RANKING,
-          element: <CheckUserRole element={Ranking} />,
+          element: <Ranking />,
         },
       ],
     },

@@ -3,6 +3,7 @@ import { Avatar, Button, Dropdown } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
+import { useAuthStore } from "@/store/use-auth-store";
 
 import EditAvatarDraw from "../edit-avatar";
 
@@ -12,16 +13,16 @@ function UserDropdown() {
     setTrue: setOpenEditAvatar,
     setFalse: setCloseEditAvatar,
   } = useBoolean(false);
-
+  const { onLogout } = useAuthStore();
   const onMenuClick = React.useCallback(
     ({ key }) => {
       if (key === USER_DROPDOWN_KEY.EDIT_AVATAR) {
         setOpenEditAvatar();
       } else if (key === USER_DROPDOWN_KEY.LOG_OUT) {
-        console.log(`🎶🎶🎶.. Log-out`);
+        onLogout();
       }
     },
-    [setOpenEditAvatar],
+    [onLogout, setOpenEditAvatar],
   );
 
   const menu = React.useMemo(() => {
