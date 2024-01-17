@@ -8,9 +8,7 @@ import axiosClient from "@/services/memberApi";
 
 const useAuthStore = create(
   (set) => ({
-    user: null,
-    token: null,
-    onSignin: async (data) => {
+    onLogin: async (data) => {
       try {
         const {
           data: { payload: token, message },
@@ -18,7 +16,7 @@ const useAuthStore = create(
 
         cookie.save("token", token, {
           path: LOCATIONS.LOGIN,
-          // One day
+          // EX: One day
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
         return {
@@ -30,11 +28,13 @@ const useAuthStore = create(
         return {
           ok: false,
           status: TYPE_MESSAGE.ERROR,
-          message: error.response.data.message,
+          message: error.response
+            ? error.response.data.message
+            : "Unknown error",
         };
       }
     },
-    onSignout: async () => {
+    onLogout: async () => {
       cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
       window.location.replace(LOCATIONS.LOGIN);
 

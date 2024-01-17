@@ -10,22 +10,22 @@ import { useAuthStore } from "@/store/use-auth-store";
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
-  const { onSignin } = useAuthStore();
+  const { onLogin } = useAuthStore();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
 
   const {
-    value: isLoadingSignin,
-    setTrue: onLoadingSignin,
-    setFalse: onUnLoadingSignin,
+    value: isLoadingLogin,
+    setTrue: onLoadingLogin,
+    setFalse: onUnLoadingLogin,
   } = useBoolean(false);
   const onFinish = async (record) => {
     const loadingMessage = message.loading("Login");
-    onLoadingSignin();
-    const result = await onSignin(record);
+    onLoadingLogin();
+    const result = await onLogin(record);
     loadingMessage();
-    onUnLoadingSignin();
+    onUnLoadingLogin();
     await message[result.status](result.message, 1);
 
     // eslint-disable-next-line no-unused-expressions
@@ -42,7 +42,7 @@ function Login() {
       />
       <div>
         <Form
-          disabled={isLoadingSignin}
+          disabled={isLoadingLogin}
           name="normal_login"
           className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
           initialValues={initialValues}
