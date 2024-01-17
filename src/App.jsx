@@ -1,5 +1,9 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import Layout from "@/components/layouts/layout";
 
@@ -45,6 +49,10 @@ function App() {
     {
       path: LOCATIONS.UNAUTHORIZED,
       element: <UnauthorizedPage />,
+    },
+    {
+      path: LOCATIONS.INVALID,
+      element: <Navigate to={LOCATIONS.MEMBER_DASHBOARD} />,
     },
   ]);
   return <RouterProvider router={router} />;
