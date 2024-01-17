@@ -19,7 +19,6 @@ function Profile() {
   } = useBoolean(false);
 
   const [currentData, setCurrentData] = React.useState();
-
   const onClickOk = React.useCallback(() => {
     setLoadingOk();
     const handleEditData = new Promise((resolve) => {
