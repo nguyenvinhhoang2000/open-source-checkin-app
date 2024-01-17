@@ -3,7 +3,6 @@ import { Button } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { dataProfile } from "@/constants/data/data-profile.js";
-import { useAuthStore } from "@/store/use-auth-store";
 
 import ModalEditProfile from "../modal-edit";
 
@@ -19,7 +18,6 @@ function Profile() {
     setFalse: setUnLoadingOk,
   } = useBoolean(false);
 
-  const user = useAuthStore();
   const [currentData, setCurrentData] = React.useState();
 
   const onClickOk = React.useCallback(() => {
