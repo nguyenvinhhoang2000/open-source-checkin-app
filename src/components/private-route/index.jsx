@@ -1,39 +1,36 @@
 import React from "react";
-import cookie from "react-cookies";
 import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 import useAppMounted from "@/store/use-app-mounted";
-// import useAuthStore from "@/store/use-auth-store";
+import useAuthStore from "@/store/use-auth-store";
+
+import AppLoadingPage from "../apps/app-page-loading";
 
 function PrivateRoute({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const user = useAuthStore().user;
-  const token = cookie.load(COOKIES_KEYS.TOKEN);
+  const user = useAuthStore().user;
+
+  const isForceLogout = useAppMounted().isForceLogout;
+
   const isAppMounted = useAppMounted().isAppMounted;
 
   React.useEffect(() => {
-    if (isAppMounted && !token) {
-      navigate(`${LOCATIONS.LOGIN}?redirect=${location.pathname}`);
+    if (isAppMounted && !user) {
+      navigate(
+        `${LOCATIONS.LOGIN}${
+          isForceLogout ? "" : `?redirect=${location.pathname}`
+        }`,
+      );
     }
-  }, [isAppMounted, location.pathname, navigate, token]);
+  }, [isAppMounted, user]); // eslint-disable-line
 
-  if (!isAppMounted) {
-    return (
-      <div className="flex min-h-screen flex-row items-center justify-center">
-        <img
-          className="animate-ping duration-500"
-          src="/assets/icons/wiicamp-logo.svg"
-          alt="w-logo"
-        />
-      </div>
-    );
+  if (!user) {
+    return <AppLoadingPage />;
   }
-
   return children;
 }
 

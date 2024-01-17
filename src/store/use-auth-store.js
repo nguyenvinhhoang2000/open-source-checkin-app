@@ -8,6 +8,8 @@ import { setAppAccessToken } from "@/services/axiosConfig";
 import userAPI from "@/services/userApi";
 import onStoreResult from "@/utils/return-message";
 
+import useAppMounted from "./use-app-mounted";
+
 const useAuthStore = create((set) => ({
   user: null,
   token: null,
@@ -34,7 +36,8 @@ const useAuthStore = create((set) => ({
   },
   onLogout: async () => {
     cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
-    window.location.replace(LOCATIONS.LOGIN);
+    const onSetForceLogout = useAppMounted.getState().onSetForceLogout;
+    onSetForceLogout(true);
     set({ user: null, token: null });
   },
   onGetUserInformation: async (token) => {

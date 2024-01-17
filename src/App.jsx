@@ -10,6 +10,7 @@ import Layout from "@/components/layouts/layout";
 
 import { LOCATIONS } from "@/constants/routes";
 
+import AuthRoute from "./components/auth-route";
 import { COOKIES_KEYS } from "./constants/cookies-keys";
 import useAppMounted from "./store/use-app-mounted";
 import useAuthStore from "./store/use-auth-store";
@@ -30,7 +31,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: LOCATIONS.LOGIN,
-      element: <Login />,
+      element: (
+        <AuthRoute>
+          <Login />,
+        </AuthRoute>
+      ),
     },
     {
       path: LOCATIONS.MEMBER_LAYOUT,
@@ -64,18 +69,26 @@ function App() {
     },
   ]);
 
-  React.useEffect(() => {
+  const onInitialize = React.useCallback(async () => {
     const token = cookie.load(COOKIES_KEYS.TOKEN);
     if (token) {
       /** Get user info
        * @api {get} /client/user Get user info
        * @action set user to zustand
        * */
-      onGetUserInformation(token);
+      await onGetUserInformation(token);
     }
+    setTimeout(
+      () => {
+        onSetAppMounted();
+      },
+      token ? 500 : 0,
+    );
+  }, []);
 
-    onSetAppMounted();
-  }, [onGetUserInformation, onSetAppMounted]);
+  React.useEffect(() => {
+    onInitialize();
+  }, []);
 
   return <RouterProvider router={router} />;
 }
