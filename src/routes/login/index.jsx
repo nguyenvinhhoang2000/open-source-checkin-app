@@ -1,9 +1,11 @@
 import React from "react";
+import cookie from "react-cookies";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
+import { COOKIES_KEYS } from "@/constants/local-storage-keys";
 import { LOCATIONS } from "@/constants/routes";
 import { useAuthStore } from "@/store/use-auth-store";
 
@@ -14,6 +16,12 @@ function Login() {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
+  const token = cookie.load(COOKIES_KEYS.TOKEN) || "";
+  React.useEffect(() => {
+    if (token) {
+      navigate(LOCATIONS.MEMBER_DASHBOARD);
+    }
+  }, []);
 
   const {
     value: isLoadingLogin,

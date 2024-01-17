@@ -18,11 +18,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: LOCATIONS.LOGIN,
-      element: (
-        <PrivateRoute>
-          <Login />
-        </PrivateRoute>
-      ),
+      element: <Login />,
     },
     {
       path: LOCATIONS.MEMBER_LAYOUT,

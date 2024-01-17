@@ -13,27 +13,24 @@ function PrivateRoute({ children }) {
   const token = cookie.load("token") || "";
   const { onGetUserInfo } = useAuthStore();
 
-  const onGetUserProfile = async () => {
-    try {
-      const {
-        data: { payload: userInfo },
-      } = await axiosClient.get(`/client/user`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      onGetUserInfo(userInfo);
-    } catch (error) {
-      message.error(error.response.data.message);
+  React.useEffect(() => {
+    const onGetUserProfile = async () => {
+      try {
+        const {
+          data: { payload: userInfo },
+        } = await axiosClient.get(`/client/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        onGetUserInfo(userInfo);
+      } catch (error) {
+        message.error(error?.response?.data?.message || "Sytem error: ");
+      }
+    };
+    if (token) {
+      onGetUserProfile();
     }
-  };
-
-  if (token && location.pathname !== "/") {
-    onGetUserProfile();
-  }
-
-  if (token && location.pathname === "/") {
-    return <Navigate to={LOCATIONS.MEMBER_DASHBOARD} />;
-  }
-  if (!token && location.pathname !== "/") {
+  }, []);
+  if (!token) {
     return <Navigate to={`${LOCATIONS.LOGIN}?redirect=${location.pathname}`} />;
   }
 
