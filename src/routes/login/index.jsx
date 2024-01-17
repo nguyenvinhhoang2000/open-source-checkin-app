@@ -5,7 +5,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
-import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 import useAuthStore from "@/store/use-auth-store";
 

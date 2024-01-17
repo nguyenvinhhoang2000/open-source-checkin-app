@@ -3,7 +3,7 @@ import cookie from "react-cookies";
 import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 import useAppMounted from "@/store/use-app-mounted";
 // import useAuthStore from "@/store/use-auth-store";

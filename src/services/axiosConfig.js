@@ -1,7 +1,7 @@
 import cookie from "react-cookies";
 import axios from "axios";
 
-import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 
 const API_STATUS = {

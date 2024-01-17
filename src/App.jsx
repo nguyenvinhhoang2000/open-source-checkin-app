@@ -10,7 +10,7 @@ import Layout from "@/components/layouts/layout";
 
 import { LOCATIONS } from "@/constants/routes";
 
-import { COOKIES_KEYS } from "./constants/local-storage-keys";
+import { COOKIES_KEYS } from "./constants/cookies-keys";
 import useAppMounted from "./store/use-app-mounted";
 import useAuthStore from "./store/use-auth-store";
 import {

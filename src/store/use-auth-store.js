@@ -1,7 +1,7 @@
 import cookie from "react-cookies";
 import { create } from "zustand";
 
-import { COOKIES_KEYS } from "@/constants/local-storage-keys";
+import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 import { TYPE_MESSAGE } from "@/constants/type-message";
 import { setAppAccessToken } from "@/services/axiosConfig";
