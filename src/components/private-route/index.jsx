@@ -1,36 +1,39 @@
 import React from "react";
 import cookie from "react-cookies";
 import { Navigate, useLocation } from "react-router-dom";
+import { message } from "antd";
 import PropTypes from "prop-types";
 
 import { LOCATIONS } from "@/constants/routes";
 import axiosClient from "@/services/memberApi";
 import { useAuthStore } from "@/store/use-auth-store";
-// import { useAuthStore } from "@/store/use-auth-store";
 
 function PrivateRoute({ children }) {
   const location = useLocation();
   const token = cookie.load("token") || "";
   const { onGetUserInfo } = useAuthStore();
 
-  React.useEffect(() => {
-    const onGetProfile = async () => {
-      if (!token) {
-        <Navigate to={`${LOCATIONS.LOGIN}?redirect=${location.pathname}`} />;
-      } else {
-        const {
-          data: { payload: userInfo },
-        } = await axiosClient.get(`/client/user`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        onGetUserInfo(userInfo);
-      }
-    };
+  const onGetUserProfile = async () => {
+    try {
+      const {
+        data: { payload: userInfo },
+      } = await axiosClient.get(`/client/user`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      onGetUserInfo(userInfo);
+    } catch (error) {
+      message.error(error.response.data.message);
+    }
+  };
 
-    onGetProfile();
-  }, [location.pathname, onGetUserInfo, token]);
+  if (token && location.pathname !== "/") {
+    onGetUserProfile();
+  }
 
-  if (!token) {
+  if (token && location.pathname === "/") {
+    return <Navigate to={LOCATIONS.MEMBER_DASHBOARD} />;
+  }
+  if (!token && location.pathname !== "/") {
     return <Navigate to={`${LOCATIONS.LOGIN}?redirect=${location.pathname}`} />;
   }
 

@@ -18,35 +18,31 @@ function App() {
   const router = createBrowserRouter([
     {
       path: LOCATIONS.LOGIN,
-      element: <Login />,
+      element: (
+        <PrivateRoute>
+          <Login />
+        </PrivateRoute>
+      ),
     },
     {
       path: LOCATIONS.MEMBER_LAYOUT,
-      element: <Layout />,
+      element: (
+        <PrivateRoute>
+          <Layout />
+        </PrivateRoute>
+      ),
       children: [
         {
           path: LOCATIONS.MEMBER_DASHBOARD,
-          element: (
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          ),
+          element: <Dashboard />,
         },
         {
           path: LOCATIONS.MEMBER_ABSENT,
-          element: (
-            <PrivateRoute>
-              <AbsentRequest />
-            </PrivateRoute>
-          ),
+          element: <AbsentRequest />,
         },
         {
           path: LOCATIONS.MEMBER_RANKING,
-          element: (
-            <PrivateRoute>
-              <Ranking />
-            </PrivateRoute>
-          ),
+          element: <Ranking />,
         },
       ],
     },
