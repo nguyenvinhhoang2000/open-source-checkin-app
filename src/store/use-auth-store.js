@@ -8,6 +8,7 @@ import axiosClient from "@/services/memberApi";
 
 const useAuthStore = create(
   (set) => ({
+    user: null,
     onLogin: async (data) => {
       try {
         const {
