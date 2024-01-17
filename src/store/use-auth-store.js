@@ -28,9 +28,7 @@ const useAuthStore = create(
         return {
           ok: false,
           status: TYPE_MESSAGE.ERROR,
-          message: error.response
-            ? error.response.data.message
-            : "Unknown error",
+          message: error.response ? error.response.data.message : "Sytem error",
         };
       }
     },
