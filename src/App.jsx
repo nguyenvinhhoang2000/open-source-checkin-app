@@ -5,14 +5,14 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { useBoolean } from "usehooks-ts";
 
 import Layout from "@/components/layouts/layout";
 
 import { LOCATIONS } from "@/constants/routes";
 
 import { COOKIES_KEYS } from "./constants/local-storage-keys";
-import { useAuthStore } from "./store/use-auth-store";
+import useAppMounted from "./store/use-app-mounted";
+import useAuthStore from "./store/use-auth-store";
 import {
   AbsentRequest,
   Dashboard,
@@ -23,7 +23,8 @@ import {
 } from "./routes";
 
 function App() {
-  const { value: isAppMounted, setTrue: setAppMounted } = useBoolean(false);
+  const onSetAppMounted = useAppMounted().onSetAppMounted;
+
   const onGetUserInformation = useAuthStore().onGetUserInformation;
 
   const router = createBrowserRouter([
@@ -73,20 +74,9 @@ function App() {
       onGetUserInformation(token);
     }
 
-    setAppMounted();
-  }, [onGetUserInformation, setAppMounted]);
+    onSetAppMounted();
+  }, [onGetUserInformation, onSetAppMounted]);
 
-  if (!isAppMounted) {
-    return (
-      <div className="flex min-h-screen flex-row items-center justify-center">
-        <img
-          className="animate-ping duration-500"
-          src="/assets/icons/wiicamp-logo.svg"
-          alt="w-logo"
-        />
-      </div>
-    );
-  }
   return <RouterProvider router={router} />;
 }
 

@@ -1,11 +1,13 @@
 import React from "react";
+import cookie from "react-cookies";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
+import { COOKIES_KEYS } from "@/constants/local-storage-keys";
 import { LOCATIONS } from "@/constants/routes";
-import { useAuthStore } from "@/store/use-auth-store";
+import useAuthStore from "@/store/use-auth-store";
 
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
@@ -13,7 +15,13 @@ function Login() {
   const { onLogin } = useAuthStore();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
+  const token = cookie.load(COOKIES_KEYS.TOKEN);
   const navigate = useNavigate();
+  React.useEffect(() => {
+    if (token) {
+      navigate(LOCATIONS.MEMBER_DASHBOARD);
+    }
+  }, [navigate, token]);
 
   const {
     value: isLoadingLogin,
@@ -29,10 +37,12 @@ function Login() {
     loadingMessage();
     onUnLoadingLogin();
     message[result.status](result.message, 1);
-    // eslint-disable-next-line no-unused-expressions
 
-    // result.ok &&
-    //   navigate(redirect || LOCATIONS.MEMBER_DASHBOARD, { replace: true });
+    // eslint-disable-next-line no-unused-expressions
+    if (result.ok) {
+      window.location.href = redirect || LOCATIONS.MEMBER_DASHBOARD;
+    }
+    // navigate(redirect || LOCATIONS.MEMBER_DASHBOARD, { replace: true });
   };
 
   return (

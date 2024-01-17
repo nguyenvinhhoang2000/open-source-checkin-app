@@ -3,7 +3,7 @@ import { Avatar, Button, Dropdown } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { USER_DROPDOWN_KEY } from "@/constants/user-dropdown-key";
-import { useAuthStore } from "@/store/use-auth-store";
+import useAuthStore from "@/store/use-auth-store";
 
 import EditAvatarDraw from "../edit-avatar";
 
