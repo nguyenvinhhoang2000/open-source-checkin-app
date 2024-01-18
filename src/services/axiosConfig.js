@@ -40,6 +40,8 @@ axiosClient.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    delete axiosClient.defaults.headers.Authorization;
+
     // EX: Handle other error
     return Promise.reject(error);
   },

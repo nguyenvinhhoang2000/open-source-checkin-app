@@ -12,6 +12,7 @@ import { LOCATIONS } from "@/constants/routes";
 
 import AuthRoute from "./components/auth-route";
 import { COOKIES_KEYS } from "./constants/cookies-keys";
+import { setAppAccessToken } from "./services/axiosConfig";
 import useAppMounted from "./store/use-app-mounted";
 import useAuthStore from "./store/use-auth-store";
 import {
@@ -76,7 +77,8 @@ function App() {
        * @api {get} /client/user Get user info
        * @action set user to zustand
        * */
-      await onGetUserInformation(token);
+      setAppAccessToken(token);
+      await onGetUserInformation();
     }
     setTimeout(
       () => {

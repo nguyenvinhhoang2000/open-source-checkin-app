@@ -1,18 +1,14 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
-import { LOCATIONS } from "@/constants/routes";
 import useAuthStore from "@/store/use-auth-store";
 
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
   const { onLogin } = useAuthStore();
-  const [searchParams] = useSearchParams();
-  const redirect = searchParams.get("redirect");
 
   const {
     value: isLoadingLogin,
@@ -30,8 +26,8 @@ function Login() {
     message[result.status](result.message, 1);
 
     // eslint-disable-next-line no-unused-expressions
-    result.ok &&
-      window.location.replace(redirect || LOCATIONS.MEMBER_DASHBOARD);
+    // result.ok &&
+    //   window.location.replace(redirect || LOCATIONS.MEMBER_DASHBOARD);
   };
 
   return (

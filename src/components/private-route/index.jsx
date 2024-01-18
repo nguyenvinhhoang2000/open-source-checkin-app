@@ -31,6 +31,7 @@ function PrivateRoute({ children }) {
   if (!user) {
     return <AppLoadingPage />;
   }
+
   return children;
 }
 

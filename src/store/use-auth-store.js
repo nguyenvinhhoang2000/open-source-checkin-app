@@ -10,9 +10,8 @@ import onStoreResult from "@/utils/return-message";
 
 import useAppMounted from "./use-app-mounted";
 
-const useAuthStore = create((set) => ({
+const useAuthStore = create((set, get) => ({
   user: null,
-  token: null,
   onLogin: async (data) => {
     try {
       const {
@@ -24,7 +23,8 @@ const useAuthStore = create((set) => ({
         // EX: Set time of cookie in 1 day
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
-      set({ token });
+      setAppAccessToken(token);
+      get().onGetUserInformation();
       return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
     } catch (error) {
       return onStoreResult(
@@ -42,9 +42,9 @@ const useAuthStore = create((set) => ({
 
     set({ user: null, token: null });
   },
-  onGetUserInformation: async (token) => {
+  onGetUserInformation: async () => {
     try {
-      setAppAccessToken(token);
+      // SET TOKEN BEFORE CALL REQUEST
       const {
         data: { payload: user, message },
       } = await userAPI.getProfile();
