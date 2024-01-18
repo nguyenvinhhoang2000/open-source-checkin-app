@@ -1,4 +1,4 @@
-import CheckUserRole from "@/components/check-user-roles";
+import PrivateRoute from "@/components/private-route";
 
 import AbsentRequest from "@/routes/absent-request";
 import Dashboard from "@/routes/dashboard";
@@ -8,7 +8,7 @@ import UnauthorizedPage from "@/routes/unauthorized";
 
 export {
   AbsentRequest,
-  CheckUserRole,
+  PrivateRoute,
   Dashboard,
   Login,
   Ranking,

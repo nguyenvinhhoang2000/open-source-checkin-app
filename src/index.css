@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -42,10 +42,9 @@
   background-color: #999999 !important;
 }
 
-
 .ant-picker-datetime-panel {
   flex-direction: column;
   @media (min-width: 480px) {
-      flex-direction: row;
+    flex-direction: row;
   }
 }

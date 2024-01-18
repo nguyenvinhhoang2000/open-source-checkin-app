@@ -1,40 +1,62 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import cookie from "react-cookies";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import Layout from "@/components/layouts/layout";
 
 import { LOCATIONS } from "@/constants/routes";
 
+import AuthRoute from "./components/auth-route";
+import { COOKIES_KEYS } from "./constants/cookies-keys";
+import { setAppAccessToken } from "./services/axiosConfig";
+import useAppMounted from "./store/use-app-mounted";
+import useAuthStore from "./store/use-auth-store";
 import {
   AbsentRequest,
-  CheckUserRole,
   Dashboard,
   Login,
+  PrivateRoute,
   Ranking,
   UnauthorizedPage,
 } from "./routes";
 
 function App() {
+  const onSetAppMounted = useAppMounted().onSetAppMounted;
+
+  const onGetUserInformation = useAuthStore().onGetUserInformation;
+
   const router = createBrowserRouter([
     {
       path: LOCATIONS.LOGIN,
-      element: <Login />,
+      element: (
+        <AuthRoute>
+          <Login />
+        </AuthRoute>
+      ),
     },
     {
       path: LOCATIONS.MEMBER_LAYOUT,
-      element: <Layout />,
+      element: (
+        <PrivateRoute>
+          <Layout />
+        </PrivateRoute>
+      ),
       children: [
         {
           path: LOCATIONS.MEMBER_DASHBOARD,
-          element: <CheckUserRole element={Dashboard} />,
+          element: <Dashboard />,
         },
         {
           path: LOCATIONS.MEMBER_ABSENT,
-          element: <CheckUserRole element={AbsentRequest} />,
+          element: <AbsentRequest />,
         },
         {
           path: LOCATIONS.MEMBER_RANKING,
-          element: <CheckUserRole element={Ranking} />,
+          element: <Ranking />,
         },
       ],
     },
@@ -42,7 +64,34 @@ function App() {
       path: LOCATIONS.UNAUTHORIZED,
       element: <UnauthorizedPage />,
     },
+    {
+      path: LOCATIONS.INVALID,
+      element: <Navigate to={LOCATIONS.MEMBER_DASHBOARD} />,
+    },
   ]);
+
+  const onInitialize = React.useCallback(async () => {
+    const token = cookie.load(COOKIES_KEYS.TOKEN);
+    if (token) {
+      /** Get user info
+       * @api {get} /client/user Get user info
+       * @action set user to zustand
+       * */
+      setAppAccessToken(token);
+      await onGetUserInformation();
+    }
+    setTimeout(
+      () => {
+        onSetAppMounted();
+      },
+      token ? 500 : 0,
+    );
+  }, []); // eslint-disable-line
+
+  React.useEffect(() => {
+    onInitialize();
+  }, []); // eslint-disable-line
+
   return <RouterProvider router={router} />;
 }
 
