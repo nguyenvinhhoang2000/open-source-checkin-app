@@ -8,7 +8,7 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { fullConfig } from "@/theme";
 
-import AvatarList from "./avatar-list";
+import AvatarList from "../avatar-list";
 
 function EditAvatarDraw({ openDraw, onCloseDraw }) {
   const {
