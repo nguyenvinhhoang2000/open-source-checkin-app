@@ -23,6 +23,7 @@ function Login() {
     const result = await onLogin(record);
 
     loadingMessage();
+
     onUnLoadingLogin();
 
     message[result.status](result.message, 1);

@@ -57,7 +57,9 @@ const useAuthStore = create((set, get) => ({
       const {
         data: { payload: user, message },
       } = await userAPI.getProfile();
+
       set({ user });
+
       return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
     } catch (error) {
       return onStoreResult(

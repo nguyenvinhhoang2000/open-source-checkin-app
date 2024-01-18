@@ -17,7 +17,6 @@ const ENDPOINT = {
 
   GET_ABSENT_REQUEST_DETAILS: (id) => `/client/absent-requests/${id}`,
 
-  // /client/absent-requests/:id
   EDIT_ABSENT_REQUEST: (id) => `/client/absent-requests/${id}`,
 };
 
