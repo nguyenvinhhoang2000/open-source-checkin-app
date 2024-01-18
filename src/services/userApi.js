@@ -1,7 +1,6 @@
 import axiosClient from "@/services/axiosConfig";
 import ENDPOINT from "@/services/endpoint";
 
-// FIXME: viết function cho mỗi endpoint
 const userAPI = {
   // LOGIN
   login(value) {

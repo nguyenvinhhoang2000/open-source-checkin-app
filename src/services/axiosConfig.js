@@ -1,8 +1,8 @@
-// import cookie from "react-cookies";
+import cookie from "react-cookies";
 import axios from "axios";
 
-// import { COOKIES_KEYS } from "@/constants/cookies-keys";
-// import { LOCATIONS } from "@/constants/routes";
+import { COOKIES_KEYS } from "@/constants/cookies-keys";
+import { LOCATIONS } from "@/constants/routes";
 
 // const API_STATUS = {
 //   UNAUTHORIZED: 401,
@@ -26,6 +26,12 @@ const axiosClient = axios.create(config);
 const createAuthToken = (token) => `Bearer ${token}`;
 
 export function setAppAccessToken(token) {
+  cookie.save(COOKIES_KEYS.TOKEN, token, {
+    path: LOCATIONS.LOGIN,
+    // EX: Set time of cookie in 1 day
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+  });
+
   axiosClient.defaults.headers.Authorization = createAuthToken(token);
 }
 

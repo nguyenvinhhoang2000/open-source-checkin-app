@@ -1,4 +1,3 @@
-// FIXME: 1. viết hết endpoint của api
 const ENDPOINT = {
   // USER
   LOGIN: "/client/auth/login",
