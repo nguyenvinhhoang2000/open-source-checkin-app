@@ -26,7 +26,7 @@ function AuthRoute({ children }) {
   return children;
 }
 
-export default AuthRoute;
+export default React.memo(AuthRoute);
 
 AuthRoute.propTypes = {
   children: PropTypes.node.isRequired,

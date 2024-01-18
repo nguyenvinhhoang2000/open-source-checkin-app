@@ -33,7 +33,7 @@ function PrivateRoute({ children }) {
   return children;
 }
 
-export default PrivateRoute;
+export default React.memo(PrivateRoute);
 
 PrivateRoute.propTypes = {
   children: PropTypes.node.isRequired,

@@ -12,4 +12,4 @@ function AppLoadingPage() {
   );
 }
 
-export default AppLoadingPage;
+export default React.memo(AppLoadingPage);
