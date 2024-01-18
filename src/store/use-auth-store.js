@@ -4,7 +4,10 @@ import { create } from "zustand";
 import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 import { TYPE_MESSAGE } from "@/constants/type-message";
-import { setAppAccessToken } from "@/services/axiosConfig";
+import {
+  removeAppAccessToken,
+  setAppAccessToken,
+} from "@/services/axiosConfig";
 import userAPI from "@/services/userApi";
 import onStoreResult from "@/utils/return-message";
 
@@ -24,7 +27,9 @@ const useAuthStore = create((set, get) => ({
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
       setAppAccessToken(token);
+
       get().onGetUserInformation();
+
       return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
     } catch (error) {
       return onStoreResult(
@@ -40,7 +45,10 @@ const useAuthStore = create((set, get) => ({
     // USER LOGOUT (MAKE SURE NO REDIRECT)
     useAppMounted.getState().onSetForceLogout(true);
 
-    set({ user: null, token: null });
+    // REMOVE TOKEN
+    removeAppAccessToken();
+
+    set({ user: null });
   },
   onGetUserInformation: async () => {
     try {

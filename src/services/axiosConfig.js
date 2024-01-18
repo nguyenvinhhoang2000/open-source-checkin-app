@@ -29,12 +29,16 @@ export function setAppAccessToken(token) {
   axiosClient.defaults.headers.Authorization = createAuthToken(token);
 }
 
+export function removeAppAccessToken() {
+  delete axiosClient.defaults.headers.Authorization;
+}
+
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     // Ex: delete old/invalid token
-    delete axiosClient.defaults.headers.Authorization;
 
+    removeAppAccessToken();
     // EX: Handle other error
     return Promise.reject(error);
   },
