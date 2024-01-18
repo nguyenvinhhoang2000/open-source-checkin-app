@@ -8,6 +8,11 @@ const useAppMounted = create((set) => ({
   },
   onSetForceLogout: () => {
     set({ isForceLogout: true });
+
+    // return false for isForceLogout when user logout
+    setTimeout(() => {
+      set({ isForceLogout: false });
+    }, 500);
   },
 }));
 
