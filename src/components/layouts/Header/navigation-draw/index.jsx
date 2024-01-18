@@ -6,7 +6,7 @@ import { useBoolean } from "usehooks-ts";
 import { fullConfig } from "@/theme";
 
 import Navigation from "../navigation";
-import UserDropdown from "../user-info/user-dropdown";
+import UserDropdown from "../user-dropdown";
 
 function NavigationDraw() {
   const {

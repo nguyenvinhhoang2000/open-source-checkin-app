@@ -1,41 +1,43 @@
 import React from "react";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import useAuthStore from "@/store/use-auth-store";
 import { fullConfig } from "@/theme";
 
-import AvatarList from "./avatar-list";
+import AvatarList from "../avatar-list";
 
 function EditAvatarDraw({ openDraw, onCloseDraw }) {
+  const onChangeAvatar = useAuthStore().onChangeAvatar;
+
+  const [avatarPicked, setAvatarPicked] = React.useState();
+
   const {
     value: isLoadingOk,
-    setTrue: setLoadingOk,
-    setFalse: setUnLoadingOk,
+    setTrue: setShowLoadingOk,
+    setFalse: setHideLoadingOk,
   } = useBoolean(false);
 
-  const onSumbit = React.useCallback(() => {
-    setLoadingOk();
-    // HANDLE SUBMIT
-    const handleEditData = new Promise((resolve) => {
-      setTimeout(() => {
-        setUnLoadingOk();
-        onCloseDraw();
-        resolve("Change avatar okay");
-      }, 2000);
-    });
+  const onSumbit = React.useCallback(async () => {
+    setShowLoadingOk();
 
-    handleEditData
-      .then((data) => {
-        console.log(`🚀🚀🚀!..data:`, data);
-      })
-      .catch((error) => {
-        console.log(`🚀🚀🚀!..change error`, error);
-      });
-  }, [onCloseDraw, setLoadingOk, setUnLoadingOk]);
+    const { status, message: resultMessage } =
+      await onChangeAvatar(avatarPicked);
+
+    message[status](resultMessage, 1);
+
+    onCloseDraw();
+
+    setHideLoadingOk();
+  }, [avatarPicked]); // eslint-disable-line
+
+  const onSetAvatarPicked = React.useCallback((value) => {
+    setAvatarPicked(value);
+  }, []);
 
   return (
     <Drawer
@@ -57,7 +59,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
         />
       }
     >
-      <AvatarList />
+      <AvatarList onSetAvatar={onSetAvatarPicked} />
     </Drawer>
   );
 }
