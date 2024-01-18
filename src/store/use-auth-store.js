@@ -36,8 +36,10 @@ const useAuthStore = create((set) => ({
   },
   onLogout: async () => {
     cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
-    const onSetForceLogout = useAppMounted.getState().onSetForceLogout;
-    onSetForceLogout(true);
+
+    // USER LOGOUT (MAKE SURE NO REDIRECT)
+    useAppMounted.getState().onSetForceLogout(true);
+
     set({ user: null, token: null });
   },
   onGetUserInformation: async (token) => {
