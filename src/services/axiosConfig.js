@@ -37,8 +37,8 @@ axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     // Ex: delete old/invalid token
-
     removeAppAccessToken();
+
     // EX: Handle other error
     return Promise.reject(error);
   },
