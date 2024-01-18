@@ -18,6 +18,7 @@ function Login() {
 
   const onFinish = async (record) => {
     const loadingMessage = message.loading("Login");
+
     onLoadingLogin();
 
     const result = await onLogin(record);
