@@ -26,6 +26,7 @@ const useAuthStore = create((set, get) => ({
         // EX: Set time of cookie in 1 day
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
+
       setAppAccessToken(token);
 
       get().onGetUserInformation();
