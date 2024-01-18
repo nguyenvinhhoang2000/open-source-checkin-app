@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import AppLoadingPage from "@/components/apps/app-page-loading";
@@ -8,33 +8,26 @@ import { LOCATIONS } from "@/constants/routes";
 import useAppMounted from "@/store/use-app-mounted";
 import useAuthStore from "@/store/use-auth-store";
 
-function PrivateRoute({ children }) {
-  const location = useLocation();
+function AuthRoute({ children }) {
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get("redirect");
 
   const user = useAuthStore().user;
-
-  const isForceLogout = useAppMounted().isForceLogout;
   const isAppMounted = useAppMounted().isAppMounted;
 
-  if (isAppMounted && !user) {
-    return (
-      <Navigate
-        to={`${LOCATIONS.LOGIN}${
-          isForceLogout ? "" : `?redirect=${location.pathname}`
-        }`}
-      />
-    );
+  if (user) {
+    return <Navigate to={redirect || LOCATIONS.MEMBER_DASHBOARD} />;
   }
 
-  if (!user) {
+  if (!user && !isAppMounted) {
     return <AppLoadingPage />;
   }
 
   return children;
 }
 
-export default React.memo(PrivateRoute);
+export default React.memo(AuthRoute);
 
-PrivateRoute.propTypes = {
+AuthRoute.propTypes = {
   children: PropTypes.node.isRequired,
 };

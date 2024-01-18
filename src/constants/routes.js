@@ -10,4 +10,6 @@ export const LOCATIONS = {
   MEMBER_RANKING: "/member/ranking",
 
   UNAUTHORIZED: "/unauthorized",
+
+  INVALID: "*",
 };

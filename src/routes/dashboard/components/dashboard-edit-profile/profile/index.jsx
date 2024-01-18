@@ -9,23 +9,22 @@ import ModalEditProfile from "../modal-edit";
 function Profile() {
   const {
     value: isModalOpen,
-    setTrue: setModalOpen,
-    setFalse: setModalClose,
+    setTrue: onModalOpen,
+    setFalse: onModalClose,
   } = useBoolean(false);
   const {
     value: isLoadingOk,
-    setTrue: setLoadingOk,
-    setFalse: setUnLoadingOk,
+    setTrue: onShowLoadingOk,
+    setFalse: onHideLoadingOk,
   } = useBoolean(false);
 
   const [currentData, setCurrentData] = React.useState();
-
   const onClickOk = React.useCallback(() => {
-    setLoadingOk();
+    onShowLoadingOk();
     const handleEditData = new Promise((resolve) => {
       setTimeout(() => {
-        setUnLoadingOk();
-        setModalClose();
+        onHideLoadingOk();
+        onModalClose();
         resolve("Change profile okay");
       }, 2000);
     });
@@ -37,12 +36,12 @@ function Profile() {
       .catch((error) => {
         console.log(`🚀🚀🚀!..change error`, error);
       });
-  }, [setLoadingOk, setModalClose, setUnLoadingOk]);
+  }, [onShowLoadingOk, onModalClose, onHideLoadingOk]);
 
   const onShowModal = React.useCallback(() => {
     setCurrentData(dataProfile);
-    setModalOpen();
-  }, [setModalOpen]);
+    onModalOpen();
+  }, [onModalOpen]);
 
   return (
     <div className="flex gap-[1.5rem] font-roboto text-sm font-normal leading-[1.375rem]">
@@ -74,9 +73,9 @@ function Profile() {
           cancelText="Cancel"
           onHandleOk={onClickOk}
           isModalOpen={isModalOpen}
-          onHandleCancel={setModalClose}
+          onHandleCancel={onModalClose}
           isLoadingButtonOk={isLoadingOk}
-          onClose={setModalClose}
+          onClose={onModalClose}
         />
       </div>
     </div>
