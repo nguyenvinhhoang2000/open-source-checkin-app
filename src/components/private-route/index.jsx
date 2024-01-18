@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import AppLoadingPage from "@/components/apps/app-page-loading";
@@ -11,22 +11,20 @@ import useAuthStore from "@/store/use-auth-store";
 function PrivateRoute({ children }) {
   const location = useLocation();
 
-  const navigate = useNavigate();
-
   const user = useAuthStore().user;
 
   const isForceLogout = useAppMounted().isForceLogout;
   const isAppMounted = useAppMounted().isAppMounted;
 
-  React.useEffect(() => {
-    if (isAppMounted && !user) {
-      navigate(
-        `${LOCATIONS.LOGIN}${
+  if (isAppMounted && !user) {
+    return (
+      <Navigate
+        to={`${LOCATIONS.LOGIN}${
           isForceLogout ? "" : `?redirect=${location.pathname}`
-        }`,
-      );
-    }
-  }, [isAppMounted, user]); // eslint-disable-line
+        }`}
+      />
+    );
+  }
 
   if (!user) {
     return <AppLoadingPage />;

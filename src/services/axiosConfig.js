@@ -25,6 +25,8 @@ export function setAppAccessToken(token) {
 }
 
 export function removeAppAccessToken() {
+  cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
+
   delete axiosClient.defaults.headers.Authorization;
 }
 

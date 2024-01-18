@@ -1,8 +1,5 @@
-import cookie from "react-cookies";
 import { create } from "zustand";
 
-import { COOKIES_KEYS } from "@/constants/cookies-keys";
-import { LOCATIONS } from "@/constants/routes";
 import { TYPE_MESSAGE } from "@/constants/type-message";
 import {
   removeAppAccessToken,
@@ -37,8 +34,6 @@ const useAuthStore = create((set, get) => ({
     }
   },
   onLogout: async () => {
-    cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
-
     // USER LOGOUT (MAKE SURE NO REDIRECT)
     useAppMounted.getState().onSetForceLogout(true);
 
