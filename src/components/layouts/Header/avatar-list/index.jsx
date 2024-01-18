@@ -1,24 +1,33 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import AppPicker from "@/components/apps/app-picker";
 
 import { dataAvatar } from "@/constants/data/data-avatar";
+import useAuthStore from "@/store/use-auth-store";
 
-function AvatarList() {
-  const [picker, setPicker] = React.useState(dataAvatar[0].alt);
+function AvatarList({ onSetAvatar }) {
+  const user = useAuthStore().user;
 
-  const onSetPicker = React.useCallback((value) => {
-    setPicker(value);
-  }, []);
+  const [picker, setPicker] = React.useState(user.avatar);
+
+  const onSetPicker = React.useCallback(
+    (value) => {
+      setPicker(value);
+
+      onSetAvatar(value);
+    },
+    [onSetAvatar],
+  );
 
   return (
     <div className="grid grid-cols-3 gap-3">
-      {dataAvatar.map(({ avatar, alt }) => (
+      {dataAvatar.map(({ avatar, alt, id }) => (
         <AppPicker
-          key={alt}
+          key={id}
           onClick={onSetPicker}
-          checked={picker === alt}
-          value={alt}
+          checked={picker === id}
+          value={id}
         >
           <img className="relative rounded-[0.25rem]" src={avatar} alt={alt} />
         </AppPicker>
@@ -28,3 +37,7 @@ function AvatarList() {
 }
 
 export default AvatarList;
+
+AvatarList.propTypes = {
+  onSetAvatar: PropTypes.func.isRequired,
+};

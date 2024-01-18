@@ -14,8 +14,8 @@ const userAPI = {
   editProfile(value) {
     return axiosClient.post(ENDPOINT.EDIT_USER_PROFILE, value);
   },
-  changeAvatar(value) {
-    return axiosClient.post(ENDPOINT.CHANGE_USER_AVATAR, value);
+  changeAvatar(id) {
+    return axiosClient.put(ENDPOINT.CHANGE_USER_AVATAR, { avatar: id });
   },
 
   // ABSENT

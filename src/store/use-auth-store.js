@@ -11,6 +11,7 @@ import useAppMounted from "./use-app-mounted";
 
 const useAuthStore = create((set, get) => ({
   user: null,
+
   onLogin: async (data) => {
     try {
       const {
@@ -26,6 +27,7 @@ const useAuthStore = create((set, get) => ({
       return storeResult.onFail(error.response?.data?.message);
     }
   },
+
   onLogout: async () => {
     // USER LOGOUT (MAKE SURE NO REDIRECT)
     useAppMounted.getState().onSetForceLogout(true);
@@ -35,6 +37,7 @@ const useAuthStore = create((set, get) => ({
 
     set({ user: null });
   },
+
   onGetUserInformation: async () => {
     try {
       // SET TOKEN BEFORE CALL REQUEST
@@ -47,6 +50,19 @@ const useAuthStore = create((set, get) => ({
       return storeResult.onSuccess(message);
     } catch (error) {
       return storeResult.onFail(error.response?.data?.message);
+    }
+  },
+
+  onChangeAvatar: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.changeAvatar(data);
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      console.log(`🚀🚀🚀!..error:`, error);
+      return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },
 }));
