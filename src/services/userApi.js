@@ -27,13 +27,10 @@ const userAPI = {
     return axiosClient.get(ENDPOINT.GET_LIST_ABSENT_REQUEST, value);
   },
   getAbsentRequestDetails(value, id) {
-    return axiosClient.get(
-      `${ENDPOINT.GET_ABSENT_REQUEST_DETAILS}${id}`,
-      value,
-    );
+    return axiosClient.get(ENDPOINT.GET_ABSENT_REQUEST_DETAILS(id), value);
   },
   editAbsentRequest(value, id) {
-    return axiosClient.post(`${ENDPOINT.EDIT_ABSENT_REQUEST}${id}`, value);
+    return axiosClient.get(ENDPOINT.GET_ABSENT_REQUEST_DETAILS(id), value);
   },
 };
 
