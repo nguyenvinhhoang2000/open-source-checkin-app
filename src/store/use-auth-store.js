@@ -1,12 +1,11 @@
 import { create } from "zustand";
 
-import { TYPE_MESSAGE } from "@/constants/type-message";
 import {
   removeAppAccessToken,
   setAppAccessToken,
 } from "@/services/axiosConfig";
 import userAPI from "@/services/userApi";
-import onStoreResult from "@/utils/return-message";
+import { storeResult } from "@/utils/return-message";
 
 import useAppMounted from "./use-app-mounted";
 
@@ -22,15 +21,9 @@ const useAuthStore = create((set, get) => ({
 
       get().onGetUserInformation();
 
-      return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
+      return storeResult.onSuccess(message);
     } catch (error) {
-      return onStoreResult(
-        false,
-        TYPE_MESSAGE.ERROR,
-        error.response
-          ? error.response.data.message
-          : TYPE_MESSAGE.SYSTEM_ERROR,
-      );
+      return storeResult.onFail(error.response?.data?.message);
     }
   },
   onLogout: async () => {
@@ -51,15 +44,9 @@ const useAuthStore = create((set, get) => ({
 
       set({ user });
 
-      return onStoreResult(true, TYPE_MESSAGE.SUCCESS, message);
+      return storeResult.onSuccess(message);
     } catch (error) {
-      return onStoreResult(
-        false,
-        TYPE_MESSAGE.ERROR,
-        error.response
-          ? error.response.data.message
-          : TYPE_MESSAGE.SYSTEM_ERROR,
-      );
+      return storeResult.onFail(error.response?.data?.message);
     }
   },
 }));
