@@ -61,7 +61,18 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      console.log(`🚀🚀🚀!..error:`, error);
+      return storeResult.onFail(error.response?.data?.errors?.msg);
+    }
+  },
+
+  onSetProfile: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.editProfile(data);
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
       return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },

@@ -11,8 +11,8 @@ const userAPI = {
   getProfile() {
     return axiosClient.get(ENDPOINT.GET_USER_PROFILE);
   },
-  editProfile(value) {
-    return axiosClient.post(ENDPOINT.EDIT_USER_PROFILE, value);
+  editProfile({ phoneNumber, note }) {
+    return axiosClient.put(ENDPOINT.EDIT_USER_PROFILE, { phoneNumber, note });
   },
   changeAvatar(id) {
     return axiosClient.put(ENDPOINT.CHANGE_USER_AVATAR, { avatar: id });
