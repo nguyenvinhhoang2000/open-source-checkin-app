@@ -34,7 +34,7 @@ function App() {
       path: LOCATIONS.LOGIN,
       element: (
         <AuthRoute>
-          <Login />,
+          <Login />
         </AuthRoute>
       ),
     },
