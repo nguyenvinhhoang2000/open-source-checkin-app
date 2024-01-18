@@ -8,7 +8,7 @@ import useAuthStore from "@/store/use-auth-store";
 import { initialValues, rulesEmail, rulesPassword } from "./config-login";
 
 function Login() {
-  const { onLogin } = useAuthStore();
+  const onLogin = useAuthStore().onLogin;
 
   const {
     value: isLoadingLogin,
@@ -24,10 +24,6 @@ function Login() {
     loadingMessage();
     onUnLoadingLogin();
     message[result.status](result.message, 1);
-
-    // eslint-disable-next-line no-unused-expressions
-    // result.ok &&
-    //   window.location.replace(redirect || LOCATIONS.MEMBER_DASHBOARD);
   };
 
   return (
