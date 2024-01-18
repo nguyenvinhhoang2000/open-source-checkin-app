@@ -86,11 +86,11 @@ function App() {
       },
       token ? 500 : 0,
     );
-  }, []);
+  }, []); // eslint-disable-line
 
   React.useEffect(() => {
     onInitialize();
-  }, []);
+  }, []); // eslint-disable-line
 
   return <RouterProvider router={router} />;
 }

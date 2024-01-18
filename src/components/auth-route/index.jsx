@@ -14,14 +14,14 @@ function AuthRoute({ children }) {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
 
-  const { user } = useAuthStore();
+  const user = useAuthStore().user;
   const isAppMounted = useAppMounted().isAppMounted;
 
   React.useEffect(() => {
     if (user) {
       navigate(redirect || LOCATIONS.MEMBER_DASHBOARD);
     }
-  }, [user]);
+  }, [user]); // eslint-disable-line
 
   if (!user && !isAppMounted) {
     return <AppLoadingPage />;
