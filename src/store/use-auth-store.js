@@ -36,7 +36,9 @@ const useAuthStore = create((set, get) => ({
       return onStoreResult(
         false,
         TYPE_MESSAGE.ERROR,
-        error.response ? error.response.data.message : "Sytem error",
+        error.response
+          ? error.response.data.message
+          : TYPE_MESSAGE.SYSTEM_ERROR,
       );
     }
   },
@@ -65,7 +67,9 @@ const useAuthStore = create((set, get) => ({
       return onStoreResult(
         false,
         TYPE_MESSAGE.ERROR,
-        error.response ? error.response.data.message : "Sytem error",
+        error.response
+          ? error.response.data.message
+          : TYPE_MESSAGE.SYSTEM_ERROR,
       );
     }
   },
