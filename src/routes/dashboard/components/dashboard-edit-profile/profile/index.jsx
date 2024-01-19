@@ -34,7 +34,7 @@ function Profile() {
     onModalClose();
 
     onHideLoadingOk();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onShowModal = React.useCallback(() => {
     const dataUser = {
