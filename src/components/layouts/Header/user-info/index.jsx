@@ -1,7 +1,6 @@
 import React from "react";
 
 import NavigationDraw from "../navigation-draw";
-
 import UserDropdown from "../user-dropdown";
 
 function UserInfo() {
