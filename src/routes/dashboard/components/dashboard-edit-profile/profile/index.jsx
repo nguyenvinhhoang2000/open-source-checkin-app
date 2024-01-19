@@ -12,6 +12,8 @@ function Profile() {
   const onSetProfile = useAuthStore().onSetProfile;
   const onGetUserInformation = useAuthStore().onGetUserInformation;
 
+  const [currentData, setCurrentData] = React.useState();
+
   const {
     value: isModalOpen,
     setTrue: onModalOpen,
@@ -22,8 +24,6 @@ function Profile() {
     setTrue: onShowLoadingOk,
     setFalse: onHideLoadingOk,
   } = useBoolean(false);
-
-  const [currentData, setCurrentData] = React.useState();
 
   const onClickOk = React.useCallback(async (value) => {
     onShowLoadingOk();
@@ -46,6 +46,7 @@ function Profile() {
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
     setCurrentData(dataUser);
+
     onModalOpen();
   }, [onModalOpen, user]);
 

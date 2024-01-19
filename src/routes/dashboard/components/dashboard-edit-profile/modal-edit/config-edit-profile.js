@@ -1,8 +1,8 @@
 const rulesPhoneNumber = [
   {
     type: "string",
-    pattern: /^(\+?84|0)([3|5|7|8|9])+([0-9]{8})\b/,
-    message: "Please enter a valid phone number",
+    pattern: /^\+849[0-9]{8}\b/,
+    message: "Please enter a valid phone number(+8499999990)",
   },
 ];
 const rulesNote = [
