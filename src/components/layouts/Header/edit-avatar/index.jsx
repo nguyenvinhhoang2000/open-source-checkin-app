@@ -33,7 +33,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
     onCloseDraw();
 
     setHideLoadingOk();
-  }, [avatarPicked]); // eslint-disable-line
+  }, [avatarPicked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSetAvatarPicked = React.useCallback((value) => {
     setAvatarPicked(value);
