@@ -64,6 +64,19 @@ function UserDropdown() {
     };
   }, [onMenuClick]);
 
+  const onRenderAvatar = React.useMemo(() => {
+    return user?.avatar ? (
+      <Avatar
+        src={dataAvatar.find((item) => item.id === user.avatar).avatar}
+        size="small"
+      />
+    ) : (
+      <Avatar size="small" shape="icon" className="bg-volcano-2 text-volcano-6">
+        {user.name.slice(0, 1)}
+      </Avatar>
+    );
+  }, [user.avatar, user.name]);
+
   return (
     <div className="flex flex-row justify-end">
       <Dropdown
@@ -79,24 +92,9 @@ function UserDropdown() {
           onClick={(e) => e.preventDefault()}
           className="flex flex-row items-center gap-2 p-0"
         >
-          {user?.avatar ? (
-            <Avatar
-              src={dataAvatar.find((item) => item.id === user.avatar).avatar}
-              size="small"
-            >
-              {user.name.slice(0, 1)}
-            </Avatar>
-          ) : (
-            <Avatar
-              size="small"
-              shape="icon"
-              className=" bg-volcano-2 text-volcano-6"
-            >
-              {user.name.slice(0, 1)}
-            </Avatar>
-          )}
+          {onRenderAvatar}
           <span className="font-roboto text-[0.875rem] font-normal leading-[1.375rem] text-black/85">
-            Vinh Thai
+            {user.name}
           </span>
           <img src="/assets/icons/arrow-user-down.svg" alt="down" />
         </Button>
