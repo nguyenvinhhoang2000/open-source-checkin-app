@@ -37,7 +37,7 @@ AppPicker.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
   checked: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 AppPicker.defaultProps = {
   classNames: "",
