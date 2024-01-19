@@ -74,17 +74,32 @@ function AbsentFormModal({
     );
   }, []);
 
-  const onDisableFromAt = (current) => {
-    return current.isBefore(dayjs().subtract(1, "day"));
-    // &&
-    // dayjs(absentForm.getFieldValue("fromAt")).isBefore(
-    //   dayjs(absentForm.getFieldValue("toAt")),
-    // )
-  };
+  const onDisableFromAt = React.useMemo(() => {
+    return (current) => {
+      return (
+        current.isBefore(dayjs().subtract(1, "day")) ||
+        (dayjs(absentForm.getFieldValue("toAt")).diff(
+          dayjs(Date.now()),
+          "day",
+        ) &&
+          dayjs(current).isAfter(dayjs(absentForm.getFieldValue("toAt"))))
+      );
+    };
+  }, [absentForm]);
 
-  const onDisableToAt = (current) => {
-    return current.isBefore(dayjs().subtract(1, "day"));
-  };
+  const onDisableToAt = React.useMemo(
+    () => (current) => {
+      return (
+        (dayjs(absentForm.getFieldValue("fromAt")).diff(
+          dayjs(Date.now()),
+          "day",
+        ) &&
+          current.isBefore(dayjs(absentForm.getFieldValue("fromAt")))) ||
+        current.isBefore(dayjs().subtract(1, "day"))
+      );
+    },
+    [absentForm],
+  );
 
   return (
     <Modal
