@@ -17,7 +17,7 @@ function AppFooterPopup({
   isLoadingButtonOk,
   buttonOkType,
   buttonOkClassNames,
-  disableButtonOk,
+  isDisableButtonOk,
 }) {
   return (
     <div className={classnames(classNames, "flex flex-row justify-end gap-2")}>
@@ -38,7 +38,7 @@ function AppFooterPopup({
           </Button>
         )}
         <Button
-          disabled={isLoadingButtonOk || disableButtonOk}
+          disabled={isLoadingButtonOk || isDisableButtonOk}
           className={buttonOkClassNames}
           loading={isLoadingButtonOk}
           onClick={onOk}
@@ -65,7 +65,7 @@ AppFooterPopup.propTypes = {
   isLoadingButtonOk: PropTypes.bool.isRequired,
   buttonOkType: PropTypes.oneOf(BUTTON_TYPE),
   buttonOkClassNames: PropTypes.string,
-  disableButtonOk: PropTypes.bool,
+  isDisableButtonOk: PropTypes.bool,
 };
 
 AppFooterPopup.defaultProps = {
@@ -76,5 +76,5 @@ AppFooterPopup.defaultProps = {
   buttonOkType: BUTTON_TYPE[0],
   buttonOkClassNames: "",
   onDelete: emptyFn,
-  disableButtonOk: false,
+  isDisableButtonOk: false,
 };

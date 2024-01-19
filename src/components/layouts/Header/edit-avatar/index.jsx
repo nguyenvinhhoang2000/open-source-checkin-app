@@ -52,7 +52,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
       closable={false}
       footer={
         <AppFooterPopup
-          disableButtonOk={user.avatar === avatarPicked}
+          isDisableButtonOk={user.avatar === avatarPicked}
           cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
