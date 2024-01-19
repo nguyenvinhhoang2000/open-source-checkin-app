@@ -5,6 +5,7 @@ const rulesPhoneNumber = [
     message: "Please enter a valid phone number (0944555666)",
   },
 ];
+
 const rulesNote = [
   {
     type: "string",
