@@ -3,7 +3,12 @@ import { Button, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { GENDER } from "@/constants/gender";
+import { TABLE_HEADE } from "@/constants/table-head";
 import useAuthStore from "@/store/use-auth-store";
+import {
+  onFormatGlobalPhone,
+  onFormatVietnamesePhone,
+} from "@/utils/format-phoneNumber";
 
 import ModalEditProfile from "../modal-edit";
 
@@ -27,7 +32,12 @@ function Profile() {
   const onClickOk = React.useCallback(async (value) => {
     onShowLoadingOk();
 
-    const { status, message: messageResult } = await onSetProfile(value);
+    const formValue = {
+      ...value,
+      phoneNumber: onFormatGlobalPhone(value.phoneNumber),
+    };
+
+    const { status, message: messageResult } = await onSetProfile(formValue);
 
     message[status](messageResult, 1);
 
@@ -36,42 +46,43 @@ function Profile() {
     onHideLoadingOk();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const onFormatGender = React.useMemo(() => {
+    return GENDER.find((item) => item.id === user.gender).label;
+  }, [user.gender]);
+
+  const onFormatPhoneNumber = React.useMemo(() => {
+    return onFormatVietnamesePhone(user.phoneNumber, { space: true });
+  }, [user.phoneNumber]);
+
   const onShowModal = React.useCallback(() => {
     const dataUser = {
       ...user,
-      gender: GENDER.find((item) => item.id === user.gender).label,
+      phoneNumber: onFormatVietnamesePhone(user.phoneNumber, { space: false }),
+      gender: onFormatGender,
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
 
     setCurrentData(dataUser);
 
     onModalOpen();
-  }, [onModalOpen, user]);
-
-  const onRenderGender = React.useMemo(() => {
-    return GENDER.find((item) => item.id === user.gender).label;
-  }, [user.gender]);
+  }, [onModalOpen, onFormatGender, user]);
 
   return (
     <div className="flex w-full flex-row gap-6 text-[0.875rem]">
       <div className="flex w-[5rem] flex-col gap-[1.25rem] text-character-2">
-        <span>Name</span>
-        <span>Gender</span>
-        <span>Position</span>
-        <span>Branch</span>
-        <span>Email</span>
-        <span>Phone</span>
-        <span>Note</span>
+        {TABLE_HEADE.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
       </div>
       <div className="flex w-[17.375rem] flex-col gap-[1.25rem] break-words text-character-1">
         <span>{user.name}</span>
-        <span>{onRenderGender}</span>
+        <span>{onFormatGender}</span>
         <span>{user.position}</span>
         <span>
           {user.branch.name}, {user.branch.address}
         </span>
         <span>{user.email}</span>
-        <span>{user.phoneNumber}</span>
+        <span>{onFormatPhoneNumber}</span>
         <span>{user.note || "..."}</span>
 
         <Button
@@ -84,7 +95,7 @@ function Profile() {
             alt="icon-edit"
             title="edit-profile"
           />
-          <span className="font-roboto text-sm"> Edit Profile</span>
+          <span className="font-roboto text-sm">Edit Profile</span>
         </Button>
       </div>
       <ModalEditProfile

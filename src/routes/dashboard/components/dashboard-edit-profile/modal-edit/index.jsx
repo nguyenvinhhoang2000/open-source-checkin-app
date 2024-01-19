@@ -70,7 +70,7 @@ function ModalEditProfile({
             placeholder="Select a option and change input text above"
           >
             {GENDER.map((item) => (
-              <Select.Option key={item.value} value={item.value}>
+              <Select.Option key={item.id} value={item.id}>
                 {item.label}
               </Select.Option>
             ))}
