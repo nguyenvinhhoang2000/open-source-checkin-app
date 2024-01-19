@@ -4,6 +4,10 @@ import axios from "axios";
 import { COOKIES_KEYS } from "@/constants/cookies-keys";
 import { LOCATIONS } from "@/constants/routes";
 
+const API_STATUS = {
+  UNAUTHORIZED: 401,
+};
+
 const config = {
   baseURL: `${import.meta.env.VITE_API_URL}v1.0`,
   validateStatus: (status) => status >= 200 && status < 400,
@@ -28,13 +32,18 @@ export function removeAppAccessToken() {
   cookie.remove(COOKIES_KEYS.TOKEN, { path: LOCATIONS.LOGIN });
 
   delete axiosClient.defaults.headers.Authorization;
+
+  window.location.replace(LOCATIONS.LOGIN);
 }
 
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    // Ex: delete old/invalid token
-    removeAppAccessToken();
+    const { response } = error;
+    // EX: Handle 401 error && delete old/invalid token
+    if (response?.status === API_STATUS.UNAUTHORIZED) {
+      removeAppAccessToken();
+    }
 
     // EX: Handle other error
     return Promise.reject(error);
