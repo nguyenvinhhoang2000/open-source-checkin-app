@@ -32,8 +32,6 @@ function Profile() {
 
     message[status](messageResult, 1);
 
-    await onGetUserInformation();
-
     onModalClose();
 
     onHideLoadingOk();
@@ -45,6 +43,7 @@ function Profile() {
       gender: GENDER.find((item) => item.id === user.gender).label,
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
+
     setCurrentData(dataUser);
 
     onModalOpen();

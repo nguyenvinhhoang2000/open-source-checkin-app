@@ -11,6 +11,10 @@ function AvatarList({ onSetAvatar }) {
 
   const [picker, setPicker] = React.useState(user.avatar);
 
+  React.useEffect(() => {
+    onSetAvatar(user.avatar || null);
+  }, []);
+
   const onSetPicker = React.useCallback(
     (value) => {
       setPicker(value);

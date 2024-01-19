@@ -13,6 +13,7 @@ import AvatarList from "../avatar-list";
 
 function EditAvatarDraw({ openDraw, onCloseDraw }) {
   const onChangeAvatar = useAuthStore().onChangeAvatar;
+  const user = useAuthStore().user;
 
   const [avatarPicked, setAvatarPicked] = React.useState();
 
@@ -33,7 +34,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
     onCloseDraw();
 
     setHideLoadingOk();
-  }, [avatarPicked]); // eslint-disable-line
+  }, [avatarPicked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSetAvatarPicked = React.useCallback((value) => {
     setAvatarPicked(value);
@@ -51,6 +52,7 @@ function EditAvatarDraw({ openDraw, onCloseDraw }) {
       closable={false}
       footer={
         <AppFooterPopup
+          disableButtonOk={user.avatar === avatarPicked}
           cancelText="Cancel"
           okText="Save"
           onOk={onSumbit}
