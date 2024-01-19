@@ -3,11 +3,12 @@ import { Button, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import useAuthStore from "@/store/use-auth-store";
-import replacePrefixPhoneNumber from "@/utils/format-phoneNumber";
+import { formatPhoneApi, formatPhoneUi } from "@/utils/format-phoneNumber";
 
 import ModalEditProfile from "../modal-edit";
 
-import { renderGender, TABLE_HEADED } from "./table-head";
+import { formatInfo } from "./formatInfo";
+import { TABLE_HEADED } from "./table-head";
 
 function Profile() {
   const user = useAuthStore().user;
@@ -31,10 +32,7 @@ function Profile() {
 
     const formValue = {
       ...value,
-      phoneNumber: replacePrefixPhoneNumber(value.phoneNumber, {
-        space: false,
-        type: "+84",
-      }),
+      phoneNumber: formatPhoneApi(value.phoneNumber),
     };
 
     const { status, message: messageResult } = await onSetProfile(formValue);
@@ -49,11 +47,7 @@ function Profile() {
   const onShowModal = React.useCallback(() => {
     const dataUser = {
       ...user,
-      phoneNumber: replacePrefixPhoneNumber(user.phoneNumber, {
-        space: false,
-        type: "0x",
-      }),
-      gender: renderGender(user.gender),
+      phoneNumber: formatPhoneUi(user.phoneNumber),
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
 
@@ -62,36 +56,16 @@ function Profile() {
     onModalOpen();
   }, [onModalOpen, user]);
 
-  const renderTableHeadDetail = React.useMemo(
-    () =>
-      TABLE_HEADED.map((item) => {
-        let content;
-
-        if (item.child) {
-          content = `${user[item.key][item.child.NAME]}, ${
-            user[item.key][item.child.ADDRESS]
-          }`;
-        } else if (item.format) {
-          content = item.format(user[item.key]);
-        } else {
-          content = user[item.key];
-        }
-
-        return <span key={item.key}>{content}</span>;
-      }),
-    [user],
-  );
-
   return (
-    <div className="flex w-full flex-row gap-6 text-[0.875rem]">
-      <div className="flex w-[5rem] flex-col gap-[1.25rem] text-character-2">
-        {TABLE_HEADED.map((item) => (
-          <span key={item.key}>{item.label}</span>
-        ))}
-      </div>
-      <div className="flex w-[17.375rem] flex-col gap-[1.25rem] break-words text-character-1">
-        {renderTableHeadDetail}
-
+    <div className="flex flex-col gap-6 text-[0.875rem]">
+      {TABLE_HEADED.map((item) => (
+        <div key={item.key} className="flex flex-row gap-6">
+          <span className="min-w-[5rem] text-character-2">{item.label}</span>
+          <span>{formatInfo(item, TABLE_HEADED, user)}</span>
+        </div>
+      ))}
+      <div className="flex flex-row gap-6">
+        <span className="min-w-[5rem] text-character-2" />
         <Button
           type="primary"
           className="flex max-w-[9rem] items-center gap-[0.625rem] sm:max-w-[7.75rem]"
