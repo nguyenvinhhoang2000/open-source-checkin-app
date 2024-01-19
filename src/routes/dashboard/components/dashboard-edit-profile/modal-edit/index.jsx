@@ -28,11 +28,7 @@ function ModalEditProfile({
   }, [currentData, updateProfileForm]);
 
   const onSubmit = React.useCallback(() => {
-    // HANDLE UPDATE DATA RIGHT HERE
-    const record = updateProfileForm.getFieldsValue();
-    console.log(`🚀🚀🚀!..record:`, record);
-    // CLOSE AFTER UPDATE DATA
-    onHandleOk();
+    onHandleOk(updateProfileForm.getFieldsValue());
   }, [onHandleOk, updateProfileForm]);
 
   return (
