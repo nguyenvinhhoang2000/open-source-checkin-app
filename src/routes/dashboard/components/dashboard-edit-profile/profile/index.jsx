@@ -2,15 +2,12 @@ import React from "react";
 import { Button, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
-import { GENDER } from "@/constants/gender";
-import { TABLE_HEADE } from "@/constants/table-head";
 import useAuthStore from "@/store/use-auth-store";
-import {
-  onFormatGlobalPhone,
-  onFormatVietnamesePhone,
-} from "@/utils/format-phoneNumber";
+import replacePrefixPhoneNumber from "@/utils/format-phoneNumber";
 
 import ModalEditProfile from "../modal-edit";
+
+import { renderGender, TABLE_HEADED } from "./table-head";
 
 function Profile() {
   const user = useAuthStore().user;
@@ -34,7 +31,10 @@ function Profile() {
 
     const formValue = {
       ...value,
-      phoneNumber: onFormatGlobalPhone(value.phoneNumber),
+      phoneNumber: replacePrefixPhoneNumber(value.phoneNumber, {
+        space: false,
+        type: "+84",
+      }),
     };
 
     const { status, message: messageResult } = await onSetProfile(formValue);
@@ -46,44 +46,51 @@ function Profile() {
     onHideLoadingOk();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onFormatGender = React.useMemo(() => {
-    return GENDER.find((item) => item.id === user.gender).label;
-  }, [user.gender]);
-
-  const onFormatPhoneNumber = React.useMemo(() => {
-    return onFormatVietnamesePhone(user.phoneNumber, { space: true });
-  }, [user.phoneNumber]);
-
   const onShowModal = React.useCallback(() => {
     const dataUser = {
       ...user,
-      phoneNumber: onFormatVietnamesePhone(user.phoneNumber, { space: false }),
-      gender: onFormatGender,
+      phoneNumber: replacePrefixPhoneNumber(user.phoneNumber, {
+        space: false,
+        type: "0x",
+      }),
+      gender: renderGender(user.gender),
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
 
     setCurrentData(dataUser);
 
     onModalOpen();
-  }, [onModalOpen, onFormatGender, user]);
+  }, [onModalOpen, user]);
+
+  const renderTableHeadDetail = React.useMemo(
+    () =>
+      TABLE_HEADED.map((item) => {
+        let content;
+
+        if (item.child) {
+          content = `${user[item.key][item.child.NAME]}, ${
+            user[item.key][item.child.ADDRESS]
+          }`;
+        } else if (item.format) {
+          content = item.format(user[item.key]);
+        } else {
+          content = user[item.key];
+        }
+
+        return <span key={item.key}>{content}</span>;
+      }),
+    [user],
+  );
 
   return (
     <div className="flex w-full flex-row gap-6 text-[0.875rem]">
       <div className="flex w-[5rem] flex-col gap-[1.25rem] text-character-2">
-        {TABLE_HEADE.map((item) => (
-          <span key={item}>{item}</span>
+        {TABLE_HEADED.map((item) => (
+          <span key={item.key}>{item.label}</span>
         ))}
       </div>
       <div className="flex w-[17.375rem] flex-col gap-[1.25rem] break-words text-character-1">
-        <span>{user.name}</span>
-        <span>{onFormatGender}</span>
-        <span>{user.position}</span>
-        <span>
-          {user.branch.name}, {user.branch.address}
-        </span>
-        <span>{user.email}</span>
-        <span>{onFormatPhoneNumber}</span>
-        <span>{user.note || "..."}</span>
+        {renderTableHeadDetail}
 
         <Button
           type="primary"
