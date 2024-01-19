@@ -21,6 +21,13 @@ import { ABSENT_TYPES } from "@/constants/absent-types";
 import useAuthStore from "@/store/use-auth-store";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
+import {
+  absentTypes,
+  description,
+  fromAt,
+  reasonType,
+  toAt,
+} from "./config-form";
 import CustomizeFormLabel from "./CustomizeFormLabel";
 
 function AbsentFormModal({
@@ -52,15 +59,32 @@ function AbsentFormModal({
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
-    setLoadingButtonOk();
-    const { status, message: messageResult } = createAbsentRequest(
+    // setLoadingButtonOk();
+    // const { status, message: messageResult } = createAbsentRequest(
+    //   absentForm.getFieldsValue(),
+    // );
+
+    // message[status](messageResult, 1);
+
+    // setUnLoadingButtonOk();
+
+    console.log(
+      `🚀🚀🚀!..absentForm.getFieldsValue():`,
       absentForm.getFieldsValue(),
     );
-
-    message[status](messageResult, 1);
-
-    setUnLoadingButtonOk();
   }, []);
+
+  const onDisableFromAt = (current) => {
+    return current.isBefore(dayjs().subtract(1, "day"));
+    // &&
+    // dayjs(absentForm.getFieldValue("fromAt")).isBefore(
+    //   dayjs(absentForm.getFieldValue("toAt")),
+    // )
+  };
+
+  const onDisableToAt = (current) => {
+    return current.isBefore(dayjs().subtract(1, "day"));
+  };
 
   return (
     <Modal
@@ -97,10 +121,14 @@ function AbsentFormModal({
       >
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item name="absentType" label="Type Absent" required>
+            <Form.Item
+              name="absentType"
+              label="Type Absent"
+              rules={absentTypes}
+            >
               <Select placeholder="Select type" allowClear>
                 {ABSENT_TYPES.map((item) => (
-                  <Select.Option value={item.key} key={item.key}>
+                  <Select.Option value={item.id} key={item.id}>
                     {item.label}
                   </Select.Option>
                 ))}
@@ -111,13 +139,14 @@ function AbsentFormModal({
             <Form.Item
               hasFeedback
               labelAlign="right"
-              name="reason"
+              name="reasonType"
               label="Reason"
               required
+              rules={reasonType}
             >
               <Select placeholder="Select reason" allowClear>
                 {ABSENT_REASONS.map((item) => (
-                  <Select.Option value={item.key} key={item.key}>
+                  <Select.Option value={item.id} key={item.id}>
                     {item.label}
                   </Select.Option>
                 ))}
@@ -127,8 +156,9 @@ function AbsentFormModal({
         </Row>
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item name="fromAt" label="From" required>
+            <Form.Item name="fromAt" label="From" required rules={fromAt}>
               <DatePicker
+                disabledDate={onDisableFromAt}
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
@@ -143,8 +173,9 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="toAt" label="To" required>
+            <Form.Item name="toAt" label="To" required rules={toAt}>
               <DatePicker
+                disabledDate={onDisableToAt}
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
@@ -159,7 +190,12 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item name="description" label="Description" required>
+        <Form.Item
+          name="description"
+          label="Description"
+          required
+          rules={description}
+        >
           <Input.TextArea
             showCount
             maxLength={100}
