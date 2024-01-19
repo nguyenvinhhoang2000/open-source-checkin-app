@@ -10,7 +10,6 @@ import ModalEditProfile from "../modal-edit";
 function Profile() {
   const user = useAuthStore().user;
   const onSetProfile = useAuthStore().onSetProfile;
-  const onGetUserInformation = useAuthStore().onGetUserInformation;
 
   const [currentData, setCurrentData] = React.useState();
 
