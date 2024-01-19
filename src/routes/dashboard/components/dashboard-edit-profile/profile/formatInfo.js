@@ -10,7 +10,7 @@ export const formatUserProfile = (item, user) => {
       );
 
     case "branch":
-      return `${user.branch.name}, ${user.branch.address}`;
+      return `${user.branch?.name}, ${user.branch?.address}`;
 
     case "gender":
       return GENDER.find((gender) => gender.id === user.gender).label;
