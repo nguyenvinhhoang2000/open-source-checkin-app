@@ -15,6 +15,8 @@ export default {
     "text-neutral-3",
     "text-neutral-4",
     "text-secondary-6",
+    "text-secondary-2",
+    "text-volcano-6",
     "top-0",
     "z-40",
   ],

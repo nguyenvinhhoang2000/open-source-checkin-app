@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import { LOCATIONS } from "@/constants/routes";
 
-import Navigation from "./components/navigation";
-import UserInfo from "./components/user-info";
+import Navigation from "./navigation";
+import UserInfo from "./user-info";
 
 function Header() {
   return (
