@@ -3,10 +3,13 @@ import { Button } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import { dataProfile } from "@/constants/data/data-profile.js";
+import { GENDER } from "@/constants/gender";
+import useAuthStore from "@/store/use-auth-store";
 
 import ModalEditProfile from "../modal-edit";
 
 function Profile() {
+  const user = useAuthStore().user;
   const {
     value: isModalOpen,
     setTrue: onModalOpen,
@@ -44,16 +47,26 @@ function Profile() {
   }, [onModalOpen]);
 
   return (
-    <div className="flex gap-[1.5rem] font-roboto text-sm font-normal leading-[1.375rem]">
-      <div className="flex flex-col gap-[1.25rem] text-character-2">
-        {Object.keys(dataProfile).map((item) => (
-          <span key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
-        ))}
+    <div className="flex w-full flex-row gap-6">
+      <div className="flex w-[5rem] flex-col gap-[1.25rem] text-character-2">
+        <span>Name</span>
+        <span>Gender</span>
+        <span>Position</span>
+        <span>Branch</span>
+        <span>Email</span>
+        <span>Phone</span>
+        <span>Note</span>
       </div>
-      <div className="flex flex-col gap-[1.25rem] text-character-1">
-        {Object.keys(dataProfile).map((item) => (
-          <span key={item}>{dataProfile[item]}</span>
-        ))}
+      <div className="flex w-[17.375rem] flex-col gap-[1.25rem] break-words text-character-1">
+        <span>{user.name}</span>
+        <span>{GENDER.find((item) => item.id === user.gender).label}</span>
+        <span>{user.position}</span>
+        <span>
+          {user.branch.name}, {user.branch.address}
+        </span>
+        <span>{user.email}</span>
+        <span>{user.phoneNumber}</span>
+        <span>{user.note || "..."}</span>
 
         <Button
           type="primary"
@@ -67,17 +80,17 @@ function Profile() {
           />
           <span className="font-roboto text-sm"> Edit Profile</span>
         </Button>
-        <ModalEditProfile
-          currentData={currentData}
-          okText="Save"
-          cancelText="Cancel"
-          onHandleOk={onClickOk}
-          isModalOpen={isModalOpen}
-          onHandleCancel={onModalClose}
-          isLoadingButtonOk={isLoadingOk}
-          onClose={onModalClose}
-        />
       </div>
+      <ModalEditProfile
+        currentData={currentData}
+        okText="Save"
+        cancelText="Cancel"
+        onHandleOk={onClickOk}
+        isModalOpen={isModalOpen}
+        onHandleCancel={onModalClose}
+        isLoadingButtonOk={isLoadingOk}
+        onClose={onModalClose}
+      />
     </div>
   );
 }
