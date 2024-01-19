@@ -59,6 +59,8 @@ const useAuthStore = create((set, get) => ({
         data: { message },
       } = await userAPI.changeAvatar(data);
 
+      await get().onGetUserInformation();
+
       return storeResult.onSuccess(message);
     } catch (error) {
       return storeResult.onFail(error.response?.data?.errors?.msg);
