@@ -1,7 +1,3 @@
-import { GENDER } from "@/constants/gender";
-
-const renderGender = (id) => GENDER.find((gender) => gender.id === id)?.label;
-
 const TABLE_HEADED = [
   { key: "name", label: "Name" },
   {
@@ -22,4 +18,4 @@ const TABLE_HEADED = [
   { key: "note", label: "Note" },
 ];
 
-export { renderGender, TABLE_HEADED };
+export { TABLE_HEADED };

@@ -7,7 +7,7 @@ import { formatPhoneApi, formatPhoneUi } from "@/utils/format-phoneNumber";
 
 import ModalEditProfile from "../modal-edit";
 
-import { formatInfo } from "./formatInfo";
+import { formatUserProfile } from "./formatInfo";
 import { TABLE_HEADED } from "./table-head";
 
 function Profile() {
@@ -61,7 +61,7 @@ function Profile() {
       {TABLE_HEADED.map((item) => (
         <div key={item.key} className="flex flex-row gap-6">
           <span className="min-w-[5rem] text-character-2">{item.label}</span>
-          <span>{formatInfo(item, TABLE_HEADED, user)}</span>
+          <span>{formatUserProfile(item, user)}</span>
         </div>
       ))}
       <div className="flex flex-row gap-6">
