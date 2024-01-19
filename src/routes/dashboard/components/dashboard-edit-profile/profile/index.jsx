@@ -48,6 +48,10 @@ function Profile() {
     onModalOpen();
   }, [onModalOpen, user]);
 
+  const onRenderGender = React.useMemo(() => {
+    return GENDER.find((item) => item.id === user.gender).label;
+  }, [user.gender]);
+
   return (
     <div className="flex w-full flex-row gap-6 text-[0.875rem]">
       <div className="flex w-[5rem] flex-col gap-[1.25rem] text-character-2">
@@ -61,7 +65,7 @@ function Profile() {
       </div>
       <div className="flex w-[17.375rem] flex-col gap-[1.25rem] break-words text-character-1">
         <span>{user.name}</span>
-        <span>{GENDER.find((item) => item.id === user.gender).label}</span>
+        <span>{onRenderGender}</span>
         <span>{user.position}</span>
         <span>
           {user.branch.name}, {user.branch.address}
