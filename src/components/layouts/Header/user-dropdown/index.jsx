@@ -79,7 +79,7 @@ function UserDropdown() {
           onClick={(e) => e.preventDefault()}
           className="flex flex-row items-center gap-2 p-0"
         >
-          {user.avatar ? (
+          {user?.avatar ? (
             <Avatar
               src={dataAvatar.find((item) => item.id === user.avatar).avatar}
               size="small"
