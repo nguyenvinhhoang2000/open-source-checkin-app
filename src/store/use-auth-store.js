@@ -66,6 +66,20 @@ const useAuthStore = create((set, get) => ({
       return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },
+
+  onCreateAbsentRequest: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.changeAvatar(data);
+
+      await get().onGetUserInformation();
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      return storeResult.onFail(error.response?.data?.errors?.msg);
+    }
+  },
 }));
 
 export default useAuthStore;

@@ -1,5 +1,14 @@
 import React from "react";
-import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
+import {
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Modal,
+  Row,
+  Select,
+} from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
@@ -9,6 +18,7 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 
 import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
+import useAuthStore from "@/store/use-auth-store";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 import CustomizeFormLabel from "./CustomizeFormLabel";
@@ -20,6 +30,8 @@ function AbsentFormModal({
   currentData,
   formName,
 }) {
+  const createAbsentRequest = useAuthStore().createAbsentRequest;
+
   const {
     value: isLoadingButtonOk,
     setTrue: setLoadingButtonOk,
@@ -41,22 +53,14 @@ function AbsentFormModal({
 
   const onSubmit = React.useCallback(() => {
     setLoadingButtonOk();
-    const record = absentForm.getFieldsValue();
-    const handleRequest = new Promise((resolve) => {
-      setTimeout(() => {
-        setUnLoadingButtonOk();
-        onClose();
-        resolve(record);
-      }, [2000]);
-    });
-    handleRequest
-      .then((res) => {
-        console.log(`🚀🚀🚀!..res:`, res);
-      })
-      .catch((err) => {
-        console.log(`🚀🚀🚀!..err:`, err);
-      });
-  }, [absentForm, onClose, setLoadingButtonOk, setUnLoadingButtonOk]);
+    const { status, message: messageResult } = createAbsentRequest(
+      absentForm.getFieldsValue(),
+    );
+
+    message[status](messageResult, 1);
+
+    setUnLoadingButtonOk();
+  }, []);
 
   return (
     <Modal
@@ -123,7 +127,7 @@ function AbsentFormModal({
         </Row>
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item name="from" label="From" required>
+            <Form.Item name="fromAt" label="From" required>
               <DatePicker
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
@@ -139,7 +143,7 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="to" label="To" required>
+            <Form.Item name="toAt" label="To" required>
               <DatePicker
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
