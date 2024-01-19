@@ -61,7 +61,6 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      console.log(`🚀🚀🚀!..error:`, error);
       return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },
