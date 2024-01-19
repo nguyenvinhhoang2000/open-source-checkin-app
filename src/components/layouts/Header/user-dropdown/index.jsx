@@ -83,7 +83,6 @@ function UserDropdown() {
             <Avatar
               src={dataAvatar.find((item) => item.id === user.avatar).avatar}
               size="small"
-              className=" bg-volcano-2 text-volcano-6"
             >
               {user.name.slice(0, 1)}
             </Avatar>
