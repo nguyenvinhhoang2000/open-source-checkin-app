@@ -50,13 +50,7 @@ function AbsentTable({ filterTime }) {
     };
 
     onGetListData();
-  }, [
-    filterTime,
-    onGetListAbsentRequest,
-    onHideLoadingAbsentTable,
-    onShowLoadingAbsentTable,
-    pageCurrent,
-  ]);
+  }, [filterTime, pageCurrent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
 
