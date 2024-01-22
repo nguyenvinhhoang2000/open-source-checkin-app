@@ -24,6 +24,8 @@ function AbsentTable({ filterTime }) {
 
   const [pageCurrent, setPageCurrent] = React.useState(1);
 
+  const [dataSelectAction, setDataSelectAction] = React.useState({});
+
   const {
     value: isOpenView,
     setTrue: onOpenView,
@@ -38,6 +40,7 @@ function AbsentTable({ filterTime }) {
   React.useEffect(() => {
     const onGetListData = async () => {
       onShowLoadingAbsentTable();
+
       const { payload } = await onGetListAbsentRequest(
         filterTime,
         pageCurrent,
@@ -51,8 +54,6 @@ function AbsentTable({ filterTime }) {
 
     onGetListData();
   }, [filterTime, pageCurrent]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const [dataSelectAction, setDataSelectAction] = React.useState({});
 
   const onOpenModalView = React.useCallback(
     (columnData, record) => {
@@ -179,7 +180,7 @@ function AbsentTable({ filterTime }) {
   }, [absentData.total]);
 
   return (
-    <div>
+    <>
       <Table
         loading={isLoadingAbsentTable}
         pagination={pagination}
@@ -190,6 +191,13 @@ function AbsentTable({ filterTime }) {
         dataSource={absentData.data}
       />
 
+      <AbsentModalView
+        onClose={onCloseView}
+        isModalOpen={isOpenView}
+        currentData={dataSelectAction}
+        onOpenEdit={onOpenEdit}
+      />
+
       <AbsentFormModal
         onClose={onCloseEdit}
         cancelText="Cancel"
@@ -197,13 +205,7 @@ function AbsentTable({ filterTime }) {
         currentData={dataSelectAction}
         formName="edit-absent"
       />
-      <AbsentModalView
-        onClose={onCloseView}
-        isModalOpen={isOpenView}
-        currentData={dataSelectAction}
-        onOpenEdit={onOpenEdit}
-      />
-    </div>
+    </>
   );
 }
 

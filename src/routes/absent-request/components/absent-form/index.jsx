@@ -51,8 +51,8 @@ function AbsentFormModal({
     if (currentData && currentData?.record) {
       const currentOne = {
         ...currentData.record,
-        to: dayjs(new Date(currentData.record.toAt)),
-        from: dayjs(new Date(currentData.record.fromAt)),
+        toAt: dayjs(new Date(currentData.record?.toAt)),
+        fromAt: dayjs(new Date(currentData.record?.fromAt)),
       };
       absentForm.setFieldsValue(currentOne);
     }

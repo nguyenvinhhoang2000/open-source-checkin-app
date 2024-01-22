@@ -1,11 +1,11 @@
 import { TYPE_MESSAGE } from "@/constants/type-message";
 
 export const storeResult = {
-  onSuccess(payload, message) {
+  onSuccess(message, payload) {
     return {
       ok: true,
       status: TYPE_MESSAGE.SUCCESS,
-      message: message || TYPE_MESSAGE.SYSTEM_ERROR,
+      message,
       payload,
     };
   },
