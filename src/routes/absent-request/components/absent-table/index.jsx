@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import useAuthStore from "@/store/use-auth-store";
+import useLoadingStore from "@/store/use-loading-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
 import AbsentFormModal from "../absent-form";
@@ -13,6 +14,10 @@ import AbsentModalView from "../absent-view";
 import { pagination, scroll } from "./config";
 
 function AbsentTable({ filterTime }) {
+  const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
+  const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
+  const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
+
   const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
 
   const [absentData, setAbsentData] = React.useState([]);
@@ -30,13 +35,21 @@ function AbsentTable({ filterTime }) {
 
   React.useEffect(() => {
     const onGetListData = async () => {
+      onShowLoadingAbsentTable();
       const { payload } = await onGetListAbsentRequest(filterTime, 1, 20);
+
+      onHideLoadingAbsentTable();
 
       setAbsentData(payload);
     };
 
     onGetListData();
-  }, [filterTime, onGetListAbsentRequest]);
+  }, [
+    filterTime,
+    onGetListAbsentRequest,
+    onHideLoadingAbsentTable,
+    onShowLoadingAbsentTable,
+  ]);
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
 
@@ -156,12 +169,12 @@ function AbsentTable({ filterTime }) {
   return (
     <div>
       <Table
+        loading={isLoadingAbsentTable}
         pagination={pagination}
         scroll={scroll}
         rowKey="_id"
         columns={columns}
         dataSource={absentData}
-        // onChange={onSetPage}
       />
 
       <AbsentFormModal
