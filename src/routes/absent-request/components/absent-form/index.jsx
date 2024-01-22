@@ -72,8 +72,8 @@ function AbsentFormModal({
     onClose();
   }, []);
 
-  const onDisableFromAt = React.useMemo(() => {
-    return (current) => {
+  const onDisableFromAt = React.useCallback(
+    (current) => {
       return (
         current.isBefore(dayjs().subtract(1, "day")) ||
         (dayjs(absentForm.getFieldValue("toAt")).diff(
@@ -82,11 +82,12 @@ function AbsentFormModal({
         ) &&
           dayjs(current).isAfter(dayjs(absentForm.getFieldValue("toAt"))))
       );
-    };
-  }, [absentForm]);
+    },
+    [absentForm],
+  );
 
-  const onDisableToAt = React.useMemo(
-    () => (current) => {
+  const onDisableToAt = React.useCallback(
+    (current) => {
       return (
         (dayjs(absentForm.getFieldValue("fromAt")).diff(
           dayjs(Date.now()),

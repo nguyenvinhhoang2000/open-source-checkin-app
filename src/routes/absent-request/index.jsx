@@ -14,12 +14,15 @@ function AbsentRequestTable() {
     setTrue: onOpenCreateAbsent,
     setFalse: onCloseCreateAbsent,
   } = useBoolean(false);
+
   const [filterTime, setFilterTime] = React.useState(
     defaultItemFilterTime[0].key,
   );
+
   const onFilterTime = React.useCallback((record) => {
     setFilterTime(record.key);
   }, []);
+
   return (
     <section className="container mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
       <AppHeaderTable
