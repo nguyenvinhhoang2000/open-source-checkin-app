@@ -84,13 +84,10 @@ const useAuthStore = create((set, get) => ({
   onGetListAbsentRequest: async (filterTime, page, limit) => {
     try {
       const {
-        data: {
-          message,
-          payload: { data },
-        },
+        data: { message, payload },
       } = await userAPI.getListAbsentRequest(filterTime, page, limit);
 
-      return storeResult.onSuccess(data, message);
+      return storeResult.onSuccess(payload, message);
     } catch (error) {
       console.log(`🚀🚀🚀!..error:`, error);
       return storeResult.onFail([], error.response?.data?.errors?.msg);

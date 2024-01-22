@@ -11,7 +11,7 @@ import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import AbsentFormModal from "../absent-form";
 import AbsentModalView from "../absent-view";
 
-import { pagination, scroll } from "./config";
+import { scroll } from "./config";
 
 function AbsentTable({ filterTime }) {
   const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
@@ -20,7 +20,9 @@ function AbsentTable({ filterTime }) {
 
   const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
 
-  const [absentData, setAbsentData] = React.useState([]);
+  const [absentData, setAbsentData] = React.useState({});
+
+  const [pageCurrent, setPageCurrent] = React.useState(1);
 
   const {
     value: isOpenView,
@@ -36,7 +38,11 @@ function AbsentTable({ filterTime }) {
   React.useEffect(() => {
     const onGetListData = async () => {
       onShowLoadingAbsentTable();
-      const { payload } = await onGetListAbsentRequest(filterTime, 1, 20);
+      const { payload } = await onGetListAbsentRequest(
+        filterTime,
+        pageCurrent,
+        10,
+      );
 
       onHideLoadingAbsentTable();
 
@@ -49,6 +55,7 @@ function AbsentTable({ filterTime }) {
     onGetListAbsentRequest,
     onHideLoadingAbsentTable,
     onShowLoadingAbsentTable,
+    pageCurrent,
   ]);
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
@@ -166,15 +173,27 @@ function AbsentTable({ filterTime }) {
     },
   ];
 
+  const onChangePage = React.useCallback((page) => {
+    setPageCurrent(page.current);
+  }, []);
+
+  const pagination = React.useMemo(() => {
+    return {
+      total: absentData.total,
+      showSizeChanger: false,
+    };
+  }, [absentData.total]);
+
   return (
     <div>
       <Table
         loading={isLoadingAbsentTable}
         pagination={pagination}
+        onChange={onChangePage}
         scroll={scroll}
         rowKey="_id"
         columns={columns}
-        dataSource={absentData}
+        dataSource={absentData.data}
       />
 
       <AbsentFormModal
