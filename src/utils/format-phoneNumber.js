@@ -1,4 +1,4 @@
-export function formatPhoneUi(phone) {
+export function formatPhoneUI(phone) {
   return phone?.replace(/^(\+84|0)/, 0);
 }
 

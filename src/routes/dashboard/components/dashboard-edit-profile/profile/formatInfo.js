@@ -1,10 +1,10 @@
 import { GENDER } from "@/constants/gender";
-import { formatPhoneUi } from "@/utils/format-phoneNumber";
+import { formatPhoneUI } from "@/utils/format-phoneNumber";
 
 export const formatUserProfile = (item, user) => {
   switch (item.key) {
     case "phoneNumber":
-      return formatPhoneUi(user[item.key]).replace(
+      return formatPhoneUI(user[item.key]).replace(
         /(\d{4})(\d{3})(\d{3})/,
         "$1 $2 $3",
       );

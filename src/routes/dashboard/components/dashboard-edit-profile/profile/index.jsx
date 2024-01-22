@@ -3,7 +3,7 @@ import { Button, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import useAuthStore from "@/store/use-auth-store";
-import { formatPhoneApi, formatPhoneUi } from "@/utils/format-phoneNumber";
+import { formatPhoneApi, formatPhoneUI } from "@/utils/format-phoneNumber";
 
 import ModalEditProfile from "../modal-edit";
 
@@ -14,13 +14,12 @@ function Profile() {
   const user = useAuthStore().user;
   const onSetProfile = useAuthStore().onSetProfile;
 
-  const [currentData, setCurrentData] = React.useState();
-
   const {
     value: isModalOpen,
-    setTrue: onModalOpen,
-    setFalse: onModalClose,
+    setTrue: onShowModal,
+    setFalse: onHideModal,
   } = useBoolean(false);
+
   const {
     value: isLoadingOk,
     setTrue: onShowLoadingOk,
@@ -39,22 +38,18 @@ function Profile() {
 
     message[status](messageResult, 1);
 
-    onModalClose();
+    onHideModal();
 
     onHideLoadingOk();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onShowModal = React.useCallback(() => {
-    const dataUser = {
+  const renderUser = React.useMemo(() => {
+    return {
       ...user,
-      phoneNumber: formatPhoneUi(user.phoneNumber),
+      phoneNumber: formatPhoneUI(user.phoneNumber),
       branch: `${user.branch.name}, ${user.branch.address}`,
     };
-
-    setCurrentData(dataUser);
-
-    onModalOpen();
-  }, [onModalOpen, user]);
+  }, [user]);
 
   return (
     <div className="flex flex-col gap-6 text-[0.875rem]">
@@ -80,14 +75,14 @@ function Profile() {
         </Button>
       </div>
       <ModalEditProfile
-        currentData={currentData}
+        currentData={renderUser}
         okText="Save"
         cancelText="Cancel"
         onHandleOk={onClickOk}
         isModalOpen={isModalOpen}
-        onHandleCancel={onModalClose}
+        onHandleCancel={onHideModal}
         isLoadingButtonOk={isLoadingOk}
-        onClose={onModalClose}
+        onClose={onHideModal}
       />
     </div>
   );
