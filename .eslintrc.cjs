@@ -4,7 +4,6 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "airbnb",
-
     "plugin:react/jsx-runtime",
     "plugin:react/recommended",
     "plugin:import/recommended",
