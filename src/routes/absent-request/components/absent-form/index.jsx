@@ -37,8 +37,6 @@ function AbsentFormModal({
       };
       absentForm.setFieldsValue(currentOne);
     }
-
-    console.log(`🚀🚀🚀!..currentData?.record:`, currentData?.record);
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
