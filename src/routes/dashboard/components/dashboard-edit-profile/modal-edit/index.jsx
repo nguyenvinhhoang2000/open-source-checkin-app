@@ -9,6 +9,8 @@ import { POSITION } from "@/constants/company-location";
 import { GENDER } from "@/constants/gender";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
+import { rulesNote, rulesPhoneNumber } from "./config-edit-profile";
+
 function ModalEditProfile({
   cancelText,
   okText,
@@ -25,13 +27,13 @@ function ModalEditProfile({
     updateProfileForm.setFieldsValue(currentData);
   }, [currentData, updateProfileForm]);
 
-  const onSubmit = React.useCallback(() => {
-    // HANDLE UPDATE DATA RIGHT HERE
-    const record = updateProfileForm.getFieldsValue();
-    console.log(`🚀🚀🚀!..record:`, record);
-    // CLOSE AFTER UPDATE DATA
-    onHandleOk();
-  }, [onHandleOk, updateProfileForm]);
+  const onSubmit = React.useCallback(async () => {
+    const { errorFields } = await updateProfileForm.validateFields();
+
+    if (!errorFields) {
+      onHandleOk(updateProfileForm.getFieldsValue());
+    }
+  }, []);
 
   return (
     <Modal
@@ -72,7 +74,7 @@ function ModalEditProfile({
             placeholder="Select a option and change input text above"
           >
             {GENDER.map((item) => (
-              <Select.Option key={item.value} value={item.value}>
+              <Select.Option key={item.id} value={item.id}>
                 {item.label}
               </Select.Option>
             ))}
@@ -93,10 +95,15 @@ function ModalEditProfile({
             ))}
           </Select>
         </Form.Item>
-        <Form.Item className="mb-2" name="phone" label="Phone">
+        <Form.Item
+          className="mb-2"
+          name="phoneNumber"
+          label="Phone"
+          rules={rulesPhoneNumber}
+        >
           <Input placeholder="Enter your Phone" />
         </Form.Item>
-        <Form.Item className="mb-2" name="note" label="Note">
+        <Form.Item className="mb-2" name="note" label="Note" rules={rulesNote}>
           <Input.TextArea
             showCount
             maxLength={100}
