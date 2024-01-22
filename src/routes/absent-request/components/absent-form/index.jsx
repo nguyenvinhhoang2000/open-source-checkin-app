@@ -153,7 +153,6 @@ function AbsentFormModal({
           </Col>
           <Col span={12}>
             <Form.Item
-              hasFeedback
               labelAlign="right"
               name="reasonType"
               label="Reason"
