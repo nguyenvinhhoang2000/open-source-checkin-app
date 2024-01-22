@@ -67,11 +67,21 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
+<<<<<<< HEAD
   onCreateAbsentRequest: async (data) => {
     try {
       const {
         data: { message },
       } = await userAPI.createAbsentRequest(data);
+=======
+  onSetProfile: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.editProfile(data);
+
+      await get().onGetUserInformation();
+>>>>>>> f43bfbe09628a37cc38a7db465cc7016610e380d
 
       return storeResult.onSuccess(message);
     } catch (error) {
