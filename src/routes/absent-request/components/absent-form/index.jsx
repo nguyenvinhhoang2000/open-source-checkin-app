@@ -32,11 +32,13 @@ function AbsentFormModal({
     if (currentData && currentData?.record) {
       const currentOne = {
         ...currentData.record,
-        to: dayjs(new Date(currentData.record.to)),
-        from: dayjs(new Date(currentData.record.from)),
+        to: dayjs(new Date(currentData.record.toAt)),
+        from: dayjs(new Date(currentData.record.fromAt)),
       };
       absentForm.setFieldsValue(currentOne);
     }
+
+    console.log(`🚀🚀🚀!..currentData?.record:`, currentData?.record);
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(() => {
@@ -93,10 +95,15 @@ function AbsentFormModal({
       >
         <Row gutter={24}>
           <Col span={12}>
-            <Form.Item name="absentType" label="Type Absent" required>
+            <Form.Item
+              hasFeedback
+              name="absentType"
+              label="Type Absent"
+              required
+            >
               <Select placeholder="Select type" allowClear>
                 {ABSENT_TYPES.map((item) => (
-                  <Select.Option value={item.key} key={item.key}>
+                  <Select.Option value={item.value} key={item.value}>
                     {item.label}
                   </Select.Option>
                 ))}
@@ -104,16 +111,10 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              hasFeedback
-              labelAlign="right"
-              name="reason"
-              label="Reason"
-              required
-            >
+            <Form.Item hasFeedback name="reasonType" label="Reason" required>
               <Select placeholder="Select reason" allowClear>
                 {ABSENT_REASONS.map((item) => (
-                  <Select.Option value={item.key} key={item.key}>
+                  <Select.Option value={item.value} key={item.value}>
                     {item.label}
                   </Select.Option>
                 ))}
