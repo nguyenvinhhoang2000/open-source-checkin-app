@@ -67,13 +67,6 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
-<<<<<<< HEAD
-  onCreateAbsentRequest: async (data) => {
-    try {
-      const {
-        data: { message },
-      } = await userAPI.createAbsentRequest(data);
-=======
   onSetProfile: async (data) => {
     try {
       const {
@@ -81,7 +74,18 @@ const useAuthStore = create((set, get) => ({
       } = await userAPI.editProfile(data);
 
       await get().onGetUserInformation();
->>>>>>> f43bfbe09628a37cc38a7db465cc7016610e380d
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      return storeResult.onFail(error.response?.data?.errors?.msg);
+    }
+  },
+
+  onCreateAbsentRequest: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.createAbsentRequest(data);
 
       return storeResult.onSuccess(message);
     } catch (error) {
