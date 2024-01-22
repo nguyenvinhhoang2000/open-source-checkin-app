@@ -71,6 +71,8 @@ function AbsentFormModal({
     console.log(
       `🚀🚀🚀!..absentForm.getFieldsValue():`,
       absentForm.getFieldsValue(),
+
+      absentForm.submit(),
     );
   }, []);
 
