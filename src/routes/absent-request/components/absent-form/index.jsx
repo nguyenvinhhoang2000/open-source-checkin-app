@@ -59,6 +59,8 @@ function AbsentFormModal({
   }, [absentForm, currentData]);
 
   const onSubmit = React.useCallback(async () => {
+    await absentForm.validateFields();
+
     onShowLoadingButtonOk();
 
     const { status, message: messageResult } = await onCreateAbsentRequest(
