@@ -11,7 +11,7 @@ import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import AbsentFormModal from "../absent-form";
 import AbsentModalView from "../absent-view";
 
-import { scroll } from "./config";
+import { paginationConfig, scroll } from "./config";
 
 function AbsentTable({ filterTime }) {
   const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
@@ -179,8 +179,8 @@ function AbsentTable({ filterTime }) {
 
   const pagination = React.useMemo(() => {
     return {
+      ...paginationConfig,
       total: absentData.total,
-      showSizeChanger: false,
     };
   }, [absentData.total]);
 
