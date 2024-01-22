@@ -22,8 +22,10 @@ const userAPI = {
   createAbsentRequest(value) {
     return axiosClient.post(ENDPOINT.CREATE_ABSENT_REQUEST, value);
   },
-  getListAbsentRequest(value) {
-    return axiosClient.get(ENDPOINT.GET_LIST_ABSENT_REQUEST, value);
+  getListAbsentRequest(filterTime, page, limit) {
+    return axiosClient.get(
+      ENDPOINT.GET_LIST_ABSENT_REQUEST(filterTime, page, limit),
+    );
   },
   getAbsentRequestDetails(value, id) {
     return axiosClient.get(ENDPOINT.GET_ABSENT_REQUEST_DETAILS(id), value);

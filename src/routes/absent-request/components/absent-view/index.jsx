@@ -17,10 +17,12 @@ function AbsentModalView({
   currentData,
   onOpenEdit,
 }) {
-  const isEdit = onCheckIsEditAbsent(currentData.record?.from);
+  const isEdit = onCheckIsEditAbsent(currentData.record?.fromAt);
+
   const onOkBtn = React.useCallback(() => {
     if (isEdit) {
       onClose();
+
       onOpenEdit();
     } else {
       onClose();
@@ -53,27 +55,22 @@ function AbsentModalView({
       }
     >
       <div className="flex flex-col gap-2 border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4">
-        {currentData.record &&
-          Object.keys(currentData.record).map((item) => {
-            return (
-              <div
-                key={item}
-                className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
-              >
-                <span className="font-bold">
-                  {
-                    currentData.columnData.find((child) => child.key === item)
-                      ?.title
-                  }
-                </span>
-                <span>
-                  {currentData.record[item] instanceof Date
-                    ? dayjs(currentData.record[item]).format("D-M-YYYY h:m A")
-                    : currentData.record[item].toString()}
-                </span>
-              </div>
-            );
-          })}
+        {currentData.columnData &&
+          currentData.columnData.map((item) => (
+            <div
+              key={item.key}
+              className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
+            >
+              <span className="font-bold">{item.title}</span>
+              <span>
+                {item.key === "description"
+                  ? currentData.record[item.key]?.toString()
+                  : dayjs(new Date(currentData.record[item.key])).format(
+                      "D-M-YYYY h:m A",
+                    )}
+              </span>
+            </div>
+          ))}
       </div>
     </Modal>
   );

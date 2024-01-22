@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
-import { dataAbsent } from "@/constants/data/data-absent";
+import useAuthStore from "@/store/use-auth-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
 import AbsentFormModal from "../absent-form";
@@ -13,6 +13,9 @@ import AbsentModalView from "../absent-view";
 import { pagination, scroll } from "./config";
 
 function AbsentTable({ filterTime }) {
+  const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
+
+  const [absentData, setAbsentData] = React.useState([]);
   const {
     value: isOpenView,
     setTrue: onOpenView,
@@ -24,11 +27,24 @@ function AbsentTable({ filterTime }) {
     setFalse: onCloseEdit,
   } = useBoolean(false);
 
+  React.useEffect(() => {
+    const onGetListData = async () => {
+      const { payload } = await onGetListAbsentRequest(filterTime, 1, 20);
+
+      setAbsentData(payload);
+    };
+
+    onGetListData();
+  }, [filterTime, onGetListAbsentRequest]);
+
   const [dataSelectAction, setDataSelectAction] = React.useState({});
+
   const onOpenModalView = React.useCallback(
     (columnData, record) => {
       const { id, ...recordWithoutId } = record;
+
       setDataSelectAction({ columnData, record: recordWithoutId });
+
       onOpenView();
     },
     [onOpenView],
@@ -46,8 +62,8 @@ function AbsentTable({ filterTime }) {
   const columns = [
     {
       title: "From",
-      dataIndex: "from",
-      key: "from",
+      dataIndex: "fromAt",
+      key: "fromAt",
       width: "11rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -58,8 +74,8 @@ function AbsentTable({ filterTime }) {
 
     {
       title: "To",
-      dataIndex: "to",
-      key: "to",
+      dataIndex: "toAt",
+      key: "toAt",
       width: "11.75rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -70,8 +86,8 @@ function AbsentTable({ filterTime }) {
 
     {
       title: "Date Request",
-      dataIndex: "dateRequest",
-      key: "dateRequest",
+      dataIndex: "createdAt",
+      key: "createdAt",
       width: "11.75rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -97,11 +113,17 @@ function AbsentTable({ filterTime }) {
       key: "actions",
       render: (record) => {
         const onClickButtonEye = () => {
-          onOpenModalView(columns, record);
+          onOpenModalView(
+            columns.filter((item) => item.key !== "actions"),
+            record,
+          );
         };
 
         const onClickButtonEdit = () => {
-          onOpenModalEdit(columns, record);
+          onOpenModalEdit(
+            columns.filter((item) => item.key !== "actions"),
+            record,
+          );
         };
         return (
           <div className="flex items-center justify-start gap-[1.25rem]">
@@ -114,7 +136,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {onCheckIsEditAbsent(record.from) && (
+            {onCheckIsEditAbsent(record.fromAt) && (
               <Button
                 title="edit"
                 type="text"
@@ -130,16 +152,14 @@ function AbsentTable({ filterTime }) {
     },
   ];
 
-  // handle width filterTime to render data of table
-  console.log(`🚀🚀🚀!..filterTime of Absent request Table:`, filterTime);
   return (
     <div>
       <Table
         pagination={pagination}
         scroll={scroll}
-        rowKey="id"
+        rowKey="_id"
         columns={columns}
-        dataSource={dataAbsent}
+        dataSource={absentData}
       />
 
       <AbsentFormModal
