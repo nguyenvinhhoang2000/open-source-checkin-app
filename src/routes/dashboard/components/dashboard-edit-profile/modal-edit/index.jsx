@@ -27,9 +27,13 @@ function ModalEditProfile({
     updateProfileForm.setFieldsValue(currentData);
   }, [currentData, updateProfileForm]);
 
-  const onSubmit = React.useCallback(() => {
-    onHandleOk(updateProfileForm.getFieldsValue());
-  }, [onHandleOk, updateProfileForm]);
+  const onSubmit = React.useCallback(async () => {
+    const { errorFields } = await updateProfileForm.validateFields();
+
+    if (!errorFields) {
+      onHandleOk(updateProfileForm.getFieldsValue());
+    }
+  }, []);
 
   return (
     <Modal
