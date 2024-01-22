@@ -37,12 +37,12 @@ function AbsentFormModal({
   currentData,
   formName,
 }) {
-  const createAbsentRequest = useAuthStore().createAbsentRequest;
+  const onCreateAbsentRequest = useAuthStore().onCreateAbsentRequest;
 
   const {
     value: isLoadingButtonOk,
-    setTrue: setLoadingButtonOk,
-    setFalse: setUnLoadingButtonOk,
+    setTrue: onShowLoadingButtonOk,
+    setFalse: onHideLoadingButtonOk,
   } = useBoolean(false);
 
   const [absentForm] = Form.useForm();
@@ -58,22 +58,18 @@ function AbsentFormModal({
     }
   }, [absentForm, currentData]);
 
-  const onSubmit = React.useCallback(() => {
-    // setLoadingButtonOk();
-    // const { status, message: messageResult } = createAbsentRequest(
-    //   absentForm.getFieldsValue(),
-    // );
+  const onSubmit = React.useCallback(async () => {
+    onShowLoadingButtonOk();
 
-    // message[status](messageResult, 1);
-
-    // setUnLoadingButtonOk();
-
-    console.log(
-      `🚀🚀🚀!..absentForm.getFieldsValue():`,
+    const { status, message: messageResult } = await onCreateAbsentRequest(
       absentForm.getFieldsValue(),
-
-      absentForm.submit(),
     );
+
+    message[status](messageResult, 1);
+
+    onHideLoadingButtonOk();
+
+    onClose();
   }, []);
 
   const onDisableFromAt = React.useMemo(() => {
