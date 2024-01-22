@@ -43,7 +43,7 @@ function Profile() {
     onHideLoadingOk();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const renderUser = React.useMemo(() => {
+  const formatedUser = React.useMemo(() => {
     return {
       ...user,
       phoneNumber: formatPhoneUI(user.phoneNumber),
@@ -75,7 +75,7 @@ function Profile() {
         </Button>
       </div>
       <ModalEditProfile
-        currentData={renderUser}
+        currentData={formatedUser}
         okText="Save"
         cancelText="Cancel"
         onHandleOk={onClickOk}
