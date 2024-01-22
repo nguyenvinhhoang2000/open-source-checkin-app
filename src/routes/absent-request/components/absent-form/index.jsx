@@ -72,7 +72,7 @@ function AbsentFormModal({
     onHideLoadingButtonOk();
 
     onClose();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDisabledFromAt = React.useCallback(
     (current) => {
