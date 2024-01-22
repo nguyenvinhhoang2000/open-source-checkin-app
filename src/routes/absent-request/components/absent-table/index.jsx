@@ -16,6 +16,7 @@ function AbsentTable({ filterTime }) {
   const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
 
   const [absentData, setAbsentData] = React.useState([]);
+
   const {
     value: isOpenView,
     setTrue: onOpenView,
@@ -160,6 +161,7 @@ function AbsentTable({ filterTime }) {
         rowKey="_id"
         columns={columns}
         dataSource={absentData}
+        // onChange={onSetPage}
       />
 
       <AbsentFormModal
