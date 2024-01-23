@@ -129,7 +129,6 @@ function AbsentFormModal({
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
-              messageVariables="12312"
               name="absentType"
               label="Type Absent"
               rules={absentTypes}
