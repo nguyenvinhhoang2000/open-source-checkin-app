@@ -96,6 +96,21 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
+  onEditAbsentRequest: async (data, id) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.editAbsentRequest(data, id);
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      return storeResult.onFail(
+        error.response?.data?.errors?.msg,
+        error.response?.data?.errors,
+      );
+    }
+  },
+
   onGetListAbsentRequest: async (filterTime, page, limit) => {
     try {
       const {
@@ -104,7 +119,6 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message, payload);
     } catch (error) {
-      console.log(`🚀🚀🚀!..error:`, error);
       return storeResult.onFail([], error.response?.data?.errors?.msg);
     }
   },

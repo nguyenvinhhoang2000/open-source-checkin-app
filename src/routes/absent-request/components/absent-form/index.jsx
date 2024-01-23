@@ -16,9 +16,11 @@ import { useBoolean } from "usehooks-ts";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
 import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
 import useAuthStore from "@/store/use-auth-store";
+import useLoadingStore from "@/store/use-loading-store";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 import {
@@ -37,7 +39,11 @@ function AbsentFormModal({
   currentData,
   formName,
 }) {
+  const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
+  const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
+
   const onCreateAbsentRequest = useAuthStore().onCreateAbsentRequest;
+  const onEditAbsentRequest = useAuthStore().onEditAbsentRequest;
 
   const {
     value: isLoadingButtonOk,
@@ -58,8 +64,15 @@ function AbsentFormModal({
     }
   }, [absentForm, currentData]);
 
+  const action = {
+    [ABSENT_FORM_NAME.CREATE]: onCreateAbsentRequest,
+    [ABSENT_FORM_NAME.EDIT]: onEditAbsentRequest,
+  };
+
   const onSubmit = React.useCallback(async () => {
     await absentForm.validateFields();
+
+    onShowLoadingAbsentTable();
 
     onShowLoadingButtonOk();
 
@@ -67,7 +80,10 @@ function AbsentFormModal({
       status,
       message: messageResult,
       messArr,
-    } = await onCreateAbsentRequest(absentForm.getFieldsValue());
+    } = await action[formName](
+      absentForm.getFieldsValue(),
+      absentForm.getFieldValue("_id"),
+    );
 
     if (messArr) {
       messArr.forEach((item) =>
@@ -81,6 +97,7 @@ function AbsentFormModal({
 
       onHideLoadingButtonOk();
 
+      onHideLoadingAbsentTable();
       return;
     }
 
@@ -89,6 +106,8 @@ function AbsentFormModal({
     absentForm.resetFields();
 
     onHideLoadingButtonOk();
+
+    onHideLoadingAbsentTable();
 
     onClose();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

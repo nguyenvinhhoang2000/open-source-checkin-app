@@ -1,5 +1,6 @@
 const paginationConfig = {
   showSizeChanger: false,
+  page: 10,
 };
 
 const scroll = {

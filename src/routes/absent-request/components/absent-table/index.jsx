@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
+import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
 import useAuthStore from "@/store/use-auth-store";
 import useLoadingStore from "@/store/use-loading-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
@@ -44,7 +45,7 @@ function AbsentTable({ filterTime }) {
       const { payload } = await onGetListAbsentRequest(
         filterTime,
         pageCurrent,
-        10,
+        paginationConfig.page,
       );
 
       onHideLoadingAbsentTable();
@@ -203,7 +204,7 @@ function AbsentTable({ filterTime }) {
         cancelText="Cancel"
         isModalOpen={isOpenEdit}
         currentData={dataSelectAction}
-        formName="edit-absent"
+        formName={ABSENT_FORM_NAME.EDIT}
       />
     </>
   );

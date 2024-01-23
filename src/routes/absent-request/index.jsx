@@ -3,6 +3,7 @@ import { useBoolean } from "usehooks-ts";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
 
+import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
 import AbsentFormModal from "./components/absent-form";
@@ -38,7 +39,7 @@ function AbsentRequestTable() {
           onClose={onCloseCreateAbsent}
           cancelText="Cancel"
           isModalOpen={isOpenCreateAbsent}
-          formName="create-absent"
+          formName={ABSENT_FORM_NAME.CREATE}
         />
         <AbsentTable filterTime={filterTime} />
       </div>
