@@ -165,9 +165,9 @@ function AbsentTable({
   const pagination = React.useMemo(() => {
     return {
       ...paginationConfig,
-      total: absentData.total,
+      total: absentData?.total,
     };
-  }, [absentData.total]);
+  }, [absentData?.total]);
 
   return (
     <Table
