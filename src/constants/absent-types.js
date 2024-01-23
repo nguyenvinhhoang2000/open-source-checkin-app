@@ -1,4 +1,4 @@
 export const ABSENT_TYPES = [
-  { value: 1, label: "Remote" },
-  { value: 2, label: "Absent" },
+  { id: 1, label: "Remote" },
+  { id: 2, label: "Absent" },
 ];
