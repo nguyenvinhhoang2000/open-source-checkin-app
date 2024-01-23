@@ -43,8 +43,10 @@ function AbsentFormModal({
   const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
   const onRefreshAbsentTable = useLoadingStore().onRefreshAbsentTable;
 
-  const onCreateAbsentRequest = useAuthStore().onCreateAbsentRequest;
-  const onEditAbsentRequest = useAuthStore().onEditAbsentRequest;
+  const switchAction = React.useRef({
+    [ABSENT_FORM_NAME.CREATE]: useAuthStore().onCreateAbsentRequest,
+    [ABSENT_FORM_NAME.EDIT]: useAuthStore().onEditAbsentRequest,
+  }).current;
 
   const {
     value: isLoadingButtonOk,
@@ -65,11 +67,6 @@ function AbsentFormModal({
     }
   }, [absentForm, currentData]);
 
-  const action = {
-    [ABSENT_FORM_NAME.CREATE]: onCreateAbsentRequest,
-    [ABSENT_FORM_NAME.EDIT]: onEditAbsentRequest,
-  };
-
   const onSubmit = React.useCallback(async () => {
     await absentForm.validateFields();
 
@@ -81,7 +78,7 @@ function AbsentFormModal({
       status,
       message: messageResult,
       messArr,
-    } = await action[formName](
+    } = await switchAction[formName](
       absentForm.getFieldsValue(),
       absentForm.getFieldValue("_id"),
     );
