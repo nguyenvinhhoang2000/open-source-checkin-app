@@ -41,15 +41,17 @@ function AbsentRequestTable() {
     setDataSelectAction(data);
   }, []);
 
-  const onSetFormModalName = React.useCallback((form) => {
-    setFormModalName(form);
-  }, []);
-
   const onOpenCreateForm = React.useCallback(() => {
-    onSetFormModalName(ABSENT_FORM_NAME.CREATE);
+    setFormModalName(ABSENT_FORM_NAME.CREATE);
 
     onShowModalForm();
-  }, [onSetFormModalName, onShowModalForm]);
+  }, [onShowModalForm]);
+
+  const onOpenEditForm = React.useCallback(() => {
+    setFormModalName(ABSENT_FORM_NAME.EDIT);
+
+    onShowModalForm();
+  }, [onShowModalForm]);
 
   return (
     <section className="container">
@@ -67,15 +69,14 @@ function AbsentRequestTable() {
           onShowModalView={onShowModalView}
           filterTime={filterTime}
           onGetAbsentDetail={onGetAbsentDetail}
-          onShowModalEdit={onShowModalForm}
-          onSetFormName={onSetFormModalName}
+          onShowModalEdit={onOpenEditForm}
         />
 
         <AbsentModalView
           isModalOpen={isOpenModalView}
           onClose={onHideModalView}
           currentData={dataSelectAction}
-          onOpenEdit={onShowModalForm}
+          onOpenEdit={onOpenEditForm}
         />
 
         <AbsentFormModal
