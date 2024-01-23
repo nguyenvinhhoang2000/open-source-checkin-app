@@ -18,6 +18,7 @@ function AbsentTable({ filterTime }) {
   const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
   const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
   const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
+  const isRefreshAbsentTable = useLoadingStore().isRefreshAbsentTable;
 
   const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
 
@@ -54,7 +55,7 @@ function AbsentTable({ filterTime }) {
     };
 
     onGetListData();
-  }, [filterTime, pageCurrent]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [filterTime, pageCurrent, isRefreshAbsentTable]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onOpenModalView = React.useCallback(
     (columnData, record) => {

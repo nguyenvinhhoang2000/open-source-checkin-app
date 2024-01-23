@@ -41,6 +41,7 @@ function AbsentFormModal({
 }) {
   const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
   const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
+  const onRefreshAbsentTable = useLoadingStore().onRefreshAbsentTable;
 
   const onCreateAbsentRequest = useAuthStore().onCreateAbsentRequest;
   const onEditAbsentRequest = useAuthStore().onEditAbsentRequest;
@@ -104,6 +105,8 @@ function AbsentFormModal({
     message[status](messageResult, 1);
 
     absentForm.resetFields();
+
+    onRefreshAbsentTable();
 
     onHideLoadingButtonOk();
 
