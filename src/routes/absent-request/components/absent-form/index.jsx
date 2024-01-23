@@ -76,34 +76,6 @@ function AbsentFormModal({
     onClose();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onDisabledFromAt = React.useCallback(
-    (current) => {
-      return (
-        current.isBefore(dayjs().subtract(1, "day")) ||
-        (dayjs(absentForm.getFieldValue("toAt")).diff(
-          dayjs(Date.now()),
-          "day",
-        ) &&
-          dayjs(current).isAfter(dayjs(absentForm.getFieldValue("toAt"))))
-      );
-    },
-    [absentForm],
-  );
-
-  const onDisabledToAt = React.useCallback(
-    (current) => {
-      return (
-        (dayjs(absentForm.getFieldValue("fromAt")).diff(
-          dayjs(Date.now()),
-          "day",
-        ) &&
-          current.isBefore(dayjs(absentForm.getFieldValue("fromAt")))) ||
-        current.isBefore(dayjs().subtract(1, "day"))
-      );
-    },
-    [absentForm],
-  );
-
   return (
     <Modal
       forceRender
@@ -175,7 +147,6 @@ function AbsentFormModal({
           <Col span={12}>
             <Form.Item name="fromAt" label="From" required rules={fromAt}>
               <DatePicker
-                disabledDate={onDisabledFromAt}
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
@@ -192,7 +163,6 @@ function AbsentFormModal({
           <Col span={12}>
             <Form.Item name="toAt" label="To" required rules={toAt}>
               <DatePicker
-                disabledDate={onDisabledToAt}
                 showTime
                 popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
                 placeholder="Pick time"
