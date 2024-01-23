@@ -67,6 +67,8 @@ function AbsentFormModal({
       absentForm.getFieldsValue(),
     );
 
+    absentForm.resetFields();
+
     message[status](messageResult, 1);
 
     onHideLoadingButtonOk();
