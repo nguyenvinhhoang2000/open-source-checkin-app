@@ -51,18 +51,6 @@ function AbsentRequestTable() {
     onShowModalForm();
   }, [onSetFormModalName, onShowModalForm]);
 
-  const renderFormModal = React.useMemo(() => {
-    return (
-      <AbsentFormModal
-        currentData={dataSelectAction}
-        onClose={onHideModalForm}
-        cancelText="Cancel"
-        isModalOpen={isOpenModalForm}
-        formName={formModalName}
-      />
-    );
-  }, [dataSelectAction, formModalName, isOpenModalForm, onHideModalForm]);
-
   return (
     <section className="container">
       <div className="mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
@@ -90,7 +78,13 @@ function AbsentRequestTable() {
           onOpenEdit={onShowModalForm}
         />
 
-        {renderFormModal}
+        <AbsentFormModal
+          currentData={dataSelectAction}
+          onClose={onHideModalForm}
+          cancelText="Cancel"
+          isModalOpen={isOpenModalForm}
+          formName={formModalName}
+        />
       </div>
     </section>
   );

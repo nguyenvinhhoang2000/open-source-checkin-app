@@ -97,15 +97,20 @@ function AbsentFormModal({
   }, [formName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   React.useEffect(() => {
-    if (currentData && currentData?.record) {
+    if (
+      formName === ABSENT_FORM_NAME.EDIT &&
+      currentData &&
+      currentData.record
+    ) {
       const currentOne = {
         ...currentData.record,
-        toAt: dayjs(new Date(currentData.record?.toAt)),
-        fromAt: dayjs(new Date(currentData.record?.fromAt)),
+        toAt: dayjs(new Date(currentData.record.toAt)),
+        fromAt: dayjs(new Date(currentData.record.fromAt)),
       };
+
       absentForm.setFieldsValue(currentOne);
     }
-  }, [absentForm, currentData]);
+  }, [absentForm, currentData, formName]);
 
   return (
     <Modal
