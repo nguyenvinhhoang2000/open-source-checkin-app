@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import { FORMAT_DATE } from "@/constants/format-date";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
@@ -66,7 +67,7 @@ function AbsentModalView({
                 {item.key === "description"
                   ? currentData.record[item.key]?.toString()
                   : dayjs(new Date(currentData.record[item.key])).format(
-                      "D-M-YYYY h:m A",
+                      FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_12_HOURS_AND_INTERVALS,
                     )}
               </span>
             </div>
