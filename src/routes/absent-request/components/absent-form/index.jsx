@@ -72,7 +72,7 @@ function AbsentFormModal({
     absentForm.resetFields();
 
     if (messArr.length > 0) {
-      messArr.forEach((item) => [message[status](item.msg, 2)]);
+      messArr.forEach((item) => message[status](item.msg, 2));
     } else {
       message[status](messageResult, 1);
     }
