@@ -1,9 +1,9 @@
 export const ABSENT_REASONS = [
-  { key: "gotSick", label: "I’m got sick" },
-  { key: "equipmentProblem", label: "Equipment is damaged/forgotten" },
-  { key: "emergency", label: "Personal or Family Emergency" },
-  { key: "appointments", label: "Appointments" },
-  { key: "ransportation", label: "Transportation Issues" },
-  { key: "personalErrands", label: "Personal errands" },
-  { key: "others", label: "Others" },
+  { id: 1, label: "I’m got sick" },
+  { id: 2, label: "Equipment is damaged/forgotten" },
+  { id: 3, label: "Personal or Family Emergency" },
+  { id: 4, label: "Appointments" },
+  { id: 5, label: "Transportation Issues" },
+  { id: 6, label: "Personal errands" },
+  { id: 7, label: "Others" },
 ];

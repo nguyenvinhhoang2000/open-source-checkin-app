@@ -1,3 +1,6 @@
+import dayjs from "dayjs";
+
+import { FORMAT_DATE } from "@/constants/format-date";
 import axiosClient from "@/services/axiosConfig";
 import ENDPOINT from "@/services/endpoint";
 
@@ -19,8 +22,14 @@ const userAPI = {
   },
 
   // ABSENT
-  createAbsentRequest(value) {
-    return axiosClient.post(ENDPOINT.CREATE_ABSENT_REQUEST, value);
+  createAbsentRequest({ absentType, reasonType, description, fromAt, toAt }) {
+    return axiosClient.post(ENDPOINT.CREATE_ABSENT_REQUEST, {
+      absentType,
+      reasonType,
+      description,
+      fromAt: dayjs(fromAt).format(FORMAT_DATE.FORMAT_DATE_FOR_API_REQUEST),
+      toAt: dayjs(toAt).format(FORMAT_DATE.FORMAT_DATE_FOR_API_REQUEST),
+    });
   },
   getListAbsentRequest(value) {
     return axiosClient.get(ENDPOINT.GET_LIST_ABSENT_REQUEST, value);

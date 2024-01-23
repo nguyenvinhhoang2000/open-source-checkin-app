@@ -80,6 +80,21 @@ const useAuthStore = create((set, get) => ({
       return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },
+
+  onCreateAbsentRequest: async (data) => {
+    try {
+      const {
+        data: { message },
+      } = await userAPI.createAbsentRequest(data);
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      return storeResult.onFail(
+        error.response?.data?.errors?.msg,
+        error.response?.data?.errors,
+      );
+    }
+  },
 }));
 
 export default useAuthStore;

@@ -130,8 +130,6 @@ function AbsentTable({ filterTime }) {
     },
   ];
 
-  // handle width filterTime to render data of table
-  console.log(`🚀🚀🚀!..filterTime of Absent request Table:`, filterTime);
   return (
     <div>
       <Table
