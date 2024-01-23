@@ -10,12 +10,12 @@ export const storeResult = {
     };
   },
 
-  onFail(payload, message) {
+  onFail(message, messArr) {
     return {
       ok: false,
       status: TYPE_MESSAGE.ERROR,
       message: message || TYPE_MESSAGE.SYSTEM_ERROR,
-      payload,
+      messArr,
     };
   },
 };
