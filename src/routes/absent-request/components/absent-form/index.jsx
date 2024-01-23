@@ -63,13 +63,19 @@ function AbsentFormModal({
 
     onShowLoadingButtonOk();
 
-    const { status, message: messageResult } = await onCreateAbsentRequest(
-      absentForm.getFieldsValue(),
-    );
+    const {
+      status,
+      message: messageResult,
+      messArr,
+    } = await onCreateAbsentRequest(absentForm.getFieldsValue());
 
     absentForm.resetFields();
 
-    message[status](messageResult, 1);
+    if (messArr.length > 0) {
+      messArr.forEach((item) => [message[status](item.msg, 2)]);
+    } else {
+      message[status](messageResult, 1);
+    }
 
     onHideLoadingButtonOk();
 
