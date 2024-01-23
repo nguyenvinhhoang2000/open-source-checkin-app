@@ -9,4 +9,4 @@ function CustomizeFormLabel(label, { required }) {
   );
 }
 
-export default CustomizeFormLabel;
+export default React.memo(CustomizeFormLabel);

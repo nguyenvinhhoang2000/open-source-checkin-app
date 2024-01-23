@@ -77,7 +77,7 @@ function AbsentModalView({
   );
 }
 
-export default AbsentModalView;
+export default React.memo(AbsentModalView);
 
 AbsentModalView.propTypes = {
   isModalOpen: PropTypes.bool,

@@ -231,7 +231,7 @@ function AbsentFormModal({
   );
 }
 
-export default AbsentFormModal;
+export default React.memo(AbsentFormModal);
 
 AbsentFormModal.propTypes = {
   isModalOpen: PropTypes.bool,

@@ -182,7 +182,7 @@ function AbsentTable({
   );
 }
 
-export default AbsentTable;
+export default React.memo(AbsentTable);
 
 AbsentTable.propTypes = {
   onShowModalView: PropTypes.func.isRequired,
