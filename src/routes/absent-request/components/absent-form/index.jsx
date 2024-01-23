@@ -69,13 +69,24 @@ function AbsentFormModal({
       messArr,
     } = await onCreateAbsentRequest(absentForm.getFieldsValue());
 
-    absentForm.resetFields();
+    if (messArr) {
+      messArr.forEach((item) =>
+        absentForm.setFields([
+          {
+            name: item.param,
+            errors: [item.msg],
+          },
+        ]),
+      );
 
-    if (messArr.length > 0) {
-      messArr.forEach((item) => message[status](item.msg, 2));
-    } else {
-      message[status](messageResult, 1);
+      onHideLoadingButtonOk();
+
+      return;
     }
+
+    message[status](messageResult, 1);
+
+    absentForm.resetFields();
 
     onHideLoadingButtonOk();
 
@@ -118,6 +129,7 @@ function AbsentFormModal({
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
+              messageVariables="12312"
               name="absentType"
               label="Type Absent"
               rules={absentTypes}
