@@ -56,22 +56,10 @@ function AbsentFormModal({
 
   const [absentForm] = Form.useForm();
 
-  React.useEffect(() => {
-    if (currentData && currentData?.record) {
-      const currentOne = {
-        ...currentData.record,
-        toAt: dayjs(new Date(currentData.record?.toAt)),
-        fromAt: dayjs(new Date(currentData.record?.fromAt)),
-      };
-      absentForm.setFieldsValue(currentOne);
-    }
-  }, [absentForm, currentData]);
-
   const onSubmit = React.useCallback(async () => {
     await absentForm.validateFields();
 
     onShowLoadingAbsentTable();
-
     onShowLoadingButtonOk();
 
     const {
@@ -94,23 +82,30 @@ function AbsentFormModal({
       );
 
       onHideLoadingButtonOk();
-
       onHideLoadingAbsentTable();
+
       return;
     }
 
     message[status](messageResult, 1);
-
     absentForm.resetFields();
 
     onRefreshAbsentTable();
-
     onHideLoadingButtonOk();
-
     onHideLoadingAbsentTable();
-
     onClose();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [formName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  React.useEffect(() => {
+    if (currentData && currentData?.record) {
+      const currentOne = {
+        ...currentData.record,
+        toAt: dayjs(new Date(currentData.record?.toAt)),
+        fromAt: dayjs(new Date(currentData.record?.fromAt)),
+      };
+      absentForm.setFieldsValue(currentOne);
+    }
+  }, [absentForm, currentData]);
 
   return (
     <Modal

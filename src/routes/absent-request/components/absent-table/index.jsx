@@ -2,19 +2,21 @@ import React from "react";
 import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { useBoolean } from "usehooks-ts";
 
 import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
 import useAuthStore from "@/store/use-auth-store";
 import useLoadingStore from "@/store/use-loading-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
-import AbsentFormModal from "../absent-form";
-import AbsentModalView from "../absent-view";
-
 import { paginationConfig, scroll } from "./config";
 
-function AbsentTable({ filterTime }) {
+function AbsentTable({
+  filterTime,
+  onShowModalEdit,
+  onShowModalView,
+  onGetAbsentDetail,
+  onSetFormName,
+}) {
   const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
   const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
   const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
@@ -25,19 +27,6 @@ function AbsentTable({ filterTime }) {
   const [absentData, setAbsentData] = React.useState({});
 
   const [pageCurrent, setPageCurrent] = React.useState(1);
-
-  const [dataSelectAction, setDataSelectAction] = React.useState({});
-
-  const {
-    value: isOpenView,
-    setTrue: onOpenView,
-    setFalse: onCloseView,
-  } = useBoolean(false);
-  const {
-    value: isOpenEdit,
-    setTrue: onOpenEdit,
-    setFalse: onCloseEdit,
-  } = useBoolean(false);
 
   React.useEffect(() => {
     const onGetListData = async () => {
@@ -61,20 +50,22 @@ function AbsentTable({ filterTime }) {
     (columnData, record) => {
       const { id, ...recordWithoutId } = record;
 
-      setDataSelectAction({ columnData, record: recordWithoutId });
+      onGetAbsentDetail({ columnData, record: recordWithoutId });
 
-      onOpenView();
+      onShowModalView();
     },
-    [onOpenView],
+    [onGetAbsentDetail, onShowModalView],
   );
 
   const onOpenModalEdit = React.useCallback(
-    (columnData, record) => {
-      setDataSelectAction({ columnData, record });
+    async (columnData, record) => {
+      onGetAbsentDetail({ columnData, record });
 
-      onOpenEdit();
+      await onSetFormName(ABSENT_FORM_NAME.EDIT);
+
+      onShowModalEdit();
     },
-    [onOpenEdit],
+    [onGetAbsentDetail, onSetFormName, onShowModalEdit],
   );
 
   const columns = [
@@ -143,6 +134,7 @@ function AbsentTable({ filterTime }) {
             record,
           );
         };
+
         return (
           <div className="flex items-center justify-start gap-[1.25rem]">
             <Button
@@ -182,38 +174,25 @@ function AbsentTable({ filterTime }) {
   }, [absentData.total]);
 
   return (
-    <>
-      <Table
-        loading={isLoadingAbsentTable}
-        pagination={pagination}
-        onChange={onChangePage}
-        scroll={scroll}
-        rowKey="_id"
-        columns={columns}
-        dataSource={absentData.data}
-      />
-
-      <AbsentModalView
-        onClose={onCloseView}
-        isModalOpen={isOpenView}
-        currentData={dataSelectAction}
-        onOpenEdit={onOpenEdit}
-      />
-
-      <AbsentFormModal
-        onClose={onCloseEdit}
-        cancelText="Cancel"
-        isModalOpen={isOpenEdit}
-        currentData={dataSelectAction}
-        formName={ABSENT_FORM_NAME.EDIT}
-      />
-    </>
+    <Table
+      loading={isLoadingAbsentTable}
+      pagination={pagination}
+      onChange={onChangePage}
+      scroll={scroll}
+      rowKey="_id"
+      columns={columns}
+      dataSource={absentData.data}
+    />
   );
 }
 
 export default AbsentTable;
 
 AbsentTable.propTypes = {
+  onShowModalView: PropTypes.func.isRequired,
+  onGetAbsentDetail: PropTypes.func.isRequired,
+  onShowModalEdit: PropTypes.func.isRequired,
+  onSetFormName: PropTypes.func.isRequired,
   filterTime: PropTypes.string,
 };
 

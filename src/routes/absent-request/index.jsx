@@ -8,12 +8,25 @@ import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
 import AbsentFormModal from "./components/absent-form";
 import AbsentTable from "./components/absent-table";
+import AbsentModalView from "./components/absent-view";
 
 function AbsentRequestTable() {
+  const [formModalName, setFormModalName] = React.useState(
+    ABSENT_FORM_NAME.CREATE,
+  );
+
+  const [dataSelectAction, setDataSelectAction] = React.useState({});
+
   const {
-    value: isOpenCreateAbsent,
-    setTrue: onOpenCreateAbsent,
-    setFalse: onCloseCreateAbsent,
+    value: isOpenModalView,
+    setTrue: onShowModalView,
+    setFalse: onHideModalView,
+  } = useBoolean(false);
+
+  const {
+    value: isOpenModalForm,
+    setTrue: onShowModalForm,
+    setFalse: onHideModalForm,
   } = useBoolean(false);
 
   const [filterTime, setFilterTime] = React.useState(
@@ -24,6 +37,32 @@ function AbsentRequestTable() {
     setFilterTime(record.key);
   }, []);
 
+  const onGetAbsentDetail = React.useCallback((data) => {
+    setDataSelectAction(data);
+  }, []);
+
+  const onSetFormModalName = React.useCallback((form) => {
+    setFormModalName(form);
+  }, []);
+
+  const onOpenCreateForm = React.useCallback(() => {
+    onSetFormModalName(ABSENT_FORM_NAME.CREATE);
+
+    onShowModalForm();
+  }, [onSetFormModalName, onShowModalForm]);
+
+  const renderFormModal = React.useMemo(() => {
+    return (
+      <AbsentFormModal
+        currentData={dataSelectAction}
+        onClose={onHideModalForm}
+        cancelText="Cancel"
+        isModalOpen={isOpenModalForm}
+        formName={formModalName}
+      />
+    );
+  }, [dataSelectAction, formModalName, isOpenModalForm, onHideModalForm]);
+
   return (
     <section className="container">
       <div className="mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
@@ -32,16 +71,26 @@ function AbsentRequestTable() {
           classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
           filterTime={filterTime}
           buttonAbsentRequestText="Absent Request"
-          onOpenAbsentRequestForm={onOpenCreateAbsent}
+          onOpenAbsentRequestForm={onOpenCreateForm}
           onFilterTime={onFilterTime}
         />
-        <AbsentFormModal
-          onClose={onCloseCreateAbsent}
-          cancelText="Cancel"
-          isModalOpen={isOpenCreateAbsent}
-          formName={ABSENT_FORM_NAME.CREATE}
+
+        <AbsentTable
+          onShowModalView={onShowModalView}
+          filterTime={filterTime}
+          onGetAbsentDetail={onGetAbsentDetail}
+          onShowModalEdit={onShowModalForm}
+          onSetFormName={onSetFormModalName}
         />
-        <AbsentTable filterTime={filterTime} />
+
+        <AbsentModalView
+          isModalOpen={isOpenModalView}
+          onClose={onHideModalView}
+          currentData={dataSelectAction}
+          onOpenEdit={onShowModalForm}
+        />
+
+        {renderFormModal}
       </div>
     </section>
   );
