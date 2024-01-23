@@ -129,14 +129,13 @@ function AbsentFormModal({
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
-              hasFeedback
               name="absentType"
               label="Type Absent"
-              required
+              rules={absentTypes}
             >
               <Select placeholder="Select type" allowClear>
                 {ABSENT_TYPES.map((item) => (
-                  <Select.Option value={item.value} key={item.value}>
+                  <Select.Option value={item.id} key={item.id}>
                     {item.label}
                   </Select.Option>
                 ))}
@@ -144,10 +143,16 @@ function AbsentFormModal({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item hasFeedback name="reasonType" label="Reason" required>
+            <Form.Item
+              labelAlign="right"
+              name="reasonType"
+              label="Reason"
+              required
+              rules={reasonType}
+            >
               <Select placeholder="Select reason" allowClear>
                 {ABSENT_REASONS.map((item) => (
-                  <Select.Option value={item.value} key={item.value}>
+                  <Select.Option value={item.id} key={item.id}>
                     {item.label}
                   </Select.Option>
                 ))}
