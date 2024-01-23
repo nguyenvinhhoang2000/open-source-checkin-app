@@ -8,8 +8,8 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:prettier/recommended",
-    // "plugin:react-hooks/recommended", // "plugin:react-hooks will render warning messages
-    "airbnb/hooks", // "airbnb/hooks will render error messages
+    // "plugin:react-hooks/recommended",
+    "airbnb/hooks",
     "prettier",
   ],
   overrides: [
