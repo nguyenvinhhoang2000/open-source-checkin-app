@@ -1,13 +1,15 @@
 import React from "react";
-import { Modal } from "antd";
+import { Form, message, Modal } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 import AbsentRequestForm from "@/components/form/absent-request-form";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
+import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
@@ -21,17 +23,61 @@ function CommonModal({
   modalName,
   onOpenModal,
 }) {
+  const switchActions = React.useRef({
+    [ABSENT_MODAL_NAME.CREATE]: useAbsentStore().onCreateAbsentRequest,
+    [ABSENT_MODAL_NAME.EDIT]: useAbsentStore().onEditAbsentRequest,
+  }).current;
+
+  const {
+    value: isDisabledForm,
+    setTrue: setDisabledForm,
+    setFalse: setEnabledForm,
+  } = useBoolean(false);
+
+  const [absentForm] = Form.useForm();
+
   const isEdit = onCheckIsEditAbsent(currentData.record?.fromAt);
 
   const onOkBtn = React.useCallback(() => {
-    if (isEdit) {
-      onClose();
+    onClose();
 
-      onOpenModal(ABSENT_MODAL_NAME.EDIT);
-    } else {
-      onClose();
+    onOpenModal(ABSENT_MODAL_NAME.EDIT);
+  }, [onClose, onOpenModal]);
+
+  const onSubmitForm = React.useCallback(async () => {
+    setDisabledForm();
+
+    await absentForm.validateFields();
+
+    const {
+      status,
+      message: { message: messageResult, errors: arrErrors },
+    } = await switchActions[modalName](
+      absentForm.getFieldsValue(),
+      absentForm.getFieldValue("_id"),
+    );
+
+    if (arrErrors) {
+      arrErrors.forEach((item) =>
+        absentForm.setFields([
+          {
+            name: item.param,
+            errors: [item.msg],
+          },
+        ]),
+      );
+
+      setEnabledForm();
+
+      return;
     }
-  }, [isEdit, onClose, onOpenModal]);
+
+    message[status](messageResult, 1.5);
+
+    absentForm.resetFields();
+    setEnabledForm();
+    onClose();
+  }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Modal
@@ -48,7 +94,11 @@ function CommonModal({
       footer={
         <AppFooterPopup
           buttonOkType="submit"
-          onOk={onOkBtn}
+          onOk={
+            isEdit && modalName === ABSENT_MODAL_NAME.VIEW
+              ? onOkBtn
+              : onSubmitForm
+          }
           okText={isEdit ? "Edit" : "OK"}
           cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}
@@ -63,20 +113,15 @@ function CommonModal({
         <AbsentView currentData={currentData} isModalOpen={isModalOpen} />
       )}
 
-      {modalName === ABSENT_MODAL_NAME.CREATE && (
+      {Object.keys(switchActions).includes(modalName) && (
         <AbsentRequestForm
-          formName={ABSENT_MODAL_NAME.CREATE}
+          formName={modalName}
           isModalOpen={isModalOpen}
           onClose={onClose}
-        />
-      )}
-
-      {modalName === ABSENT_MODAL_NAME.EDIT && (
-        <AbsentRequestForm
-          formName={ABSENT_MODAL_NAME.EDIT}
           currentData={currentData}
-          isModalOpen={isModalOpen}
-          onClose={onClose}
+          onSubmitForm={onSubmitForm}
+          absentForm={absentForm}
+          isDisabledForm={isDisabledForm}
         />
       )}
     </Modal>

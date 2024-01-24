@@ -1,16 +1,14 @@
 import React from "react";
-import { Col, DatePicker, Form, Input, message, Row, Select } from "antd";
+import { Col, DatePicker, Form, Input, Row, Select } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { useBoolean } from "usehooks-ts";
 
 import customizeFormLabel from "@/components/form/customize-form-label";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
-import useAbsentStore from "@/store/use-absent-store";
-import { emptyFn, emptyObj } from "@/utils/empty-types";
+import { emptyObj } from "@/utils/empty-types";
 
 import {
   absentTypes,
@@ -20,55 +18,14 @@ import {
   toAt,
 } from "./config-form";
 
-function AbsentRequestForm({ isModalOpen, onClose, currentData, formName }) {
-  const switchAction = React.useRef({
-    [ABSENT_MODAL_NAME.CREATE]: useAbsentStore().onCreateAbsentRequest,
-    [ABSENT_MODAL_NAME.EDIT]: useAbsentStore().onEditAbsentRequest,
-  }).current;
-
-  const {
-    value: isLoadingButtonOk,
-    setTrue: onShowLoadingButtonOk,
-    setFalse: onHideLoadingButtonOk,
-  } = useBoolean(false);
-
-  const [absentForm] = Form.useForm();
-
-  const onSubmit = React.useCallback(async () => {
-    await absentForm.validateFields();
-
-    onShowLoadingButtonOk();
-
-    const {
-      status,
-      message: { message: messageResult, errors: arrErrors },
-    } = await switchAction[formName](
-      absentForm.getFieldsValue(),
-      absentForm.getFieldValue("_id"),
-    );
-
-    if (arrErrors) {
-      arrErrors.forEach((item) =>
-        absentForm.setFields([
-          {
-            name: item.param,
-            errors: [item.msg],
-          },
-        ]),
-      );
-
-      onHideLoadingButtonOk();
-
-      return;
-    }
-
-    message[status](messageResult, 1.5);
-    absentForm.resetFields();
-
-    onHideLoadingButtonOk();
-    onClose();
-  }, [formName]); // eslint-disable-line react-hooks/exhaustive-deps
-
+function AbsentRequestForm({
+  isModalOpen,
+  currentData,
+  formName,
+  onSubmitForm,
+  absentForm,
+  isDisabledForm,
+}) {
   React.useEffect(() => {
     if (isModalOpen && formName === ABSENT_MODAL_NAME.EDIT) {
       const currentOne = {
@@ -76,20 +33,21 @@ function AbsentRequestForm({ isModalOpen, onClose, currentData, formName }) {
         toAt: dayjs(new Date(currentData.toAt)),
         fromAt: dayjs(new Date(currentData.fromAt)),
       };
-
       absentForm.setFieldsValue(currentOne);
+    } else {
+      absentForm.resetFields();
     }
-  }, [isModalOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isModalOpen, formName, currentData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Form
-      disabled={isLoadingButtonOk}
+      disabled={isDisabledForm}
       requiredMark={customizeFormLabel}
       className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
       form={absentForm}
       layout="vertical"
       name={formName}
-      onFinish={onSubmit}
+      onFinish={onSubmitForm}
     >
       <Row gutter={24}>
         <Col span={12}>
@@ -177,12 +135,13 @@ export default React.memo(AbsentRequestForm);
 AbsentRequestForm.propTypes = {
   isModalOpen: PropTypes.bool,
   formName: PropTypes.string.isRequired,
-  onClose: PropTypes.func,
+  onSubmitForm: PropTypes.func.isRequired,
   currentData: PropTypes.instanceOf(Object),
+  absentForm: PropTypes.instanceOf(Object).isRequired,
+  isDisabledForm: PropTypes.bool.isRequired,
 };
 
 AbsentRequestForm.defaultProps = {
   isModalOpen: false,
-  onClose: emptyFn,
   currentData: emptyObj,
 };
