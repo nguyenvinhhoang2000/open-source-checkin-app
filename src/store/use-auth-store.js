@@ -83,11 +83,9 @@ const useAuthStore = create((set, get) => ({
 
   onCreateAbsentRequest: async (data) => {
     try {
-      const {
-        data: { message },
-      } = await userAPI.createAbsentRequest(data);
+      const { data: apiData } = await userAPI.createAbsentRequest(data);
 
-      return storeResult.onSuccess(message);
+      return storeResult.onSuccess(apiData);
     } catch (error) {
       return storeResult.onFail(error.response?.data);
     }
@@ -95,11 +93,9 @@ const useAuthStore = create((set, get) => ({
 
   onEditAbsentRequest: async (data, id) => {
     try {
-      const {
-        data: { message },
-      } = await userAPI.editAbsentRequest(data, id);
+      const { data: apiData } = await userAPI.editAbsentRequest(data, id);
 
-      return storeResult.onSuccess(message);
+      return storeResult.onSuccess(apiData);
     } catch (error) {
       return storeResult.onFail(error.response?.data);
     }
