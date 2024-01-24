@@ -9,17 +9,14 @@ import { useBoolean } from "usehooks-ts";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
 
-import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
+import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
 
-import AbsentFormModal from "./components/absent-form";
 import AbsentTable from "./components/absent-table";
-import AbsentModalView from "./components/absent-view";
+import CommonModal from "./components/common-modal";
 
 function AbsentRequestTable() {
-  const [formModalName, setFormModalName] = React.useState(
-    ABSENT_FORM_NAME.CREATE,
-  );
+  const [modalName, setModalName] = React.useState(ABSENT_MODAL_NAME.CREATE);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,15 +25,9 @@ function AbsentRequestTable() {
   const [dataSelectAction, setDataSelectAction] = React.useState({});
 
   const {
-    value: isOpenModalView,
-    setTrue: onShowModalView,
-    setFalse: onHideModalView,
-  } = useBoolean(false);
-
-  const {
-    value: isOpenModalForm,
-    setTrue: onShowModalForm,
-    setFalse: onHideModalForm,
+    value: isOpenModal,
+    setTrue: onShowModal,
+    setFalse: onHideModal,
   } = useBoolean(false);
 
   const [filterTime, setFilterTime] = React.useState(
@@ -61,17 +52,19 @@ function AbsentRequestTable() {
     setDataSelectAction(data);
   }, []);
 
-  const onOpenCreateForm = React.useCallback(() => {
-    setFormModalName(ABSENT_FORM_NAME.CREATE);
+  const onOpenModal = React.useCallback(
+    (value) => {
+      setModalName(value);
 
-    onShowModalForm();
-  }, [onShowModalForm]);
+      onShowModal();
+    },
+    [onShowModal],
+  );
 
-  const onOpenEditForm = React.useCallback(() => {
-    setFormModalName(ABSENT_FORM_NAME.EDIT);
-
-    onShowModalForm();
-  }, [onShowModalForm]);
+  const onOpenModalAbsentFormCreate = React.useCallback(() => {
+    setModalName(ABSENT_MODAL_NAME.CREATE);
+    onShowModal();
+  }, [onShowModal]);
 
   return (
     <section className="container">
@@ -81,30 +74,23 @@ function AbsentRequestTable() {
           classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
           filterTime={filterTime}
           buttonAbsentRequestText="Absent Request"
-          onOpenAbsentRequestForm={onOpenCreateForm}
+          onOpenAbsentRequestForm={onOpenModalAbsentFormCreate}
           onFilterTime={onFilterTime}
         />
 
         <AbsentTable
-          onShowModalView={onShowModalView}
+          onShowModalView={onShowModal}
           filterTime={filterTime}
           onGetAbsentDetail={onGetAbsentDetail}
-          onShowModalEdit={onOpenEditForm}
+          onShowModal={onOpenModal}
         />
 
-        <AbsentModalView
-          isModalOpen={isOpenModalView}
-          onClose={onHideModalView}
+        <CommonModal
           currentData={dataSelectAction}
-          onOpenEdit={onOpenEditForm}
-        />
-
-        <AbsentFormModal
-          currentData={dataSelectAction}
-          onClose={onHideModalForm}
-          cancelText="Cancel"
-          isModalOpen={isOpenModalForm}
-          formName={formModalName}
+          onOpenModal={onOpenModal}
+          isModalOpen={isOpenModal}
+          onClose={onHideModal}
+          modalName={modalName}
         />
       </div>
     </section>

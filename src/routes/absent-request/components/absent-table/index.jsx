@@ -9,18 +9,14 @@ import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
+import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
 import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
 import { paginationConfig, scroll } from "./config";
 
-function AbsentTable({
-  filterTime,
-  onShowModalEdit,
-  onShowModalView,
-  onGetAbsentDetail,
-}) {
+function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,18 +31,18 @@ function AbsentTable({
     (record) => {
       onGetAbsentDetail(record);
 
-      onShowModalView();
+      onShowModal(ABSENT_MODAL_NAME.VIEW);
     },
-    [onGetAbsentDetail, onShowModalView],
+    [onGetAbsentDetail, onShowModal],
   );
 
   const onOpenModalEdit = React.useCallback(
     async (record) => {
       onGetAbsentDetail(record);
 
-      onShowModalEdit();
+      onShowModal(ABSENT_MODAL_NAME.EDIT);
     },
-    [onGetAbsentDetail, onShowModalEdit],
+    [onGetAbsentDetail, onShowModal],
   );
 
   const columnRender = [
@@ -174,9 +170,8 @@ function AbsentTable({
 export default React.memo(AbsentTable);
 
 AbsentTable.propTypes = {
-  onShowModalView: PropTypes.func.isRequired,
   onGetAbsentDetail: PropTypes.func.isRequired,
-  onShowModalEdit: PropTypes.func.isRequired,
+  onShowModal: PropTypes.func.isRequired,
   filterTime: PropTypes.string,
 };
 
