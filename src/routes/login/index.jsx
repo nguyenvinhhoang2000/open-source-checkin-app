@@ -26,8 +26,8 @@ function Login() {
     setFalse: onEnabledLoginForm,
   } = useBoolean(false);
 
-  const onValuesChange = React.useCallback(() => {
-    if (loginForm.getFieldsError()) {
+  const onClickForm = React.useCallback(() => {
+    if (loginForm.getFieldsError().length > 0) {
       loginForm.setFields(errorLoginNullMessage);
     }
   }, [loginForm]);
@@ -66,13 +66,13 @@ function Login() {
       />
       <div>
         <Form
-          onValuesChange={onValuesChange}
           form={loginForm}
           disabled={isDisabledLoginForm}
           name="normal_login"
           className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
           initialValues={initialValues}
           onFinish={onFinish}
+          onClick={onClickForm}
         >
           <div className="mb-[1.5rem]">
             <h2 className="mb-[0.25rem] px-[2.37rem] text-center font-roboto text-3xl font-medium leading-10 text-character-1">
