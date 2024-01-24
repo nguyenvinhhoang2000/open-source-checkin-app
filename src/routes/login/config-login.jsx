@@ -1,10 +1,12 @@
 const initialValues = {
   remember: true,
 };
+
 const rulesEmail = [
   { required: true, message: "Please input your E-mail!" },
   { type: "email", message: "The input is not valid E-mail!" },
 ];
+
 const rulesPassword = [
   {
     required: true,
@@ -26,4 +28,5 @@ const errorLoginFail = [
 ];
 
 const errorCode = { UNAUTHORIZED: 40100 };
+
 export { initialValues, rulesEmail, rulesPassword, errorLoginFail, errorCode };
