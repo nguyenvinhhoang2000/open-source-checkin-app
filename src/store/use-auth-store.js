@@ -80,38 +80,6 @@ const useAuthStore = create((set, get) => ({
       return storeResult.onFail(error.response?.data?.errors?.msg);
     }
   },
-
-  onCreateAbsentRequest: async (data) => {
-    try {
-      const { data: apiData } = await userAPI.createAbsentRequest(data);
-
-      return storeResult.onSuccess(apiData);
-    } catch (error) {
-      return storeResult.onFail(error.response?.data);
-    }
-  },
-
-  onEditAbsentRequest: async (data, id) => {
-    try {
-      const { data: apiData } = await userAPI.editAbsentRequest(data, id);
-
-      return storeResult.onSuccess(apiData);
-    } catch (error) {
-      return storeResult.onFail(error.response?.data);
-    }
-  },
-
-  onGetListAbsentRequest: async (filterTime, page, limit) => {
-    try {
-      const {
-        data: { message, payload },
-      } = await userAPI.getListAbsentRequest(filterTime, page, limit);
-
-      return storeResult.onSuccess(message, payload);
-    } catch (error) {
-      return storeResult.onFail([], error.response?.data?.errors?.msg);
-    }
-  },
 }));
 
 export default useAuthStore;
