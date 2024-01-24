@@ -16,7 +16,7 @@ const rulesPassword = [
   { max: 12, message: "Password cannot exceed more than 12 characters" },
 ];
 
-const errorLoginFail = [
+const errorLoginFailMessage = [
   {
     name: "email",
     errors: ["Email is incorrect"],
@@ -27,7 +27,7 @@ const errorLoginFail = [
   },
 ];
 
-const errorLoginNull = [
+const errorLoginNullMessage = [
   {
     name: "email",
     errors: [],
@@ -43,11 +43,11 @@ const loadingLoginMessage = "Login";
 const errorCode = { UNAUTHORIZED: 40100 };
 
 export {
-  errorLoginNull,
+  errorLoginNullMessage,
   loadingLoginMessage,
   initialValues,
   rulesEmail,
   rulesPassword,
-  errorLoginFail,
+  errorLoginFailMessage,
   errorCode,
 };

@@ -7,8 +7,8 @@ import useAuthStore from "@/store/use-auth-store";
 
 import {
   errorCode,
-  errorLoginFail,
-  errorLoginNull,
+  errorLoginFailMessage,
+  errorLoginNullMessage,
   initialValues,
   loadingLoginMessage,
   rulesEmail,
@@ -28,7 +28,7 @@ function Login() {
 
   const onValuesChange = React.useCallback(() => {
     if (loginForm.getFieldsError()) {
-      loginForm.setFields(errorLoginNull);
+      loginForm.setFields(errorLoginNullMessage);
     }
   }, [loginForm]);
 
@@ -40,7 +40,7 @@ function Login() {
     const { message: messResult, status, messArr } = await onLogin(record);
 
     if (messArr && messArr.code === errorCode.UNAUTHORIZED) {
-      loginForm.setFields(errorLoginFail);
+      loginForm.setFields(errorLoginFailMessage);
 
       onEnabledLoginForm();
 
