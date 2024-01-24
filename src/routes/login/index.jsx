@@ -8,7 +8,9 @@ import useAuthStore from "@/store/use-auth-store";
 import {
   errorCode,
   errorLoginFail,
+  errorLoginNull,
   initialValues,
+  loadingLoginMessage,
   rulesEmail,
   rulesPassword,
 } from "./config-login";
@@ -24,8 +26,14 @@ function Login() {
     setFalse: onEnabledLoginForm,
   } = useBoolean(false);
 
+  const onValuesChange = React.useCallback(() => {
+    if (loginForm.getFieldsError()) {
+      loginForm.setFields(errorLoginNull);
+    }
+  }, [loginForm]);
+
   const onFinish = async (record) => {
-    const onCanelLoadingMessage = message.loading("Login");
+    const onCancelLoadingMessage = message.loading(loadingLoginMessage);
 
     onDisabledLoginForm();
 
@@ -36,12 +44,12 @@ function Login() {
 
       onEnabledLoginForm();
 
-      onCanelLoadingMessage();
+      onCancelLoadingMessage();
 
       return;
     }
 
-    onCanelLoadingMessage();
+    onCancelLoadingMessage();
 
     onEnabledLoginForm();
 
@@ -58,6 +66,7 @@ function Login() {
       />
       <div>
         <Form
+          onValuesChange={onValuesChange}
           form={loginForm}
           disabled={isDisabledLoginForm}
           name="normal_login"
