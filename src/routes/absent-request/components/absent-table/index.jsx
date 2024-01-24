@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
@@ -7,7 +13,7 @@ import useAuthStore from "@/store/use-auth-store";
 import useLoadingStore from "@/store/use-loading-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
-import { paginationConfig, scroll } from "./config";
+import { pageDefault, paginationConfig, scroll } from "./config";
 
 function AbsentTable({
   filterTime,
@@ -15,6 +21,10 @@ function AbsentTable({
   onShowModalView,
   onGetAbsentDetail,
 }) {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
   const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
   const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
@@ -24,15 +34,20 @@ function AbsentTable({
 
   const [absentData, setAbsentData] = React.useState({});
 
-  const [pageCurrent, setPageCurrent] = React.useState(1);
-
   React.useEffect(() => {
+    if (!searchParams.get("page")) {
+      navigate({
+        pathname: location.pathname,
+        search: createSearchParams(pageDefault).toString(),
+      });
+    }
+
     const onGetListData = async () => {
       onShowLoadingAbsentTable();
 
       const { payload } = await onGetListAbsentRequest(
         filterTime,
-        pageCurrent,
+        searchParams.get("page"),
         paginationConfig.page,
       );
 
@@ -42,7 +57,7 @@ function AbsentTable({
     };
 
     onGetListData();
-  }, [filterTime, pageCurrent, isRefreshAbsentTable]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [filterTime, searchParams.get("page"), isRefreshAbsentTable]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onOpenModalView = React.useCallback(
     (columnData, record) => {
@@ -158,16 +173,25 @@ function AbsentTable({
     },
   ];
 
-  const onChangePage = React.useCallback((page) => {
-    setPageCurrent(page.current);
-  }, []);
+  const onChangePage = React.useCallback(
+    (page) => {
+      navigate({
+        pathname: location.pathname,
+        search: createSearchParams({
+          page: page.current,
+        }).toString(),
+      });
+    },
+    [location.pathname, navigate],
+  );
 
   const pagination = React.useMemo(() => {
     return {
       ...paginationConfig,
       total: absentData?.total,
+      current: searchParams.get("page"),
     };
-  }, [absentData?.total]);
+  }, [absentData?.total, searchParams]);
 
   return (
     <Table
@@ -177,7 +201,7 @@ function AbsentTable({
       scroll={scroll}
       rowKey="_id"
       columns={columns}
-      dataSource={absentData.data}
+      dataSource={absentData?.data}
     />
   );
 }

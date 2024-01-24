@@ -86,7 +86,7 @@ function AbsentFormModal({
       return;
     }
 
-    message[status](messageResult, 1);
+    message[status](messageResult, 1.5);
     absentForm.resetFields();
 
     onRefreshAbsentTable();

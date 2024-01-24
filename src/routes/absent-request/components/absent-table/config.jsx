@@ -7,4 +7,6 @@ const scroll = {
   x: "auto",
 };
 
-export { paginationConfig, scroll };
+const pageDefault = { page: 1 };
+
+export { pageDefault, paginationConfig, scroll };
