@@ -76,7 +76,7 @@ const useAbsentStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      return storeResult.onFail(error.response?.data?.errors?.msg, []);
+      return storeResult.onFail(error.response?.data);
     } finally {
       set({ isLoadingAbsentTable: false });
     }
