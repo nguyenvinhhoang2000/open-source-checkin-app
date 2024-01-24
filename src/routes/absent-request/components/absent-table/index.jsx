@@ -9,11 +9,10 @@ import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-import useAuthStore from "@/store/use-auth-store";
-import useLoadingStore from "@/store/use-loading-store";
+import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
-import { pageDefault, paginationConfig, scroll } from "./config";
+import { paginationConfig, scroll } from "./config";
 
 function AbsentTable({
   filterTime,
@@ -25,39 +24,11 @@ function AbsentTable({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isLoadingAbsentTable = useLoadingStore().isLoadingAbsentTable;
-  const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
-  const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
-  const isRefreshAbsentTable = useLoadingStore().isRefreshAbsentTable;
-
-  const onGetListAbsentRequest = useAuthStore().onGetListAbsentRequest;
-
-  const [absentData, setAbsentData] = React.useState({});
-
-  React.useEffect(() => {
-    if (!searchParams.get("page")) {
-      navigate({
-        pathname: location.pathname,
-        search: createSearchParams(pageDefault).toString(),
-      });
-    }
-
-    const onGetListData = async () => {
-      onShowLoadingAbsentTable();
-
-      const { payload } = await onGetListAbsentRequest(
-        filterTime,
-        searchParams.get("page"),
-        paginationConfig.page,
-      );
-
-      onHideLoadingAbsentTable();
-
-      setAbsentData(payload);
-    };
-
-    onGetListData();
-  }, [filterTime, searchParams.get("page"), isRefreshAbsentTable]); // eslint-disable-line react-hooks/exhaustive-deps
+  const isLoadingAbsentTable = useAbsentStore().isLoadingAbsentTable;
+  const listAbsent = useAbsentStore().listAbsent;
+  const totalAbsent = useAbsentStore().totalAbsent;
+  const onGetListAbsentRequest = useAbsentStore().onGetListAbsentRequest;
+  const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
 
   const onOpenModalView = React.useCallback(
     (columnData, record) => {
@@ -188,10 +159,24 @@ function AbsentTable({
   const pagination = React.useMemo(() => {
     return {
       ...paginationConfig,
-      total: absentData?.total,
+      total: totalAbsent,
       current: +searchParams.get("page") || 1,
     };
-  }, [absentData?.total, searchParams]);
+  }, [totalAbsent, searchParams]);
+
+  const onGetListData = React.useCallback(async () => {
+    await onGetListAbsentRequest(filterTime, pagination.current);
+  }, [filterTime, onGetListAbsentRequest, pagination]);
+
+  React.useEffect(() => {
+    onGetListData();
+  }, [filterTime, pagination.current]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  React.useEffect(() => {
+    return () => {
+      onClearListAbsentRequest();
+    };
+  }, [onClearListAbsentRequest]);
 
   return (
     <Table
@@ -201,7 +186,7 @@ function AbsentTable({
       scroll={scroll}
       rowKey="_id"
       columns={columns}
-      dataSource={absentData?.data}
+      dataSource={listAbsent}
     />
   );
 }

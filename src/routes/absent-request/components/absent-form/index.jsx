@@ -19,8 +19,7 @@ import AppTitlePopup from "@/components/apps/app-title-popup";
 import { ABSENT_FORM_NAME } from "@/constants/absent-form-name";
 import { ABSENT_REASONS } from "@/constants/absent-reason";
 import { ABSENT_TYPES } from "@/constants/absent-types";
-import useAuthStore from "@/store/use-auth-store";
-import useLoadingStore from "@/store/use-loading-store";
+import useAbsentStore from "@/store/use-absent-store";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
 import {
@@ -39,13 +38,9 @@ function AbsentFormModal({
   currentData,
   formName,
 }) {
-  const onHideLoadingAbsentTable = useLoadingStore().onHideLoadingAbsentTable;
-  const onShowLoadingAbsentTable = useLoadingStore().onShowLoadingAbsentTable;
-  const onRefreshAbsentTable = useLoadingStore().onRefreshAbsentTable;
-
   const switchAction = React.useRef({
-    [ABSENT_FORM_NAME.CREATE]: useAuthStore().onCreateAbsentRequest,
-    [ABSENT_FORM_NAME.EDIT]: useAuthStore().onEditAbsentRequest,
+    [ABSENT_FORM_NAME.CREATE]: useAbsentStore().onCreateAbsentRequest,
+    [ABSENT_FORM_NAME.EDIT]: useAbsentStore().onEditAbsentRequest,
   }).current;
 
   const {
@@ -59,7 +54,6 @@ function AbsentFormModal({
   const onSubmit = React.useCallback(async () => {
     await absentForm.validateFields();
 
-    onShowLoadingAbsentTable();
     onShowLoadingButtonOk();
 
     const {
@@ -81,7 +75,6 @@ function AbsentFormModal({
       );
 
       onHideLoadingButtonOk();
-      onHideLoadingAbsentTable();
 
       return;
     }
@@ -89,9 +82,7 @@ function AbsentFormModal({
     message[status](messageResult, 1.5);
     absentForm.resetFields();
 
-    onRefreshAbsentTable();
     onHideLoadingButtonOk();
-    onHideLoadingAbsentTable();
     onClose();
   }, [formName]); // eslint-disable-line react-hooks/exhaustive-deps
 
