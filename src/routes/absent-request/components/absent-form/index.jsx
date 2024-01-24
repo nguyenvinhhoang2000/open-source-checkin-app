@@ -136,6 +136,7 @@ function AbsentFormModal({
           classNames="px-[1.25rem]"
         />
       }
+      onCancel={onClose}
     >
       <Form
         requiredMark={CustomizeFormLabel}

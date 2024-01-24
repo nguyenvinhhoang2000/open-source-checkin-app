@@ -54,6 +54,7 @@ function AbsentModalView({
           buttonOkClassNames={classnames(!isEdit && "min-w-[6.25rem]")}
         />
       }
+      onCancel={onClose}
     >
       <div className="flex flex-col gap-2 border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4">
         {currentData.columnData &&
