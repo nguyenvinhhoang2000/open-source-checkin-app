@@ -30,7 +30,7 @@ import {
   reasonType,
   toAt,
 } from "./config-form";
-import CustomizeFormLabel from "./CustomizeFormLabel";
+import CustomizeFormLabel from "./customize-form-label";
 
 function AbsentFormModal({
   cancelText,

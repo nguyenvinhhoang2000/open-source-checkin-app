@@ -5,7 +5,12 @@ export default {
   safelist: [
     "absolute",
     "font-roboto",
+    "flex",
+    "flex-col",
+    "flex-wrap",
+    "gap-2",
     "h-full",
+    "justify-between",
     "leading-[1.375rem]",
     "min-h-[2.3125rem]",
     "min-w-[8.1875rem]",
