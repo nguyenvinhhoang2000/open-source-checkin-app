@@ -35,11 +35,11 @@ const useAbsentStore = create((set, get) => ({
     try {
       set({ isLoadingAbsentTable: true });
 
-      const { filterTime, onGetListAbsentRequest } = get();
+      const { filterTime, onGetListAbsentRequest, page } = get();
 
       const { data: apiData } = await userAPI.editAbsentRequest(data, id);
 
-      await onGetListAbsentRequest(filterTime, get().page);
+      await onGetListAbsentRequest(filterTime, page);
 
       return storeResult.onSuccess(apiData);
     } catch (error) {
