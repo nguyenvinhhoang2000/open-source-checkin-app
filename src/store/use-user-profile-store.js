@@ -4,6 +4,8 @@ import userAPI from "@/services/userApi";
 import { storeResult } from "@/utils/return-message";
 
 const useUserProfileStore = create((set, get) => ({
+  user: null,
+
   onGetUserInformation: async () => {
     try {
       // SET TOKEN BEFORE CALL REQUEST
