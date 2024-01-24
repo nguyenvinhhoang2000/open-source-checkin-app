@@ -149,11 +149,12 @@ function AbsentTable({
       navigate({
         pathname: location.pathname,
         search: createSearchParams({
+          ...Object.fromEntries(searchParams),
           page: page.current,
         }).toString(),
       });
     },
-    [location.pathname, navigate],
+    [location.pathname, navigate, searchParams],
   );
 
   const pagination = React.useMemo(() => {

@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useBoolean } from "usehooks-ts";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
@@ -14,6 +20,10 @@ function AbsentRequestTable() {
   const [formModalName, setFormModalName] = React.useState(
     ABSENT_FORM_NAME.CREATE,
   );
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
 
@@ -33,9 +43,19 @@ function AbsentRequestTable() {
     defaultItemFilterTime[0].key,
   );
 
-  const onFilterTime = React.useCallback((record) => {
-    setFilterTime(record.key);
-  }, []);
+  const onFilterTime = React.useCallback(
+    (record) => {
+      setFilterTime(record.key);
+      navigate({
+        pathname: location.pathname,
+        search: createSearchParams({
+          ...Object.fromEntries(searchParams),
+          filterTime: record.key,
+        }).toString(),
+      });
+    },
+    [location.pathname, navigate, searchParams],
+  );
 
   const onGetAbsentDetail = React.useCallback((data) => {
     setDataSelectAction(data);
