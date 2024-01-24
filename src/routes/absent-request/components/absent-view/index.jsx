@@ -7,11 +7,10 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
+import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
 import { FORMAT_DATE } from "@/constants/format-date";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
-
-import { KEY_TO_STRING } from "./config-modal";
 
 function AbsentModalView({
   isModalOpen,
@@ -60,21 +59,24 @@ function AbsentModalView({
     >
       <div className="flex flex-col gap-2 border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4">
         {isModalOpen &&
-          currentData.columnData.map((item) => (
-            <div
-              key={item.key}
-              className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
-            >
-              <span className="font-bold">{item.title}</span>
-              <span>
-                {item.key === KEY_TO_STRING.DESCRIPTION
-                  ? currentData.record[item.key]?.toString()
-                  : dayjs(new Date(currentData.record[item.key])).format(
-                      FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_12_HOURS_AND_INTERVALS,
-                    )}
-              </span>
-            </div>
-          ))}
+          ABSENT_TABLE_COLUMNS.map(
+            (item, index) =>
+              index < 4 && (
+                <div
+                  key={item.key}
+                  className="flex flex-row flex-wrap justify-between gap-2 font-roboto"
+                >
+                  <span className="font-bold">{item.title}</span>
+                  <span>
+                    {item.key === ABSENT_TABLE_COLUMNS[3].key
+                      ? currentData[item.key]?.toString()
+                      : dayjs(new Date(currentData[item.key])).format(
+                          FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_12_HOURS_AND_INTERVALS,
+                        )}
+                  </span>
+                </div>
+              ),
+          )}
       </div>
     </Modal>
   );

@@ -9,6 +9,7 @@ import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
+import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
 import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
@@ -31,10 +32,8 @@ function AbsentTable({
   const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
 
   const onOpenModalView = React.useCallback(
-    (columnData, record) => {
-      const { id, ...recordWithoutId } = record;
-
-      onGetAbsentDetail({ columnData, record: recordWithoutId });
+    (record) => {
+      onGetAbsentDetail(record);
 
       onShowModalView();
     },
@@ -42,20 +41,16 @@ function AbsentTable({
   );
 
   const onOpenModalEdit = React.useCallback(
-    async (columnData, record) => {
-      onGetAbsentDetail({ columnData, record });
+    async (record) => {
+      onGetAbsentDetail(record);
 
       onShowModalEdit();
     },
     [onGetAbsentDetail, onShowModalEdit],
   );
 
-  const columns = [
+  const columnRender = [
     {
-      title: "From",
-      dataIndex: "fromAt",
-      key: "fromAt",
-      width: "11rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
@@ -64,10 +59,6 @@ function AbsentTable({
     },
 
     {
-      title: "To",
-      dataIndex: "toAt",
-      key: "toAt",
-      width: "11.75rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
@@ -76,10 +67,6 @@ function AbsentTable({
     },
 
     {
-      title: "Date Request",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      width: "11.75rem",
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
@@ -88,10 +75,6 @@ function AbsentTable({
     },
 
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      width: "39rem",
       render: (text) => (
         <span className="line-clamp-2 min-w-[15rem] text-ellipsis whitespace-pre-wrap font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {text}
@@ -100,21 +83,13 @@ function AbsentTable({
     },
 
     {
-      title: "Action",
-      key: "actions",
       render: (record) => {
         const onClickButtonEye = () => {
-          onOpenModalView(
-            columns.filter((item) => item.key !== "actions"),
-            record,
-          );
+          onOpenModalView(record);
         };
 
         const onClickButtonEdit = () => {
-          onOpenModalEdit(
-            columns.filter((item) => item.key !== "actions"),
-            record,
-          );
+          onOpenModalEdit(record);
         };
 
         return (
@@ -143,6 +118,10 @@ function AbsentTable({
       },
     },
   ];
+
+  const columns = ABSENT_TABLE_COLUMNS.map((item, index) => {
+    return { ...item, ...columnRender[index] };
+  });
 
   const onChangePage = React.useCallback(
     (page) => {

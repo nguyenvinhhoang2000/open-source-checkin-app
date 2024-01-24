@@ -89,9 +89,9 @@ function AbsentFormModal({
   React.useEffect(() => {
     if (isModalOpen && formName === ABSENT_FORM_NAME.EDIT) {
       const currentOne = {
-        ...currentData.record,
-        toAt: dayjs(new Date(currentData.record.toAt)),
-        fromAt: dayjs(new Date(currentData.record.fromAt)),
+        ...currentData,
+        toAt: dayjs(new Date(currentData.toAt)),
+        fromAt: dayjs(new Date(currentData.fromAt)),
       };
 
       absentForm.setFieldsValue(currentOne);
