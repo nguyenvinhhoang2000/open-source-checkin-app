@@ -189,7 +189,7 @@ function AbsentTable({
     return {
       ...paginationConfig,
       total: absentData?.total,
-      current: searchParams.get("page"),
+      current: +searchParams.get("page") || 1,
     };
   }, [absentData?.total, searchParams]);
 
