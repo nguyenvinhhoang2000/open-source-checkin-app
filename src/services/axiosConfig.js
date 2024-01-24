@@ -33,7 +33,7 @@ export function removeAppAccessToken() {
 
   delete axiosClient.defaults.headers.Authorization;
 
-  window.location.replace(LOCATIONS.LOGIN);
+  // window.location.replace(LOCATIONS.LOGIN);
 }
 
 axiosClient.interceptors.response.use(

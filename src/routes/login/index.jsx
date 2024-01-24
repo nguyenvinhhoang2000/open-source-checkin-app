@@ -5,29 +5,46 @@ import { useBoolean } from "usehooks-ts";
 
 import useAuthStore from "@/store/use-auth-store";
 
-import { initialValues, rulesEmail, rulesPassword } from "./config-login";
+import {
+  errorLoginFail,
+  initialValues,
+  rulesEmail,
+  rulesPassword,
+} from "./config-login";
 
 function Login() {
   const onLogin = useAuthStore().onLogin;
 
+  const [loginForm] = Form.useForm();
+
   const {
     value: isLoadingLogin,
-    setTrue: onLoadingLogin,
-    setFalse: onUnLoadingLogin,
+    setTrue: onShowLoadingLogin,
+    setFalse: onHideLoadingLogin,
   } = useBoolean(false);
 
   const onFinish = async (record) => {
-    const loadingMessage = message.loading("Login");
+    const onCanelLoadingMessage = message.loading("Login");
 
-    onLoadingLogin();
+    onShowLoadingLogin();
 
-    const result = await onLogin(record);
+    const { message: messResult, status, messArr } = await onLogin(record);
 
-    loadingMessage();
+    if (messArr) {
+      loginForm.setFields(errorLoginFail);
 
-    onUnLoadingLogin();
+      onHideLoadingLogin();
 
-    message[result.status](result.message, 1);
+      onCanelLoadingMessage();
+
+      return;
+    }
+
+    onCanelLoadingMessage();
+
+    onHideLoadingLogin();
+
+    message[status.status](messResult, 1);
   };
 
   return (
@@ -40,6 +57,7 @@ function Login() {
       />
       <div>
         <Form
+          form={loginForm}
           disabled={isLoadingLogin}
           name="normal_login"
           className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"

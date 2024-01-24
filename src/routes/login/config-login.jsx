@@ -14,4 +14,15 @@ const rulesPassword = [
   { max: 12, message: "Password cannot exceed more than 12 characters" },
 ];
 
-export { initialValues, rulesEmail, rulesPassword };
+const errorLoginFail = [
+  {
+    name: "email",
+    errors: ["Email is incorrect"],
+  },
+  {
+    name: "password",
+    errors: ["Password is incorrect"],
+  },
+];
+
+export { initialValues, rulesEmail, rulesPassword, errorLoginFail };
