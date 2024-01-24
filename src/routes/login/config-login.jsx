@@ -25,4 +25,5 @@ const errorLoginFail = [
   },
 ];
 
-export { initialValues, rulesEmail, rulesPassword, errorLoginFail };
+const errorCode = { UNAUTHORIZED: 40100 };
+export { initialValues, rulesEmail, rulesPassword, errorLoginFail, errorCode };

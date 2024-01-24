@@ -6,6 +6,7 @@ import { useBoolean } from "usehooks-ts";
 import useAuthStore from "@/store/use-auth-store";
 
 import {
+  errorCode,
   errorLoginFail,
   initialValues,
   rulesEmail,
@@ -18,22 +19,22 @@ function Login() {
   const [loginForm] = Form.useForm();
 
   const {
-    value: isLoadingLogin,
-    setTrue: onShowLoadingLogin,
-    setFalse: onHideLoadingLogin,
+    value: isDisabledLoginForm,
+    setTrue: onDisabledLoginForm,
+    setFalse: onEnabledLoginForm,
   } = useBoolean(false);
 
   const onFinish = async (record) => {
     const onCanelLoadingMessage = message.loading("Login");
 
-    onShowLoadingLogin();
+    onDisabledLoginForm();
 
     const { message: messResult, status, messArr } = await onLogin(record);
 
-    if (messArr) {
+    if (messArr && messArr.code === errorCode.UNAUTHORIZED) {
       loginForm.setFields(errorLoginFail);
 
-      onHideLoadingLogin();
+      onEnabledLoginForm();
 
       onCanelLoadingMessage();
 
@@ -42,7 +43,7 @@ function Login() {
 
     onCanelLoadingMessage();
 
-    onHideLoadingLogin();
+    onEnabledLoginForm();
 
     message[status.status](messResult, 1);
   };
@@ -58,7 +59,7 @@ function Login() {
       <div>
         <Form
           form={loginForm}
-          disabled={isLoadingLogin}
+          disabled={isDisabledLoginForm}
           name="normal_login"
           className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
           initialValues={initialValues}
