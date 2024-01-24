@@ -64,15 +64,14 @@ function AbsentFormModal({
 
     const {
       status,
-      message: messageResult,
-      messArr,
+      message: { message: messageResult, errors: arrErrors },
     } = await switchAction[formName](
       absentForm.getFieldsValue(),
       absentForm.getFieldValue("_id"),
     );
 
-    if (messArr) {
-      messArr.forEach((item) =>
+    if (arrErrors) {
+      arrErrors.forEach((item) =>
         absentForm.setFields([
           {
             name: item.param,

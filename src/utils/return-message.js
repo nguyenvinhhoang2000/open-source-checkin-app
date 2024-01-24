@@ -10,12 +10,11 @@ export const storeResult = {
     };
   },
 
-  onFail(message, messArr) {
+  onFail(message) {
     return {
       ok: false,
       status: TYPE_MESSAGE.ERROR,
       message: message || TYPE_MESSAGE.SYSTEM_ERROR,
-      messArr,
     };
   },
 };

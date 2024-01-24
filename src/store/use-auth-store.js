@@ -89,10 +89,7 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      return storeResult.onFail(
-        error.response?.data?.errors?.msg,
-        error.response?.data?.errors,
-      );
+      return storeResult.onFail(error.response?.data);
     }
   },
 
@@ -104,10 +101,7 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      return storeResult.onFail(
-        error.response?.data?.errors?.msg,
-        error.response?.data?.errors,
-      );
+      return storeResult.onFail(error.response?.data);
     }
   },
 
