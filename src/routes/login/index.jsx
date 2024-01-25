@@ -44,7 +44,7 @@ function Login() {
 
     onEnabledLoginForm();
 
-    message[status.status](messResult, 1);
+    message[status](messResult, 1);
   };
 
   return (
