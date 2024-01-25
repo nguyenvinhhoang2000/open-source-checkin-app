@@ -19,9 +19,9 @@ const useAbsentStore = create((set, get) => ({
 
   onCreateAbsentRequest: async (data) => {
     try {
-      set({ isLoadingAbsentTable: true });
-
       const { filterTime, onGetListAbsentRequest, page } = get();
+
+      set({ isLoadingAbsentTable: true });
 
       const { data: apiData } = await userAPI.createAbsentRequest(data);
 
@@ -37,9 +37,9 @@ const useAbsentStore = create((set, get) => ({
 
   onEditAbsentRequest: async (data, id) => {
     try {
-      set({ isLoadingAbsentTable: true });
-
       const { filterTime, onGetListAbsentRequest, page } = get();
+
+      set({ isLoadingAbsentTable: true });
 
       const { data: apiData } = await userAPI.editAbsentRequest(data, id);
 
@@ -55,11 +55,11 @@ const useAbsentStore = create((set, get) => ({
 
   onGetListAbsentRequest: async (filterTime, page) => {
     try {
+      const { limit } = get();
+
       set({
         isLoadingAbsentTable: true,
       });
-
-      const { limit } = get();
 
       const {
         data: {
