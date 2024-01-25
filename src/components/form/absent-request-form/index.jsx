@@ -57,7 +57,10 @@ function AbsentRequestForm({
             label={ABSENT_FORM.TYPE_ABSENT.label}
             rules={absentTypes}
           >
-            <Select placeholder="Select type" allowClear>
+            <Select
+              placeholder={ABSENT_FORM.TYPE_ABSENT.placeholder}
+              allowClear
+            >
               {ABSENT_TYPES.map((item) => (
                 <Select.Option value={item.id} key={item.id}>
                   {item.label}
@@ -73,7 +76,7 @@ function AbsentRequestForm({
             required
             rules={reasonType}
           >
-            <Select placeholder="Select reason" allowClear>
+            <Select placeholder={ABSENT_FORM.REASON.placeholder} allowClear>
               {ABSENT_REASONS.map((item) => (
                 <Select.Option value={item.id} key={item.id}>
                   {item.label}
@@ -94,7 +97,7 @@ function AbsentRequestForm({
             <DatePicker
               showTime
               popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
-              placeholder="Pick time"
+              placeholder={ABSENT_FORM.FORM_DATE.placeholder}
               className="w-full"
               suffixIcon={
                 <img
@@ -115,7 +118,7 @@ function AbsentRequestForm({
             <DatePicker
               showTime
               popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
-              placeholder="Pick time"
+              placeholder={ABSENT_FORM.TO_DATE.placeholder}
               className="w-full"
               suffixIcon={
                 <img
@@ -135,9 +138,9 @@ function AbsentRequestForm({
       >
         <Input.TextArea
           showCount
-          maxLength={100}
+          maxLength={1000}
           rows={4}
-          placeholder="Enter your Description"
+          placeholder={ABSENT_FORM.DESCRIPTION.placeholder}
         />
       </Form.Item>
     </Form>

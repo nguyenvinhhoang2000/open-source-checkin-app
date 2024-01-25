@@ -1,15 +1,35 @@
 import { SCHEMAS } from "@/components/schemas";
 
 const ABSENT_FORM = {
-  TYPE_ABSENT: { name: "absentType", label: "Type Absent" },
+  TYPE_ABSENT: {
+    name: "absentType",
+    label: "Type Absent",
+    placeholder: "Select type",
+  },
 
-  REASON: { name: "reasonType", label: "Reason" },
+  REASON: {
+    name: "reasonType",
+    label: "Reason",
+    placeholder: "Select reason",
+  },
 
-  FORM_DATE: { name: "fromAt", label: "From" },
+  FORM_DATE: {
+    name: "fromAt",
+    label: "From",
+    placeholder: "Pick time",
+  },
 
-  TO_DATE: { name: "toAt", label: "To" },
+  TO_DATE: {
+    name: "toAt",
+    label: "To",
+    placeholder: "Pick time",
+  },
 
-  DESCRIPTION: { name: "description", label: "Description" },
+  DESCRIPTION: {
+    name: "description",
+    label: "Description",
+    placeholder: "Enter your Description",
+  },
 };
 
 const absentTypes = [SCHEMAS.REQUIRED_SELECT(ABSENT_FORM.TYPE_ABSENT.label)];
