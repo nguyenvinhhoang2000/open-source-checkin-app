@@ -3,6 +3,7 @@ import { Button } from "antd";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
+import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import { emptyFn } from "@/utils/empty-types";
 
 import AppDropdownFilterTime from "./app-dropdown-filter-time";
@@ -13,8 +14,12 @@ function AppHeaderTable({
   onFilterTime,
   filterTime,
   buttonAbsentRequestText,
-  onOpenAbsentRequestForm,
+  onOpenCreateForm,
 }) {
+  const onOpenCreateAbsentForm = React.useCallback(() => {
+    onOpenCreateForm(ABSENT_MODAL_NAME.CREATE);
+  }, [onOpenCreateForm]);
+
   return (
     <div
       className={classNames(
@@ -35,7 +40,7 @@ function AppHeaderTable({
             className="h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto"
             title="Absent Request"
             type="primary"
-            onClick={onOpenAbsentRequestForm}
+            onClick={onOpenCreateAbsentForm}
           >
             {buttonAbsentRequestText}
           </Button>
@@ -52,12 +57,12 @@ AppHeaderTable.propTypes = {
   classNameTitle: PropTypes.string,
   onFilterTime: PropTypes.func.isRequired,
   filterTime: PropTypes.string.isRequired,
-  onOpenAbsentRequestForm: PropTypes.func,
+  onOpenCreateForm: PropTypes.func,
   buttonAbsentRequestText: PropTypes.string,
 };
 
 AppHeaderTable.defaultProps = {
   classNameTitle: "",
   buttonAbsentRequestText: "",
-  onOpenAbsentRequestForm: emptyFn,
+  onOpenCreateForm: emptyFn,
 };

@@ -59,11 +59,6 @@ function AbsentRequestTable() {
     [onShowModal],
   );
 
-  const onOpenModalAbsentFormCreate = React.useCallback(() => {
-    setModalName(ABSENT_MODAL_NAME.CREATE);
-    onShowModal();
-  }, [onShowModal]);
-
   return (
     <section className="container">
       <div className="mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
@@ -72,7 +67,7 @@ function AbsentRequestTable() {
           classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
           filterTime={filterTime}
           buttonAbsentRequestText="Absent Request"
-          onOpenAbsentRequestForm={onOpenModalAbsentFormCreate}
+          onOpenCreateForm={onOpenModal}
           onFilterTime={onFilterTime}
         />
 
