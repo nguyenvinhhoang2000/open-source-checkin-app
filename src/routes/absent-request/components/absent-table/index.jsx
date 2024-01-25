@@ -27,24 +27,6 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
   const onGetListAbsentRequest = useAbsentStore().onGetListAbsentRequest;
   const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
 
-  const onOpenModalView = React.useCallback(
-    (record) => {
-      onGetAbsentDetail(record);
-
-      onShowModal(ABSENT_MODAL_NAME.VIEW);
-    },
-    [onGetAbsentDetail, onShowModal],
-  );
-
-  const onOpenModalEdit = React.useCallback(
-    async (record) => {
-      onGetAbsentDetail(record);
-
-      onShowModal(ABSENT_MODAL_NAME.EDIT);
-    },
-    [onGetAbsentDetail, onShowModal],
-  );
-
   const columnRender = [
     {
       render: (text) => (
@@ -81,11 +63,13 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
     {
       render: (record) => {
         const onClickButtonEye = () => {
-          onOpenModalView(record);
+          onGetAbsentDetail(record);
+          onShowModal(ABSENT_MODAL_NAME.VIEW);
         };
 
         const onClickButtonEdit = () => {
-          onOpenModalEdit(record);
+          onGetAbsentDetail(record);
+          onShowModal(ABSENT_MODAL_NAME.EDIT);
         };
 
         return (
