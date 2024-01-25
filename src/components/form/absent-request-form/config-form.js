@@ -1,13 +1,25 @@
-const absentTypes = [
-  { required: true, message: "Please select your Absent Type" },
-];
+import { SCHEMAS } from "@/components/schemas";
 
-const reasonType = [{ required: true, message: "Please select your Reason" }];
+const ABSENT_FORM = {
+  TYPE_ABSENT: { name: "absentType", label: "Type Absent" },
 
-const description = [
-  { required: true, message: "Please input your Description" },
-];
-const fromAt = [{ required: true, message: "Please input your From Date" }];
-const toAt = [{ required: true, message: "Please input your To Date" }];
+  REASON: { name: "reasonType", label: "Reason" },
 
-export { absentTypes, reasonType, description, fromAt, toAt };
+  FORM_DATE: { name: "fromAt", label: "From" },
+
+  TO_DATE: { name: "toAt", label: "To" },
+
+  DESCRIPTION: { name: "description", label: "Description" },
+};
+
+const absentTypes = [SCHEMAS.REQUIRED_SELECT(ABSENT_FORM.TYPE_ABSENT.label)];
+
+const reasonType = [SCHEMAS.REQUIRED_SELECT(ABSENT_FORM.REASON.label)];
+
+const fromAt = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.FORM_DATE.label)];
+
+const toAt = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.TO_DATE.label)];
+
+const description = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.DESCRIPTION.label)];
+
+export { ABSENT_FORM, absentTypes, reasonType, description, fromAt, toAt };

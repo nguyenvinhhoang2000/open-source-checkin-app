@@ -12,6 +12,7 @@ import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
+import seletecButtonPopupName from "@/utils/select-footer-button-popup-name";
 
 import AbsentView from "../absent-view";
 
@@ -45,38 +46,42 @@ function CommonModal({
   }, [onClose, onOpenModal]);
 
   const onSubmitForm = React.useCallback(async () => {
-    setDisabledForm();
+    try {
+      setDisabledForm();
 
-    await absentForm.validateFields();
+      await absentForm.validateFields();
 
-    const {
-      status,
-      message: { message: messageResult, errors: arrErrors },
-    } = await switchActions[modalName](
-      absentForm.getFieldsValue(),
-      absentForm.getFieldValue("_id"),
-    );
-
-    if (arrErrors) {
-      arrErrors.forEach((item) =>
-        absentForm.setFields([
-          {
-            name: item.param,
-            errors: [item.msg],
-          },
-        ]),
+      const {
+        status,
+        message: { message: messageResult, errors: arrErrors },
+      } = await switchActions[modalName](
+        absentForm.getFieldsValue(),
+        absentForm.getFieldValue("_id"),
       );
 
+      if (arrErrors) {
+        arrErrors.forEach((item) =>
+          absentForm.setFields([
+            {
+              name: item.param,
+              errors: [item.msg],
+            },
+          ]),
+        );
+
+        setEnabledForm();
+
+        return;
+      }
+
+      message[status](messageResult, 1.5);
+
+      absentForm.resetFields();
       setEnabledForm();
-
-      return;
+      onClose();
+    } catch (error) {
+      setEnabledForm();
     }
-
-    message[status](messageResult, 1.5);
-
-    absentForm.resetFields();
-    setEnabledForm();
-    onClose();
   }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -99,7 +104,7 @@ function CommonModal({
               ? onOkBtn
               : onSubmitForm
           }
-          okText={isEdit ? "Edit" : "OK"}
+          okText={seletecButtonPopupName(modalName, isEdit)}
           cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}
           isLoadingButtonOk={isLoadingButtonOk}

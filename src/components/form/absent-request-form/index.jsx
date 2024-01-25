@@ -11,6 +11,7 @@ import { ABSENT_TYPES } from "@/constants/absent-types";
 import { emptyObj } from "@/utils/empty-types";
 
 import {
+  ABSENT_FORM,
   absentTypes,
   description,
   fromAt,
@@ -51,7 +52,11 @@ function AbsentRequestForm({
     >
       <Row gutter={24}>
         <Col span={12}>
-          <Form.Item name="absentType" label="Type Absent" rules={absentTypes}>
+          <Form.Item
+            name={ABSENT_FORM.TYPE_ABSENT.name}
+            label={ABSENT_FORM.TYPE_ABSENT.label}
+            rules={absentTypes}
+          >
             <Select placeholder="Select type" allowClear>
               {ABSENT_TYPES.map((item) => (
                 <Select.Option value={item.id} key={item.id}>
@@ -63,9 +68,8 @@ function AbsentRequestForm({
         </Col>
         <Col span={12}>
           <Form.Item
-            labelAlign="right"
-            name="reasonType"
-            label="Reason"
+            name={ABSENT_FORM.REASON.name}
+            label={ABSENT_FORM.REASON.label}
             required
             rules={reasonType}
           >
@@ -81,7 +85,12 @@ function AbsentRequestForm({
       </Row>
       <Row gutter={24}>
         <Col span={12}>
-          <Form.Item name="fromAt" label="From" required rules={fromAt}>
+          <Form.Item
+            name={ABSENT_FORM.FORM_DATE.name}
+            label={ABSENT_FORM.FORM_DATE.label}
+            required
+            rules={fromAt}
+          >
             <DatePicker
               showTime
               popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
@@ -97,7 +106,12 @@ function AbsentRequestForm({
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item name="toAt" label="To" required rules={toAt}>
+          <Form.Item
+            name={ABSENT_FORM.TO_DATE.name}
+            label={ABSENT_FORM.TO_DATE.label}
+            required
+            rules={toAt}
+          >
             <DatePicker
               showTime
               popupClassName="max-h-[25rem] overflow-y-scroll ssm:h-fit ssm:overflow-y-hidden"
@@ -114,8 +128,8 @@ function AbsentRequestForm({
         </Col>
       </Row>
       <Form.Item
-        name="description"
-        label="Description"
+        name={ABSENT_FORM.DESCRIPTION.name}
+        label={ABSENT_FORM.DESCRIPTION.label}
         required
         rules={description}
       >
