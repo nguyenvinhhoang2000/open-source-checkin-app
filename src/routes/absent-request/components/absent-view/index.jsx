@@ -18,7 +18,7 @@ function AbsentView({ currentData }) {
               <span className="font-bold">{item.title}</span>
               <span>
                 {item.key === ABSENT_TABLE_COLUMNS[3].key
-                  ? currentData[item.key]?.toString()
+                  ? currentData[item.key].toString()
                   : dayjs(new Date(currentData[item.key])).format(
                       FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_12_HOURS_AND_INTERVALS,
                     )}

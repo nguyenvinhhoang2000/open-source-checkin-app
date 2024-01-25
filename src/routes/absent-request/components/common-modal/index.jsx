@@ -69,15 +69,13 @@ function CommonModal({
       );
 
       setEnabledForm();
+    } else {
+      message[status](messageResult, 1.5);
 
-      return;
+      absentForm.resetFields();
+      setEnabledForm();
+      onClose();
     }
-
-    message[status](messageResult, 1.5);
-
-    absentForm.resetFields();
-    setEnabledForm();
-    onClose();
   }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
