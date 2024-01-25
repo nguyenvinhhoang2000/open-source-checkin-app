@@ -46,9 +46,8 @@ function CommonModal({
   }, [onClose, onOpenModal]);
 
   const onSubmitForm = React.useCallback(async () => {
-    setDisabledForm();
-
     await absentForm.validateFields();
+    setDisabledForm();
 
     const {
       status,

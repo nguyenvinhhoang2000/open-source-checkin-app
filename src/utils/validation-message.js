@@ -1,3 +1,3 @@
 export default function validationMessages(message, type) {
-  return `Please ${type} your ${message}`;
+  return `Please ${type} ${message}`;
 }
