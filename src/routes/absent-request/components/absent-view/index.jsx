@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
 import { FORMAT_DATE } from "@/constants/format-date";
-import { emptyObj } from "@/utils/empty-types";
 
 function AbsentView({ currentData }) {
   return (
@@ -34,9 +33,5 @@ function AbsentView({ currentData }) {
 export default React.memo(AbsentView);
 
 AbsentView.propTypes = {
-  currentData: PropTypes.instanceOf(Object),
-};
-
-AbsentView.defaultProps = {
-  currentData: emptyObj,
+  currentData: PropTypes.instanceOf(Object).isRequired,
 };
