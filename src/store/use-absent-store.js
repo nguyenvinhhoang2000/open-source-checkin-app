@@ -6,13 +6,9 @@ import { storeResult } from "@/utils/return-message";
 
 const useAbsentStore = create((set, get) => ({
   filterTime: defaultItemFilterTime[0].key,
-
   page: 1,
-
   limit: 10,
-
   listAbsent: [],
-
   totalAbsent: 0,
 
   isLoadingAbsentTable: false,

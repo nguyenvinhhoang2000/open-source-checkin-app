@@ -30,13 +30,12 @@ function AbsentRequestTable() {
     setFalse: onHideModal,
   } = useBoolean(false);
 
-  const [filterTime, setFilterTime] = React.useState(
-    defaultItemFilterTime[0].key,
-  );
+  const filterTime = React.useMemo(() => {
+    return searchParams.get("filterTime") || defaultItemFilterTime[0].key;
+  }, [searchParams]);
 
   const onFilterTime = React.useCallback(
     (record) => {
-      setFilterTime(record.key);
       navigate({
         pathname: location.pathname,
         search: createSearchParams({
