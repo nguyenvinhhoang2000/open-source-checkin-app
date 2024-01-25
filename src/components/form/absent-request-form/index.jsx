@@ -20,7 +20,6 @@ import {
 } from "./config-form";
 
 function AbsentRequestForm({
-  isModalOpen,
   currentData,
   formName,
   onSubmitForm,
@@ -28,7 +27,7 @@ function AbsentRequestForm({
   isDisabledForm,
 }) {
   React.useEffect(() => {
-    if (isModalOpen && formName === ABSENT_MODAL_NAME.EDIT) {
+    if (formName === ABSENT_MODAL_NAME.EDIT) {
       const currentOne = {
         ...currentData,
         toAt: dayjs(new Date(currentData.toAt)),
@@ -38,7 +37,7 @@ function AbsentRequestForm({
     } else {
       absentForm.resetFields();
     }
-  }, [isModalOpen, formName, currentData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [formName, currentData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Form
@@ -150,7 +149,6 @@ function AbsentRequestForm({
 export default React.memo(AbsentRequestForm);
 
 AbsentRequestForm.propTypes = {
-  isModalOpen: PropTypes.bool,
   formName: PropTypes.string.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
   currentData: PropTypes.instanceOf(Object),
@@ -159,6 +157,5 @@ AbsentRequestForm.propTypes = {
 };
 
 AbsentRequestForm.defaultProps = {
-  isModalOpen: false,
   currentData: emptyObj,
 };

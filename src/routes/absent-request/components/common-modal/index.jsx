@@ -121,7 +121,6 @@ function CommonModal({
       {Object.keys(switchActions).includes(modalName) && (
         <AbsentRequestForm
           formName={modalName}
-          isModalOpen={isModalOpen}
           onClose={onClose}
           currentData={currentData}
           onSubmitForm={onSubmitForm}
