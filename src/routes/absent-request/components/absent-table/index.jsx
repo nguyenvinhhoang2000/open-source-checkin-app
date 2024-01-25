@@ -146,13 +146,11 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
 
   React.useEffect(() => {
     onGetListData();
-  }, [filterTime, pagination.current]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  React.useEffect(() => {
     return () => {
       onClearListAbsentRequest();
     };
-  }, [onClearListAbsentRequest]);
+  }, [filterTime, pagination.current]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Table
