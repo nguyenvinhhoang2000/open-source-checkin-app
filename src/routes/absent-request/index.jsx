@@ -54,7 +54,6 @@ function AbsentRequestTable() {
   const onOpenModal = React.useCallback(
     (value) => {
       setModalName(value);
-
       onShowModal();
     },
     [onShowModal],
