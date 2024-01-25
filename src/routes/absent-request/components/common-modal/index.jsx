@@ -46,42 +46,38 @@ function CommonModal({
   }, [onClose, onOpenModal]);
 
   const onSubmitForm = React.useCallback(async () => {
-    try {
-      setDisabledForm();
+    setDisabledForm();
 
-      await absentForm.validateFields();
+    await absentForm.validateFields();
 
-      const {
-        status,
-        message: { message: messageResult, errors: arrErrors },
-      } = await switchActions[modalName](
-        absentForm.getFieldsValue(),
-        absentForm.getFieldValue("_id"),
+    const {
+      status,
+      message: { message: messageResult, errors: arrErrors },
+    } = await switchActions[modalName](
+      absentForm.getFieldsValue(),
+      absentForm.getFieldValue("_id"),
+    );
+
+    if (arrErrors) {
+      arrErrors.forEach((item) =>
+        absentForm.setFields([
+          {
+            name: item.param,
+            errors: [item.msg],
+          },
+        ]),
       );
 
-      if (arrErrors) {
-        arrErrors.forEach((item) =>
-          absentForm.setFields([
-            {
-              name: item.param,
-              errors: [item.msg],
-            },
-          ]),
-        );
-
-        setEnabledForm();
-
-        return;
-      }
-
-      message[status](messageResult, 1.5);
-
-      absentForm.resetFields();
       setEnabledForm();
-      onClose();
-    } catch (error) {
-      setEnabledForm();
+
+      return;
     }
+
+    message[status](messageResult, 1.5);
+
+    absentForm.resetFields();
+    setEnabledForm();
+    onClose();
   }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
