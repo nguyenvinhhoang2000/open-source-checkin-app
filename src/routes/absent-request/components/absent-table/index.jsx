@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
+import { FORMAT_DATE } from "@/constants/format-date";
 import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
@@ -27,32 +28,36 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
   const onGetListAbsentRequest = useAbsentStore().onGetListAbsentRequest;
   const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
 
-  const columnRender = [
+  const columns = [
     {
+      ...ABSENT_TABLE_COLUMNS.FROM_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
+      ...ABSENT_TABLE_COLUMNS.TO_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
+      ...ABSENT_TABLE_COLUMNS.CREATE_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
+      ...ABSENT_TABLE_COLUMNS.DESCRIPTION,
       render: (text) => (
         <span className="line-clamp-2 min-w-[15rem] text-ellipsis whitespace-pre-wrap font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {text}
@@ -61,6 +66,7 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
     },
 
     {
+      ...ABSENT_TABLE_COLUMNS.ACTIONS,
       render: (record) => {
         const onClickButtonEye = () => {
           onGetAbsentDetail(record);
@@ -98,10 +104,6 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
       },
     },
   ];
-
-  const columns = ABSENT_TABLE_COLUMNS.map((item, index) => {
-    return { ...item, ...columnRender[index] };
-  });
 
   const onChangePage = React.useCallback(
     (page) => {
