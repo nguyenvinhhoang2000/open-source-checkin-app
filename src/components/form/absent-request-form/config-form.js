@@ -32,14 +32,18 @@ const ABSENT_FORM = {
   },
 };
 
-const absentTypes = [SCHEMAS.REQUIRED_SELECT(ABSENT_FORM.TYPE_ABSENT.label)];
+const absentTypes = [
+  SCHEMAS.RULE_REQUIRED_SELECT(ABSENT_FORM.TYPE_ABSENT.label),
+];
 
-const reasonType = [SCHEMAS.REQUIRED_SELECT(ABSENT_FORM.REASON.label)];
+const reasonType = [SCHEMAS.RULE_REQUIRED_SELECT(ABSENT_FORM.REASON.label)];
 
-const fromAt = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.FORM_DATE.label)];
+const fromAt = [SCHEMAS.RULE_REQUIRED_INPUT(ABSENT_FORM.FORM_DATE.label)];
 
-const toAt = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.TO_DATE.label)];
+const toAt = [SCHEMAS.RULE_REQUIRED_INPUT(ABSENT_FORM.TO_DATE.label)];
 
-const description = [SCHEMAS.REQUIRED_INPUT(ABSENT_FORM.DESCRIPTION.label)];
+const description = [
+  SCHEMAS.RULE_REQUIRED_INPUT(ABSENT_FORM.DESCRIPTION.label),
+];
 
 export { ABSENT_FORM, absentTypes, reasonType, description, fromAt, toAt };
