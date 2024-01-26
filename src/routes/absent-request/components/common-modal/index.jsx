@@ -87,6 +87,7 @@ function CommonModal({
           titleText="Absent Request"
           onClose={onClose}
           classNames="px-[1.25rem] mb-[1rem]"
+          isDisabledClose={isDisabledForm}
         />
       }
       open={isModalOpen}
