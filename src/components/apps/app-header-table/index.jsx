@@ -15,7 +15,6 @@ function AppHeaderTable({
   buttonAbsentRequestText,
   onClickButton,
   buttonClassNames,
-  buttonTitle,
 }) {
   return (
     <div
@@ -38,7 +37,7 @@ function AppHeaderTable({
               buttonClassNames,
               "h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto",
             )}
-            title={buttonTitle}
+            title={buttonAbsentRequestText}
             type="primary"
             onClick={onClickButton}
           >
@@ -60,13 +59,11 @@ AppHeaderTable.propTypes = {
   onClickButton: PropTypes.func,
   buttonAbsentRequestText: PropTypes.string,
   buttonClassNames: PropTypes.string,
-  buttonTitle: PropTypes.string,
 };
 
 AppHeaderTable.defaultProps = {
   classNameTitle: "",
   buttonAbsentRequestText: "",
   buttonClassNames: "",
-  buttonTitle: "Absent",
   onClickButton: emptyFn,
 };

@@ -94,20 +94,33 @@ const useAbsentStore = create((set, get) => ({
     });
   },
 
-  onSetFilterTime: async (filterTimeAbsent) => {
+  onSetFilterTime: async (filterTime) => {
+    const { filterTimeAbsent, onGetListAbsentRequest } = get();
     set({
-      filterTimeAbsent,
+      filterTimeAbsent: filterTime || filterTimeAbsent,
     });
 
-    get().onGetListAbsentRequest();
+    await onGetListAbsentRequest();
   },
 
-  onSetPage: async (pageAbsent) => {
+  onSetPage: async (page) => {
+    const { pageAbsent, onGetListAbsentRequest } = get();
+
     set({
-      pageAbsent,
+      pageAbsent: page || pageAbsent,
     });
 
-    get().onGetListAbsentRequest();
+    await onGetListAbsentRequest();
+  },
+
+  onGetDataFirstRender: async (filterTime, page) => {
+    const { filterTimeAbsent, pageAbsent, onGetListAbsentRequest } = get();
+    set({
+      filterTimeAbsent: filterTime || filterTimeAbsent,
+      pageAbsent: page || pageAbsent,
+    });
+
+    await onGetListAbsentRequest();
   },
 }));
 

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useBoolean } from "usehooks-ts";
 
 import AppHeaderTable from "@/components/apps/app-header-table";
@@ -19,11 +14,11 @@ function AbsentRequestTable() {
   const [modalName, setModalName] = React.useState(ABSENT_MODAL_NAME.CREATE);
 
   const onSetFilterTime = useAbsentStore().onSetFilterTime;
+  const onGetDataFirstRender = useAbsentStore().onGetDataFirstRender;
   const filterTimeAbsent = useAbsentStore().filterTimeAbsent;
+  const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
 
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [dataSelectAction, setDataSelectAction] = React.useState({});
 
@@ -35,21 +30,14 @@ function AbsentRequestTable() {
 
   const onFilterTime = React.useCallback(
     (record) => {
-      navigate({
-        pathname: location.pathname,
-        search: createSearchParams({
-          ...Object.fromEntries(searchParams),
-          filterTime: record.key,
-        }).toString(),
+      setSearchParams({
+        ...Object.fromEntries(searchParams),
+        filterTime: record.key,
       });
       onSetFilterTime(record.key);
     },
-    [location.pathname, navigate, onSetFilterTime, searchParams],
+    [onSetFilterTime, searchParams, setSearchParams],
   );
-
-  const onGetAbsentDetail = React.useCallback((data) => {
-    setDataSelectAction(data);
-  }, []);
 
   const onOpenModal = React.useCallback(
     (value) => {
@@ -61,9 +49,19 @@ function AbsentRequestTable() {
 
   const onOpenCreateModal = React.useCallback(() => {
     setModalName(ABSENT_MODAL_NAME.CREATE);
-
     onShowModal();
   }, [onShowModal]);
+
+  React.useEffect(() => {
+    onGetDataFirstRender(
+      searchParams.get("filterTime"),
+      searchParams.get("page"),
+    );
+
+    return () => {
+      onClearListAbsentRequest();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="container">
@@ -81,7 +79,7 @@ function AbsentRequestTable() {
         <AbsentTable
           onShowModalView={onShowModal}
           filterTime={filterTimeAbsent}
-          onGetAbsentDetail={onGetAbsentDetail}
+          onGetAbsentDetail={setDataSelectAction}
           onShowModal={onOpenModal}
         />
 

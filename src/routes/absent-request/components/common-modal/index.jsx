@@ -74,14 +74,14 @@ function CommonModal({
   const onOk = React.useCallback(() => {
     switch (modalName) {
       case ABSENT_MODAL_NAME.VIEW:
-        return isEdit && onOpenModal(ABSENT_MODAL_NAME.EDIT);
+        return isEdit ? onOpenModal(ABSENT_MODAL_NAME.EDIT) : onClose();
       case ABSENT_MODAL_NAME.CREATE:
       case ABSENT_MODAL_NAME.EDIT:
         return isEdit && onSubmitForm();
       default:
         return onClose();
     }
-  }, [isEdit, modalName, onClose, onOpenModal, onSubmitForm]);
+  }, [isEdit, modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Modal

@@ -6,7 +6,7 @@ export default function seletecButtonPopupName(modalName, isEdit) {
       return isEdit ? "Edit" : "OK";
 
     case ABSENT_MODAL_NAME.EDIT:
-      return "Save";
+      return "Edit";
 
     case ABSENT_MODAL_NAME.CREATE:
       return "Save";

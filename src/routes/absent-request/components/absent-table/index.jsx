@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
@@ -14,20 +9,17 @@ import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
 import { FORMAT_DATE } from "@/constants/format-date";
 import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
+import paginationConfig from "@/utils/pagination-table-config";
 
-import { paginationConfig, scroll } from "./config";
+import { scroll } from "./config";
 
 function AbsentTable({ onShowModal, onGetAbsentDetail }) {
-  const [searchParams] = useSearchParams();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const isLoadingAbsentTable = useAbsentStore().isLoadingAbsentTable;
   const listAbsent = useAbsentStore().listAbsent;
   const totalAbsent = useAbsentStore().totalAbsent;
   const pageAbsent = useAbsentStore().pageAbsent;
-  const onGetListAbsentRequest = useAbsentStore().onGetListAbsentRequest;
-  const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
   const onSetPage = useAbsentStore().onSetPage;
 
   const columns = [
@@ -109,42 +101,19 @@ function AbsentTable({ onShowModal, onGetAbsentDetail }) {
 
   const onChangePage = React.useCallback(
     (page) => {
-      navigate({
-        pathname: location.pathname,
-        search: createSearchParams({
-          ...Object.fromEntries(searchParams),
-          page: page.current,
-        }).toString(),
+      setSearchParams({
+        ...Object.fromEntries(searchParams),
+        page: page.current,
       });
-      onSetPage(page.current || 1);
+      onSetPage(page.current);
     },
-    [location.pathname, navigate, onSetPage, searchParams],
+    [onSetPage, searchParams, setSearchParams],
   );
-
-  const pagination = React.useMemo(() => {
-    return {
-      ...paginationConfig,
-      total: totalAbsent,
-      current: pageAbsent,
-    };
-  }, [totalAbsent, pageAbsent]);
-
-  const onGetListData = React.useCallback(async () => {
-    await onGetListAbsentRequest();
-  }, [onGetListAbsentRequest]);
-
-  React.useEffect(() => {
-    onGetListData();
-
-    return () => {
-      onClearListAbsentRequest();
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Table
       loading={isLoadingAbsentTable}
-      pagination={pagination}
+      pagination={paginationConfig(totalAbsent, pageAbsent)}
       onChange={onChangePage}
       scroll={scroll}
       rowKey="_id"
