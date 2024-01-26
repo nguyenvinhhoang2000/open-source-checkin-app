@@ -116,7 +116,7 @@ function AbsentTable({ onShowModal, onGetAbsentDetail }) {
           page: page.current,
         }).toString(),
       });
-      onSetPage(page.current);
+      onSetPage(page.current || 1);
     },
     [location.pathname, navigate, onSetPage, searchParams],
   );
