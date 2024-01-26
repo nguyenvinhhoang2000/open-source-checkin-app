@@ -5,8 +5,8 @@ import userAPI from "@/services/userApi";
 import { storeResult } from "@/utils/return-message";
 
 const useAbsentStore = create((set, get) => ({
-  filterTime: defaultItemFilterTime[0].key,
-  page: 1,
+  filterTimeAbsent: defaultItemFilterTime[0].key,
+  pageAbsent: 1,
   limit: 10,
   listAbsent: [],
   totalAbsent: 0,
@@ -15,13 +15,13 @@ const useAbsentStore = create((set, get) => ({
 
   onCreateAbsentRequest: async (data) => {
     try {
-      const { filterTime, onGetListAbsentRequest, page } = get();
+      const { filterTimeAbsent, onGetListAbsentRequest, pageAbsent } = get();
 
       set({ isLoadingAbsentTable: true });
 
       const { data: apiData } = await userAPI.createAbsentRequest(data);
 
-      await onGetListAbsentRequest(filterTime, page);
+      await onGetListAbsentRequest(filterTimeAbsent, pageAbsent);
 
       return storeResult.onSuccess(apiData);
     } catch (error) {
@@ -33,13 +33,13 @@ const useAbsentStore = create((set, get) => ({
 
   onEditAbsentRequest: async (data, id) => {
     try {
-      const { filterTime, onGetListAbsentRequest, page } = get();
+      const { filterTimeAbsent, onGetListAbsentRequest, pageAbsent } = get();
 
       set({ isLoadingAbsentTable: true });
 
       const { data: apiData } = await userAPI.editAbsentRequest(data, id);
 
-      await onGetListAbsentRequest(filterTime, page);
+      await onGetListAbsentRequest(filterTimeAbsent, pageAbsent);
 
       return storeResult.onSuccess(apiData);
     } catch (error) {
@@ -49,9 +49,9 @@ const useAbsentStore = create((set, get) => ({
     }
   },
 
-  onGetListAbsentRequest: async (filterTime, page) => {
+  onGetListAbsentRequest: async () => {
     try {
-      const { limit } = get();
+      const { filterTimeAbsent, pageAbsent, limit } = get();
 
       set({
         isLoadingAbsentTable: true,
@@ -62,12 +62,16 @@ const useAbsentStore = create((set, get) => ({
           message,
           payload: { data, total },
         },
-      } = await userAPI.getListAbsentRequest(filterTime, page, limit);
+      } = await userAPI.getListAbsentRequest(
+        filterTimeAbsent,
+        pageAbsent,
+        limit,
+      );
 
       set({
         listAbsent: data,
         totalAbsent: total,
-        page,
+        pageAbsent,
       });
 
       return storeResult.onSuccess(message);
@@ -80,14 +84,30 @@ const useAbsentStore = create((set, get) => ({
 
   onClearListAbsentRequest: async () => {
     set({
-      filterTime: defaultItemFilterTime[0].key,
+      filterTimeAbsent: defaultItemFilterTime[0].key,
 
-      page: 1,
+      pageAbsent: 1,
 
       limit: 10,
 
       listAbsent: [],
     });
+  },
+
+  onSetFilterTime: async (filterTimeAbsent) => {
+    set({
+      filterTimeAbsent,
+    });
+
+    get().onGetListAbsentRequest();
+  },
+
+  onSetPage: async (pageAbsent) => {
+    set({
+      pageAbsent,
+    });
+
+    get().onGetListAbsentRequest();
   },
 }));
 

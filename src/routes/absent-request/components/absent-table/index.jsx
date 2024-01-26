@@ -17,7 +17,7 @@ import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
 
 import { paginationConfig, scroll } from "./config";
 
-function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
+function AbsentTable({ onShowModal, onGetAbsentDetail }) {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,8 +25,10 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
   const isLoadingAbsentTable = useAbsentStore().isLoadingAbsentTable;
   const listAbsent = useAbsentStore().listAbsent;
   const totalAbsent = useAbsentStore().totalAbsent;
+  const pageAbsent = useAbsentStore().pageAbsent;
   const onGetListAbsentRequest = useAbsentStore().onGetListAbsentRequest;
   const onClearListAbsentRequest = useAbsentStore().onClearListAbsentRequest;
+  const onSetPage = useAbsentStore().onSetPage;
 
   const columns = [
     {
@@ -114,21 +116,22 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
           page: page.current,
         }).toString(),
       });
+      onSetPage(page.current);
     },
-    [location.pathname, navigate, searchParams],
+    [location.pathname, navigate, onSetPage, searchParams],
   );
 
   const pagination = React.useMemo(() => {
     return {
       ...paginationConfig,
       total: totalAbsent,
-      current: +searchParams.get("page") || 1,
+      current: pageAbsent,
     };
-  }, [totalAbsent, searchParams]);
+  }, [totalAbsent, pageAbsent]);
 
   const onGetListData = React.useCallback(async () => {
-    await onGetListAbsentRequest(filterTime, pagination.current);
-  }, [filterTime, onGetListAbsentRequest, pagination]);
+    await onGetListAbsentRequest();
+  }, [onGetListAbsentRequest]);
 
   React.useEffect(() => {
     onGetListData();
@@ -136,7 +139,7 @@ function AbsentTable({ filterTime, onShowModal, onGetAbsentDetail }) {
     return () => {
       onClearListAbsentRequest();
     };
-  }, [filterTime, pagination.current]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Table
@@ -156,9 +159,4 @@ export default React.memo(AbsentTable);
 AbsentTable.propTypes = {
   onGetAbsentDetail: PropTypes.func.isRequired,
   onShowModal: PropTypes.func.isRequired,
-  filterTime: PropTypes.string,
-};
-
-AbsentTable.defaultProps = {
-  filterTime: "",
 };

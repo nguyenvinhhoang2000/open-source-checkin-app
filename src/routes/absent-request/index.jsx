@@ -10,13 +10,16 @@ import { useBoolean } from "usehooks-ts";
 import AppHeaderTable from "@/components/apps/app-header-table";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
-import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
+import useAbsentStore from "@/store/use-absent-store";
 
 import AbsentTable from "./components/absent-table";
 import CommonModal from "./components/common-modal";
 
 function AbsentRequestTable() {
   const [modalName, setModalName] = React.useState(ABSENT_MODAL_NAME.CREATE);
+
+  const onSetFilterTime = useAbsentStore().onSetFilterTime;
+  const filterTimeAbsent = useAbsentStore().filterTimeAbsent;
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,10 +33,6 @@ function AbsentRequestTable() {
     setFalse: onHideModal,
   } = useBoolean(false);
 
-  const filterTime = React.useMemo(() => {
-    return searchParams.get("filterTime") || defaultItemFilterTime[0].key;
-  }, [searchParams]);
-
   const onFilterTime = React.useCallback(
     (record) => {
       navigate({
@@ -43,8 +42,9 @@ function AbsentRequestTable() {
           filterTime: record.key,
         }).toString(),
       });
+      onSetFilterTime(record.key);
     },
-    [location.pathname, navigate, searchParams],
+    [location.pathname, navigate, onSetFilterTime, searchParams],
   );
 
   const onGetAbsentDetail = React.useCallback((data) => {
@@ -59,21 +59,28 @@ function AbsentRequestTable() {
     [onShowModal],
   );
 
+  const onOpenCreateModal = React.useCallback(() => {
+    setModalName(ABSENT_MODAL_NAME.CREATE);
+
+    onShowModal();
+  }, [onShowModal]);
+
   return (
     <section className="container">
       <div className="mt-[1.25rem] flex flex-col gap-6 rounded-xl bg-white p-5 shadow-dropShadow">
         <AppHeaderTable
           title="Your Absent Request"
           classNameTitle="font-medium text-[1.25rem] leading-[1.75rem] font-roboto"
-          filterTime={filterTime}
+          filterTime={filterTimeAbsent}
           buttonAbsentRequestText="Absent Request"
-          onOpenCreateForm={onOpenModal}
+          onClickButton={onOpenCreateModal}
           onFilterTime={onFilterTime}
+          buttonTitle="Absent Request"
         />
 
         <AbsentTable
           onShowModalView={onShowModal}
-          filterTime={filterTime}
+          filterTime={filterTimeAbsent}
           onGetAbsentDetail={onGetAbsentDetail}
           onShowModal={onOpenModal}
         />
