@@ -18,7 +18,6 @@ import AbsentView from "../absent-view";
 
 function CommonModal({
   isModalOpen,
-  isLoadingButtonOk,
   onClose,
   currentData,
   modalName,
@@ -99,7 +98,7 @@ function CommonModal({
           okText={seletecButtonPopupName(modalName, isEdit)}
           cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}
-          isLoadingButtonOk={isLoadingButtonOk}
+          isLoadingButtonOk={isDisabledForm}
           classNames="px-[1.25rem]"
           buttonOkClassNames={classnames(!isEdit && "min-w-[6.25rem]")}
         />
@@ -128,7 +127,6 @@ export default React.memo(CommonModal);
 
 CommonModal.propTypes = {
   isModalOpen: PropTypes.bool,
-  isLoadingButtonOk: PropTypes.bool,
   onClose: PropTypes.func,
   onOpenModal: PropTypes.func,
   currentData: PropTypes.instanceOf(Object),
@@ -137,7 +135,6 @@ CommonModal.propTypes = {
 
 CommonModal.defaultProps = {
   isModalOpen: false,
-  isLoadingButtonOk: false,
   onClose: emptyFn,
   onOpenModal: emptyFn,
   currentData: emptyObj,
