@@ -37,13 +37,7 @@ function CommonModal({
 
   const [absentForm] = Form.useForm();
 
-  const isEdit = onCheckIsEditAbsent(currentData.record?.fromAt);
-
-  const onOkBtn = React.useCallback(() => {
-    onClose();
-
-    onOpenModal(ABSENT_MODAL_NAME.EDIT);
-  }, [onClose, onOpenModal]);
+  const isEdit = onCheckIsEditAbsent(currentData.fromAt);
 
   const onSubmitForm = React.useCallback(async () => {
     await absentForm.validateFields();
@@ -77,6 +71,16 @@ function CommonModal({
     }
   }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const onOk = React.useCallback(() => {
+    if (isEdit && modalName === ABSENT_MODAL_NAME.VIEW) {
+      return onOpenModal(ABSENT_MODAL_NAME.EDIT);
+    }
+    if (isEdit && modalName === ABSENT_MODAL_NAME.CREATE) {
+      return onSubmitForm();
+    }
+    return onClose();
+  }, [isEdit, modalName, onClose, onOpenModal, onSubmitForm]);
+
   return (
     <Modal
       width={572}
@@ -92,11 +96,7 @@ function CommonModal({
       footer={
         <AppFooterPopup
           buttonOkType="submit"
-          onOk={
-            isEdit && modalName === ABSENT_MODAL_NAME.VIEW
-              ? onOkBtn
-              : onSubmitForm
-          }
+          onOk={onOk}
           okText={seletecButtonPopupName(modalName, isEdit)}
           cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}

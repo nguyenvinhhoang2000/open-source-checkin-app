@@ -3,7 +3,7 @@ import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 export default function seletecButtonPopupName(modalName, isEdit) {
   switch (modalName) {
     case ABSENT_MODAL_NAME.VIEW:
-      return isEdit && "Edit";
+      return isEdit ? "Edit" : "OK";
 
     case ABSENT_MODAL_NAME.EDIT:
       return "Save";
