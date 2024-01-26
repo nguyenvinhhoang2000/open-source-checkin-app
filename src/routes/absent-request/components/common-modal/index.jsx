@@ -51,22 +51,19 @@ function CommonModal({
       absentForm.getFieldValue("_id"),
     );
 
-    if (arrErrors) {
-      arrErrors.forEach((item) =>
-        absentForm.setFields([
-          {
-            name: item.param,
-            errors: [item.msg],
-          },
-        ]),
+    const keepChecking =
+      arrErrors &&
+      arrErrors.every(
+        (item) =>
+          item &&
+          (absentForm.setFields([{ name: item.param, errors: [item.msg] }]),
+          true),
       );
+    setEnabledForm();
+    message[status](messageResult, 1.5);
 
-      setEnabledForm();
-    } else {
-      message[status](messageResult, 1.5);
-
+    if (!keepChecking) {
       absentForm.resetFields();
-      setEnabledForm();
       onClose();
     }
   }, [modalName]); // eslint-disable-line react-hooks/exhaustive-deps
