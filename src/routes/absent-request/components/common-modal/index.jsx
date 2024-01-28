@@ -2,7 +2,6 @@ import React from "react";
 import { Form, message, Modal } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import { useBoolean } from "usehooks-ts";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
@@ -28,11 +27,7 @@ function CommonModal({
     [ABSENT_MODAL_NAME.EDIT]: useAbsentStore().onEditAbsentRequest,
   }).current;
 
-  const {
-    value: isDisabledForm,
-    setTrue: setDisabledForm,
-    setFalse: setEnabledForm,
-  } = useBoolean(false);
+  const isLoadingAbsentTable = useAbsentStore().isLoadingAbsentTable;
 
   const [absentForm] = Form.useForm();
 
@@ -40,7 +35,6 @@ function CommonModal({
 
   const onSubmitForm = React.useCallback(async () => {
     await absentForm.validateFields();
-    setDisabledForm();
 
     const {
       status,
@@ -58,7 +52,6 @@ function CommonModal({
           (absentForm.setFields([{ name: item.param, errors: [item.msg] }]),
           true),
       );
-    setEnabledForm();
     message[status](messageResult, 1.5);
 
     if (!keepChecking) {
@@ -87,7 +80,7 @@ function CommonModal({
           titleText="Absent Request"
           onClose={onClose}
           classNames="px-[1.25rem] mb-[1rem]"
-          isDisabledClose={isDisabledForm}
+          isDisabledClose={isLoadingAbsentTable}
         />
       }
       open={isModalOpen}
@@ -99,7 +92,7 @@ function CommonModal({
           okText={seletecButtonPopupName(modalName, isEdit)}
           cancelText={isEdit ? "Cancel" : ""}
           onCancel={onClose}
-          isLoadingButtonOk={isDisabledForm}
+          isLoadingButtonOk={isLoadingAbsentTable}
           classNames="px-[1.25rem]"
           buttonOkClassNames={classnames(!isEdit && "min-w-[6.25rem]")}
         />
@@ -117,7 +110,7 @@ function CommonModal({
           currentData={currentData}
           onSubmitForm={onSubmitForm}
           absentForm={absentForm}
-          isDisabledForm={isDisabledForm}
+          isDisabledForm={isLoadingAbsentTable}
         />
       )}
     </Modal>
