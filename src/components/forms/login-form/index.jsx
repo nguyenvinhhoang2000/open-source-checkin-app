@@ -1,14 +1,54 @@
 import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
-import PropTypes from "prop-types";
+import { Button, Form, Input, message } from "antd";
+import { useBoolean } from "usehooks-ts";
 
-import { LOGIN_FORM, rulesEmail, rulesPassword } from "./config";
+import useAuthStore from "@/store/use-auth-store";
 
-function LoginForm({ form, isDisabledLoginForm, onSubmitForm }) {
+import {
+  errorLoginFailMessage,
+  loadingLoginMessage,
+  LOGIN_FORM,
+  rulesEmail,
+  rulesPassword,
+} from "./config";
+
+function LoginForm() {
+  const onLogin = useAuthStore().onLogin;
+
+  const {
+    value: isDisabledLoginForm,
+    setTrue: onDisabledLoginForm,
+    setFalse: onEnabledLoginForm,
+  } = useBoolean(false);
+
+  const [loginForm] = Form.useForm();
+  const onSubmitForm = async (record) => {
+    const onCancelLoadingMessage = message.loading(loadingLoginMessage);
+
+    onDisabledLoginForm();
+
+    const { message: messResult, status, payload } = await onLogin(record);
+
+    if (payload) {
+      loginForm.setFields(errorLoginFailMessage);
+
+      onEnabledLoginForm();
+
+      onCancelLoadingMessage();
+
+      return;
+    }
+
+    onCancelLoadingMessage();
+
+    onEnabledLoginForm();
+
+    message[status](messResult, 1);
+  };
   return (
     <Form
-      form={form}
+      form={loginForm}
       disabled={isDisabledLoginForm}
       name="normal_login"
       className="flex max-w-[29rem] flex-col justify-center rounded-xl bg-secondary-1 p-[2rem] shadow-dropShadow"
@@ -48,9 +88,3 @@ function LoginForm({ form, isDisabledLoginForm, onSubmitForm }) {
 }
 
 export default React.memo(LoginForm);
-
-LoginForm.propTypes = {
-  form: PropTypes.instanceOf(Object).isRequired,
-  isDisabledLoginForm: PropTypes.bool.isRequired,
-  onSubmitForm: PropTypes.func.isRequired,
-};
