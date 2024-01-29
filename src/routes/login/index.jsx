@@ -3,14 +3,13 @@ import { Form, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
 import LoginForm from "@/components/form/login-form";
-
-import useAuthStore from "@/store/use-auth-store";
-
 import {
   errorCode,
   errorLoginFailMessage,
   loadingLoginMessage,
-} from "./config-login";
+} from "@/components/form/login-form/config";
+
+import useAuthStore from "@/store/use-auth-store";
 
 function Login() {
   const onLogin = useAuthStore().onLogin;

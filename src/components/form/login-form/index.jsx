@@ -3,7 +3,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import PropTypes from "prop-types";
 
-import { LOGIN_FORM, rulesEmail, rulesPassword } from "./config-form";
+import { LOGIN_FORM, rulesEmail, rulesPassword } from "./config";
 
 function LoginForm({ form, isDisabledLoginForm, onSubmitForm }) {
   return (
