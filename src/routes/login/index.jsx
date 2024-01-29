@@ -2,12 +2,12 @@ import React from "react";
 import { Form, message } from "antd";
 import { useBoolean } from "usehooks-ts";
 
-import LoginForm from "@/components/form/login-form";
+import LoginForm from "@/components/forms/login-form";
 import {
   errorCode,
   errorLoginFailMessage,
   loadingLoginMessage,
-} from "@/components/form/login-form/config";
+} from "@/components/forms/login-form/config";
 
 import useAuthStore from "@/store/use-auth-store";
 
