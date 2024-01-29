@@ -11,7 +11,7 @@ import {
   LOGIN_FORM,
   rulesEmail,
   rulesPassword,
-} from "./config";
+} from "./config-form";
 
 function LoginForm() {
   const onLogin = useAuthStore().onLogin;
