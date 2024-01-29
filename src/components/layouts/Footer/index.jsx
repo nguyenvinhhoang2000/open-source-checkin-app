@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="container flex flex-row items-center justify-between py-[1.1875rem] text-black/25">
+    <footer className="container flex flex-row items-center justify-between py-[1.1875rem] text-[0.875rem] text-black/25">
       <span>2023 © Wiicamp</span>
       <span>Design & Develop by Wiicamp</span>
     </footer>

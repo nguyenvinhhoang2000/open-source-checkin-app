@@ -10,14 +10,13 @@ import EditAvatarDraw from "../edit-avatar";
 
 function UserDropdown() {
   const user = useAuthStore().user;
+  const onLogout = useAuthStore().onLogout;
 
   const {
     value: isOpenEditAvatar,
     setTrue: setOpenEditAvatar,
     setFalse: setCloseEditAvatar,
   } = useBoolean(false);
-
-  const { onLogout } = useAuthStore();
 
   const onMenuClick = React.useCallback(
     ({ key }) => {

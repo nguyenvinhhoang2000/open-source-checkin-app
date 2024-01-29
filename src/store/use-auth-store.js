@@ -24,7 +24,10 @@ const useAuthStore = create((set, get) => ({
 
       return storeResult.onSuccess(message);
     } catch (error) {
-      return storeResult.onFail(error.response?.data?.message);
+      return storeResult.onFail(
+        error.response?.data?.message,
+        error.response?.data,
+      );
     }
   },
 
