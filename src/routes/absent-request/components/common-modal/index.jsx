@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
-import AbsentRequestForm from "@/components/form/absent-request-form";
+import AbsentRequestForm from "@/components/forms/absent-request-form";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import useAbsentStore from "@/store/use-absent-store";

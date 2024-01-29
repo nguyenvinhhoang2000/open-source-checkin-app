@@ -3,7 +3,7 @@ import { Col, DatePicker, Form, Input, Row, Select } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-import customizeFormLabel from "@/components/form/customize-form-label";
+import CustomizeFormLabel from "@/components/forms/customize-form-label";
 
 import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
 import { ABSENT_REASONS } from "@/constants/absent-reason";
@@ -34,15 +34,17 @@ function AbsentRequestForm({
         fromAt: dayjs(new Date(currentData.fromAt)),
       };
       absentForm.setFieldsValue(currentOne);
-    } else {
-      absentForm.resetFields();
     }
+
+    return () => {
+      absentForm.resetFields();
+    };
   }, [formName, currentData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Form
       disabled={isDisabledForm}
-      requiredMark={customizeFormLabel}
+      requiredMark={CustomizeFormLabel}
       className="border-b border-t border-b-black/5 border-t-black/5 px-6 pb-1 pt-4"
       form={absentForm}
       layout="vertical"
