@@ -13,7 +13,8 @@ function AppHeaderTable({
   onFilterTime,
   filterTime,
   buttonAbsentRequestText,
-  onOpenAbsentRequestForm,
+  onClickButton,
+  buttonClassNames,
 }) {
   return (
     <div
@@ -32,10 +33,13 @@ function AppHeaderTable({
         />
         {buttonAbsentRequestText && (
           <Button
-            className="h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto"
-            title="Absent Request"
+            className={classNames(
+              buttonClassNames,
+              "h-full min-h-[2.3125rem] min-w-[8.1875rem] font-roboto",
+            )}
+            title={buttonAbsentRequestText}
             type="primary"
-            onClick={onOpenAbsentRequestForm}
+            onClick={onClickButton}
           >
             {buttonAbsentRequestText}
           </Button>
@@ -52,12 +56,14 @@ AppHeaderTable.propTypes = {
   classNameTitle: PropTypes.string,
   onFilterTime: PropTypes.func.isRequired,
   filterTime: PropTypes.string.isRequired,
-  onOpenAbsentRequestForm: PropTypes.func,
+  onClickButton: PropTypes.func,
   buttonAbsentRequestText: PropTypes.string,
+  buttonClassNames: PropTypes.string,
 };
 
 AppHeaderTable.defaultProps = {
   classNameTitle: "",
   buttonAbsentRequestText: "",
-  onOpenAbsentRequestForm: emptyFn,
+  buttonClassNames: "",
+  onClickButton: emptyFn,
 };

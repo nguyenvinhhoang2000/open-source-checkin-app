@@ -1,5 +1,5 @@
 export const VALIDATION_MESSAGE = {
-  REQUIRED_INPUT: (type, message) => {
+  PLEASE_ENTER: (message, type) => {
     return `Please ${type} ${message}`;
   },
 
