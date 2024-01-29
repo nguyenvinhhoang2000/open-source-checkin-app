@@ -16,13 +16,14 @@ import {
 function LoginForm() {
   const onLogin = useAuthStore().onLogin;
 
+  const [loginForm] = Form.useForm();
+
   const {
     value: isDisabledLoginForm,
     setTrue: onDisabledLoginForm,
     setFalse: onEnabledLoginForm,
   } = useBoolean(false);
 
-  const [loginForm] = Form.useForm();
   const onSubmitForm = async (record) => {
     const onCancelLoadingMessage = message.loading(loadingLoginMessage);
 
