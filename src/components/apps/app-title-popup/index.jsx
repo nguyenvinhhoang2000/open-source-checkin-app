@@ -9,6 +9,7 @@ function AppTitlePopup({
   classNames,
   classNamesClose,
   classNamesTitle,
+  isDisabledClose,
 }) {
   return (
     <div
@@ -23,6 +24,7 @@ function AppTitlePopup({
         {titleText}
       </span>
       <Button
+        disabled={isDisabledClose}
         aria-label="Close draw"
         className={classnames(classNamesClose, "m-0 h-fit p-0")}
         onClick={onClose}
@@ -42,6 +44,7 @@ AppTitlePopup.propTypes = {
   classNamesClose: PropTypes.string,
   classNamesTitle: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  isDisabledClose: PropTypes.bool,
 };
 
 AppTitlePopup.defaultProps = {
@@ -49,4 +52,5 @@ AppTitlePopup.defaultProps = {
   classNames: "",
   classNamesClose: "",
   classNamesTitle: "",
+  isDisabledClose: false,
 };

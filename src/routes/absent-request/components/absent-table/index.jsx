@@ -1,90 +1,57 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button, Table } from "antd";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { useBoolean } from "usehooks-ts";
 
-import { dataAbsent } from "@/constants/data/data-absent";
+import { ABSENT_MODAL_NAME } from "@/constants/absent-form-name";
+import ABSENT_TABLE_COLUMNS from "@/constants/absent-table";
+import { FORMAT_DATE } from "@/constants/format-date";
+import useAbsentStore from "@/store/use-absent-store";
 import onCheckIsEditAbsent from "@/utils/check-allowce-edit-absent";
+import paginationConfig from "@/utils/pagination-table-config";
 
-import AbsentFormModal from "../absent-form";
-import AbsentModalView from "../absent-view";
+import { scroll } from "./config";
 
-import { pagination, scroll } from "./config";
+function AbsentTable({ onShowModal, onGetAbsentDetail }) {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-function AbsentTable({ filterTime }) {
-  const {
-    value: isOpenView,
-    setTrue: onOpenView,
-    setFalse: onCloseView,
-  } = useBoolean(false);
-  const {
-    value: isOpenEdit,
-    setTrue: onOpenEdit,
-    setFalse: onCloseEdit,
-  } = useBoolean(false);
-
-  const [dataSelectAction, setDataSelectAction] = React.useState({});
-  const onOpenModalView = React.useCallback(
-    (columnData, record) => {
-      const { id, ...recordWithoutId } = record;
-      setDataSelectAction({ columnData, record: recordWithoutId });
-      onOpenView();
-    },
-    [onOpenView],
-  );
-
-  const onOpenModalEdit = React.useCallback(
-    (columnData, record) => {
-      setDataSelectAction({ columnData, record });
-
-      onOpenEdit();
-    },
-    [onOpenEdit],
-  );
+  const isLoadingAbsentTable = useAbsentStore().isLoadingAbsentTable;
+  const listAbsent = useAbsentStore().listAbsent;
+  const totalAbsent = useAbsentStore().totalAbsent;
+  const pageAbsent = useAbsentStore().pageAbsent;
+  const onSetPage = useAbsentStore().onSetPage;
 
   const columns = [
     {
-      title: "From",
-      dataIndex: "from",
-      key: "from",
-      width: "11rem",
+      ...ABSENT_TABLE_COLUMNS.FROM_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
-      title: "To",
-      dataIndex: "to",
-      key: "to",
-      width: "11.75rem",
+      ...ABSENT_TABLE_COLUMNS.TO_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
-      title: "Date Request",
-      dataIndex: "dateRequest",
-      key: "dateRequest",
-      width: "11.75rem",
+      ...ABSENT_TABLE_COLUMNS.CREATE_AT,
       render: (text) => (
         <span className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {dayjs(text).format("DD-MM-YYYY hh:mm:ss")}
+          {dayjs(text).format(FORMAT_DATE.FORMAT_DATE_FOR_DATE_AND_24_HOURS)}
         </span>
       ),
     },
 
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      width: "39rem",
+      ...ABSENT_TABLE_COLUMNS.DESCRIPTION,
       render: (text) => (
         <span className="line-clamp-2 min-w-[15rem] text-ellipsis whitespace-pre-wrap font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
           {text}
@@ -93,16 +60,18 @@ function AbsentTable({ filterTime }) {
     },
 
     {
-      title: "Action",
-      key: "actions",
+      ...ABSENT_TABLE_COLUMNS.ACTIONS,
       render: (record) => {
         const onClickButtonEye = () => {
-          onOpenModalView(columns, record);
+          onGetAbsentDetail(record);
+          onShowModal(ABSENT_MODAL_NAME.VIEW);
         };
 
         const onClickButtonEdit = () => {
-          onOpenModalEdit(columns, record);
+          onGetAbsentDetail(record);
+          onShowModal(ABSENT_MODAL_NAME.EDIT);
         };
+
         return (
           <div className="flex items-center justify-start gap-[1.25rem]">
             <Button
@@ -114,7 +83,7 @@ function AbsentTable({ filterTime }) {
               <img src="/assets/icons/eye.svg" alt="view" />
             </Button>
 
-            {onCheckIsEditAbsent(record.from) && (
+            {onCheckIsEditAbsent(record.fromAt) && (
               <Button
                 title="edit"
                 type="text"
@@ -130,39 +99,33 @@ function AbsentTable({ filterTime }) {
     },
   ];
 
-  return (
-    <div>
-      <Table
-        pagination={pagination}
-        scroll={scroll}
-        rowKey="id"
-        columns={columns}
-        dataSource={dataAbsent}
-      />
+  const onChangePage = React.useCallback(
+    (page) => {
+      setSearchParams({
+        ...Object.fromEntries(searchParams),
+        page: page.current,
+      });
+      onSetPage(page.current);
+    },
+    [onSetPage, searchParams, setSearchParams],
+  );
 
-      <AbsentFormModal
-        onClose={onCloseEdit}
-        cancelText="Cancel"
-        isModalOpen={isOpenEdit}
-        currentData={dataSelectAction}
-        formName="edit-absent"
-      />
-      <AbsentModalView
-        onClose={onCloseView}
-        isModalOpen={isOpenView}
-        currentData={dataSelectAction}
-        onOpenEdit={onOpenEdit}
-      />
-    </div>
+  return (
+    <Table
+      loading={isLoadingAbsentTable}
+      pagination={paginationConfig(totalAbsent, pageAbsent)}
+      onChange={onChangePage}
+      scroll={scroll}
+      rowKey="_id"
+      columns={columns}
+      dataSource={listAbsent}
+    />
   );
 }
 
-export default AbsentTable;
+export default React.memo(AbsentTable);
 
 AbsentTable.propTypes = {
-  filterTime: PropTypes.string,
-};
-
-AbsentTable.defaultProps = {
-  filterTime: "",
+  onGetAbsentDetail: PropTypes.func.isRequired,
+  onShowModal: PropTypes.func.isRequired,
 };

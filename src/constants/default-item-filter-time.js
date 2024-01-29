@@ -7,12 +7,12 @@ const defaultItemFilterTime = [
   },
   {
     id: 3,
-    key: "3month",
+    key: "threeMonths",
     label: "3 month",
   },
   {
     id: 4,
-    key: "allTime",
+    key: "all",
     label: "All time",
   },
 ];

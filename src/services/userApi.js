@@ -31,14 +31,23 @@ const userAPI = {
       toAt: dayjs(toAt).format(FORMAT_DATE.FORMAT_DATE_FOR_API_REQUEST),
     });
   },
-  getListAbsentRequest(value) {
-    return axiosClient.get(ENDPOINT.GET_LIST_ABSENT_REQUEST, value);
+  getListAbsentRequest(filterTime, page, limit) {
+    return axiosClient.get(
+      ENDPOINT.GET_LIST_ABSENT_REQUEST(filterTime, page, limit),
+    );
   },
   getAbsentRequestDetails(value, id) {
     return axiosClient.get(ENDPOINT.GET_ABSENT_REQUEST_DETAILS(id), value);
   },
-  editAbsentRequest(value, id) {
-    return axiosClient.get(ENDPOINT.EDIT_ABSENT_REQUEST(id), value);
+
+  editAbsentRequest({ absentType, reasonType, description, fromAt, toAt }, id) {
+    return axiosClient.put(ENDPOINT.EDIT_ABSENT_REQUEST(id), {
+      absentType,
+      reasonType,
+      description,
+      fromAt: dayjs(fromAt).format(FORMAT_DATE.FORMAT_DATE_FOR_API_REQUEST),
+      toAt: dayjs(toAt).format(FORMAT_DATE.FORMAT_DATE_FOR_API_REQUEST),
+    });
   },
 };
 
