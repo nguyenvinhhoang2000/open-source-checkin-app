@@ -1,127 +1,45 @@
 import { create } from "zustand";
 
 import { defaultItemFilterTime } from "@/constants/default-item-filter-time";
-import userAPI from "@/services/userApi";
+import workingAPI from "@/services/workingApi";
 import { storeResult } from "@/utils/return-message";
 
-const useAbsentStore = create((set, get) => ({
-  filterTimeAbsent: defaultItemFilterTime[0].key,
-  pageAbsent: 1,
-  limit: 10,
-  listAbsent: [],
+const useWorkingStatisticStore = create((set, get) => ({
+  filterTime: defaultItemFilterTime[0].key,
+  totalEarly: 0,
+  totalLater: 0,
   totalAbsent: 0,
 
-  isLoadingAbsentTable: false,
+  isLoadingGetWorkingStatistic: false,
 
-  onCreateAbsentRequest: async (data) => {
+  onGetWorkingStatistic: async () => {
     try {
-      const { filterTimeAbsent, onGetListAbsentRequest, pageAbsent } = get();
-
-      set({ isLoadingAbsentTable: true });
-
-      const { data: apiData } = await userAPI.createAbsentRequest(data);
-
-      await onGetListAbsentRequest(filterTimeAbsent, pageAbsent);
-
-      return storeResult.onSuccess(apiData);
-    } catch (error) {
-      return storeResult.onFail(error.response?.data);
-    } finally {
-      set({ isLoadingAbsentTable: false });
-    }
-  },
-
-  onEditAbsentRequest: async (data, id) => {
-    try {
-      const { filterTimeAbsent, onGetListAbsentRequest, pageAbsent } = get();
-
-      set({ isLoadingAbsentTable: true });
-
-      const { data: apiData } = await userAPI.editAbsentRequest(data, id);
-
-      await onGetListAbsentRequest(filterTimeAbsent, pageAbsent);
-
-      return storeResult.onSuccess(apiData);
-    } catch (error) {
-      return storeResult.onFail(error.response?.data);
-    } finally {
-      set({ isLoadingAbsentTable: false });
-    }
-  },
-
-  onGetListAbsentRequest: async () => {
-    try {
-      const { filterTimeAbsent, pageAbsent, limit } = get();
+      const { filterTime } = get();
 
       set({
-        isLoadingAbsentTable: true,
+        isLoadingGetWorkingStatistic: true,
       });
 
       const {
         data: {
           message,
-          payload: { data, total },
+          payload: [{ totalEarly, totalLater, totalAbsent }],
         },
-      } = await userAPI.getListAbsentRequest(
-        filterTimeAbsent,
-        pageAbsent,
-        limit,
-      );
+      } = await workingAPI.getWorkingStatistic(filterTime);
 
       set({
-        listAbsent: data,
-        totalAbsent: total,
-        pageAbsent,
+        totalEarly,
+        totalLater,
+        totalAbsent,
       });
 
       return storeResult.onSuccess(message);
     } catch (error) {
       return storeResult.onFail(error.response?.data);
     } finally {
-      set({ isLoadingAbsentTable: false });
+      set({ isLoadingGetWorkingStatistic: false });
     }
-  },
-
-  onClearListAbsentRequest: async () => {
-    set({
-      filterTimeAbsent: defaultItemFilterTime[0].key,
-
-      pageAbsent: 1,
-
-      limit: 10,
-
-      listAbsent: [],
-    });
-  },
-
-  onSetFilterTime: async (filterTime) => {
-    const { filterTimeAbsent, onGetListAbsentRequest } = get();
-    set({
-      filterTimeAbsent: filterTime || filterTimeAbsent,
-    });
-
-    await onGetListAbsentRequest();
-  },
-
-  onSetPage: async (page) => {
-    const { pageAbsent, onGetListAbsentRequest } = get();
-
-    set({
-      pageAbsent: page || pageAbsent,
-    });
-
-    await onGetListAbsentRequest();
-  },
-
-  onGetDataFirstRender: async (filterTime, page) => {
-    const { filterTimeAbsent, pageAbsent, onGetListAbsentRequest } = get();
-    set({
-      filterTimeAbsent: filterTime || filterTimeAbsent,
-      pageAbsent: page || pageAbsent,
-    });
-
-    await onGetListAbsentRequest();
   },
 }));
 
-export default useAbsentStore;
+export default useWorkingStatisticStore;
