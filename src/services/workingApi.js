@@ -6,6 +6,12 @@ const workingAPI = {
   getWorkingStatistic(filterTime) {
     return axiosClient.get(ENDPOINT.GET_WORKING_STATISTIC(filterTime));
   },
+
+  getWorkingHistory(filterTime, limit, page) {
+    return axiosClient.get(
+      ENDPOINT.GET_WORKING_HISTORY(filterTime, limit, page),
+    );
+  },
 };
 
 export default workingAPI;

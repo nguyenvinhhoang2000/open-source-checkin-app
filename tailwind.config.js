@@ -88,6 +88,7 @@ export default {
         current: "currentColor",
         mainBg: "#f8f8fb",
         danger: "#FF4D4F",
+        success: "#00CE9D",
         primary: {
           0: "#FF6D03",
           1: "#FFF4E6",
