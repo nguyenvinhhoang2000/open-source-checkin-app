@@ -22,6 +22,7 @@ export default {
     "text-secondary-6",
     "text-secondary-2",
     "text-volcano-6",
+    "text-success",
     "top-0",
     "z-40",
   ],

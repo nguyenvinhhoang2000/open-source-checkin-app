@@ -4,22 +4,15 @@ import { Table } from "antd";
 import classnames from "classnames";
 import dayjs from "dayjs";
 
+import {
+  CHECK_IN_OUT_STATUS,
+  CHECK_IN_OUT_TYPE,
+} from "@/constants/check-in-out";
 import useWorkingStatisticStore from "@/store/use-working-store";
 import onCheckRowAbsent from "@/utils/check-row-absent";
 import paginationConfig from "@/utils/pagination-table-config";
 
 import { scroll } from "./table-config";
-
-const TYPE_CHECK_IN_OUT = {
-  CHECKIN: "CHECKIN",
-  CHECKOUT: "CHECKOUT",
-};
-
-const CHECK_IN_OUT_STATUS = {
-  EARLY: 1,
-  LATE: 2,
-  ABSENT: 3,
-};
 
 function HistoryTable() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -48,7 +41,7 @@ function HistoryTable() {
   }, []);
 
   const renderContent = React.useCallback((status, type) => {
-    if (type === TYPE_CHECK_IN_OUT.CHECKIN) {
+    if (type === CHECK_IN_OUT_TYPE.CHECKIN) {
       switch (status) {
         case CHECK_IN_OUT_STATUS.EARLY:
           return "Check-in Early";
@@ -109,7 +102,7 @@ function HistoryTable() {
                 "text-[0.875rem] font-[400] leading-[1.375rem]",
               )}
             >
-              {renderContent(text.status, TYPE_CHECK_IN_OUT.CHECKIN)}
+              {renderContent(text.status, CHECK_IN_OUT_TYPE.CHECKIN)}
             </p>
           </div>
         );
@@ -129,7 +122,7 @@ function HistoryTable() {
               {dayjs(text.date).format("HH:mm:ss")}
             </p>
             <p className="text-[0.875rem] font-[400] leading-[1.375rem] text-neutral-4">
-              {renderContent(text.status, TYPE_CHECK_IN_OUT.CHECKOUT)}
+              {renderContent(text.status, CHECK_IN_OUT_TYPE.CHECKOUT)}
             </p>
           </div>
         );
