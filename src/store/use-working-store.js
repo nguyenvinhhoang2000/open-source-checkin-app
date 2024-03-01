@@ -49,7 +49,7 @@ const useWorkingStatisticStore = create((set, get) => ({
     }
   },
 
-  onGetWorkingHistory: async () => {
+  onGetWorkingHistory: async (filterTime, page) => {
     try {
       const { filterTimeWorkingHistory, limit, pageWorkingHistory } = get();
 
@@ -63,12 +63,14 @@ const useWorkingStatisticStore = create((set, get) => ({
           payload: { data, total },
         },
       } = await workingAPI.getWorkingHistory(
-        filterTimeWorkingHistory,
+        filterTime || filterTimeWorkingHistory,
         limit,
-        pageWorkingHistory,
+        page || pageWorkingHistory,
       );
 
       set({
+        filterTimeWorkingHistory: filterTime || filterTimeWorkingHistory,
+        pageWorkingHistory: page || pageWorkingHistory,
         listWorkingHistory: data,
         totalWorkingHistory: total,
       });
@@ -92,21 +94,6 @@ const useWorkingStatisticStore = create((set, get) => ({
       listWorkingHistory: [],
       totalWorkingHistory: 0,
     });
-  },
-
-  onSetFilter: async (filterTime, page) => {
-    const {
-      filterTimeWorkingHistory,
-      pageWorkingHistory,
-      onGetWorkingHistory,
-    } = get();
-
-    set({
-      filterTimeWorkingHistory: filterTime || filterTimeWorkingHistory,
-      pageWorkingHistory: page || pageWorkingHistory,
-    });
-
-    await onGetWorkingHistory();
   },
 }));
 

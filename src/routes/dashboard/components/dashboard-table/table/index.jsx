@@ -18,7 +18,6 @@ import { scroll } from "./table-config";
 function HistoryTable() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const onSetFilter = useWorkingStatisticStore().onSetFilter;
   const listWorkingHistory = useWorkingStatisticStore().listWorkingHistory;
   const totalWorkingHistory = useWorkingStatisticStore().totalWorkingHistory;
   const pageWorkingHistory = useWorkingStatisticStore().pageWorkingHistory;
@@ -117,9 +116,8 @@ function HistoryTable() {
         ...Object.fromEntries(searchParams),
         page: page.current,
       });
-      onSetFilter(null, page.current);
     },
-    [onSetFilter, searchParams, setSearchParams],
+    [searchParams, setSearchParams],
   );
 
   return (

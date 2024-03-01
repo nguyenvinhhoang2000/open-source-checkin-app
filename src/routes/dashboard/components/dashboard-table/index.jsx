@@ -8,7 +8,7 @@ import useWorkingStatisticStore from "@/store/use-working-store";
 import HistoryTable from "./table";
 
 function DashboardTable() {
-  const onSetFilter = useWorkingStatisticStore().onSetFilter;
+  const onGetWorkingHistory = useWorkingStatisticStore().onGetWorkingHistory;
   const onClearListWorkingHistory =
     useWorkingStatisticStore().onClearListWorkingHistory;
 
@@ -22,16 +22,20 @@ function DashboardTable() {
       setSearchParams({
         ...Object.fromEntries(searchParams),
         filterTime: record.key,
+        page: 1,
       });
-
-      onSetFilter(record.key);
     },
-    [searchParams, setSearchParams, onSetFilter],
+    [searchParams, setSearchParams],
   );
 
   React.useEffect(() => {
-    onSetFilter(searchParams.get("filterTime"), searchParams.get("page"));
+    onGetWorkingHistory(
+      searchParams.get("filterTime"),
+      searchParams.get("page"),
+    );
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  React.useEffect(() => {
     return () => {
       onClearListWorkingHistory();
     };
