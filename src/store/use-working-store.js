@@ -5,16 +5,24 @@ import workingAPI from "@/services/workingApi";
 import { storeResult } from "@/utils/return-message";
 
 const useWorkingStatisticStore = create((set, get) => ({
-  filterTime: defaultItemFilterTime[0].key,
+  filterTimeWorkingHistory: defaultItemFilterTime[0].key,
+  limit: 10,
+  pageWorkingHistory: 1,
+
+  listWorkingHistory: [],
+  totalWorkingHistory: 0,
+
+  filterTimeWorkingStatistic: defaultItemFilterTime[0].key,
   totalEarly: 0,
   totalLater: 0,
   totalAbsent: 0,
 
   isLoadingGetWorkingStatistic: false,
+  isLoadingGetWorkingHistory: false,
 
   onGetWorkingStatistic: async () => {
     try {
-      const { filterTime } = get();
+      const { filterTimeWorkingStatistic } = get();
 
       set({
         isLoadingGetWorkingStatistic: true,
@@ -25,7 +33,7 @@ const useWorkingStatisticStore = create((set, get) => ({
           message,
           payload: [{ totalEarly, totalLater, totalAbsent }],
         },
-      } = await workingAPI.getWorkingStatistic(filterTime);
+      } = await workingAPI.getWorkingStatistic(filterTimeWorkingStatistic);
 
       set({
         totalEarly,
@@ -39,6 +47,53 @@ const useWorkingStatisticStore = create((set, get) => ({
     } finally {
       set({ isLoadingGetWorkingStatistic: false });
     }
+  },
+
+  onGetWorkingHistory: async (filterTime, page) => {
+    try {
+      const { filterTimeWorkingHistory, limit, pageWorkingHistory } = get();
+
+      set({
+        isLoadingGetWorkingHistory: true,
+      });
+
+      const {
+        data: {
+          message,
+          payload: { data, total },
+        },
+      } = await workingAPI.getWorkingHistory(
+        filterTime || filterTimeWorkingHistory,
+        limit,
+        page || pageWorkingHistory,
+      );
+
+      set({
+        filterTimeWorkingHistory: filterTime || filterTimeWorkingHistory,
+        pageWorkingHistory: page || pageWorkingHistory,
+        listWorkingHistory: data,
+        totalWorkingHistory: total,
+      });
+
+      return storeResult.onSuccess(message);
+    } catch (error) {
+      return storeResult.onFail(error.response?.data);
+    } finally {
+      set({ isLoadingGetWorkingHistory: false });
+    }
+  },
+
+  onClearListWorkingHistory: async () => {
+    set({
+      filterTimeWorkingHistory: defaultItemFilterTime[0].key,
+
+      pageWorkingHistory: 1,
+
+      limit: 10,
+
+      listWorkingHistory: [],
+      totalWorkingHistory: 0,
+    });
   },
 }));
 

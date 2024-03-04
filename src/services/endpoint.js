@@ -19,8 +19,12 @@ const ENDPOINT = {
 
   EDIT_ABSENT_REQUEST: (id) => `/client/absent-requests/${id}`,
 
+  // WORKING
   GET_WORKING_STATISTIC: (filterTime) =>
     `/client/workings/statistics?period=${filterTime}`,
+
+  GET_WORKING_HISTORY: (filterTime, limit, page) =>
+    `/client/workings/histories?limit=${limit}&page=${page}&period=${filterTime}`,
 };
 
 export default ENDPOINT;

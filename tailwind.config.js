@@ -22,6 +22,8 @@ export default {
     "text-secondary-6",
     "text-secondary-2",
     "text-volcano-6",
+    "text-absentDescription",
+    "text-success",
     "top-0",
     "z-40",
   ],
@@ -88,6 +90,7 @@ export default {
         current: "currentColor",
         mainBg: "#f8f8fb",
         danger: "#FF4D4F",
+        success: "#00CE9D",
         primary: {
           0: "#FF6D03",
           1: "#FFF4E6",
