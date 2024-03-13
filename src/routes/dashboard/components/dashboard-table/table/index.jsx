@@ -135,7 +135,7 @@ function HistoryTable() {
     <Table
       pagination={paginationConfig(totalWorkingHistory, pageWorkingHistory)}
       onChange={onChangePage}
-      {...(listWorkingHistory.length !== 0 ? { scroll } : {})}
+      scroll={listWorkingHistory.length !== 0 ? scroll : {}}
       rowKey="_id"
       columns={columns}
       className="w-full whitespace-nowrap"
