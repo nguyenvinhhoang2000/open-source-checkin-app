@@ -8,6 +8,7 @@ function HeadAbsentInfor() {
   const totalEarly = useWorkingStatisticStore().totalEarly;
   const totalLater = useWorkingStatisticStore().totalLater;
   const totalAbsent = useWorkingStatisticStore().totalAbsent;
+  const totalWorkingHour = useWorkingStatisticStore().totalWorkingHour;
 
   const workingStatistic = React.useMemo(() => {
     return [
@@ -31,8 +32,13 @@ function HeadAbsentInfor() {
         number: totalAbsent,
         text: "Absent",
       },
+      {
+        id: "04",
+        number: totalWorkingHour,
+        text: "Working hour",
+      },
     ];
-  }, [totalAbsent, totalEarly, totalLater]);
+  }, [totalAbsent, totalEarly, totalLater, totalWorkingHour]);
 
   React.useEffect(() => {
     onGetWorkingStatistic();

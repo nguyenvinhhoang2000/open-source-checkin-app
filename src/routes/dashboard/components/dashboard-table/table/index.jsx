@@ -59,6 +59,8 @@ function HistoryTable() {
       key: "checkIn",
       width: "25%",
       render: (text) => {
+        if (!text) return null;
+
         return (
           <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -84,6 +86,8 @@ function HistoryTable() {
       width: "25%",
 
       render: (text) => {
+        if (!text) return null;
+
         return (
           <div className="min-h-[3.1875rem]">
             <p className="font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
@@ -102,11 +106,18 @@ function HistoryTable() {
       dataIndex: "userAgent",
       key: "_id",
       width: "25%",
-      render: (text) => (
-        <p className="flex min-h-[3.1875rem] items-start font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
-          {text}
-        </p>
-      ),
+      render: (userAgent) => {
+        const deviceNamePattern = /\(.*?;(.*?)\)/;
+
+        const match = userAgent.match(deviceNamePattern);
+
+        const deviceName = match ? match[1].trim() : userAgent;
+        return (
+          <p className="flex min-h-[3.1875rem] items-start font-roboto text-[0.875rem] font-[400] leading-[1.375rem]">
+            {deviceName}
+          </p>
+        );
+      },
     },
   ];
 
@@ -124,7 +135,7 @@ function HistoryTable() {
     <Table
       pagination={paginationConfig(totalWorkingHistory, pageWorkingHistory)}
       onChange={onChangePage}
-      scroll={scroll}
+      {...(listWorkingHistory.length !== 0 ? { scroll } : {})}
       rowKey="_id"
       columns={columns}
       className="w-full whitespace-nowrap"
