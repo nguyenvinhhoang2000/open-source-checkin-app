@@ -16,6 +16,7 @@ const useWorkingStatisticStore = create((set, get) => ({
   totalEarly: 0,
   totalLater: 0,
   totalAbsent: 0,
+  totalWorkingHour: 0,
 
   isLoadingGetWorkingStatistic: false,
   isLoadingGetWorkingHistory: false,
@@ -31,7 +32,7 @@ const useWorkingStatisticStore = create((set, get) => ({
       const {
         data: {
           message,
-          payload: [{ totalEarly, totalLater, totalAbsent }],
+          payload: [{ totalEarly, totalLater, totalAbsent, totalWorkingHour }],
         },
       } = await workingAPI.getWorkingStatistic(filterTimeWorkingStatistic);
 
@@ -39,6 +40,7 @@ const useWorkingStatisticStore = create((set, get) => ({
         totalEarly,
         totalLater,
         totalAbsent,
+        totalWorkingHour: totalWorkingHour || 0,
       });
 
       return storeResult.onSuccess(message);
