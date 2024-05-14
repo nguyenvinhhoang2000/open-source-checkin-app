@@ -10,7 +10,7 @@ function HeadShortProfile() {
     <div className="flex gap-[0.75rem]">
       {user.avatar ? (
         <Avatar
-          src={dataAvatar.find((item) => item.id === user.avatar).avatar}
+          src={dataAvatar.find((item) => item.id === +user.avatar).avatar}
           size={64}
           alt="avatar"
         />

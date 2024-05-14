@@ -22,10 +22,10 @@ function Checkin() {
       </Button>
       <AppModel
         text="Check-in"
-        title="You Check-in late!"
-        description="Please be more compliant with your working hours"
+        title="Bạn Check-in trễ!"
+        description="Vui lòng tuân thủ giờ làm việc của bạn hơn"
         src="/assets/icons/check-in.svg"
-        okText="Cancel"
+        okText="Hủy"
         onHandleOk={onClickOk}
         isModalOpen={isModalOpen}
       />

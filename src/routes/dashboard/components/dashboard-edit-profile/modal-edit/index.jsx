@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import AppFooterPopup from "@/components/apps/app-footer-popup";
 import AppTitlePopup from "@/components/apps/app-title-popup";
 
-import { POSITION } from "@/constants/company-location";
 import { GENDER } from "@/constants/gender";
 import { emptyFn, emptyObj } from "@/utils/empty-types";
 
@@ -40,7 +39,7 @@ function ModalEditProfile({
       forceRender
       title={
         <AppTitlePopup
-          titleText="Edit Profile"
+          titleText="Chỉnh sửa thông tin cá nhân"
           onClose={onClose}
           classNames="px-[1.25rem] mb-[1rem]"
         />
@@ -49,7 +48,7 @@ function ModalEditProfile({
       closable={false}
       footer={
         <AppFooterPopup
-          buttonOkType="submit"
+          buttonOkType="Xác nhận"
           okText={okText}
           onOk={onSubmit}
           cancelText={cancelText}
@@ -65,10 +64,10 @@ function ModalEditProfile({
         layout="vertical"
         name="edit-profile"
       >
-        <Form.Item className="mb-2" name="name" label="Name">
+        <Form.Item className="mb-2" name="name" label="Tên">
           <Input disabled />
         </Form.Item>
-        <Form.Item className="mb-2" name="gender" label="Gender">
+        <Form.Item className="mb-2" name="gender" label="Giới tính">
           <Select
             disabled
             placeholder="Select a option and change input text above"
@@ -80,35 +79,28 @@ function ModalEditProfile({
             ))}
           </Select>
         </Form.Item>
-        <Form.Item className="mb-2" name="position" label="Position">
+        <Form.Item className="mb-2" name="position" label="Vị trí">
           <Input disabled />
-        </Form.Item>
-        <Form.Item className="mb-2" name="branch" label="Branch">
-          <Select
-            disabled
-            placeholder="Select a option and change input text above"
-          >
-            {POSITION.map((item) => (
-              <Select.Option key={item.value} value={item.value}>
-                {item.label}
-              </Select.Option>
-            ))}
-          </Select>
         </Form.Item>
         <Form.Item
           className="mb-2"
           name="phoneNumber"
-          label="Phone"
+          label="Số điện thoại"
           rules={rulesPhoneNumber}
         >
-          <Input placeholder="Enter your Phone" />
+          <Input placeholder="Nhập số điện thoại" />
         </Form.Item>
-        <Form.Item className="mb-2" name="note" label="Note" rules={rulesNote}>
+        <Form.Item
+          className="mb-2"
+          name="note"
+          label="Ghi chú"
+          rules={rulesNote}
+        >
           <Input.TextArea
             showCount
             maxLength={100}
             rows={4}
-            placeholder="Enter your note"
+            placeholder="Nhập ghi chú"
           />
         </Form.Item>
       </Form>

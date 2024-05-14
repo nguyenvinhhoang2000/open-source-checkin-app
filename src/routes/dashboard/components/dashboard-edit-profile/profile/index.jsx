@@ -47,7 +47,6 @@ function Profile() {
     return {
       ...user,
       phoneNumber: formatPhoneUI(user.phoneNumber),
-      branch: `${user.branch.name}, ${user.branch.address}`,
     };
   }, [user]);
 
@@ -63,7 +62,7 @@ function Profile() {
         <span className="min-w-[5rem] text-character-2" />
         <Button
           type="primary"
-          className="flex max-w-[9rem] items-center gap-[0.625rem] sm:max-w-[7.75rem]"
+          className="flex items-center gap-[0.625rem] "
           onClick={onShowModal}
         >
           <img
@@ -71,7 +70,7 @@ function Profile() {
             alt="icon-edit"
             title="edit-profile"
           />
-          <span className="font-roboto text-sm">Edit Profile</span>
+          <span className="font-roboto text-sm">Chỉnh sửa thông tin</span>
         </Button>
       </div>
       <ModalEditProfile

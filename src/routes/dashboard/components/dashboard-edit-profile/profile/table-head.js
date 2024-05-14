@@ -1,21 +1,16 @@
 const TABLE_HEADED = [
-  { key: "name", label: "Name" },
+  { key: "name", label: "Tên" },
   {
     key: "gender",
-    label: "Gender",
+    label: "Giới tính",
   },
-  { key: "position", label: "Position" },
-  {
-    key: "branch",
-    label: "Branch",
-    child: { NAME: "name", ADDRESS: "address" },
-  },
+  { key: "position", label: "Vị trí" },
   { key: "email", label: "Email" },
   {
     key: "phoneNumber",
-    label: "Phone",
+    label: "Số điện thoại",
   },
-  { key: "note", label: "Note" },
+  { key: "note", label: "Ghi chú" },
 ];
 
 export { TABLE_HEADED };

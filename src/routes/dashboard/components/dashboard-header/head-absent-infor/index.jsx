@@ -15,27 +15,27 @@ function HeadAbsentInfor() {
       {
         id: "01",
         number: totalAbsent + totalEarly + totalLater,
-        text: "Total All time",
+        text: "Tổng thời gian",
       },
       {
         id: "02",
         number: totalEarly,
-        text: "Check-in Early",
+        text: "Check-in Sớm",
       },
       {
         id: "03",
         number: totalLater,
-        text: "Check-in Late",
+        text: "Check-in Trễ",
       },
       {
         id: "04",
         number: totalAbsent,
-        text: "Absent",
+        text: "Vắng",
       },
       {
         id: "04",
         number: totalWorkingHour,
-        text: "Working hour",
+        text: "Số giờ làm việc",
       },
     ];
   }, [totalAbsent, totalEarly, totalLater, totalWorkingHour]);

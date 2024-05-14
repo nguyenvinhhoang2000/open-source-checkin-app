@@ -4,13 +4,13 @@ const LOGIN_FORM = {
   EMAIL: {
     name: "email",
     label: "Email",
-    placeholder: "Enter your email",
+    placeholder: "Nhập email của bạn",
   },
 
   PASSWORD: {
     name: "password",
-    label: "Password",
-    placeholder: "Enter your password",
+    label: "Mật khẩu",
+    placeholder: "Nhập mật khẩu",
   },
 };
 
@@ -37,11 +37,11 @@ const rulesPassword = [
 const errorLoginFailMessage = [
   {
     name: "email",
-    errors: ["Email is incorrect"],
+    errors: ["Email không đúng"],
   },
   {
     name: "password",
-    errors: ["Password is incorrect"],
+    errors: ["Mật khẩu không đúng"],
   },
 ];
 

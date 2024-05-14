@@ -1,19 +1,19 @@
 const defaultItemFilterTime = [
-  { id: 1, key: "thisMonth", label: "This month" },
+  { id: 1, key: "thisMonth", label: "Tháng này" },
   {
     id: 2,
     key: "lastMonth",
-    label: "Last month",
+    label: "Tháng trước",
   },
   {
     id: 3,
     key: "threeMonths",
-    label: "3 month",
+    label: "3 tháng trước",
   },
   {
     id: 4,
     key: "all",
-    label: "All time",
+    label: "Tất cả thời gian",
   },
 ];
 

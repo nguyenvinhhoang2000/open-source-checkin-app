@@ -57,10 +57,10 @@ function LoginForm() {
     >
       <div className="mb-[1.5rem]">
         <h2 className="mb-[0.25rem] px-[2.37rem] text-center font-roboto text-3xl font-medium leading-10 text-character-1">
-          Welcome Back
+          Chào mừng trở lại
         </h2>
         <p className="font-roboto text-sm font-normal leading-[1.375rem] text-character-2 sm:px-[2.37rem]">
-          Enter the account provided to access the dashboard
+          Nhập tài khoản được cung cấp để đăng nhập
         </p>
       </div>
       <Form.Item name={LOGIN_FORM.EMAIL.name} rules={rulesEmail}>
@@ -81,7 +81,7 @@ function LoginForm() {
       </Form.Item>
       <Form.Item className="mb-0">
         <Button type="primary" htmlType="submit" className="h-[2.5rem] w-full">
-          Sign in
+          Đăng nhập
         </Button>
       </Form.Item>
     </Form>

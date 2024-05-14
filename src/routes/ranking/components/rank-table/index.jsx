@@ -76,7 +76,7 @@ const columns = [
   },
 
   {
-    title: "Check-in Early",
+    title: "Check-in Sớm",
     dataIndex: "checkinEarly",
     key: "checkinEarly",
     width: "9.5rem",
@@ -90,7 +90,7 @@ const columns = [
   },
 
   {
-    title: "Check-in Late",
+    title: "Check-in Trễ",
     dataIndex: "checkinLate",
     key: "checkinLate",
     width: "9.5rem",

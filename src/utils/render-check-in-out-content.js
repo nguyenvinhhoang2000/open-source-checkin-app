@@ -7,13 +7,13 @@ export const renderContent = (status, type) => {
   if (type === CHECK_IN_OUT_TYPE.CHECKIN) {
     switch (status) {
       case CHECK_IN_OUT_STATUS.EARLY:
-        return "Check-in Early";
+        return "Check-in Sớm";
 
       case CHECK_IN_OUT_STATUS.LATE:
-        return "Check-in Late";
+        return "Check-in Trễ";
 
       case CHECK_IN_OUT_STATUS.ABSENT:
-        return "Description";
+        return "Mô tả";
 
       default:
         return null;
@@ -21,13 +21,13 @@ export const renderContent = (status, type) => {
   } else {
     switch (status) {
       case CHECK_IN_OUT_STATUS.EARLY:
-        return "Check-out Early";
+        return "Check-out Sớm";
 
       case CHECK_IN_OUT_STATUS.LATE:
-        return "Check-out Late";
+        return "Check-out Trễ";
 
       case CHECK_IN_OUT_STATUS.ABSENT:
-        return "Description";
+        return "Mô tả";
 
       default:
         return null;

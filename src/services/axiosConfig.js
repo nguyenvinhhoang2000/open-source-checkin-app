@@ -9,7 +9,7 @@ const API_STATUS = {
 };
 
 const config = {
-  baseURL: `${import.meta.env.VITE_API_URL}v1.0`,
+  baseURL: `${import.meta.env.VITE_API_URL}`,
   validateStatus: (status) => status >= 200 && status < 400,
   timeout: 60000,
 };
@@ -21,8 +21,6 @@ const createAuthToken = (token) => `Bearer ${token}`;
 export function setAppAccessToken(token) {
   cookie.save(COOKIES_KEYS.TOKEN, token, {
     path: LOCATIONS.LOGIN,
-    // EX: Set time of cookie in 1 day
-    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
   });
 
   axiosClient.defaults.headers.Authorization = createAuthToken(token);

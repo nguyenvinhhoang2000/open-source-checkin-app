@@ -15,7 +15,7 @@ const useAuthStore = create((set, get) => ({
   onLogin: async (data) => {
     try {
       const {
-        data: { payload: token, message },
+        data: { token, message },
       } = await userAPI.login(data);
 
       setAppAccessToken(token);
